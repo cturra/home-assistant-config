@@ -1,0 +1,1648 @@
+title: Home
+custom_header:
+  compact_mode: true
+views:
+  ## ------ OVERVIEW DASHBOARD ------
+  - title: Overview
+    path: overview
+    icon: 'mdi:alert-box-outline'
+    badges: []
+    cards:
+      # devices in state out of normal range
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Alerting Devices
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        # fridge temperature above normal!
+        - type: entity-filter
+          entities:
+            - entity: sensor.fridge_temperature_f1
+              name: 'Kitchen: Fridge Temperature'
+              icon: 'mdi:fridge-alert-outline'
+          state_filter:
+            - operator: ">"
+              value: "7.5"
+          show_empty: false
+        # freezer temperature above normal (> -14.0)
+        - type: entity-filter
+          entities:
+            - entity: sensor.freezer_temperature_f1
+              name: 'Crawlspace: Freezer Temperature'
+              icon: 'mdi:fridge-alert-outline'
+          state_filter:
+            - operator: regex
+              value: '^\-(([1][0-3]\.[0-9])|([0-9]\.[0-9]))$'
+          show_empty: false
+        # water leak!!
+        - type: entity-filter
+          entities:
+          - entity: binary_sensor.snr_dishwasherleak_water_leak
+            name: 'Dishwasher: Water Detected'
+            icon: 'mdi:water-alert'
+          - entity: binary_sensor.snr_espressoleak_water_leak
+            name: 'Espresso Machine: Water Detected'
+            icon: 'mdi:water-alert'
+          - entity: binary_sensor.snr_ensuitebathtubleak_water_leak
+            name: 'Ensuite Bathtub: Water Detected'
+          - entity: binary_sensor.snr_fridgeleak_water_leak
+            name: 'Fridge: Water Detected'
+            icon: 'mdi:water-alert'
+          - entity: binary_sensor.snr_laundryleak_water_leak
+            name: 'Laundry Water Detected'
+            icon: 'mdi:water-alert'
+          - entity: binary_sensor.snr_upcommontoiletleak_water_leak
+            name: 'Upstairs Bathroom: Toilet Water Detected'
+            icon: 'mdi:water-alert'
+          state_filter:
+            - "on"
+          show_empty: false
+        # outdoor air quality unhealthy
+        - type: entity-filter
+          entities:
+            - entity: sensor.purpleair_description
+              name: 'Outdoor Air Quality'
+              icon: 'mdi:chemical-weapon'
+          state_filter:
+            - operator: regex
+              value: '(Unhealthy|Hazardous)'
+          show_empty: false
+        # battery level low (< 25%)
+        - type: entity-filter
+          entities:
+            # climate sensors
+            - entity: sensor.snr_crawlspaceclimate_battery
+              name: 'Crawlspace: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_garageclimate_battery
+              name: 'Garage: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_kidsroomclimate_battery
+              name: 'Kids Room: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_officeclimate_battery
+              name: 'Office: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_laundryclimate_battery
+              name: 'Laundry: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_mainbedroomclimate_battery
+              name: 'Main Bedroom: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_sparebedroomclimate_battery
+              name: 'Spare Bedroom: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            # contact sensors
+            - entity: sensor.garage_door_contact_battery
+              name: 'Garage: Door Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.crawlspace_door_contact_battery
+              name: 'Crawlspace: Door Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_frontdoorcontact_battery
+              name: 'Front: Door Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_garagedoorhousecontact_battery
+              name: 'Garage: House Door Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_garagedoorsidecontact_battery
+              name: 'Garage: Side Door Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.main_bedroom_window_contact_battery
+              name: 'Main Bedroom: Window Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_patiodoorcontact_battery
+              name: 'Patio Door Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.family_room_front_window_contact_battery
+              icon: 'mdi:battery-alert-variant-outline'
+            # leak sensors
+            - entity: sensor.snr_ensuitebathtubleak_battery
+              name: 'Ensuite: Bathtub Leak Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_dishwasherleak_battery
+              name: 'Kitchen: Dishwasher Leak Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_espressoleak_battery
+              name: 'Kitchen: Espresso Leak Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_fridgeleak_battery
+              name: 'Kitchen: Fridge Leak Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_laundryleak_battery
+              name: 'Laundry: Washer Leak Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_upcommontoiletleak_battery
+              name: 'Upstairs Bathroom: Toilet Leak Sensor Battery'  
+              icon: 'mdi:battery-alert-variant-outline'
+            # motion sensors (ikea)
+            - entity: sensor.snr_officemotion_battery
+              name: 'Office: Motion Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            # motion sensors (wyze)
+            - entity: sensor.garage_outside_motion_battery
+              name: 'Garage: Outside Motion Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.garage_inside_motion_battery
+              name: 'Garage: Inside Motion Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.porch_motion_battery
+              name: 'Porch: Motion Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+          state_filter:
+            - operator: regex
+              # matches 0-24 (less than 25)
+              value: '^([0-2][0-4])$'
+          show_empty: false
+        # weather advisories
+        - type: entity-filter
+          entities:
+            - entity: sensor.warnings
+              name: 'Weather'
+              icon: 'mdi:weather-cloudy-alert'
+          state_filter:
+            - operator: regex
+              # will match any string that contains at least one non-space character
+              value: '^(?!\s*$).+'
+          show_empty: false
+
+      # devices that are active
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Active Devices
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: entity-filter
+          card:
+            show_header_toggle: false
+          entities:
+            # Outdoor/Front
+            - entity: switch.sw_porch
+              name: 'Porch'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: switch.sw_driveway
+              name: 'Driveway'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: switch.sw_fronthouseoutlet
+              name: 'Front: Outlet'
+              icon: 'mdi:power'
+              secondary_info: last-changed
+            # Family Room
+            - entity: switch.sw_familyroomceiling
+              name: 'Family Room: Ceiling'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: switch.plg_familyroomcabinet
+              name: 'Family Room: Cabinet'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: switch.sw_familyroomcorner
+              name: 'Family Room: Corner'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: binary_sensor.wyzesense_77a05439
+              name: 'Family Room: Front Window'
+              secondary_info: last-changed
+            - entity: light.family_room_wall
+              type: 'custom:slider-entity-row'
+              name: 'Family Room: Wall'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            # Stairwell
+            - entity: light.stairwell_ceiling
+              name: 'Stairwell'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            # Kitchen
+            - entity: light.kitchen_ceiling
+              name: 'Kitchen: Ceiling'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: switch.sw_kitchensink
+              name: 'Kitchen: Sink'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: light.dining_room_ceiling
+              type: 'custom:slider-entity-row'
+              name: 'Kitchen: Table'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: switch.plg_espressomachine
+              name: 'Espresso Machine'
+              icon: 'mdi:coffee-maker'
+              secondary_info: last-changed
+            # TV Room
+            - entity: light.tv_room_ceiling
+              type: 'custom:slider-entity-row'
+              name: 'TV Room: Ceiling'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            # Office
+            - entity: switch.sw_office
+              name: "Office: Ceiling"
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: switch.plg_officeairpurifier
+              name: 'Office: Air Purifier'
+              icon: 'mdi:air-purifier'
+              secondary_info: last-changed
+            # Main Bedroom
+            - entity: light.main_bedroom_ceiling
+              type: 'custom:slider-entity-row'
+              name: 'Main Bedroom'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: switch.plg_mainbedroom1
+              name: 'Main Bedroom: Heater'
+              icon: 'mdi:radiator'
+              secondary_info: last-changed
+            - entity: binary_sensor.wyzesense_77a71e53
+              name: 'Main Bedroom: Window'
+              secondary_info: last-changed
+            # Kids Bedroom
+            - entity: light.kids_bedroom_ceiling
+              type: 'custom:slider-entity-row'
+              name: 'Kids Bedroom'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            # Laundry
+            - entity: switch.plg_utility
+              name: 'Laundry: Dehumidifier'
+              icon: 'mdi:water-outline'
+              secondary_info: last-changed
+            # Garage
+            - entity: switch.sw_garageceilingmain
+              name: 'Garage: Ceiling (Main)'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: switch.sw_garagesidedoor
+              name: 'Garage: Side Door'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: switch.plg_garagedehumidifier
+              name: 'Garage: Dehumidifier'
+              icon: 'mdi:water-outline'
+              secondary_info: last-changed
+            # Shed
+            - entity: switch.sw_shedfan
+              name: 'Shed: Fan'
+              icon: 'mdi:fan'
+              secondary_info: last-changed
+            # Contact Sensors
+            - entity: binary_sensor.wyzesense_77a725aa
+              name: 'Crawlspace: Door'
+              secondary_info: last-changed
+            - entity: binary_sensor.snr_frontdoorcontact_contact
+              name: 'Front Door'
+              secondary_info: last-changed
+            - entity: binary_sensor.wyzesense_77a05475
+              name: 'Garage: Car Door'
+              secondary_info: last-changed
+            - entity: binary_sensor.snr_garagedoorhousecontact_contact
+              name: 'Garage: House Door'
+              secondary_info: last-changed
+            - entity: binary_sensor.snr_garagedoorsidecontact_contact
+              name: 'Garage: Side Door'
+              secondary_info: last-changed
+            - entity: binary_sensor.snr_patiodoorcontact_contact
+              name: 'Patio Door'
+              secondary_info: last-changed
+            # HVAC (ecobee) / fan
+            - entity: sensor.hvac_fan_state
+              name: 'HVAC Fan'
+              icon: 'mdi:fan'
+              secondary_info: last-changed
+           # HVAC (ecobee) / ac
+            - entity: sensor.hvac_cooling_state
+              name: 'Air Conditioner'
+              icon: 'mdi:snowflake'
+              secondary_info: last-changed
+           # HVAC (ecobee) / furtnace
+            - entity: sensor.hvac_heating_state
+              name: 'Furnace'
+              icon: 'mdi:fire'
+              secondary_info: last-changed
+           # Media
+            - entity: media_player.main_bedroom
+              name: 'Main: Beam'
+              icon: 'mdi:speaker'
+            - entity: 'media_player.kitchen_speaker'
+              name: 'Kitchen: Speakers'
+              icon: 'mdi:speaker'
+            - entity: media_player.family_room
+              name: 'Family Room: Play:5'
+              icon: 'mdi:speaker'
+          state_filter:
+            - operator: '=='
+              value: 'on'
+            - operator: '=='
+              value: 'playing'
+          show_empty: false
+
+  
+  ## ------ SWITCH DASHBAORD ------
+  - title: Home
+    panel: false
+    path: default_view
+    icon: 'mdi:home-outline'
+    badges: []
+    cards:
+      # Family Room
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Family Room
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: switch.sw_familyroomceiling
+                  name: Ceiling
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+                - entity: light.family_room_wall
+                  name: Wall
+                  icon: 'mdi:lightbulb-outline'
+                - entity: light.stairwell_ceiling
+                  name: Stairwell
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: switch.plg_familyroomcabinet
+                  name: Cabinet
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+                - entity: switch.sw_familyroomcorner
+                  name: Corner
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+
+      # Kitchen
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Kitchen
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: light.kitchen_ceiling
+                  name: "Ceiling"
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+                - entity: switch.plg_espressomachine
+                  name: 'Espresso Machine'
+                  icon: 'mdi:coffee-maker'
+                - entity: switch.plg_kitchenspeaker
+                  name: Speaker
+                  icon: 'mdi:speaker'
+                  state_color: true
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: switch.sw_kitchensink
+                  name: Sink
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+                - entity: light.dining_room_ceiling
+                  name: Table
+                  icon: 'mdi:lightbulb-outline'
+
+      # TV Room
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### TV Room
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: entities
+          card_mod:
+            style: |
+              :host .card-content {
+                padding: 0px 10px;
+              }
+          entities:
+            - entity: light.tv_room_ceiling
+              name: 'Ceiling'
+              type: 'custom:slider-entity-row'
+              icon: 'mdi:lightbulb-outline'
+
+      # Office
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Office
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+              - entity: switch.sw_office
+                name: 'Ceiling'
+                icon: 'mdi:lightbulb-outline'
+                state_color: true
+            - type: entities
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+              - entity: switch.plg_officeairpurifier
+                name: 'Air Purifier'
+                icon: 'mdi:air-purifier'
+                state_color: true
+
+      # Main Bedroom
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Main Bedroom
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: light.main_bedroom_ceiling
+                  name: 'Ceiling'
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: switch.plg_mainbedroom1
+                  name: 'Heater'
+                  icon: 'mdi:radiator'
+                  state_color: true
+
+      # Kids Bedroom
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Kids Bedroom
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: light.kids_bedroom_ceiling
+                  name: 'Ceiling'
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+            - type: 'custom:button-card'
+              color_type: blank
+
+      # Laundry
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Laundry
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: switch.plg_utility
+                  name: 'Dehumidifier'
+                  icon: 'mdi:water-outline'
+                  state_color: true
+            - type: 'custom:button-card'
+              color_type: blank
+
+      # Garage
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Garage
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: switch.sw_garageceilingmain
+                  name: 'Ceiling'
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+                - entity: switch.plg_garagedehumidifier
+                  name: 'Dehumidifier'
+                  icon: 'mdi:water-outline'
+                  state_color: true
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: switch.sw_garagesidedoor
+                  name: 'Side Door'
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+
+      # Outdoor (Front)
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Outdoor Front
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: switch.sw_driveway
+                  name: Driveway
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+                - entity: switch.sw_fronthouseoutlet
+                  name: Outlet
+                  icon: 'mdi:power'
+                  state_color: true
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: switch.sw_porch
+                  name: Porch
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
+
+      # Shed
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Shed
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px 10px 10px;
+                  }
+              entities:
+                - entity: switch.sw_shedfan
+                  name: Fan
+                  icon: 'mdi:fan'
+                  state_color: true
+            - type: 'custom:button-card'
+              color_type: blank
+
+
+  ## ------ CLIMATE DASHBOARD ------
+  - title: Climate
+    path: climate
+    icon: 'mdi:home-thermometer-outline'
+    badges: []
+    cards:
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### House
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+
+        ## THERMOSTAT 
+        - type: 'custom:simple-thermostat'
+          entity: climate.amazon
+          card_mod:
+            style: |
+              ha-card {
+                --st-font-size-xl: 60px;
+                --st-font-size-m: 20px;
+                --st-font-size-sensors: 14px;
+                --st-spacing: 2px;
+              }
+              ha-card .mode-item {
+                --heat-color: transparent;
+                --cool-color: transparent;
+              }
+              ha-card .mode-item.active.heat {
+                color: #e67300;
+              }
+              ha-card .mode-item.active.cool {
+                color: #3399ff;
+              }
+          show_header: false
+          step_layout: row
+          hide:
+            state: true
+          control:
+            present: false
+            hvac:
+              "off":
+                include: false
+            _names: false
+            _headings: false
+          sensors:
+            - entity: sensor.amazon_humidity
+              name: 'Humidity'
+            - entity: sensor.hvac_time_on_today
+              attribute: value
+              name: 'Runtime'
+
+        ## INDOOR TEMPERATURE CARDS
+        # row 1
+        - type: horizontal-stack
+          cards:
+          # upstairs hallway
+          - type: 'custom:button-card'
+            entity: sensor.uptairs_hallway_temperature
+            name: Upstairs Hall
+            show_state: true
+            show_icon: false
+            card_mod:
+              style: "ha-card { height: 50px; }"
+            styles:
+              name:
+                - font-size: 11px
+              state:
+                - font-size: 20px
+
+          # main bedroom
+          - type: 'custom:button-card'
+            entity: sensor.main_bedroom_temperature_f1
+            name: 'Main Bedroom'
+            show_state: true
+            show_icon: false
+            card_mod:
+              style: "ha-card { height: 50px; }"
+            styles:
+              name:
+                - font-size: 11px
+              state:
+                - font-size: 20px
+
+          # kids room
+          - type: 'custom:button-card'
+            entity: sensor.kids_room_temperature_f1
+            name: 'Kids Bedroom'
+            show_state: true
+            show_icon: false
+            card_mod:
+              style: "ha-card { height: 50px; }"
+            styles:
+              name:
+                - font-size: 11px
+              state:
+                - font-size: 20px
+
+          # spare bedroom
+          - type: 'custom:button-card'
+            entity: sensor.sparebedroom_temperature_f1
+            name: Spare Bedroom
+            show_state: true
+            show_icon: false
+            card_mod:
+              style: "ha-card { height: 50px; }"
+            styles:
+              name:
+                - font-size: 11px
+              state:
+                - font-size: 20px
+
+        # TEMPERATURE BUTTONS
+        # row 2
+        - type: horizontal-stack
+          cards:
+          # laundry room
+          - type: 'custom:button-card'
+            entity: sensor.laundry_temperature_f1
+            name: Laundry Room
+            show_state: true
+            show_icon: false
+            card_mod:
+              style: "ha-card { height: 60px; }"
+            styles:
+              name:
+                - font-size: 11px
+              state:
+                - font-size: 20px
+
+          # family room
+          - type: 'custom:button-card'
+            entity: sensor.family_room_temperature
+            name: Family Room
+            show_state: true
+            show_icon: false
+            card_mod:
+              style: "ha-card { height: 60px; }"
+            styles:
+              name:
+                - font-size: 11px
+              state:
+                - font-size: 20px
+
+          # office
+          - type: 'custom:button-card'
+            entity: sensor.office_temperature_f1
+            name: Office
+            show_state: true
+            show_icon: false
+            card_mod:
+              style: "ha-card { height: 60px; }"
+            styles:
+              name:
+                - font-size: 11px
+              state:
+                - font-size: 20px
+
+          # crawlspace
+          - type: 'custom:button-card'
+            entity: sensor.crawlspace_temperature_f1
+            name: 'Crawlspace'
+            show_state: true
+            show_icon: false
+            card_mod:
+              style: "ha-card { height: 60px; }"
+            styles:
+              name:
+                - font-size: 11px
+              state:
+                - font-size: 20px
+
+
+        # INDOOR TEMPERATURE GRAPHS
+        - type: 'custom:mini-graph-card'
+          show:
+            extrema: false
+            fill: fade
+            icon: false
+            labels: hover
+            labels_secondary: hover
+            name: false
+            state: false
+          height: 100
+          line_width: 1
+          hours_to_show: 24
+          points_per_hour: 3
+          group: true
+          lower_bound_secondary: 35
+          upper_bound_secondary: 70
+          entities:
+            # temerature in downstairs hallway
+            - entity: sensor.amazon_temperature
+              name: "Downstairs"
+              show_fill: false
+              show_points: false
+              color: '#fd9644'
+            # temerature at upstairs hallway ecobee remote sensor
+            - entity: sensor.uptairs_hallway_temperature
+              name: "Upstairs"
+              show_fill: false
+              show_points: false
+              color: '#21b064'
+            # temerature at crawlspace aqara sensor
+            - entity: sensor.crawlspace_temperature_f1
+              name: "Crawlspace"
+              show_fill: false
+              show_points: false
+              color: '#eb3b5a'
+            # humidity at ecobee
+            - entity: sensor.amazon_humidity
+              name: Humidity
+              show_fill: false
+              state_adaptive_color: true
+              color: '#5f9bea'
+              show_points: false
+              y_axis: secondary
+
+        # INDOOR HVAC FUNCTION GRAPHS
+        - type: 'custom:mini-graph-card'
+          show:
+            extrema: false
+            fill: fade
+            icon: false
+            labels: hover
+            labels_secondary: hover
+            name: false
+            state: false
+          height: 20
+          line_width: 1
+          hours_to_show: 24
+          points_per_hour: 60
+          group: true
+          entities:
+            # sensor template (true/false) for if A/C is running
+            - entity: sensor.hvac_cooling_bool
+              name: Cooling
+              color: '#71b7f4'
+              show_legend: false
+              show_line: false
+              show_points: false
+            # sensor template (true/false) for if furnace is running
+            - entity: sensor.hvac_heating_bool
+              name: Heating
+              color: '#f4ce71'
+              show_legend: false
+              show_line: false
+              show_points: false
+            # sensor template (true/false) for if fan is running
+            - entity: sensor.hvac_fan_bool
+              name: Fan
+              color: '#cccccc'
+              show_legend: true
+              show_line: false
+              show_points: false
+          state_map:
+            - label: 'Off'
+              value: '0'
+            - label: 'On'
+              value: '1'
+
+      - type: horizontal-stack
+        cards:
+        ## SHED TEMPERATURE CARDS
+        - type: 'custom:vertical-stack-in-card'
+          cards:
+          - type: markdown
+            content: >
+              ### Shed
+            card_mod:
+              style: |
+                ha-card {
+                  padding-left: 5px;
+                  border-radius: 0px;
+                  font-size: 1.1em;
+                }
+                :host ha-markdown.no-header {
+                  padding: 7px 2px 5px 5px;
+                }
+          - type: horizontal-stack
+            cards:
+            # shed sensorpush temperature
+            - type: 'custom:button-card'
+              entity: sensor.shed_temperature_f1
+              name: Temperature
+              show_state: true
+              show_icon: false
+              styles:
+                card:
+                  - margin: -3px
+                  - height: 60px
+                name:
+                  - margin: 10px
+                  - font-size: 11px
+                state:
+                  - margin: -10px
+                  - font-size: 22px
+            # shed sensorpush humidity
+            - type: 'custom:button-card'
+              entity: sensor.shed_humidity_int
+              name: Humidity
+              show_state: true
+              show_icon: false
+              styles:
+                card:
+                  - margin: -3px
+                  - height: 60px
+                name:
+                  - margin: 10px
+                  - font-size: 11px
+                state:
+                  - margin: -10px
+                  - font-size: 22px
+
+          # SHED TEMPERATURE GRAPH CARD
+          - type: 'custom:mini-graph-card'
+            show:
+              extrema: false
+              icon: false
+              labels: hover
+              labels_secondary: hover
+              name: false
+              state: false
+            line_width: 2
+            hours_to_show: 24
+            points_per_hour: 6
+            lower_bound_secondary: 40
+            upper_bound_secondary: 80
+            group: true
+            color_thresholds:
+              - color: '#a55eea'
+                value: -6.9
+              - color: '#8854d0'
+                value: -3.9
+              - color: '#3867d6'
+                value: -1.2
+              - color: '#4b7bec'
+                value: 1.6
+              - color: '#2d98da'
+                value: 4.3
+              - color: '#45aaf2'
+                value: 7.1
+              - color: '#0fb9b1'
+                value: 9.9
+              - color: '#2bcbba'
+                value: 12.7
+              - color: '#20bf6b'
+                value: 15.5
+              - color: '#26de81'
+                value: 18.2
+              - color: '#fed330'
+                value: 21
+              - color: '#f7b731'
+                value: 23.8
+              - color: '#fd9644'
+                value: 26.6
+              - color: '#fa8231'
+                value: 29.3
+              - color: '#fc5c65'
+                value: 32.1
+              - color: '#eb3b5a'
+                value: 35.9
+            entities:
+              # temerature at sensorpush
+              - entity: sensor.shed_temperature
+                name: "Temperature"
+                show_legend: false
+                state_adaptive_color: true
+              # humidity at sensorpush
+              - entity: sensor.shed_humidity
+                name: Humidity
+                line_width: 1
+                show_legend: false
+                show_fill: false
+                state_adaptive_color: true
+                color: '#5f9bea'
+                y_axis: secondary
+
+        ## GARAGE TEMPERATURE CARDS
+        - type: 'custom:vertical-stack-in-card'
+          cards:
+          - type: markdown
+            content: >
+              ###  Garage
+            card_mod:
+              style: |
+                ha-card {
+                  padding-left: 5px;
+                  border-radius: 0px;
+                  font-size: 1.1em;
+                }
+                :host ha-markdown.no-header {
+                  padding: 7px 2px 5px 5px;
+                }
+          - type: horizontal-stack
+            cards:
+            # garage temperature
+            - type: 'custom:button-card'
+              entity: sensor.garage_temperature_f1
+              name: Temperature
+              show_state: true
+              show_icon: false
+              styles:
+                card:
+                  - margin: -3px
+                  - height: 60px
+                name:
+                  - margin: 10px
+                  - font-size: 11px
+                state:
+                  - margin: -10px
+                  - font-size: 22px
+            # garage humidity
+            - type: 'custom:button-card'
+              entity: sensor.garage_humidity_int
+              name: Humidity
+              show_state: true
+              show_icon: false
+              styles:
+                card:
+                  - margin: -3px
+                  - height: 60px
+                name:
+                  - margin: 10px
+                  - font-size: 11px
+                state:
+                  - margin: -10px
+                  - font-size: 22px
+
+          # GARAGE TEMPERATURE GRAPH CARD
+          - type: 'custom:mini-graph-card'
+            show:
+              extrema: false
+              fill: fade
+              icon: false
+              labels: hover
+              labels_secondary: hover
+              name: false
+              state: false
+            line_width: 2
+            hours_to_show: 24
+            points_per_hour: 4
+            lower_bound_secondary: 40
+            upper_bound_secondary: 80
+            group: true
+            color_thresholds:
+              - color: '#a55eea'
+                value: -6.9
+              - color: '#8854d0'
+                value: -3.9
+              - color: '#3867d6'
+                value: -1.2
+              - color: '#4b7bec'
+                value: 1.6
+              - color: '#2d98da'
+                value: 4.3
+              - color: '#45aaf2'
+                value: 7.1
+              - color: '#0fb9b1'
+                value: 9.9
+              - color: '#2bcbba'
+                value: 12.7
+              - color: '#20bf6b'
+                value: 15.5
+              - color: '#26de81'
+                value: 18.2
+              - color: '#fed330'
+                value: 21
+              - color: '#f7b731'
+                value: 23.8
+              - color: '#fd9644'
+                value: 26.6
+              - color: '#fa8231'
+                value: 29.3
+              - color: '#fc5c65'
+                value: 32.1
+              - color: '#eb3b5a'
+                value: 35.9
+            entities:
+              # temerature at sensorpush
+              - entity: sensor.garage_temperature_f1
+                name: "Garage"
+                show_legend: false
+                state_adaptive_color: true
+              # humidity at sensorpush
+              - entity: sensor.garage_humidity_int
+                name: "Humidity_1"
+                line_width: 2
+                show_legend: true
+                show_fill: false
+                state_adaptive_color: true
+                color: '#5f9bea'
+                y_axis: secondary
+
+      ## OUTDSIDE CLIMATE INFO
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        # WEATHER FORECAST
+        - type: 'custom:vertical-stack-in-card'
+          cards:
+          # weather forecast card (from environment canada)
+          - type: weather-forecast
+            name: ' '
+            entity: weather.pitt_meadows
+            secondary_info_attribute: humidity
+            show_forcast: true
+        
+        # AIR QUALITY (FROM PURPLEAIR DEVICE)
+        - type: horizontal-stack
+          cards:
+          # AQI
+          - type: 'custom:button-card'
+            entity: sensor.purpleair
+            name: ' '
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 20px
+          # blank card to add spacing
+          - type: 'custom:button-card'
+            color_type: blank
+            styles:
+              card:
+                - width: 25px
+          # pm 2.5
+          - type: 'custom:button-card'
+            entity: sensor.purpleair_pm25
+            name: 'PM 2.5'
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 20px
+          # pm 10
+          - type: 'custom:button-card'
+            entity: sensor.purpleair_pm10
+            name: 'PM 10'
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 20px
+        - type: 'custom:mini-graph-card'
+          entities:
+            - sensor.purpleair
+          unit: AQI
+          name: AQI
+          height: 75
+          hour24: true
+          show:
+              extrema: false
+              fill: fade
+              icon: false
+              labels: hover
+              labels_secondary: hover
+              name: false
+              state: false
+          line_width: 1
+          points_per_hour: 6
+          hours_to_show: 24
+          color_thresholds_transition: hard
+          color_thresholds:
+              - value: 0
+                color: '#24b300'
+              - value: 50
+                color: '#b3b300'
+              - value: 100
+                color: '#a54f0d'
+              - value: 150
+                color: '#a21c10'
+              - value: 200
+                color: '#8c1a4b'
+              - value: 250
+                color: '#731425'
+
+
+  ## ------ BATTERY DASHBOARD ------
+  - title: Battery
+    path: battery
+    icon: 'mdi:battery-outline'
+    badges: []
+    cards:
+      # Climate Sensors
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Climate Sensors
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 10px 10px 0px 10px;
+              }
+        - type: 'custom:battery-state-card'
+          color_gradient:
+            - "#a21c10" # red
+            - "#b3b300" # yellow
+            - "#24b300" # green
+          card_mod:
+            style: |
+              :host .card-content {
+                padding: 5px 15px 5px 10px;
+              }
+              :host .entity-spacing {
+                margin: 0px 0;
+              }
+          entities:
+            - entity: sensor.snr_crawlspaceclimate_battery
+              name: 'Crawspace'
+              tap_action: more-info
+            - entity: sensor.snr_garageclimate_battery
+              name: 'Garage'
+              tap_action: more-info
+            - entity: sensor.snr_kidsroomclimate_battery
+              name: 'Kids Bedroom'
+              tap_action: more-info
+            - entity: sensor.snr_laundryclimate_battery
+              name: 'Laundry'
+              tap_action: more-info
+            - entity: sensor.snr_mainbedroomclimate_battery
+              name: 'Main Bedroom'
+              tap_action: more-info
+            - entity: sensor.snr_officeclimate_battery
+              name: 'Office'
+              tap_action: more-info
+            - entity: sensor.snr_sparebedroomclimate_battery
+              name: 'Spare Bedroom'
+              tap_action: more-info
+
+      # Contact Sensors
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Contact Sensors
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 10px 10px 0px 10px;
+              }
+        - type: 'custom:battery-state-card'
+          color_gradient:
+            - "#a21c10" # red
+            - "#b3b300" # yellow
+            - "#24b300" # green
+          card_mod:
+            style: |
+              :host .card-content {
+                padding: 5px 15px 5px 10px;
+              }
+              :host .entity-spacing {
+                margin: 0px 0;
+              }
+          entities:
+            - entity: sensor.crawlspace_door_contact_battery
+              name: 'Crawlspace Door'
+              tap_action: more-info
+            - entity: sensor.family_room_front_window_contact_battery
+              name: 'Family Room Front Window'
+              tap_action: more-info
+            - entity: sensor.snr_frontdoorcontact_battery
+              name: 'Front Door'
+              tap_action: more-info
+            - entity: sensor.snr_garagedoorhousecontact_battery
+              name: 'Garage House Door'
+              tap_action: more-info
+            - entity: sensor.snr_garagedoorsidecontact_battery
+              name: 'Garage Side Door'
+              tap_action: more-info
+            - entity: sensor.garage_door_contact_battery
+              name: 'Garage Car Door'
+              tap_action: more-info
+            - entity: sensor.main_bedroom_window_contact_battery
+              name: 'Main Bedroom Window'
+              tap_action: more-info
+            - entity: sensor.snr_patiodoorcontact_battery
+              name: 'Patio Door'
+              tap_action: more-info
+
+      # Leak Sensors
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Leak Sensors
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 10px 10px 0px 10px;
+              }
+        - type: 'custom:battery-state-card'
+          color_gradient:
+            - "#a21c10" # red
+            - "#b3b300" # yellow
+            - "#24b300" # green
+          card_mod:
+            style: |
+              :host .card-content {
+                padding: 5px 15px 5px 10px;
+              }
+              :host .entity-spacing {
+                margin: 0px 0;
+              }
+          entities:
+            - entity: sensor.snr_dishwasherleak_battery
+              name: 'Dishwasher'
+              tap_action: more-info
+            - entity: sensor.snr_ensuitebathtubleak_battery
+              name: 'Ensuite Bathtub'
+              tap_action: more-info
+            - entity: sensor.snr_espressoleak_battery
+              name: 'Espresso Machine'
+              tap_action: more-info
+            - entity: sensor.snr_fridgeleak_battery
+              name: 'Fridge'
+              tap_action: more-info
+            - entity: sensor.snr_laundryleak_battery
+              name: 'Laundry'
+              tap_action: more-info
+            - entity: sensor.snr_upcommontoiletleak_battery
+              name: 'Upstairs Bathroom Toilet'
+              tap_action: more-info
+
+      # Motion Sensors
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Motion Sensors
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 10px 10px 0px 10px;
+              }
+        - type: 'custom:battery-state-card'
+          color_gradient:
+            - "#a21c10" # red
+            - "#b3b300" # yellow
+            - "#24b300" # green
+          card_mod:
+            style: |
+              :host .card-content {
+                padding: 5px 15px 5px 10px;
+              }
+              :host .entity-spacing {
+                margin: 0px 0;
+              }
+          entities:
+            - entity: sensor.garage_inside_motion_battery
+              name: 'Garage Indoor'
+              tap_action: more-info
+            - entity: sensor.garage_outside_motion_battery
+              name: 'Garage Outdoor'
+              tap_action: more-info
+            - entity: sensor.snr_officemotion_battery
+              name: 'Office'
+              tap_action: more-info
+            - entity: sensor.porch_motion_battery
+              name: 'Porch'
+              tap_action: more-info
+
+
+  ## ------ AUDIO DASHBOARD ------
+  - title: Audio
+    path: audio
+    icon: 'mdi:music-box-outline'
+    badges: []
+    cards:
+
+      # Sonos
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+          - type: markdown
+            content: >
+              ## Sonos
+            card_mod:
+              style: |
+                ha-card {
+                  padding-left: 5px;
+                  border-radius: 0px;
+                }
+                :host ha-markdown.no-header {
+                  padding: 7px 2px 5px 5px;
+                }
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: media_player.family_room
+                name: 'Family Room (Sonos Play:5)'
+              - entity: media_player.main_bedroom
+                name: 'Main Bedroom (Sonos Beam)'
+
+      # Chomecast
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+          - type: markdown
+            content: >
+              ## Chromecast
+            card_mod:
+              style: |
+                ha-card {
+                  padding-left: 5px;
+                  border-radius: 0px;
+                }
+                :host ha-markdown.no-header {
+                  padding: 7px 2px 5px 5px;
+                }
+                
+          - type: entities
+            show_header_toggle: false
+            entities:
+              - entity: media_player.kitchen_speaker
+                name: 'Kicthen (ChromeCast Audio)'

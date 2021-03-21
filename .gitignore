@@ -1,0 +1,18 @@
+# generic
+*.log
+*.db
+*.db-shm
+*.db-wal
+*.pyc
+._*
+__pycache__
+
+# directories
+.storage/
+tts/
+
+# add-ons
+aircast.xml
+
+# specific files
+secrets.yaml

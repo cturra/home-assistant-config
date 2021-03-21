@@ -1,0 +1,46 @@
+- platform: template
+  sensors:
+    ## -- battery level motion sensors --
+    # garage outside (side door) motion sensor
+    garage_outside_motion_battery:
+      friendly_name: 'Garage Outside Motion Sensor Battery Level'
+      unit_of_measurement: '%'
+      value_template: '{{ state_attr("binary_sensor.wyzesense_77a7a16f","battery_level") }}'
+
+    # garage inside motion sensor
+    garage_inside_motion_battery:
+      friendly_name: 'Garage Inside Motion Sensor Battery Level'
+      unit_of_measurement: '%'
+      value_template: '{{ state_attr("binary_sensor.wyzesense_779f1f3a","battery_level") }}'
+
+    # front porch motion sensor
+    porch_motion_battery:
+      friendly_name: 'Porch Motion Sensor Battery Level'
+      unit_of_measurement: '%'
+      value_template: '{{ state_attr("binary_sensor.wyzesense_77a7a12e","battery_level") }}'
+    
+    ## -- battery level contact sensors --
+    # crawlspace door contact sensor
+    crawlspace_door_contact_battery:
+      friendly_name: 'Crawlspace Door Battery Level'
+      unit_of_measurement: '%'
+      value_template: '{{ state_attr("binary_sensor.wyzesense_77a725aa","battery_level") }}'
+    
+    # family room front window contact sensor
+    family_room_front_window_contact_battery:
+      friendly_name: 'Family Room Front Window Battery Level'
+      unit_of_measurement: '%'
+      value_template: '{{ state_attr("binary_sensor.wyzesense_77a05439", "battery_level") }}'
+
+    # garage door (vehicle) contact sensor
+    garage_door_contact_battery:
+      friendly_name: 'Garage Door Contact Sensor Battery Level'
+      unit_of_measurement: '%'
+      value_template: '{{ state_attr("binary_sensor.wyzesense_77a05475","battery_level") }}'
+    
+    # main bedroom window
+    main_bedroom_window_contact_battery:
+      friendly_name: 'Main Bedroom Window Contact Sensor Battery Level'
+      unit_of_measurement: '%'
+      value_template: '{{ state_attr("binary_sensor.wyzesense_77a71e53","battery_level") }}'
+    

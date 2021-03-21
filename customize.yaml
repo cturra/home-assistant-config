@@ -1,0 +1,96 @@
+## ------ motion sensors ------
+
+# garage / outdoor (side of house)
+binary_sensor.wyzesense_77a7a16f:
+  friendly_name: 'Garage Outside Motion Sensor'
+  device_class: motion
+  icon_template: >-
+    {% if is_state('binary_sensor.wyzesense_77a7a16f','on') %}
+      mdi:motion-sense
+    {% else %}
+      mdi:walk
+    {% endif %}
+
+# garage / indoor
+binary_sensor.wyzesense_779f1f3a:
+  friendly_name: 'Garage Motion Sensor'
+  device_class: motion
+  icon_template: >-
+    {% if is_state('binary_sensor.wyzesense_779f1f3a','on') %}
+      mdi:motion-sense
+    {% else %}
+      mdi:walk
+    {% endif %}
+
+# front porch
+binary_sensor.wyzesense_77a7a12e:
+  friendly_name: 'Porch Motion Sensor'
+  device_class: motion
+  icon_template: >-
+    {% if is_state('binary_sensor.wyzesense_77a7a12e','on') %}
+      mdi:motion-sense
+    {% else %}
+      mdi:walk
+    {% endif %}
+
+
+## ------ leak sensors ------
+
+# dishwasher
+binary_sensor.snr_dishwasherleak_water_leak:
+  friendly_name: 'Dishwasher leak'
+
+# espresso machine
+binary_sensor.snr_espressoleak_water_leak:
+  friendly_name: 'Espresso Machine leak'
+
+# ensuite bathtub
+binary_sensor.snr_ensuitebathtubleak_water_leak:
+  friendly_name: 'Ensuite Bathtub leak'
+
+# fridge
+binary_sensor.snr_fridgeleak_water_leak:
+  friendly_name: 'Fridge leak'
+
+# laundry room
+binary_sensor.snr_laundryleak_water_leak:
+  friendly_name: 'Laundry Room leak'
+
+# upstairs common bathroom toilet
+binary_sensor.snr_upcommontoiletleak_water_leak:
+  friendly_name: 'Upstairs Bathroom Toilet leak'
+
+
+## ------ contact sensors ------
+
+# crawlspace door
+binary_sensor.wyzesense_77a725aa:
+  friendly_name: 'Crawlspace Door Sensor'
+  device_class: door
+  icon_template: >-
+    {% if is_state('binary_sensor.wyzesense_77a725aa','on') %}
+      mdi:door-open
+    {% else %}
+      mdi:door-closed
+    {% endif %}
+
+# family room front window
+binary_sensor.wyzesense_77a05439:
+  friendly_name: 'Family Room Front Window Sensor'
+  device_class: window
+
+# garage door
+binary_sensor.wyzesense_77a05475:
+  friendly_name: 'Garage Door Sensor'
+  device_class: garage_door
+  icon_template: >-
+    {% if is_state('binary_sensor.wyzesense_77a05475','on') %}
+      mdi:garage-open-variant
+    {% else %}
+      mdi:garage-variant
+    {% endif %}
+
+# main bedroom window
+binary_sensor.wyzesense_77a71e53:
+  friendly_name: 'Main Bedroom Window Sensor'
+  device_class: window

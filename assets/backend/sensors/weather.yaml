@@ -1,0 +1,14 @@
+- platform: environment_canada
+
+- platform: template
+  sensors:
+    # sensor templates from environment canada weather
+    weather_outside_temperature:
+      friendly_name: 'Outside Temperature from Environment Canada in Pitt Meadows'
+      unit_of_measurement: '°C'
+      value_template: '{{ state_attr("weather.pitt_meadows", "temperature") }}'
+      
+    weather_outside_humidity:
+      friendly_name: 'Outside Humidity from Envirionment Canada in Pitt Meadows'
+      unit_of_measurement: '%'
+      value_template: '{{ state_attr("weather.pitt_meadows", "humidity") }}'

@@ -1,0 +1,4 @@
+  ## config hidraw device is the wyze receiver
+  # (custom integration) https://github.com/kevinvincent/ha-wyzesense
+  - platform: wyzesense
+    device: auto

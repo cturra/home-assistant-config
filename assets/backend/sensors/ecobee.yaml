@@ -1,0 +1,98 @@
+## sensor templates from ecobee devices
+# state: used for alerts dashboard
+# bool:  used to annotate climate graphs
+- platform: template
+  sensors:
+    # cooling on/off
+    hvac_cooling_state:
+      friendly_name: 'HVAC Action Cooling state'
+      value_template: >-
+        {% if states.climate.amazon.attributes.hvac_action == 'cooling' %}
+          on
+        {% else %}
+          off
+        {% endif %}
+    hvac_cooling_bool:
+      friendly_name: 'HVAC Action Cooling boolean'
+      value_template: >-
+        {% if states.climate.amazon.attributes.hvac_action == 'cooling' %}
+          1
+        {% else %}
+          0
+        {% endif %}
+    
+    # heating on/off
+    hvac_heating_state:
+      friendly_name: 'HVAC Action Heating state'
+      value_template: >-
+        {% if states.climate.amazon.attributes.hvac_action == 'heating' %}
+          on
+        {% else %}
+          off
+        {% endif %}
+    hvac_heating_bool:
+      friendly_name: 'HVAC Action Heating boolean'
+      value_template: >-
+        {% if states.climate.amazon.attributes.hvac_action == 'heating' %}
+          1
+        {% else %}
+          0
+        {% endif %}
+ 
+    # fan on/off
+    hvac_fan_state:
+      friendly_name: 'HVAC Fan state'
+      value_template: >-
+        {% if states.climate.amazon.attributes.fan == 'on' %}
+          on
+        {% else %}
+          off
+        {% endif %}
+    hvac_fan_bool:
+      friendly_name: 'HVAC Fan State boolean'
+      value_template: >-
+        {% if states.climate.amazon.attributes.fan == 'on' %}
+          1
+        {% else %}
+          0
+        {% endif %}
+
+    # any hvac function is on/off
+    hvac_state:
+      friendly_name: 'HVAC State'
+      value_template: >-
+        {% if states.climate.amazon.attributes.fan         == 'on'      or 
+              states.climate.amazon.attributes.hvac_action == 'heating' or
+              states.climate.amazon.attributes.hvac_action == 'cooling'
+        %}
+          on
+        {% else %}
+          off
+        {% endif %}
+
+## cooling time on today
+- platform: history_stats
+  name: 'HVAC Cooling Time On Today'
+  entity_id: sensor.hvac_cooling_state
+  state: 'on'
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+## heating time on today
+- platform: history_stats
+  name: 'HVAC Heating Time On Today'
+  entity_id: sensor.hvac_heating_state
+  state: 'on'
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+## hvac time on today
+- platform: history_stats
+  name: 'HVAC Time On Today'
+  entity_id: sensor.hvac_state
+  state: 'on'
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
