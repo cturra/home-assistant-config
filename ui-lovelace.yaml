@@ -50,13 +50,23 @@ views:
           - entity: binary_sensor.snr_dishwasherleak_water_leak
             name: 'Dishwasher: Water Detected'
             icon: 'mdi:water-alert'
+          - entity: binary_sensor.snr_downtoiletleak_water_leak
+            name: 'Downstairs Bathroom: Toilet Water Detected'
+            icon: 'mdi:water-alert'
           - entity: binary_sensor.snr_espressoleak_water_leak
             name: 'Espresso Machine: Water Detected'
             icon: 'mdi:water-alert'
           - entity: binary_sensor.snr_ensuitebathtubleak_water_leak
             name: 'Ensuite Bathtub: Water Detected'
+            icon: 'mdi:water-alert'
+          - entity: binary_sensor.snr_ensuitetoiletleak_water_leak
+            name: 'Ensuite Toilet: Water Detected'
+            icon: 'mdi:water-alert'
           - entity: binary_sensor.snr_fridgeleak_water_leak
             name: 'Fridge: Water Detected'
+            icon: 'mdi:water-alert'
+          - entity: binary_sensor.snr_hotwatertankleak_water_leak
+            name: 'Hot Water Tank: Water Detected'
             icon: 'mdi:water-alert'
           - entity: binary_sensor.snr_laundryleak_water_leak
             name: 'Laundry Water Detected'
@@ -127,8 +137,14 @@ views:
             - entity: sensor.family_room_front_window_contact_battery
               icon: 'mdi:battery-alert-variant-outline'
             # leak sensors
+            - entity: sensor.snr_downtoiletleak_battery
+              name: 'Downstairs: Toilet Leak Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_ensuitebathtubleak_battery
               name: 'Ensuite: Bathtub Leak Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_ensuitetoiletleak_battery
+              name: 'Ensuite: Toilet Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_dishwasherleak_battery
               name: 'Kitchen: Dishwasher Leak Sensor Battery'
@@ -138,6 +154,9 @@ views:
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_fridgeleak_battery
               name: 'Kitchen: Fridge Leak Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_hotwatertankleak_battery
+              name: 'Crawspace: Hot Water Tank Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_laundryleak_battery
               name: 'Laundry: Washer Leak Sensor Battery'
@@ -1535,14 +1554,23 @@ views:
             - entity: sensor.snr_dishwasherleak_battery
               name: 'Dishwasher'
               tap_action: more-info
+            - entity: sensor.snr_downtoiletleak_battery
+              name: 'Downstairs Bathroom Toilet'
+              tap_action: more-info
             - entity: sensor.snr_ensuitebathtubleak_battery
               name: 'Ensuite Bathtub'
+              tap_action: more-info
+            - entity: sensor.snr_ensuitetoiletleak_battery
+              name: 'Ensuite Toilet'
               tap_action: more-info
             - entity: sensor.snr_espressoleak_battery
               name: 'Espresso Machine'
               tap_action: more-info
             - entity: sensor.snr_fridgeleak_battery
               name: 'Fridge'
+              tap_action: more-info
+            - entity: sensor.snr_hotwatertankleak_battery
+              name: 'Hot Water Tank'
               tap_action: more-info
             - entity: sensor.snr_laundryleak_battery
               name: 'Laundry'
