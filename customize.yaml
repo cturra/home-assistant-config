@@ -87,8 +87,8 @@ binary_sensor.wyzesense_77a725aa:
     {% endif %}
 
 # family room front window
-binary_sensor.wyzesense_77a05439:
-  friendly_name: 'Family Room Front Window Sensor'
+binary_sensor.srn_familyroomwindowfrontcontact_contact:
+  friendly_name: 'Family Room Front Window contact'
   device_class: window
 
 # garage door
@@ -103,6 +103,6 @@ binary_sensor.wyzesense_77a05475:
     {% endif %}
 
 # main bedroom window
-binary_sensor.wyzesense_77a71e53:
+binary_sensor.snr_mainbedroomwindowcontact_contact:
   friendly_name: 'Main Bedroom Window Sensor'
   device_class: window

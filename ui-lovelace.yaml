@@ -119,6 +119,9 @@ views:
             - entity: sensor.crawlspace_door_contact_battery
               name: 'Crawlspace: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.srn_familyroomwindowfrontcontact_battery
+              name: 'Family Room: Front Window Contact battery'
+              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_frontdoorcontact_battery
               name: 'Front: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
@@ -128,7 +131,10 @@ views:
             - entity: sensor.snr_garagedoorsidecontact_battery
               name: 'Garage: Side Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-            - entity: sensor.main_bedroom_window_contact_battery
+            - entity: sensor.snr_lockercontact_battery
+              name:  'Crawlspace: Locker Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_mainbedroomwindowcontact_battery
               name: 'Main Bedroom: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_patiodoorcontact_battery
@@ -241,9 +247,6 @@ views:
               name: 'Family Room: Corner'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
-            - entity: binary_sensor.wyzesense_77a05439
-              name: 'Family Room: Front Window'
-              secondary_info: last-changed
             - entity: light.family_room_wall
               type: 'custom:slider-entity-row'
               name: 'Family Room: Wall'
@@ -297,9 +300,6 @@ views:
               name: 'Main Bedroom: Heater'
               icon: 'mdi:radiator'
               secondary_info: last-changed
-            - entity: binary_sensor.wyzesense_77a71e53
-              name: 'Main Bedroom: Window'
-              secondary_info: last-changed
             # Kids Bedroom
             - entity: light.kids_bedroom_ceiling
               type: 'custom:slider-entity-row'
@@ -329,9 +329,16 @@ views:
               name: 'Shed: Fan'
               icon: 'mdi:fan'
               secondary_info: last-changed
+            - entity: switch.sw_shedflood2
+              name: 'Shed: Flood'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
             # Contact Sensors
             - entity: binary_sensor.wyzesense_77a725aa
               name: 'Crawlspace: Door'
+              secondary_info: last-changed
+            - entity: binary_sensor.srn_familyroomwindowfrontcontact_contact
+              name: 'Family Room: Front Window'
               secondary_info: last-changed
             - entity: binary_sensor.snr_frontdoorcontact_contact
               name: 'Front Door'
@@ -344,6 +351,12 @@ views:
               secondary_info: last-changed
             - entity: binary_sensor.snr_garagedoorsidecontact_contact
               name: 'Garage: Side Door'
+              secondary_info: last-changed
+            - entity: binary_sensor.snr_lockercontact_contact
+              name: 'Crawlspace: Locker Door'
+              secondary_info: last-changed
+            - entity: binary_sensor.snr_mainbedroomwindowcontact_contact
+              name: 'Main Bedroom: Window'
               secondary_info: last-changed
             - entity: binary_sensor.snr_patiodoorcontact_contact
               name: 'Patio Door'
@@ -797,8 +810,18 @@ views:
                   name: Fan
                   icon: 'mdi:fan'
                   state_color: true
-            - type: 'custom:button-card'
-              color_type: blank
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px 10px 10px;
+                  }
+              entities:
+                - entity: switch.sw_shedflood2
+                  name: Flood
+                  icon: 'mdi:lightbulb-outline'
+                  state_color: true
 
 
   ## ------ CLIMATE DASHBOARD ------
@@ -1499,7 +1522,7 @@ views:
             - entity: sensor.crawlspace_door_contact_battery
               name: 'Crawlspace Door'
               tap_action: more-info
-            - entity: sensor.family_room_front_window_contact_battery
+            - entity: sensor.srn_familyroomwindowfrontcontact_battery
               name: 'Family Room Front Window'
               tap_action: more-info
             - entity: sensor.snr_frontdoorcontact_battery
@@ -1514,7 +1537,10 @@ views:
             - entity: sensor.garage_door_contact_battery
               name: 'Garage Car Door'
               tap_action: more-info
-            - entity: sensor.main_bedroom_window_contact_battery
+            - entity: sensor.snr_lockercontact_battery
+              name: 'Locker Door'
+              tap_action: more-info
+            - entity: sensor.snr_mainbedroomwindowcontact_battery
               name: 'Main Bedroom Window'
               tap_action: more-info
             - entity: sensor.snr_patiodoorcontact_battery

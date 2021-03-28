@@ -604,11 +604,9 @@
   condition:
   - condition: and
     conditions:
-    - condition: device
-      device_id: 2e26b385efa3d99e3d3a35bf23d70c4f
-      domain: device_tracker
+    - condition: state
       entity_id: device_tracker.turraphone
-      type: is_home
+      state: home
     - condition: time
       before: '10:00'
       after: 05:00
@@ -619,4 +617,25 @@
   - service: switch.turn_on
     target:
       entity_id: switch.plg_espressomachine
+  mode: single
+- id: '1616875296550'
+  alias: Crawlspace / Locker / Open - alert
+  description: 'when locker door is opened notify chris' iphone.'
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.snr_lockercontact_contact
+    to: 'on'
+    for: 00:00:02
+  condition: []
+  action:
+  - service: notify.mobile_app_turraphone
+    data:
+      title: ❗🚪 Locker Door Open
+      message: Locker Door has been opened
+      data:
+        push:
+          sound:
+            name: default
+            critical: 1
+            volume: 1
   mode: single
