@@ -102,7 +102,12 @@ binary_sensor.wyzesense_77a05475:
       mdi:garage-variant
     {% endif %}
 
+# kitchen window
+binary_sensor.snr_kitchenwindowcontact_contact:
+  friendly_name: 'Kitchen Window contact'
+  device_class: window
+
 # main bedroom window
 binary_sensor.snr_mainbedroomwindowcontact_contact:
-  friendly_name: 'Main Bedroom Window Sensor'
+  friendly_name: 'Main Bedroom Window contact'
   device_class: window

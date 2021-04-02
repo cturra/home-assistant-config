@@ -131,6 +131,9 @@ views:
             - entity: sensor.snr_garagedoorsidecontact_battery
               name: 'Garage: Side Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_kitchenwindowcontact_battery
+              name: 'Kitchen: Window Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_lockercontact_battery
               name:  'Crawlspace: Locker Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
@@ -170,9 +173,13 @@ views:
             - entity: sensor.snr_upcommontoiletleak_battery
               name: 'Upstairs Bathroom: Toilet Leak Sensor Battery'  
               icon: 'mdi:battery-alert-variant-outline'
-            # motion sensors (ikea)
+            # motion sensors (aqara)
             - entity: sensor.snr_officemotion_battery
               name: 'Office: Motion Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            # motion sensors (ikea)
+            - entity: sensor.snr_shedoutsidemotion_battery
+              name: 'Shed: Outdoor Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
             # motion sensors (wyze)
             - entity: sensor.garage_outside_motion_battery
@@ -329,7 +336,7 @@ views:
               name: 'Shed: Fan'
               icon: 'mdi:fan'
               secondary_info: last-changed
-            - entity: switch.sw_shedflood2
+            - entity: switch.sw_shedflood
               name: 'Shed: Flood'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
@@ -351,6 +358,9 @@ views:
               secondary_info: last-changed
             - entity: binary_sensor.snr_garagedoorsidecontact_contact
               name: 'Garage: Side Door'
+              secondary_info: last-changed
+            - entity: binary_sensor.snr_kitchenwindowcontact_contact
+              name: 'Kitchen: Window'
               secondary_info: last-changed
             - entity: binary_sensor.snr_lockercontact_contact
               name: 'Crawlspace: Locker Door'
@@ -818,7 +828,7 @@ views:
                     padding: 0px 10px 10px 10px;
                   }
               entities:
-                - entity: switch.sw_shedflood2
+                - entity: switch.sw_shedflood
                   name: Flood
                   icon: 'mdi:lightbulb-outline'
                   state_color: true
@@ -1537,6 +1547,9 @@ views:
             - entity: sensor.garage_door_contact_battery
               name: 'Garage Car Door'
               tap_action: more-info
+            - entity: sensor.snr_kitchenwindowcontact_battery
+              name: 'Kitchen Window'
+              tap_action: more-info
             - entity: sensor.snr_lockercontact_battery
               name: 'Locker Door'
               tap_action: more-info
@@ -1646,6 +1659,9 @@ views:
               tap_action: more-info
             - entity: sensor.porch_motion_battery
               name: 'Porch'
+              tap_action: more-info
+            - entity: sensor.snr_shedoutsidemotion_battery
+              name: 'Shed Outdoor'
               tap_action: more-info
 
 
