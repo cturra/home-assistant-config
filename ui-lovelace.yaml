@@ -1665,6 +1665,101 @@ views:
               tap_action: more-info
 
 
+## ------ ENERGY DASHBOARD ------
+  - title: Energy
+    path: energy
+    icon: 'mdi:flash'
+    badges: []
+    cards:
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ###  Espresso Machine
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+          # espresso machine power (watts)
+          - type: 'custom:button-card'
+            entity: sensor.espresso_machine_plug_energy_power
+            name: Power
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+          # espresso machine current (amps)
+          - type: 'custom:button-card'
+            entity: sensor.espresso_machine_plug_energy_current
+            name: Current
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+          # espresso machine energy total (today)
+          - type: 'custom:button-card'
+            entity: sensor.espresso_machine_plug_energy_today
+            name: Today
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+        # ESPRESSO POWER GRAPH
+        - type: 'custom:mini-graph-card'
+          show:
+            extrema: false
+            fill: fade
+            icon: false
+            labels: hover
+            labels_secondary: hover
+            name: false
+            state: false
+          line_width: 2
+          hours_to_show: 12
+          points_per_hour: 12
+          entities:
+            # power (watts)
+            - entity: sensor.espresso_machine_plug_energy_power
+              name: "Power"
+              show_legend: false
+              state_adaptive_color: true
+      
+
   ## ------ AUDIO DASHBOARD ------
   - title: Audio
     path: audio
