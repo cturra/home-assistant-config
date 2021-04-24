@@ -347,7 +347,7 @@
     conditions:
     - condition: numeric_state
       entity_id: sensor.garage_humidity_int
-      above: '67'
+      above: '65'
     - condition: state
       entity_id: switch.plg_garagedehumidifier
       state: 'off'
@@ -362,7 +362,7 @@
   trigger:
   - platform: numeric_state
     entity_id: sensor.garage_humidity_int
-    above: '67'
+    above: '65'
     for: 00:05:00
   condition:
   - condition: and
@@ -384,12 +384,12 @@
   trigger:
   - platform: numeric_state
     entity_id: sensor.garage_humidity_int
-    above: '63'
     for: 00:15:00
+    below: '61'
   condition:
   - condition: state
     entity_id: switch.plg_garagedehumidifier
-    state: 'off'
+    state: 'on'
   action:
   - service: switch.turn_off
     data: {}
@@ -674,4 +674,39 @@
   - service: switch.turn_off
     data: {}
     entity_id: switch.sw_shedflood
+  mode: restart
+- id: '1618634466675'
+  alias: Yard / Motion / ON - at night
+  description: turn on porch lights in motion is detected in front yard at night
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.wyzesense_779f1f3a
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: and
+    conditions:
+    - condition: time
+      after: 00:30
+      before: 06:00
+    - condition: state
+      entity_id: switch.sw_porch
+      state: 'off'
+  action:
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.sw_porch
+  - wait_for_trigger:
+    - platform: state
+      from: 'on'
+      to: 'off'
+      entity_id: binary_sensor.wyzesense_779f1f3a
+  - delay:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.sw_porch
   mode: restart
