@@ -1,0 +1,26 @@
+- platform: template
+  sensors:
+    ## ENERGY
+    # deep freezer today total (2 decimals)
+    deep_freezer_plug_energy_today_f2:
+      friendly_name: 'Deep Freezer Plug Energy Today 2 decimal places'
+      unit_of_measurement: 'kWh'
+      value_template: '{{ states("sensor.deep_freezer_plug_energy_today") | round(2) }}'
+    
+    # deep freezer current (2 decimals)
+    deep_freezer_plug_energy_current_f2:
+      friendly_name: 'Deep Freezer Plug Enerfy Current 2 decimal places'
+      unit_of_measurement: 'A'
+      value_template: '{{ states("sensor.deep_freezer_plug_energy_current") | round(2) }}'
+
+    # espresso machine today total (2 decimals)
+    espresso_machine_plug_energy_today_f2:
+      friendly_name: 'Espresso Machine Plug Energy Today 2 decimal places'
+      unit_of_measurement: 'kWh'
+      value_template: '{{ states("sensor.espresso_machine_plug_energy_today") | round(2) }}'
+    
+    # espresso machine current (2 decimals)
+    espresso_machine_plug_energy_current_f2:
+      friendly_name: 'Espresso Machine Plug Enerfy Current 2 decimal places'
+      unit_of_measurement: 'A'
+      value_template: '{{ states("sensor.espresso_machine_plug_energy_current") | round(2) }}'

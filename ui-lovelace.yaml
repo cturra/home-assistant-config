@@ -144,6 +144,10 @@ views:
               name: 'Patio Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.family_room_front_window_contact_battery
+              name: 'Family Room: Front Window Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_sheddoorcontact_battery
+              name: 'Shed: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
             # leak sensors
             - entity: sensor.snr_downtoiletleak_battery
@@ -182,11 +186,11 @@ views:
               name: 'Shed: Outdoor Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
             # motion sensors (wyze)
+            - entity: sensor.front_yard_motion_battery
+              name: 'Front Yard: Motion Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.garage_outside_motion_battery
               name: 'Garage: Outside Motion Sensor Battery'
-              icon: 'mdi:battery-alert-variant-outline'
-            - entity: sensor.garage_inside_motion_battery
-              name: 'Garage: Inside Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.porch_motion_battery
               name: 'Porch: Motion Sensor Battery'
@@ -350,6 +354,8 @@ views:
             - entity: binary_sensor.snr_frontdoorcontact_contact
               name: 'Front Door'
               secondary_info: last-changed
+            - entity: binary_sensor.wyzesense_779f1f3a
+              name: 'Front Yard: motion'
             - entity: binary_sensor.wyzesense_77a05475
               name: 'Garage: Car Door'
               secondary_info: last-changed
@@ -371,22 +377,25 @@ views:
             - entity: binary_sensor.snr_patiodoorcontact_contact
               name: 'Patio Door'
               secondary_info: last-changed
+            - entity: binary_sensor.snr_sheddoorcontact_contact
+              name: 'Shed: Door'
+              secondary_info: last-changed
             # HVAC (ecobee) / fan
             - entity: sensor.hvac_fan_state
               name: 'HVAC Fan'
               icon: 'mdi:fan'
               secondary_info: last-changed
-           # HVAC (ecobee) / ac
+            # HVAC (ecobee) / ac
             - entity: sensor.hvac_cooling_state
               name: 'Air Conditioner'
               icon: 'mdi:snowflake'
               secondary_info: last-changed
-           # HVAC (ecobee) / furtnace
+            # HVAC (ecobee) / furtnace
             - entity: sensor.hvac_heating_state
               name: 'Furnace'
               icon: 'mdi:fire'
               secondary_info: last-changed
-           # Media
+            # Media
             - entity: media_player.main_bedroom
               name: 'Main: Beam'
               icon: 'mdi:speaker'
@@ -870,12 +879,16 @@ views:
               ha-card .mode-item {
                 --heat-color: transparent;
                 --cool-color: transparent;
+                --heat_cool-color: transparent;
               }
               ha-card .mode-item.active.heat {
                 color: #e67300;
               }
               ha-card .mode-item.active.cool {
                 color: #3399ff;
+              }
+              ha-card .mode-item.active.heat_cool {
+                color: #00ff7f;
               }
           show_header: false
           step_layout: row
@@ -1169,7 +1182,7 @@ views:
             line_width: 2
             hours_to_show: 24
             points_per_hour: 6
-            lower_bound_secondary: 40
+            lower_bound_secondary: 20
             upper_bound_secondary: 80
             group: true
             color_thresholds:
@@ -1285,7 +1298,7 @@ views:
             line_width: 2
             hours_to_show: 24
             points_per_hour: 4
-            lower_bound_secondary: 40
+            lower_bound_secondary: 20
             upper_bound_secondary: 80
             group: true
             color_thresholds:
@@ -1441,6 +1454,175 @@ views:
                 color: '#731425'
 
 
+  ## ------ ENERGY DASHBOARD ------
+  - title: Energy
+    path: energy
+    icon: 'mdi:flash'
+    badges: []
+    cards:
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        # DEEP FREEZER BUTTONS
+        - type: markdown
+          content: >
+            ###  Deep Freezer
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+          # deep freezer (watts)
+          - type: 'custom:button-card'
+            entity: sensor.deep_freezer_plug_energy_power
+            name: Power
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+          # deep freezer current (amps)
+          - type: 'custom:button-card'
+            entity: sensor.deep_freezer_plug_energy_current_f2
+            name: Current
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+          # deep freezer energy total (today)
+          - type: 'custom:button-card'
+            entity: sensor.deep_freezer_plug_energy_today_f2
+            name: Usage
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+        # ESPRESSO MACHINE BUTTONS
+        - type: markdown
+          content: >
+            ###  Espresso Machine
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+          # espresso machine power (watts)
+          - type: 'custom:button-card'
+            entity: sensor.espresso_machine_plug_energy_power
+            name: Power
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+          # espresso machine current (amps)
+          - type: 'custom:button-card'
+            entity: sensor.espresso_machine_plug_energy_current_f2
+            name: Current
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+          # espresso machine energy total (today)
+          - type: 'custom:button-card'
+            entity: sensor.espresso_machine_plug_energy_today_f2
+            name: Usage
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+        # ENERGY POWER GRAPH
+        - type: 'custom:mini-graph-card'
+          show:
+            extrema: false
+            fill: fade
+            icon: false
+            labels: hover
+            labels_secondary: hover
+            name: false
+            state: false
+          height: 100
+          line_width: 1.2
+          hours_to_show: 12
+          points_per_hour: 15
+          entities:
+            # deep freezer
+            - entity: sensor.deep_freezer_plug_energy_power
+              name: 'Deep Freezer'
+              show_fill: false
+              show_points: false
+            # espresso machine
+            - entity: sensor.espresso_machine_plug_energy_power
+              name: 'Espresso Machine'
+              show_fill: false
+              show_points: false
+
+
   ## ------ BATTERY DASHBOARD ------
   - title: Battery
     path: battery
@@ -1559,6 +1741,9 @@ views:
             - entity: sensor.snr_patiodoorcontact_battery
               name: 'Patio Door'
               tap_action: more-info
+            - entity: sensor.snr_sheddoorcontact_battery
+              name: 'Shed Door'
+              tap_action: more-info
 
       # Leak Sensors
       - type: 'custom:vertical-stack-in-card'
@@ -1648,8 +1833,8 @@ views:
                 margin: 0px 0;
               }
           entities:
-            - entity: sensor.garage_inside_motion_battery
-              name: 'Garage Indoor'
+            - entity: sensor.front_yard_motion_battery
+              name: 'Front Yard'
               tap_action: more-info
             - entity: sensor.garage_outside_motion_battery
               name: 'Garage Outdoor'
@@ -1664,101 +1849,6 @@ views:
               name: 'Shed Outdoor'
               tap_action: more-info
 
-
-## ------ ENERGY DASHBOARD ------
-  - title: Energy
-    path: energy
-    icon: 'mdi:flash'
-    badges: []
-    cards:
-      - type: 'custom:vertical-stack-in-card'
-        cards:
-        - type: markdown
-          content: >
-            ###  Espresso Machine
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
-        - type: horizontal-stack
-          cards:
-          # espresso machine power (watts)
-          - type: 'custom:button-card'
-            entity: sensor.espresso_machine_plug_energy_power
-            name: Power
-            show_state: true
-            show_icon: false
-            styles:
-              card:
-                - margin: -3px
-                - height: 60px
-              name:
-                - margin: 10px
-                - font-size: 11px
-              state:
-                - margin: -10px
-                - font-size: 22px
-
-          # espresso machine current (amps)
-          - type: 'custom:button-card'
-            entity: sensor.espresso_machine_plug_energy_current
-            name: Current
-            show_state: true
-            show_icon: false
-            styles:
-              card:
-                - margin: -3px
-                - height: 60px
-              name:
-                - margin: 10px
-                - font-size: 11px
-              state:
-                - margin: -10px
-                - font-size: 22px
-
-          # espresso machine energy total (today)
-          - type: 'custom:button-card'
-            entity: sensor.espresso_machine_plug_energy_today
-            name: Today
-            show_state: true
-            show_icon: false
-            styles:
-              card:
-                - margin: -3px
-                - height: 60px
-              name:
-                - margin: 10px
-                - font-size: 11px
-              state:
-                - margin: -10px
-                - font-size: 22px
-
-        # ESPRESSO POWER GRAPH
-        - type: 'custom:mini-graph-card'
-          show:
-            extrema: false
-            fill: fade
-            icon: false
-            labels: hover
-            labels_secondary: hover
-            name: false
-            state: false
-          line_width: 2
-          hours_to_show: 12
-          points_per_hour: 12
-          entities:
-            # power (watts)
-            - entity: sensor.espresso_machine_plug_energy_power
-              name: "Power"
-              show_legend: false
-              state_adaptive_color: true
-      
 
   ## ------ AUDIO DASHBOARD ------
   - title: Audio
