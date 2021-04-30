@@ -712,7 +712,7 @@
   mode: restart
 - id: '1619640982634'
   alias: Shed / Door / ON - notify @ night
-  description: notify chris' phone is the shed door is left open for 5 minutes when
+  description: notify chris' phone if the shed door is left open for 5 minutes when
     the time is after 22:30.
   trigger:
   - platform: time_pattern
@@ -737,4 +737,29 @@
             name: default
             critical: 1
             volume: 1
+  mode: single
+- id: '1619814582936'
+  alias: Shed / Fan / On - cycle when door opened
+  description: turn on shed exhaust fan for 10 minutes when the door is opened.
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.snr_sheddoorcontact_contact
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.sw_shedfan
+    state: 'off'
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.sw_shedfan
+  - delay:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  - service: switch.turn_off
+    target:
+      entity_id: switch.sw_shedfan
   mode: single
