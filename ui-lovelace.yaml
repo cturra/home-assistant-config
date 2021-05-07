@@ -122,6 +122,12 @@ views:
             - entity: sensor.srn_familyroomwindowfrontcontact_battery
               name: 'Family Room: Front Window Contact battery'
               icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_familyroomwindowsideleftcontact_battery
+              name: 'Family Room: Side/Left Window Contact battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_familyroomwindowsiderightcontact_battery
+              name: 'Family Room: Side/Right Window Contact battery'
+              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_frontdoorcontact_battery
               name: 'Front: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
@@ -344,6 +350,9 @@ views:
               name: 'Shed: Flood'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
+            # Motion Sensors
+            - entity: binary_sensor.wyzesense_779f1f3a
+              name: 'Front Yard: motion'
             # Contact Sensors
             - entity: binary_sensor.wyzesense_77a725aa
               name: 'Crawlspace: Door'
@@ -351,11 +360,15 @@ views:
             - entity: binary_sensor.srn_familyroomwindowfrontcontact_contact
               name: 'Family Room: Front Window'
               secondary_info: last-changed
+            - entity: binary_sensor.snr_familyroomwindowsideleftcontact_contact
+              name: 'Family Room: Side/Left Window'
+              secondary_info: last-changed
+            - entity: binary_sensor.snr_familyroomwindowsiderightcontact_contact
+              name: 'Family Room: Side/Right Window'
+              secondary_info: last-changed
             - entity: binary_sensor.snr_frontdoorcontact_contact
               name: 'Front Door'
               secondary_info: last-changed
-            - entity: binary_sensor.wyzesense_779f1f3a
-              name: 'Front Yard: motion'
             - entity: binary_sensor.wyzesense_77a05475
               name: 'Garage: Car Door'
               secondary_info: last-changed
@@ -412,7 +425,7 @@ views:
               value: 'playing'
           show_empty: false
 
-  
+
   ## ------ SWITCH DASHBAORD ------
   - title: Home
     panel: false
@@ -1716,6 +1729,12 @@ views:
               tap_action: more-info
             - entity: sensor.srn_familyroomwindowfrontcontact_battery
               name: 'Family Room Front Window'
+              tap_action: more-info
+            - entity: sensor.snr_familyroomwindowsideleftcontact_battery
+              name: 'Family Room Side/Left Window'
+              tap_action: more-info
+            - entity: sensor.snr_familyroomwindowsiderightcontact_battery
+              name: 'Family Room Side/Right Window'
               tap_action: more-info
             - entity: sensor.snr_frontdoorcontact_battery
               name: 'Front Door'

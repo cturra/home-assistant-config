@@ -90,6 +90,16 @@ binary_sensor.srn_familyroomwindowfrontcontact_contact:
   friendly_name: 'Family Room Front Window contact'
   device_class: window
 
+# family room side/left window
+binary_sensor.snr_familyroomwindowsideleftcontact_contact:
+  friendly_name: 'Family Room Side/Left Window contact'
+  device_class: window
+
+# family room side/right window
+binary_sensor.snr_familyroomwindowsiderightcontact_contact:
+  friendly_name: 'Family Room Side/Right Window contact'
+  device_class: window
+
 # garage door
 binary_sensor.wyzesense_77a05475:
   friendly_name: 'Garage Door Sensor'
