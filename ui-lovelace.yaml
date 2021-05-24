@@ -313,10 +313,10 @@ views:
               name: 'Main Bedroom'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
-            - entity: switch.plg_mainbedroom1
-              name: 'Main Bedroom: Heater'
-              icon: 'mdi:radiator'
-              secondary_info: last-changed
+            #- entity: switch.plg_mainbedroom1
+            #  name: 'Main Bedroom: Heater'
+            #  icon: 'mdi:radiator'
+            #  secondary_info: last-changed
             # Kids Bedroom
             - entity: light.kids_bedroom_ceiling
               type: 'custom:slider-entity-row'
@@ -324,7 +324,7 @@ views:
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
             # Laundry
-            - entity: switch.plg_utility
+            - entity: switch.plg_zbrpt_laundryroom
               name: 'Laundry: Dehumidifier'
               icon: 'mdi:water-outline'
               secondary_info: last-changed
@@ -639,18 +639,8 @@ views:
                   name: 'Ceiling'
                   icon: 'mdi:lightbulb-outline'
                   state_color: true
-            - type: entities
-              show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
-              entities:
-                - entity: switch.plg_mainbedroom1
-                  name: 'Heater'
-                  icon: 'mdi:radiator'
-                  state_color: true
+            - type: 'custom:button-card'
+              color_type: blank
 
       # Kids Bedroom
       - type: 'custom:vertical-stack-in-card'
@@ -711,7 +701,7 @@ views:
                     padding: 0px 10px;
                   }
               entities:
-                - entity: switch.plg_utility
+                - entity: switch.plg_zbrpt_laundryroom
                   name: 'Dehumidifier'
                   icon: 'mdi:water-outline'
                   state_color: true
