@@ -1599,6 +1599,73 @@ views:
                 - margin: -10px
                 - font-size: 22px
 
+        # GARAGE DEHUMIDIFIER BUTTONS
+        - type: markdown
+          content: >
+            ###  Garage Dehumidifier
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
+          cards:
+          # garage dehumidifier power (watts)
+          - type: 'custom:button-card'
+            entity: sensor.garage_dehumidifier_plug_energy_power
+            name: Power
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+          # garage dehumidifier current (amps)
+          - type: 'custom:button-card'
+            entity: sensor.garage_dehumidifier_plug_energy_current_f2
+            name: Current
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+          # garage dehumidifier energy total (today)
+          - type: 'custom:button-card'
+            entity: sensor.garage_dehumidifier_plug_energy_today_f2
+            name: Usage
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
         # ENERGY POWER GRAPH
         - type: 'custom:mini-graph-card'
           show:
@@ -1616,14 +1683,20 @@ views:
           entities:
             # deep freezer
             - entity: sensor.deep_freezer_plug_energy_power
-              name: 'Deep Freezer'
+              name: 'Freezer'
               show_fill: false
               show_points: false
             # espresso machine
             - entity: sensor.espresso_machine_plug_energy_power
-              name: 'Espresso Machine'
+              name: 'Espresso'
               show_fill: false
               show_points: false
+            # garage dehumidifier
+            - entity: sensor.garage_dehumidifier_plug_energy_power
+              name: 'Garage Dehumidifier'
+              show_fill: false
+              show_points: false
+              color: '#27bac4'
 
 
   ## ------ BATTERY DASHBOARD ------
