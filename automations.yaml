@@ -358,13 +358,15 @@
   mode: single
 - id: '1612463000537'
   alias: Garage / Dehumidifier / ON - High Humidity
-  description: ''
+  description: check garage humidity every 10 minutes and turn on dehumidifier if
+    humidity has risen above 65% RH
   trigger:
-  - platform: numeric_state
+  - platform: time_pattern
+    minutes: /10
+  condition:
+  - condition: numeric_state
     entity_id: sensor.garage_humidity_int
     above: '65'
-    for: 00:05:00
-  condition:
   - condition: and
     conditions:
     - condition: state
@@ -380,13 +382,15 @@
   mode: single
 - id: '1612463100433'
   alias: Garage / Dehumidifier / OFF - Low Humidity
-  description: ''
+  description: check garage humidity every 15 minutes and turn off dehumidifier if
+    humidity has dropped below 61% RH
   trigger:
-  - platform: numeric_state
-    entity_id: sensor.garage_humidity_int
-    for: 00:15:00
-    below: '61'
+  - platform: time_pattern
+    minutes: /15
   condition:
+  - condition: numeric_state
+    entity_id: sensor.garage_humidity_int
+    below: '61'
   - condition: state
     entity_id: switch.plg_garagedehumidifier
     state: 'on'
