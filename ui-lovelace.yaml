@@ -724,6 +724,15 @@ views:
               :host ha-markdown.no-header {
                 padding: 7px 2px 5px 5px;
               }
+        - type: entities
+          card_mod:
+            style: |
+              :host .card-content {
+                padding: 0px 10px;
+              }
+          entities:
+          - entity: cover.garage_door
+            name: 'Garage Door' 
         - type: horizontal-stack
           cards:
             - type: entities
