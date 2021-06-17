@@ -796,3 +796,38 @@
     target:
       entity_id: switch.sw_shedfan
   mode: single
+- id: '1623889405239'
+  alias: Garage / Door / Open - when chris returns home
+  description: notify chris' phone when it returns home from away and offer to open
+    the garage door.
+  trigger:
+  - platform: state
+    entity_id: device_tracker.turraphone
+    from: not_home
+    to: home
+  condition:
+  - condition: state
+    entity_id: binary_sensor.wyzesense_77a05475
+    state: 'off'
+  action:
+  - service: notify.mobile_app_turraphone
+    data:
+      title: Welcome Home!
+      message: Would you like to open the Garage Door?
+      data:
+        actions:
+        - action: OPEN_DOOR
+          title: Yes Please
+        - action: NO_ACTION
+          title: 'No'
+  - wait_for_trigger:
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: OPEN_DOOR
+    timeout: 00:02:00
+    continue_on_timeout: false
+  - service: switch.turn_on
+    target:
+      entity_id: switch.sw_garagedooropener1
+  mode: single
