@@ -986,8 +986,8 @@ views:
           cards:
           # laundry room
           - type: 'custom:button-card'
-            entity: sensor.laundry_temperature_f1
-            name: Laundry Room
+            entity: sensor.kitchen_temperature
+            name: 'Kitchen'
             show_state: true
             show_icon: false
             card_mod:
