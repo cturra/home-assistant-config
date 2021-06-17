@@ -724,17 +724,22 @@ views:
               :host ha-markdown.no-header {
                 padding: 7px 2px 5px 5px;
               }
-        - type: entities
-          card_mod:
-            style: |
-              :host .card-content {
-                padding: 0px 10px;
-              }
-          entities:
-          - entity: cover.garage_door
-            name: 'Garage Door' 
         - type: horizontal-stack
           cards:
+            # car door opener
+            - type: 'custom:button-card'
+              entity: cover.garage_door
+              name: 'Car Door'
+              tap_action:
+                action: toggle
+              confirmation:
+                text: '[[[ return `Are you sure you want to toggle the Garage Door?` ]]]'
+              styles:
+                card:
+                  - height: 100px
+                  - width: 125px
+              entities:
+            # switches
             - type: entities
               show_header_toggle: false
               card_mod:
@@ -743,22 +748,17 @@ views:
                     padding: 0px 10px;
                   }
               entities:
+                # ceiling light
                 - entity: switch.sw_garageceilingmain
                   name: 'Ceiling'
                   icon: 'mdi:lightbulb-outline'
                   state_color: true
+                # dehumidifier
                 - entity: switch.plg_garagedehumidifier
                   name: 'Dehumidifier'
                   icon: 'mdi:water-outline'
                   state_color: true
-            - type: entities
-              show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
-              entities:
+                # side door light
                 - entity: switch.sw_garagesidedoor
                   name: 'Side Door'
                   icon: 'mdi:lightbulb-outline'
@@ -837,6 +837,7 @@ views:
                     padding: 0px 10px 10px 10px;
                   }
               entities:
+                # ventilation fan
                 - entity: switch.sw_shedfan
                   name: Fan
                   icon: 'mdi:fan'
@@ -849,6 +850,7 @@ views:
                     padding: 0px 10px 10px 10px;
                   }
               entities:
+                # flood light
                 - entity: switch.sw_shedflood
                   name: Flood
                   icon: 'mdi:lightbulb-outline'
@@ -984,7 +986,7 @@ views:
         # row 2
         - type: horizontal-stack
           cards:
-          # laundry room
+          # kitchen
           - type: 'custom:button-card'
             entity: sensor.kitchen_temperature
             name: 'Kitchen'
