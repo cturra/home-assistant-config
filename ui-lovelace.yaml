@@ -91,7 +91,7 @@ views:
         - type: entity-filter
           entities:
             # climate sensors
-            - entity: sensor.snr_crawlspaceclimate_battery
+            - entity: sensor.snr_crawlspacedoorcontact_battery
               name: 'Crawlspace: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_garageclimate_battery
@@ -354,7 +354,7 @@ views:
             - entity: binary_sensor.wyzesense_779f1f3a
               name: 'Front Yard: motion'
             # Contact Sensors
-            - entity: binary_sensor.wyzesense_77a725aa
+            - entity: binary_sensor.snr_crawlspacedoorcontact_contact
               name: 'Crawlspace: Door'
               secondary_info: last-changed
             - entity: binary_sensor.srn_familyroomwindowfrontcontact_contact
@@ -737,7 +737,6 @@ views:
               styles:
                 card:
                   - height: 100px
-                  - width: 125px
               entities:
             # switches
             - type: entities
@@ -1798,7 +1797,7 @@ views:
                 margin: 0px 0;
               }
           entities:
-            - entity: sensor.crawlspace_door_contact_battery
+            - entity: sensor.snr_crawlspacedoorcontact_battery
               name: 'Crawlspace Door'
               tap_action: more-info
             - entity: sensor.srn_familyroomwindowfrontcontact_battery
@@ -1949,7 +1948,6 @@ views:
     icon: 'mdi:music-box-outline'
     badges: []
     cards:
-
       # Sonos
       - type: 'custom:vertical-stack-in-card'
         cards:

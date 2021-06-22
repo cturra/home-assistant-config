@@ -74,17 +74,6 @@ binary_sensor.snr_upcommontoiletleak_water_leak:
 
 ## ------ contact sensors ------
 
-# crawlspace door
-binary_sensor.wyzesense_77a725aa:
-  friendly_name: 'Crawlspace Door Sensor'
-  device_class: door
-  icon_template: >-
-    {% if is_state('binary_sensor.wyzesense_77a725aa','on') %}
-      mdi:door-open
-    {% else %}
-      mdi:door-closed
-    {% endif %}
-
 # family room front window
 binary_sensor.srn_familyroomwindowfrontcontact_contact:
   friendly_name: 'Family Room Front Window contact'
