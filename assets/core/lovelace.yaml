@@ -1,0 +1,26 @@
+# lovelace
+mode: yaml
+
+# add-ons
+resources:
+  # battery-state-card
+- url: /hacsfiles/battery-state-card/battery-state-card.js
+  type: module
+  # button-card
+- url: /hacsfiles/button-card/button-card.js
+  type: module
+  # card-mod
+- url: /hacsfiles/lovelace-card-mod/card-mod.js
+  type: module
+  # mini-graph-card
+- url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+  type: module
+  # slider-entity-row
+- url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js
+  type: module
+  # simple-thermostat
+- url: /hacsfiles/simple-thermostat/simple-thermostat.js
+  type: module
+  # vertical-stack-in-card
+- url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
+  type: module

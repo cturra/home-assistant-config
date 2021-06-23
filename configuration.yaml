@@ -1,59 +1,23 @@
 
-# Configure a default setup of Home Assistant (frontend, api, etc)
+## ha core configurations
 default_config:
-
-automation: !include automations.yaml
-
-binary_sensor: !include_dir_merge_list assets/backend/binary_sensors
-
-cover: !include_dir_merge_list assets/backend/covers
-
 frontend:
   themes: !include_dir_merge_named themes
-
-group: !include groups.yaml
-
 homeassistant:
   customize: !include customize.yaml
+# http
+http: !include assets/core/http.yaml
+# lovelace
+lovelace: !include assets/core/lovelace.yaml
 
-lovelace:
-  mode: yaml
 
-  # add-ons
-  resources:
-    # battery-state-card
-  - url: /hacsfiles/battery-state-card/battery-state-card.js
-    type: module
-    # button-card
-  - url: /hacsfiles/button-card/button-card.js
-    type: module
-    # card-mod
-  - url: /hacsfiles/lovelace-card-mod/card-mod.js
-    type: module
-    # mini-graph-card
-  - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
-    type: module
-    # slider-entity-row
-  - url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js
-    type: module
-    # simple-thermostat
-  - url: /hacsfiles/simple-thermostat/simple-thermostat.js
-    type: module
-    # vertical-stack-in-card
-  - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
-    type: module
-
-# enable ssl (cert/key generated w/ letsencrypt add-on)
-http:
-  ssl_certificate: /ssl/fullchain.pem
-  ssl_key: /ssl/privkey.pem
-
+automation: !include automations.yaml
+binary_sensor: !include_dir_merge_list assets/backend/binary_sensors
+cover: !include_dir_merge_list assets/backend/covers
+group: !include groups.yaml
 light: !include_dir_merge_list assets/backend/lights
-
 scene: !include scenes.yaml
-
 script: !include scripts.yaml
-
 sensor: !include_dir_merge_list assets/backend/sensors
 
 ## hass-sensorpush
@@ -67,9 +31,8 @@ weather:
   - platform: environment_canada
     station: !secret environment_canada_station
 
-# text to speech
-tts:
-  - platform: google_translate
-    service_name: google_say
-    language: 'en'
-    base_url: !secret ha_base_url
+## text to speech
+tts: !include assets/core/tts.yaml
+
+## rtsp cameras
+camera: !include_dir_merge_list assets/backend/cameras
