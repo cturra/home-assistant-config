@@ -520,7 +520,7 @@ views:
                 - entity: switch.plg_espressomachine
                   name: 'Espresso Machine'
                   icon: 'mdi:coffee-maker'
-                - entity: switch.plg_kitchenspeaker
+                - entity: switch.plg_zbrpt_kitchen
                   name: Speaker
                   icon: 'mdi:speaker'
                   state_color: true

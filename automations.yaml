@@ -55,17 +55,22 @@
     entity_id: switch.sw_shedfan
   mode: single
 - id: '1612292614712'
-  alias: Kitchen / Speaker / ON - music playing
+  alias: 'Kitchen Speakers: ON when music starts playing'
   description: ''
   trigger:
   - platform: state
     entity_id: media_player.kitchen_speaker
     to: playing
-  condition: []
+    for: 00:00:01
+  condition:
+  - condition: state
+    entity_id: switch.plg_zbrpt_kitchen
+    state: 'off'
   action:
   - service: switch.turn_on
     data: {}
-    entity_id: switch.plg_kitchenspeaker
+    target:
+      entity_id: switch.plg_zbrpt_kitchen
   mode: single
 - id: '1612292752882'
   alias: Kitchen / Speaker / OFF - music stops
@@ -81,12 +86,12 @@
     to: 'off'
   condition:
   - condition: state
-    entity_id: switch.plg_kitchenspeaker
+    entity_id: switch.plg_zbrpt_kitchen
     state: 'on'
   action:
   - service: switch.turn_off
     data: {}
-    entity_id: switch.plg_kitchenspeaker
+    entity_id: switch.plg_zbrpt_kitchen
   mode: single
 - id: '1612292819059'
   alias: Kitchen / Sink / ON - @ Sunset
@@ -830,4 +835,23 @@
   - service: switch.turn_on
     target:
       entity_id: switch.sw_garagedooropener1
+  mode: single
+- id: '1624131994582'
+  alias: Garage / Door / Open - send notification
+  description: send a notification to chris' phone, including a dynamic image, when
+    the garage door has been opened.
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.wyzesense_77a05475
+    from: 'off'
+    to: 'on'
+    for: 00:00:10
+  condition: []
+  action:
+  - service: notify.mobile_app_turraphone
+    data:
+      title: 🚪 Garage Door
+      message: The Garage Door has been opened.
+      data:
+        entity_id: camera.amzn_cam04
   mode: single
