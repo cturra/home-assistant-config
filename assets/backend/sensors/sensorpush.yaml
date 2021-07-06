@@ -31,31 +31,3 @@
       friendly_name: 'Fridge SensorPush battery voltage'
       unit_of_measurement: 'V'
       value_template: '{{ state_attr("sensor.fridge_humidity", "battery_voltage") }}'
-    
-    # garage
-    garage_temperature_f1_sp:
-      friendly_name: 'Garage Temperature 1 decimal'
-      unit_of_measurement: '°C'
-      value_template: '{{ states("sensor.garage_temperature") | round(1) }}'
-    garage_humidity_int_sp:
-      friendly_name: 'Garage Humidity without decimal'
-      unit_of_measurement: '%'
-      value_template: '{{ states("sensor.garage_humidity") | int }}'
-    garage_sensor_battery_voltage_sp:
-      friendly_name: 'Garage SensorPush battery voltage'
-      unit_of_measurement: 'V'
-      value_template: '{{ state_attr("sensor.garage_humidity", "battery_voltage") }}'
-    
-    # shed
-    shed_temperature_f1:
-      friendly_name: 'Shed Temperature 1 decimal'
-      unit_of_measurement: '°C'
-      value_template: '{{ states("sensor.shed_temperature") | round(1) }}'
-    shed_humidity_int:
-      friendly_name: 'Shed Humidity without decimal'
-      unit_of_measurement: '%'
-      value_template: '{{ states("sensor.shed_humidity") | int }}'
-    shed_sensor_battery_voltage:
-      friendly_name: 'Shed SensorPush battery voltage'
-      unit_of_measurement: 'V'
-      value_template: '{{ state_attr("sensor.shed_humidity", "battery_voltage") }}'

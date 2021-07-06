@@ -109,6 +109,9 @@ views:
             - entity: sensor.snr_mainbedroomclimate_battery
               name: 'Main Bedroom: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_shedclimate_battery
+              name: 'Shed: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_sparebedroomclimate_battery
               name: 'Spare Bedroom: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
@@ -987,8 +990,8 @@ views:
           cards:
           # kitchen
           - type: 'custom:button-card'
-            entity: sensor.kitchen_temperature
-            name: 'Kitchen'
+            entity: sensor.dining_room_temperature
+            name: 'Dining Room'
             show_state: true
             show_icon: false
             card_mod:
@@ -1060,8 +1063,8 @@ views:
           lower_bound_secondary: 35
           upper_bound_secondary: 70
           entities:
-            # temerature in downstairs hallway
-            - entity: sensor.amazon_temperature
+            # temerature in downstairs family room
+            - entity: sensor.family_room_temperature
               name: "Downstairs"
               show_fill: false
               show_points: false
@@ -1150,7 +1153,7 @@ views:
                 }
           - type: horizontal-stack
             cards:
-            # shed sensorpush temperature
+            # shed temperature
             - type: 'custom:button-card'
               entity: sensor.shed_temperature_f1
               name: Temperature
@@ -1166,7 +1169,7 @@ views:
                 state:
                   - margin: -10px
                   - font-size: 22px
-            # shed sensorpush humidity
+            # shed humidity
             - type: 'custom:button-card'
               entity: sensor.shed_humidity_int
               name: Humidity
@@ -1194,7 +1197,7 @@ views:
               state: false
             line_width: 2
             hours_to_show: 24
-            points_per_hour: 6
+            points_per_hour: 4
             lower_bound_secondary: 20
             upper_bound_secondary: 80
             group: true
@@ -1232,13 +1235,13 @@ views:
               - color: '#eb3b5a'
                 value: 35.9
             entities:
-              # temerature at sensorpush
-              - entity: sensor.shed_temperature
+              # temerature
+              - entity: sensor.shed_temperature_f1
                 name: "Temperature"
                 show_legend: false
                 state_adaptive_color: true
-              # humidity at sensorpush
-              - entity: sensor.shed_humidity
+              # humidity
+              - entity: sensor.shed_humidity_int
                 name: Humidity
                 line_width: 1
                 show_legend: false
@@ -1348,12 +1351,12 @@ views:
               - color: '#eb3b5a'
                 value: 35.9
             entities:
-              # temerature at sensorpush
+              # temerature
               - entity: sensor.garage_temperature_f1
                 name: "Garage"
                 show_legend: false
                 state_adaptive_color: true
-              # humidity at sensorpush
+              # humidity
               - entity: sensor.garage_humidity_int
                 name: "Humidity_1"
                 line_width: 2
@@ -1762,6 +1765,9 @@ views:
               tap_action: more-info
             - entity: sensor.snr_officeclimate_battery
               name: 'Office'
+              tap_action: more-info
+            - entity: sensor.snr_shedclimate_battery
+              name: 'Shed'
               tap_action: more-info
             - entity: sensor.snr_sparebedroomclimate_battery
               name: 'Spare Bedroom'

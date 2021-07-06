@@ -8,3 +8,24 @@ This project still an active work in progress. Stay tuned for more information a
 what hardware I am using, how it's configured, etc.
 
 For now, please enjoy, and feedback always welcome!
+
+### Devices
+
+| Type | Make | Model | Count | Connectivity |
+| :--- | :--- | :--- | :--: | :-- |
+| Climate Sensor | Xiaomi | WSDCGQ11LM | 8 | Zigbee2MQTT |
+| Contact Sensor | Xiaomi | MCCGQ11LM | 12 | Zigbee2MQTT |
+| Contact Sensor | Wyze | Sense | 1 | HACS Wyze Sense Component |
+| Leak Sensor | Xiaomi | SJCGQ11LM | 9 | Zigbee2MQTT |
+| Motion Sensor | Ikea | E1745 | 1 | Zigbee2MQTT |
+| Motion Sensor | Xiaomi | RTCGQ11LM | 1 | Zigbee2MQTT |
+| Motion Sensor | Wyze | Sense | 2 | HACS Wyze Sense Component |
+| Plug | Sonoff | S31ZB | 3 |  Zigbee2MQTT |
+| Plug | Sonoff | S31 | 3 | Tasmota |
+| Plug | Gosund | WP5 | 3 | Tasmota |
+| Switch | Sonoff | Mini v1 | 3 | Tasmota |
+| Switch | Sonoff | SV | 1 | Tasmota |
+| Switch | Treatlife | SS02S | 9 | Tasmota |
+| Switch (3 Way) | Treatlife | SS02 | 2 | Tasmota |
+| Switch (Dimmer) | Treatlife | DS02S | 3 | Tasmota |
+| Switch  (Dimmer) | Treatlife | DS01C | 2 | Tasmota |
