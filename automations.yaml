@@ -857,10 +857,10 @@
     entity_id: climate.amazon
     attribute: hvac_action
     to: cooling
-  - platform: state
+  condition:
+  - condition: state
     entity_id: group.windows
-    to: 'on'
-  condition: []
+    state: 'on'
   action:
   - service: notify.mobile_app_turraphone
     data:
