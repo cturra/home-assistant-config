@@ -38,7 +38,7 @@
         {% else %}
           0
         {% endif %}
- 
+
     # fan on/off
     hvac_fan_state:
       friendly_name: 'HVAC Fan state'

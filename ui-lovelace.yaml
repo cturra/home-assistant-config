@@ -119,8 +119,14 @@ views:
             - entity: sensor.garage_door_contact_battery
               name: 'Garage: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_upcommonbathroomwindowcontact_battery
+              name: 'Common Bathroom: Window Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.crawlspace_door_contact_battery
               name: 'Crawlspace: Door Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_ensuitewindowcontact_battery
+              name: 'Ensuite: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.srn_familyroomwindowfrontcontact_battery
               name: 'Family Room: Front Window Contact battery'
@@ -357,8 +363,14 @@ views:
             - entity: binary_sensor.wyzesense_779f1f3a
               name: 'Front Yard: motion'
             # Contact Sensors
+            - entity: binary_sensor.snr_upcommonbathroomwindowcontact_contact
+              name: 'Common Bathroom: Window'
+              secondary_info: last-changed
             - entity: binary_sensor.snr_crawlspacedoorcontact_contact
               name: 'Crawlspace: Door'
+              secondary_info: last-changed
+            - entity: binary_sensor.snr_ensuitewindowcontact_contact
+              name: 'Ensuite: Window'
               secondary_info: last-changed
             - entity: binary_sensor.srn_familyroomwindowfrontcontact_contact
               name: 'Family Room: Front Window'
@@ -1803,8 +1815,14 @@ views:
                 margin: 0px 0;
               }
           entities:
+            - entity: sensor.snr_upcommonbathroomwindowcontact_battery
+              name: 'Common Bathroom Window'
+              tap_action: more-info
             - entity: sensor.snr_crawlspacedoorcontact_battery
               name: 'Crawlspace Door'
+              tap_action: more-info
+            - entity: sensor.snr_ensuitewindowcontact_battery
+              name: 'Ensuite Window'
               tap_action: more-info
             - entity: sensor.srn_familyroomwindowfrontcontact_battery
               name: 'Family Room Front Window'

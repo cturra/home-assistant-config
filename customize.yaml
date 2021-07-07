@@ -74,6 +74,16 @@ binary_sensor.snr_upcommontoiletleak_water_leak:
 
 ## ------ contact sensors ------
 
+# common bathroom window
+binary_sensor.snr_upcommonbathroomwindowcontact_contact:
+  friendly_name: 'Common Bathroom Window contact'
+  device_class: window
+
+# ensuite window
+binary_sensor.snr_ensuitewindowcontact_contact:
+  friendly_name: 'Ensuite Window contact'
+  device_class: window
+
 # family room front window
 binary_sensor.srn_familyroomwindowfrontcontact_contact:
   friendly_name: 'Family Room Front Window contact'
