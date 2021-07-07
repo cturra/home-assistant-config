@@ -22,12 +22,6 @@
 
     ## -- battery level contact sensors --
     
-    # crawlspace door contact sensor
-    crawlspace_door_contact_battery:
-      friendly_name: 'Crawlspace Door Battery Level'
-      unit_of_measurement: '%'
-      value_template: '{{ state_attr("binary_sensor.wyzesense_77a725aa","battery_level") }}'
-    
     # garage door (vehicle) contact sensor
     garage_door_contact_battery:
       friendly_name: 'Garage Door Contact Sensor Battery Level'
