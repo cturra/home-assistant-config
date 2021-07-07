@@ -1,6 +1,6 @@
 - id: '1611982176739'
-  alias: System / LetsEncrypt - Cert Renewal
-  description: ''
+  alias: 'System: SSL Certificate Renewal'
+  description: renew ssl certificate from letsencrypt.
   trigger:
   - at: 00:02
     platform: time
@@ -73,7 +73,7 @@
       entity_id: switch.plg_zbrpt_kitchen
   mode: single
 - id: '1612292752882'
-  alias: Kitchen / Speaker / OFF - music stops
+  alias: 'Kitchen Speakers: Off when music no longer playing'
   description: ''
   trigger:
   - platform: state
@@ -94,8 +94,8 @@
     entity_id: switch.plg_zbrpt_kitchen
   mode: single
 - id: '1612292819059'
-  alias: Kitchen / Sink / ON - @ Sunset
-  description: ''
+  alias: 'Kitchen Sink: Lights on at sunset'
+  description: turn on light over kitchen sink at sunset
   trigger:
   - platform: sun
     event: sunset
@@ -109,8 +109,8 @@
     entity_id: switch.sw_kitchensink
   mode: single
 - id: '1612292887886'
-  alias: Kitchen / Sink / OFF - @ 01:00
-  description: ''
+  alias: 'Kitchen Sink: Lights off for night'
+  description: turn kitchen sink light off if it was forgotten.
   trigger:
   - platform: time
     at: 01:01
@@ -124,8 +124,8 @@
     entity_id: switch.sw_kitchensink
   mode: single
 - id: '1612294990194'
-  alias: Driveway / Lights / ON - @ Sunset
-  description: ''
+  alias: 'Driveway: Lights on at sunset'
+  description: turn on driveway lights shortly after sunset.
   trigger:
   - platform: sun
     event: sunset
@@ -140,8 +140,8 @@
     entity_id: switch.sw_driveway
   mode: single
 - id: '1612295061627'
-  alias: Driveway / Lights / OFF - @ Sunrise
-  description: ''
+  alias: 'Driveway: Lights off at sunrise'
+  description: turn off driveway lights shortly before sunrise.
   trigger:
   - platform: sun
     event: sunrise
@@ -224,8 +224,8 @@
     entity_id: switch.plg_mainbedroom1
   mode: single
 - id: '1612306243899'
-  alias: Garage / Lights / ON - door opened @ night
-  description: ''
+  alias: 'Garage Inside: Lights on when person door opened'
+  description: turn on garage lights when person door is opened after sunset.
   trigger:
   - platform: state
     from: 'off'
@@ -251,8 +251,9 @@
     entity_id: switch.sw_garageceilingmain
   mode: single
 - id: '1612309818757'
-  alias: Garage / Side / ON - Motion @ night
-  description: ''
+  alias: 'Garage Outside: Side light On at night with motion'
+  description: turn light at garage side door on when motion is detected at side of
+    house.
   trigger:
   - platform: state
     entity_id: binary_sensor.wyzesense_77a7a16f
@@ -286,8 +287,9 @@
     entity_id: switch.sw_garagesidedoor
   mode: restart
 - id: '1612312535434'
-  alias: Porch / Lights / ON - Motion
-  description: ''
+  alias: 'Porch: Lights on when motion detected'
+  description: turn on porch lights when motion is detected after sunset around front
+    door
   trigger:
   - platform: state
     entity_id: binary_sensor.wyzesense_77a7a12e
@@ -321,8 +323,8 @@
     entity_id: switch.sw_porch
   mode: restart
 - id: '1612462343806'
-  alias: Garage / Dehumidifier / OFF - Door Open
-  description: ''
+  alias: 'Garage Inside: Dehumidifier off when car door opened'
+  description: turn off dehumidifier when garage car door is opened.
   trigger:
   - platform: state
     entity_id: binary_sensor.wyzesense_77a05475
@@ -362,7 +364,7 @@
     entity_id: switch.plg_garagedehumidifier
   mode: single
 - id: '1612463000537'
-  alias: Garage / Dehumidifier / ON - High Humidity
+  alias: 'Garage Inside: Dehumidifier on with high humidity'
   description: check garage humidity every 10 minutes and turn on dehumidifier if
     humidity has risen above 65% RH
   trigger:
@@ -386,7 +388,7 @@
     entity_id: switch.plg_garagedehumidifier
   mode: single
 - id: '1612463100433'
-  alias: Garage / Dehumidifier / OFF - Low Humidity
+  alias: 'Garage Inside: Dehumidifier off with low humidity'
   description: check garage humidity every 15 minutes and turn off dehumidifier if
     humidity has dropped below 61% RH
   trigger:
@@ -500,7 +502,7 @@
     entity_id: light.kids_bedroom_lights
   mode: single
 - id: '1613012241426'
-  alias: Office / Air Purifier / ON - with occupancy
+  alias: 'Office: Air Purifier on with occupancy'
   description: ''
   trigger:
   - platform: state
@@ -530,7 +532,7 @@
     entity_id: switch.plg_officeairpurifier
   mode: restart
 - id: '1613012339822'
-  alias: Office / Air Purifier / OFF
+  alias: 'Office: Air Purifier off when room is empty'
   description: ''
   trigger:
   - platform: state
@@ -560,9 +562,8 @@
     entity_id: switch.plg_officeairpurifier
   mode: single
 - id: '1613958937211'
-  alias: House / Leak / Alert - critical notification
-  description: ''
-  mode: single
+  alias: 'House: Nofity if leak detected'
+  description: send notification and announce on sonos speakers if leak is detected.
   trigger:
   - platform: state
     entity_id:
@@ -601,8 +602,9 @@
           message: '"ALERT. Water detected at {{ trigger.to_state.attributes.friendly_name
             }} sensor."'
           delay: 00:00:07
+  mode: single
 - id: '1616274628046'
-  alias: Kitchen / Espresso / ON - morning
+  alias: 'Espresso Machine: On in the morning'
   description: turn on the espresso machine in the morning (between 05:00 - 10:00)
     when chris' iphone is removed from the charger for 1 minute.
   trigger:
@@ -628,7 +630,7 @@
       entity_id: switch.plg_espressomachine
   mode: single
 - id: '1616875296550'
-  alias: Crawlspace / Locker / Open - alert
+  alias: 'Crawlspace: notify when locker door opened'
   description: when locker door is opened notify chris' iphone.
   trigger:
   - platform: state
@@ -649,7 +651,7 @@
             volume: 1
   mode: single
 - id: '1617333806988'
-  alias: Shed / Flood / ON - motion @ night
+  alias: 'Shed: Flood Light on at night with motion'
   description: turn on shed flood light 15 minutes after sun is below the horizon
     and keep on for 5 minutes after motion is no longer detected.
   trigger:
@@ -720,7 +722,7 @@
     entity_id: switch.sw_porch
   mode: restart
 - id: '1619640982634'
-  alias: Shed / Door / ON - notify @ night
+  alias: 'Shed: Notify when door left open at night'
   description: notify chris' phone if the shed door is left open for 5 minutes when
     the time is after 22:30.
   trigger:
@@ -748,7 +750,7 @@
             volume: 1
   mode: single
 - id: '1619814582936'
-  alias: Shed / Fan / ON - cycle when door opened
+  alias: 'Shed: Fan on when door is opened'
   description: turn on shed exhaust fan for 10 minutes when the door is opened.
   trigger:
   - platform: state
@@ -773,7 +775,7 @@
       entity_id: switch.sw_shedfan
   mode: single
 - id: '1620159763993'
-  alias: Shed / Fan / ON - cycle when door open
+  alias: 'Shed: cycle Fan while door is open'
   description: cycle fan on for 10 min every 30 min when the shed door is open.
   trigger:
   - platform: time_pattern
@@ -802,7 +804,7 @@
       entity_id: switch.sw_shedfan
   mode: single
 - id: '1623889405239'
-  alias: Garage / Door / Open - when chris returns home
+  alias: 'Garage Inside: offer to open car door on Chris'' return'
   description: notify chris' phone when it returns home from away and offer to open
     the garage door.
   trigger:
@@ -837,7 +839,7 @@
       entity_id: switch.sw_garagedooropener1
   mode: single
 - id: '1624131994582'
-  alias: Garage / Door / Open - send notification
+  alias: 'Garage Indoor: notify Chris when car door opened'
   description: send a notification to chris' phone, including a dynamic image, when
     the garage door has been opened.
   trigger:
@@ -854,4 +856,29 @@
       message: The Garage Door has been opened.
       data:
         entity_id: camera.amzn_cam04
+  mode: single
+- id: '1625692425135'
+  alias: 'HVAC: Notify Chris'' phone if window is open'
+  description: notify chris' phone if hvac starts cooling the house and a window is
+    left open.
+  trigger:
+  - platform: state
+    entity_id: climate.amazon
+    attribute: hvac_action
+    to: cooling
+  - platform: state
+    entity_id: group.windows
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.mobile_app_turraphone
+    data:
+      message: AC has started and an open window was detected.
+      title: ❗🪟 Window left open
+      data:
+        push:
+          sound:
+            name: default
+            critical: 1
+            volume: 1
   mode: single
