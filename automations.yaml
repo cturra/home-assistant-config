@@ -566,16 +566,7 @@
   description: send notification and announce on sonos speakers if leak is detected.
   trigger:
   - platform: state
-    entity_id:
-    - binary_sensor.snr_dishwasherleak_water_leak
-    - binary_sensor.snr_downtoiletleak_water_leak
-    - binary_sensor.snr_ensuitebathtubleak_water_leak
-    - binary_sensor.snr_ensuitetoiletleak_water_leak
-    - binary_sensor.snr_espressoleak_water_leak
-    - binary_sensor.snr_fridgeleak_water_leak
-    - binary_sensor.snr_hotwatertankleak_water_leak
-    - binary_sensor.snr_laundryleak_water_leak
-    - binary_sensor.snr_upcommontoiletleak_water_leak
+    entity_id: group.leak_sensors
     to: 'on'
   condition: []
   action:
