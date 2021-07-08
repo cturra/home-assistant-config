@@ -16,7 +16,7 @@ For now, please enjoy, and feedback always welcome!
 | Climate Sensor | SensorPush | HT1 | 4 | HACS :: SensorPush |
 | Climate Sensor | Xiaomi | WSDCGQ11LM | 8 | Zigbee2MQTT |
 | Contact Sensor | Wyze | Sense | 1 | HACS :: Wyze Sense Component |
-| Contact Sensor | Xiaomi | MCCGQ11LM | 14 | Zigbee2MQTT |
+| Contact Sensor | Xiaomi | MCCGQ11LM | 15 | Zigbee2MQTT |
 | Leak Sensor | Xiaomi | SJCGQ11LM | 9 | Zigbee2MQTT |
 | Motion Sensor | Ikea | E1745 | 1 | Zigbee2MQTT |
 | Motion Sensor | Wyze | Sense | 3 | HACS :: Wyze Sense Component |

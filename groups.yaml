@@ -2,13 +2,14 @@
 windows:
   name: 'Windows'
   entities:
-    - binary_sensor.snr_upcommonbathroomwindowcontact_contact
     - binary_sensor.snr_ensuitewindowcontact_contact
     - binary_sensor.srn_familyroomwindowfrontcontact_contact
     - binary_sensor.snr_familyroomwindowsideleftcontact_contact
     - binary_sensor.snr_familyroomwindowsiderightcontact_contact
     - binary_sensor.snr_kitchenwindowcontact_contact
+    - binary_sensor.snr_laundryroomwindowcontact_contact
     - binary_sensor.snr_mainbedroomwindowcontact_contact
+    - binary_sensor.snr_upcommonbathroomwindowcontact_contact
 
 # contact sensors on house exterior doors
 exterior_doors:

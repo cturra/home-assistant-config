@@ -115,6 +115,11 @@ binary_sensor.snr_kitchenwindowcontact_contact:
   friendly_name: 'Kitchen Window contact'
   device_class: window
 
+# laundry window
+binary_sensor.snr_laundryroomwindowcontact_contact:
+  friendly_name: 'Laundry Window contact'
+  device_class: window
+
 # main bedroom window
 binary_sensor.snr_mainbedroomwindowcontact_contact:
   friendly_name: 'Main Bedroom Window contact'

@@ -13,7 +13,7 @@ views:
         cards:
         - type: markdown
           content: >
-            ### Alerting Devices
+            ### Alerts
           card_mod:
             style: |
               ha-card {
@@ -119,9 +119,6 @@ views:
             - entity: sensor.garage_door_contact_battery
               name: 'Garage: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-            - entity: sensor.snr_upcommonbathroomwindowcontact_battery
-              name: 'Common Bathroom: Window Contact Battery'
-              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.crawlspace_door_contact_battery
               name: 'Crawlspace: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
@@ -149,6 +146,9 @@ views:
             - entity: sensor.snr_kitchenwindowcontact_battery
               name: 'Kitchen: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_laundryroomwindowcontact_battery
+              name: 'Laundry: Window Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_lockercontact_battery
               name:  'Crawlspace: Locker Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
@@ -163,6 +163,9 @@ views:
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_sheddoorcontact_battery
               name: 'Shed: Door Contact Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_upcommonbathroomwindowcontact_battery
+              name: 'Upstairs Bathroom: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
             # leak sensors
             - entity: sensor.snr_downtoiletleak_battery
@@ -359,55 +362,6 @@ views:
               name: 'Shed: Flood'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
-            # Motion Sensors
-            - entity: binary_sensor.wyzesense_779f1f3a
-              name: 'Front Yard: motion'
-            # Contact Sensors
-            - entity: binary_sensor.snr_upcommonbathroomwindowcontact_contact
-              name: 'Common Bathroom: Window'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_crawlspacedoorcontact_contact
-              name: 'Crawlspace: Door'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_ensuitewindowcontact_contact
-              name: 'Ensuite: Window'
-              secondary_info: last-changed
-            - entity: binary_sensor.srn_familyroomwindowfrontcontact_contact
-              name: 'Family Room: Front Window'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_familyroomwindowsideleftcontact_contact
-              name: 'Family Room: Side/Left Window'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_familyroomwindowsiderightcontact_contact
-              name: 'Family Room: Side/Right Window'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_frontdoorcontact_contact
-              name: 'Front Door'
-              secondary_info: last-changed
-            - entity: binary_sensor.wyzesense_77a05475
-              name: 'Garage: Car Door'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_garagedoorhousecontact_contact
-              name: 'Garage: House Door'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_garagedoorsidecontact_contact
-              name: 'Garage: Side Door'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_kitchenwindowcontact_contact
-              name: 'Kitchen: Window'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_lockercontact_contact
-              name: 'Crawlspace: Locker Door'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_mainbedroomwindowcontact_contact
-              name: 'Main Bedroom: Window'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_patiodoorcontact_contact
-              name: 'Patio Door'
-              secondary_info: last-changed
-            - entity: binary_sensor.snr_sheddoorcontact_contact
-              name: 'Shed: Door'
-              secondary_info: last-changed
             # HVAC (ecobee) / fan
             - entity: sensor.hvac_fan_state
               name: 'HVAC Fan'
@@ -440,6 +394,96 @@ views:
               value: 'playing'
           show_empty: false
 
+      # doors and windows active
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Doors & Windows Open
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: entity-filter
+          card:
+            show_header_toggle: false
+          entities:
+            ## doors
+            # crawlspace
+            - entity: binary_sensor.snr_crawlspacedoorcontact_contact
+              name: 'Crawlspace: Door'
+              secondary_info: last-changed
+            # crawlspace locker
+            - entity: binary_sensor.snr_lockercontact_contact
+              name: 'Crawlspace: Locker Door'
+              secondary_info: last-changed
+            # front
+            - entity: binary_sensor.snr_frontdoorcontact_contact
+              name: 'Front Door'
+              secondary_info: last-changed
+            # garage car
+            - entity: binary_sensor.wyzesense_77a05475
+              name: 'Garage: Car Door'
+              secondary_info: last-changed
+            # garage house
+            - entity: binary_sensor.snr_garagedoorhousecontact_contact
+              name: 'Garage: House Door'
+              secondary_info: last-changed
+            # garage side
+            - entity: binary_sensor.snr_garagedoorsidecontact_contact
+              name: 'Garage: Side Door'
+              secondary_info: last-changed
+            # patio
+            - entity: binary_sensor.snr_patiodoorcontact_contact
+              name: 'Patio Door'
+              secondary_info: last-changed
+            # shed
+            - entity: binary_sensor.snr_sheddoorcontact_contact
+              name: 'Shed: Door'
+              secondary_info: last-changed
+            ## windows
+            # ensuite bathroom
+            - entity: binary_sensor.snr_ensuitewindowcontact_contact
+              name: 'Ensuite: Window'
+              secondary_info: last-changed
+            # family room front
+            - entity: binary_sensor.srn_familyroomwindowfrontcontact_contact
+              name: 'Family Room: Front Window'
+              secondary_info: last-changed
+            # family room side :: left
+            - entity: binary_sensor.snr_familyroomwindowsideleftcontact_contact
+              name: 'Family Room: Side/Left Window'
+              secondary_info: last-changed
+            # family room side :: right
+            - entity: binary_sensor.snr_familyroomwindowsiderightcontact_contact
+              name: 'Family Room: Side/Right Window'
+              secondary_info: last-changed
+            # kitchen
+            - entity: binary_sensor.snr_kitchenwindowcontact_contact
+              name: 'Kitchen: Window'
+              secondary_info: last-changed
+            # laundry
+            - entity: binary_sensor.snr_laundryroomwindowcontact_contact
+              name: 'Laundry: Window'
+              secondary_info: last-changed
+            # main bedroom
+            - entity: binary_sensor.snr_mainbedroomwindowcontact_contact
+              name: 'Main Bedroom: Window'
+              secondary_info: last-changed
+            # upstairs common bathroom
+            - entity: binary_sensor.snr_upcommonbathroomwindowcontact_contact
+              name: 'Upstairs Bathroom: Window'
+              secondary_info: last-changed
+          state_filter:
+            - operator: '=='
+              value: 'on'
+          show_empty: false
 
   ## ------ SWITCH DASHBAORD ------
   - title: Home
@@ -1760,27 +1804,35 @@ views:
                 margin: 0px 0;
               }
           entities:
+            # crawlspace
             - entity: sensor.snr_crawlspaceclimate_battery
               name: 'Crawspace'
               tap_action: more-info
+            # garage
             - entity: sensor.snr_garageclimate_battery
               name: 'Garage'
               tap_action: more-info
+            # kids bedroom
             - entity: sensor.snr_kidsroomclimate_battery
               name: 'Kids Bedroom'
               tap_action: more-info
+            # laundry
             - entity: sensor.snr_laundryclimate_battery
               name: 'Laundry'
               tap_action: more-info
+            # main bedroom
             - entity: sensor.snr_mainbedroomclimate_battery
               name: 'Main Bedroom'
               tap_action: more-info
+            # office
             - entity: sensor.snr_officeclimate_battery
               name: 'Office'
               tap_action: more-info
+            # shed
             - entity: sensor.snr_shedclimate_battery
               name: 'Shed'
               tap_action: more-info
+            # spare bedroom
             - entity: sensor.snr_sparebedroomclimate_battery
               name: 'Spare Bedroom'
               tap_action: more-info
@@ -1815,50 +1867,69 @@ views:
                 margin: 0px 0;
               }
           entities:
-            - entity: sensor.snr_upcommonbathroomwindowcontact_battery
-              name: 'Common Bathroom Window'
-              tap_action: more-info
+            # crawlspace door
             - entity: sensor.snr_crawlspacedoorcontact_battery
               name: 'Crawlspace Door'
               tap_action: more-info
+            # ensuite bathroom window
             - entity: sensor.snr_ensuitewindowcontact_battery
               name: 'Ensuite Window'
               tap_action: more-info
+            # family room front window
             - entity: sensor.srn_familyroomwindowfrontcontact_battery
               name: 'Family Room Front Window'
               tap_action: more-info
+            # family room side :: left window
             - entity: sensor.snr_familyroomwindowsideleftcontact_battery
               name: 'Family Room Side/Left Window'
               tap_action: more-info
+            # family room side :: right window
             - entity: sensor.snr_familyroomwindowsiderightcontact_battery
               name: 'Family Room Side/Right Window'
               tap_action: more-info
+            # front door
             - entity: sensor.snr_frontdoorcontact_battery
               name: 'Front Door'
               tap_action: more-info
+            # garage house door
             - entity: sensor.snr_garagedoorhousecontact_battery
               name: 'Garage House Door'
               tap_action: more-info
+            # garage side door
             - entity: sensor.snr_garagedoorsidecontact_battery
               name: 'Garage Side Door'
               tap_action: more-info
+            # garage car door
             - entity: sensor.garage_door_contact_battery
               name: 'Garage Car Door'
               tap_action: more-info
+            # kitchen window
             - entity: sensor.snr_kitchenwindowcontact_battery
               name: 'Kitchen Window'
               tap_action: more-info
+            # laundry window
+            - entity: sensor.snr_laundryroomwindowcontact_battery
+              name: 'Laundry Window Contact'
+              tap_action: more-info
+            # locker door
             - entity: sensor.snr_lockercontact_battery
               name: 'Locker Door'
               tap_action: more-info
+            # main bedroom window
             - entity: sensor.snr_mainbedroomwindowcontact_battery
               name: 'Main Bedroom Window'
               tap_action: more-info
+            # patio door
             - entity: sensor.snr_patiodoorcontact_battery
               name: 'Patio Door'
               tap_action: more-info
+            # shed door
             - entity: sensor.snr_sheddoorcontact_battery
               name: 'Shed Door'
+              tap_action: more-info
+            # upstairs common bathroom window
+            - entity: sensor.snr_upcommonbathroomwindowcontact_battery
+              name: 'Upstairs Bathroom Window'
               tap_action: more-info
 
       # Leak Sensors
@@ -1891,30 +1962,39 @@ views:
                 margin: 0px 0;
               }
           entities:
+            # dishwasher
             - entity: sensor.snr_dishwasherleak_battery
               name: 'Dishwasher'
               tap_action: more-info
+            # downstairs common bathroom toilet
             - entity: sensor.snr_downtoiletleak_battery
               name: 'Downstairs Bathroom Toilet'
               tap_action: more-info
+            # ensuite bathtub
             - entity: sensor.snr_ensuitebathtubleak_battery
               name: 'Ensuite Bathtub'
               tap_action: more-info
+            # ensuite toilet
             - entity: sensor.snr_ensuitetoiletleak_battery
               name: 'Ensuite Toilet'
               tap_action: more-info
+            # espresso machine
             - entity: sensor.snr_espressoleak_battery
               name: 'Espresso Machine'
               tap_action: more-info
+            # fridge
             - entity: sensor.snr_fridgeleak_battery
               name: 'Fridge'
               tap_action: more-info
+            # hot water tank
             - entity: sensor.snr_hotwatertankleak_battery
               name: 'Hot Water Tank'
               tap_action: more-info
+            # laundry tub
             - entity: sensor.snr_laundryleak_battery
               name: 'Laundry'
               tap_action: more-info
+            # upstairs common bathroom toilet
             - entity: sensor.snr_upcommontoiletleak_battery
               name: 'Upstairs Bathroom Toilet'
               tap_action: more-info
@@ -1949,18 +2029,23 @@ views:
                 margin: 0px 0;
               }
           entities:
+            # front yard
             - entity: sensor.front_yard_motion_battery
               name: 'Front Yard'
               tap_action: more-info
+            # garage outdoor :: side
             - entity: sensor.garage_outside_motion_battery
               name: 'Garage Outdoor'
               tap_action: more-info
+            # office
             - entity: sensor.snr_officemotion_battery
               name: 'Office'
               tap_action: more-info
+            # porch (front door)
             - entity: sensor.porch_motion_battery
               name: 'Porch'
               tap_action: more-info
+            # shed (bbq pad)
             - entity: sensor.snr_shedoutsidemotion_battery
               name: 'Shed Outdoor'
               tap_action: more-info
