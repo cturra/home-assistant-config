@@ -13,8 +13,11 @@ For now, please enjoy, and feedback always welcome!
 
 | Type | Make | Model | Count | Connectivity |
 | :--- | :--- | :--- | :--: | :-- |
+| Air Quality Monitor | PurpleAir | PA-II | 1 | RESP API |
+| Audio Streaming | Chromecast | Audio | 1 | HA Integration |
 | Climate Sensor | SensorPush | HT1 | 4 | HACS :: SensorPush |
 | Climate Sensor | Xiaomi | WSDCGQ11LM | 8 | Zigbee2MQTT |
+| Climate Sensor | Ecobee | v1 | 3 | HA Integration |
 | Contact Sensor | Wyze | Sense | 1 | HACS :: Wyze Sense Component |
 | Contact Sensor | Xiaomi | MCCGQ11LM | 15 | Zigbee2MQTT |
 | Leak Sensor | Xiaomi | SJCGQ11LM | 9 | Zigbee2MQTT |
@@ -24,6 +27,9 @@ For now, please enjoy, and feedback always welcome!
 | Plug | Gosund | WP5 | 3 | Tasmota |
 | Plug | Sonoff | S31 | 3 | Tasmota |
 | Plug | Sonoff | S31ZB | 3 |  Zigbee2MQTT |
+| Thermostat | Ecobee | Ecobee3 | 1 | HA Integration |
+| Speaker | Sonos | Play:5 | 1 | HA Integration |
+| Speaker | Sonos | Beam | 1 | HA Integration |
 | Switch | Sonoff | Mini v1 | 3 | Tasmota |
 | Switch | Sonoff | SV | 1 | Tasmota |
 | Switch | Treatlife | SS02S | 9 | Tasmota |

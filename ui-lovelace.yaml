@@ -364,17 +364,17 @@ views:
               secondary_info: last-changed
             # HVAC (ecobee) / fan
             - entity: sensor.hvac_fan_state
-              name: 'HVAC Fan'
+              name: 'HVAC: Fan'
               icon: 'mdi:fan'
               secondary_info: last-changed
             # HVAC (ecobee) / ac
             - entity: sensor.hvac_cooling_state
-              name: 'Air Conditioner'
+              name: 'HVAC: Cooling'
               icon: 'mdi:snowflake'
               secondary_info: last-changed
             # HVAC (ecobee) / furtnace
             - entity: sensor.hvac_heating_state
-              name: 'Furnace'
+              name: 'HVAC: Heating'
               icon: 'mdi:fire'
               secondary_info: last-changed
             # Media
@@ -399,7 +399,7 @@ views:
         cards:
         - type: markdown
           content: >
-            ### Doors & Windows Open
+            ### Doors & Windows
           card_mod:
             style: |
               ha-card {
