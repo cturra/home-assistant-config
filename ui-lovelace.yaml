@@ -948,31 +948,12 @@ views:
                 --st-font-size-sensors: 14px;
                 --st-spacing: 2px;
               }
-              ha-card .mode-item {
-                --heat-color: transparent;
-                --cool-color: transparent;
-                --heat_cool-color: transparent;
-              }
-              ha-card .mode-item.active.heat {
-                color: #e67300;
-              }
-              ha-card .mode-item.active.cool {
-                color: #3399ff;
-              }
-              ha-card .mode-item.active.heat_cool {
-                color: #00ff7f;
-              }
-          show_header: false
-          step_layout: row
+          layout:
+            step: row
+          header: false
+          control: false
           hide:
             state: true
-          control:
-            present: false
-            hvac:
-              "off":
-                include: false
-            _names: false
-            _headings: false
           sensors:
             - entity: sensor.amazon_humidity
               name: 'Humidity'
