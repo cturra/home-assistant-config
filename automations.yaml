@@ -36,8 +36,8 @@
     entity_id: switch.plg_utility
   mode: single
 - id: '1612291548796'
-  alias: Shed / Fan / ON - Hrly cycle
-  description: ''
+  alias: 'Shed: cycle fan ON for 10 minutes each hour'
+  description: (used for extra ventilation when drying garlic)
   trigger:
   - hours: /1
     platform: time_pattern
@@ -292,7 +292,7 @@
     door
   trigger:
   - platform: state
-    entity_id: binary_sensor.wyzesense_77a7a12e
+    entity_id: binary_sensor.snr_porchfrontdoormotion_occupancy
     from: 'off'
     to: 'on'
   condition:
@@ -310,7 +310,7 @@
     entity_id: switch.sw_porch
   - wait_for_trigger:
     - platform: state
-      entity_id: binary_sensor.wyzesense_77a7a12e
+      entity_id: binary_sensor.snr_porchfrontdoormotion_occupancy
       from: 'on'
       to: 'off'
   - delay:

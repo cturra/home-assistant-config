@@ -7,12 +7,6 @@
       unit_of_measurement: '%'
       value_template: '{{ state_attr("binary_sensor.wyzesense_77a7a16f","battery_level") }}'
 
-    # front porch motion sensor
-    porch_motion_battery:
-      friendly_name: 'Porch Motion Sensor Battery Level'
-      unit_of_measurement: '%'
-      value_template: '{{ state_attr("binary_sensor.wyzesense_77a7a12e","battery_level") }}'
-    
     # front yard motion sensor
     front_yard_motion_battery:
       friendly_name: 'Front Yard Motion Sensor Battery Level'
@@ -27,4 +21,3 @@
       friendly_name: 'Garage Door Contact Sensor Battery Level'
       unit_of_measurement: '%'
       value_template: '{{ state_attr("binary_sensor.wyzesense_77a05475","battery_level") }}'
-    

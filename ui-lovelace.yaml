@@ -199,6 +199,9 @@ views:
             - entity: sensor.snr_officemotion_battery
               name: 'Office: Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_porchfrontdoormotion_battery
+              name: 'Porch: Motion Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
             # motion sensors (ikea)
             - entity: sensor.snr_shedoutsidemotion_battery
               name: 'Shed: Outdoor Motion Sensor Battery'
@@ -209,9 +212,6 @@ views:
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.garage_outside_motion_battery
               name: 'Garage: Outside Motion Sensor Battery'
-              icon: 'mdi:battery-alert-variant-outline'
-            - entity: sensor.porch_motion_battery
-              name: 'Porch: Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
           state_filter:
             - operator: regex
@@ -2023,7 +2023,7 @@ views:
               name: 'Office'
               tap_action: more-info
             # porch (front door)
-            - entity: sensor.porch_motion_battery
+            - entity: sensor.snr_porchfrontdoormotion_battery
               name: 'Porch'
               tap_action: more-info
             # shed (bbq pad)

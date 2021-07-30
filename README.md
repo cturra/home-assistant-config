@@ -24,8 +24,8 @@ For now, please enjoy, and feedback always welcome!
 | Contact Sensor | Xiaomi | MCCGQ11LM | 15 | Zigbee2MQTT |
 | Leak Sensor | Xiaomi | SJCGQ11LM | 9 | Zigbee2MQTT |
 | Motion Sensor | Ikea | E1745 | 1 | Zigbee2MQTT |
-| Motion Sensor | Wyze | Sense | 3 | HACS :: Wyze Sense Component |
-| Motion Sensor | Xiaomi | RTCGQ11LM | 1 | Zigbee2MQTT |
+| Motion Sensor | Wyze | Sense | 2 | HACS :: Wyze Sense Component |
+| Motion Sensor | Xiaomi | RTCGQ11LM | 2 | Zigbee2MQTT |
 | Plug | Gosund | WP5 | 3 | Tasmota |
 | Plug | Sonoff | S31 | 3 | Tasmota |
 | Plug | Sonoff | S31ZB | 3 |  Zigbee2MQTT |
