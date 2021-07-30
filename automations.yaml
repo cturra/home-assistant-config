@@ -64,13 +64,13 @@
     for: 00:00:01
   condition:
   - condition: state
-    entity_id: switch.plg_zbrpt_kitchen
+    entity_id: switch.plg_kitchenspeaker
     state: 'off'
   action:
   - service: switch.turn_on
     data: {}
     target:
-      entity_id: switch.plg_zbrpt_kitchen
+      entity_id: switch.plg_kitchenspeaker
   mode: single
 - id: '1612292752882'
   alias: 'Kitchen Speakers: Off when music no longer playing'
@@ -86,12 +86,13 @@
     to: 'off'
   condition:
   - condition: state
-    entity_id: switch.plg_zbrpt_kitchen
+    entity_id: switch.plg_kitchenspeaker
     state: 'on'
   action:
   - service: switch.turn_off
     data: {}
-    entity_id: switch.plg_zbrpt_kitchen
+    target:
+      entity_id: switch.plg_kitchenspeaker
   mode: single
 - id: '1612292819059'
   alias: 'Kitchen Sink: Lights on at sunset'

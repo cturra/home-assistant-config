@@ -580,7 +580,7 @@ views:
                 - entity: switch.plg_espressomachine
                   name: 'Espresso Machine'
                   icon: 'mdi:coffee-maker'
-                - entity: switch.plg_zbrpt_kitchen
+                - entity: switch.plg_kitchenspeaker
                   name: Speaker
                   icon: 'mdi:speaker'
                   state_color: true
@@ -2024,7 +2024,7 @@ views:
               name: 'Office'
               tap_action: more-info
             # porch (front door)
-            - entity: sensor.snr_garageoutsidemotion_battery
+            - entity: sensor.snr_porchfrontdoormotion_battery
               name: 'Porch'
               tap_action: more-info
             # shed (bbq pad)
