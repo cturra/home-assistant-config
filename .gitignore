@@ -16,3 +16,4 @@ aircast.xml
 
 # specific files
 secrets.yaml
+.HA_VERSION
