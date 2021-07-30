@@ -1,16 +1,5 @@
 ## ------ motion sensors ------
 
-# garage / outdoor (side of house)
-binary_sensor.wyzesense_77a7a16f:
-  friendly_name: 'Garage Outside Motion Sensor'
-  device_class: motion
-  icon_template: >-
-    {% if is_state('binary_sensor.wyzesense_77a7a16f','on') %}
-      mdi:motion-sense
-    {% else %}
-      mdi:walk
-    {% endif %}
-
 # front yard
 binary_sensor.wyzesense_779f1f3a:
   friendly_name: 'Front Yard Motion Sensor'

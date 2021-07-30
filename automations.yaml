@@ -256,7 +256,7 @@
     house.
   trigger:
   - platform: state
-    entity_id: binary_sensor.wyzesense_77a7a16f
+    entity_id: binary_sensor.snr_garageoutsidemotion_occupancy
     from: 'off'
     to: 'on'
   condition:
@@ -274,7 +274,7 @@
     entity_id: switch.sw_garagesidedoor
   - wait_for_trigger:
     - platform: state
-      entity_id: binary_sensor.wyzesense_77a7a16f
+      entity_id: binary_sensor.snr_garageoutsidemotion_occupancy
       from: 'on'
       to: 'off'
   - delay:

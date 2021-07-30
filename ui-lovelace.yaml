@@ -196,6 +196,9 @@ views:
               name: 'Upstairs Bathroom: Toilet Leak Sensor Battery'  
               icon: 'mdi:battery-alert-variant-outline'
             # motion sensors (aqara)
+            - entity: sensor.snr_garageoutsidemotion_battery
+              name: 'Garage: Outside Motion Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_officemotion_battery
               name: 'Office: Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
@@ -209,9 +212,6 @@ views:
             # motion sensors (wyze)
             - entity: sensor.front_yard_motion_battery
               name: 'Front Yard: Motion Sensor Battery'
-              icon: 'mdi:battery-alert-variant-outline'
-            - entity: sensor.garage_outside_motion_battery
-              name: 'Garage: Outside Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
           state_filter:
             - operator: regex
@@ -484,6 +484,7 @@ views:
             - operator: '=='
               value: 'on'
           show_empty: false
+
 
   ## ------ SWITCH DASHBAORD ------
   - title: Home
@@ -2015,7 +2016,7 @@ views:
               name: 'Front Yard'
               tap_action: more-info
             # garage outdoor :: side
-            - entity: sensor.garage_outside_motion_battery
+            - entity: sensor.snr_garageoutsidemotion_battery
               name: 'Garage Outdoor'
               tap_action: more-info
             # office
@@ -2023,7 +2024,7 @@ views:
               name: 'Office'
               tap_action: more-info
             # porch (front door)
-            - entity: sensor.snr_porchfrontdoormotion_battery
+            - entity: sensor.snr_garageoutsidemotion_battery
               name: 'Porch'
               tap_action: more-info
             # shed (bbq pad)
