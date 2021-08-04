@@ -18,7 +18,7 @@ For now, please enjoy, and feedback always welcome!
 | Audio | Sonos | Play:5 | 1 | HA :: Sonos |
 | Audio | Sonos | Beam | 1 | HA :: Sonos |
 | Climate Sensor | SensorPush | HT1 | 4 | HACS :: SensorPush |
-| Climate Sensor | Xiaomi | WSDCGQ11LM | 8 | Zigbee2MQTT |
+| Climate Sensor | Xiaomi | WSDCGQ11LM | 9 | Zigbee2MQTT |
 | Climate Sensor | Ecobee | v1 | 3 | HA :: Ecobee |
 | Contact Sensor | Wyze | Sense | 1 | HACS :: Wyze Sense Component |
 | Contact Sensor | Xiaomi | MCCGQ11LM | 15 | Zigbee2MQTT |

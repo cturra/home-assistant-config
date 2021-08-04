@@ -100,14 +100,17 @@ views:
             - entity: sensor.snr_kidsroomclimate_battery
               name: 'Kids Room: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-            - entity: sensor.snr_officeclimate_battery
-              name: 'Office: Climate Sensor Battery'
-              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_laundryclimate_battery
               name: 'Laundry: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_mainbedroomclimate_battery
               name: 'Main Bedroom: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_officeclimate_battery
+              name: 'Office: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+            - entity: sensor.snr_outsideclimate_battery            
+              name: 'Outside: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.snr_shedclimate_battery
               name: 'Shed: Climate Sensor Battery'
@@ -1407,16 +1410,34 @@ views:
       ## OUTDSIDE CLIMATE INFO
       - type: 'custom:vertical-stack-in-card'
         cards:
-        # WEATHER FORECAST
-        - type: 'custom:vertical-stack-in-card'
-          cards:
-          # weather forecast card (from environment canada)
-          - type: weather-forecast
-            name: ' '
-            entity: weather.pitt_meadows
-            secondary_info_attribute: humidity
-            show_forcast: true
-        
+        - type: markdown
+          content: >
+            ### Outside
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        # WEATHER
+        - type: 'custom:simple-weather-card'
+          entity: weather.pitt_meadows
+          name: " "
+          custom:
+            - humidity: sensor.outside_humidity_int
+            - pressure: sensor.snr_outsideclimate_pressure
+            - temp: sensor.outside_temperature_f1
+          primary_info:
+            - humidity
+            - pressure
+          secondary_info:
+            - precipitation_probability
+            - wind_speed
+
         # AIR QUALITY (FROM PURPLEAIR DEVICE)
         - type: horizontal-stack
           cards:
@@ -1809,6 +1830,10 @@ views:
             # office
             - entity: sensor.snr_officeclimate_battery
               name: 'Office'
+              tap_action: more-info
+            # outside
+            - entity: sensor.snr_outsideclimate_battery
+              name: 'Outside'
               tap_action: more-info
             # shed
             - entity: sensor.snr_shedclimate_battery

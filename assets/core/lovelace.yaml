@@ -21,6 +21,9 @@ resources:
   # simple-thermostat
 - url: /hacsfiles/simple-thermostat/simple-thermostat.js
   type: module
+  # simple-weather-card
+- url: /hacsfiles/simple-weather-card/simple-weather-card-bundle.js
+  type: module              
   # vertical-stack-in-card
 - url: /hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js
   type: module
