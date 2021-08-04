@@ -1437,6 +1437,14 @@ views:
           secondary_info:
             - precipitation_probability
             - wind_speed
+          card_mod:
+            style: |
+              .weather__info__title {
+                font-size: 20px;
+              }
+              ha-card.type-custom-simple-weather-card {
+                padding: 10px 10px 5px 5px;
+              }
 
         # AIR QUALITY (FROM PURPLEAIR DEVICE)
         - type: horizontal-stack
