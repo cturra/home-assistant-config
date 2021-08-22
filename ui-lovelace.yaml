@@ -307,6 +307,10 @@ views:
               name: 'Espresso Machine'
               icon: 'mdi:coffee-maker'
               secondary_info: last-changed
+            - entity: switch.plg_kitchenoutlet1
+              name: 'Kitchen: Baby Monitor'
+              icon: 'mdi:speaker'
+              secondary_info: last-changed
             # TV Room
             - entity: light.tv_room_ceiling
               type: 'custom:slider-entity-row'
@@ -602,6 +606,10 @@ views:
                 - entity: light.dining_room_ceiling
                   name: Table
                   icon: 'mdi:lightbulb-outline'
+                - entity: switch.plg_kitchenoutlet1
+                  name: 'Baby Monitor'
+                  icon: 'mdi:speaker'
+                  state_color: true
 
       # TV Room
       - type: 'custom:vertical-stack-in-card'
