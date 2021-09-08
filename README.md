@@ -31,6 +31,7 @@ For now, please enjoy, and feedback always welcome!
 | Plug | Sonoff | S31 | 3 | Tasmota |
 | Plug | Sonoff | S31ZB | 3 |  Zigbee2MQTT |
 | Thermostat | Ecobee | Ecobee3 | 1 | HA :: Ecobee |
+| Thermostat | Sinopé | TH11400ZB | 1 | Zigbee2MQTT |
 | Switch | Sonoff | Mini v1 | 3 | Tasmota |
 | Switch | Sonoff | SV | 1 | Tasmota |
 | Switch | Treatlife | SS02S | 9 | Tasmota |

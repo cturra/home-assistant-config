@@ -9,9 +9,22 @@
 
 
     ## -- battery level contact sensors --
-    
+
     # garage door (vehicle) contact sensor
     garage_door_contact_battery:
       friendly_name: 'Garage Door Contact Sensor Battery Level'
       unit_of_measurement: '%'
       value_template: '{{ state_attr("binary_sensor.wyzesense_77a05475","battery_level") }}'
+
+
+    ## -- boolean sensors --
+
+    # garage door (vehicle) contact boolean
+    garage_door_contact_bool:
+      friendly_name: 'Garage Door Contact boolean'
+      value_template: >-
+        {% if states('binary_sensor.wyzesense_77a05475') == 'on' %}
+          1
+        {% else %}
+          0
+        {% endif %}

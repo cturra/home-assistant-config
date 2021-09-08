@@ -1,0 +1,38 @@
+## sensor templates from sinopé thermostat
+
+- platform: template
+  sensors:
+    # garage temperature
+    hvac_garage_temperature:
+      friendly_name: 'HVAC Garage Temperature'
+      unit_of_measurement: '°C'
+      value_template: "{{ state_attr('climate.hvac_garagethermostat', 'current_temperature') }}"
+    
+    # heating on/off
+    #  - state: used for alerts dashboard
+    #  - bool:  used to annotate climate graphs
+    hvac_garage_heating_state:
+      friendly_name: 'HVAC Garage Heating state'
+      value_template: >-
+        {% if (state_attr('climate.hvac_garagethermostat', 'pi_heating_demand') | int) > 0 %}
+          on
+        {% else %}
+          off
+        {% endif %}
+    hvac_garage_heating_bool:
+      friendly_name: 'HVAC Garage Heating boolean'
+      value_template: >-
+        {% if (state_attr('climate.hvac_garagethermostat', 'pi_heating_demand') | int) > 0 %}
+          1
+        {% else %}
+          0
+        {% endif %}
+
+# heating time on today
+- platform: history_stats
+  name: 'HVAC Garage Heating Time On Today'
+  entity_id: sensor.hvac_garage_heating_state
+  state: 'on'
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"

@@ -360,6 +360,10 @@ views:
               name: 'Garage: Dehumidifier'
               icon: 'mdi:water-outline'
               secondary_info: last-changed
+            - entity: sensor.hvac_garage_heating_state
+              name: 'Garage: Heater'
+              icon: 'mdi:radiator'
+              secondary_info: last-changed
             # Shed
             - entity: switch.sw_shedfan
               name: 'Shed: Fan'
@@ -933,6 +937,7 @@ views:
     icon: 'mdi:home-thermometer-outline'
     badges: []
     cards:
+      # HOUSE INDOOR CLIMATE CARDS
       - type: 'custom:vertical-stack-in-card'
         cards:
         - type: markdown
@@ -949,7 +954,7 @@ views:
                 padding: 7px 2px 5px 5px;
               }
 
-        ## THERMOSTAT 
+        ## HOUSE THERMOSTAT 
         - type: 'custom:simple-thermostat'
           entity: climate.amazon
           card_mod:
@@ -966,7 +971,10 @@ views:
           control: false
           hide:
             state: true
+            temperature: true
           sensors:
+            - entity: sensor.amazon_temperature
+              name: 'Temperature'
             - entity: sensor.amazon_humidity
               name: 'Humidity'
             - entity: sensor.hvac_time_on_today
@@ -1093,7 +1101,6 @@ views:
               state:
                 - font-size: 20px
 
-
         # INDOOR TEMPERATURE GRAPHS
         - type: 'custom:mini-graph-card'
           show:
@@ -1182,240 +1189,267 @@ views:
             - label: 'On'
               value: '1'
 
-      - type: horizontal-stack
+      ## GARAGE CLIMATE CARDS
+      - type: 'custom:vertical-stack-in-card'
         cards:
-        ## SHED TEMPERATURE CARDS
-        - type: 'custom:vertical-stack-in-card'
-          cards:
-          - type: markdown
-            content: >
-              ### Shed
-            card_mod:
-              style: |
-                ha-card {
-                  padding-left: 5px;
-                  border-radius: 0px;
-                  font-size: 1.1em;
-                }
-                :host ha-markdown.no-header {
-                  padding: 7px 2px 5px 5px;
-                }
-          - type: horizontal-stack
-            cards:
-            # shed temperature
-            - type: 'custom:button-card'
-              entity: sensor.shed_temperature_f1
-              name: Temperature
-              show_state: true
-              show_icon: false
-              styles:
-                card:
-                  - margin: -3px
-                  - height: 60px
-                name:
-                  - margin: 10px
-                  - font-size: 11px
-                state:
-                  - margin: -10px
-                  - font-size: 22px
-            # shed humidity
-            - type: 'custom:button-card'
-              entity: sensor.shed_humidity_int
+        - type: markdown
+          content: >
+            ### Garage
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+
+        ## GARAGE THERMOSTAT 
+        - type: 'custom:simple-thermostat'
+          entity: climate.hvac_garagethermostat
+          card_mod:
+            style: |
+              ha-card {
+                --st-font-size-xl: 60px;
+                --st-font-size-m: 20px;
+                --st-font-size-sensors: 14px;
+                --st-spacing: 2px;
+              }
+          layout:
+            step: row
+          header: false
+          control: false
+          hide:
+            state: true
+            temperature: true
+          sensors:
+            - entity: sensor.hvac_garage_temperature
+              name: 'Temperature'
+            - entity: sensor.garage_humidity_int
+              name: 'Humidity'
+
+        # GARAGE TEMPERATURE GRAPHS
+        - type: 'custom:mini-graph-card'
+          show:
+            extrema: false
+            icon: false
+            labels: hover
+            labels_secondary: hover
+            name: false
+            state: false
+          height: 60
+          line_width: 1
+          hours_to_show: 24
+          points_per_hour: 4
+          lower_bound_secondary: 20
+          upper_bound_secondary: 80
+          group: true
+          color_thresholds:
+            - color: '#a55eea'
+              value: -6.9
+            - color: '#8854d0'
+              value: -3.9
+            - color: '#3867d6'
+              value: -1.2
+            - color: '#4b7bec'
+              value: 1.6
+            - color: '#2d98da'
+              value: 4.3
+            - color: '#45aaf2'
+              value: 7.1
+            - color: '#0fb9b1'
+              value: 9.9
+            - color: '#2bcbba'
+              value: 12.7
+            - color: '#20bf6b'
+              value: 15.5
+            - color: '#26de81'
+              value: 18.2
+            - color: '#fed330'
+              value: 21
+            - color: '#f7b731'
+              value: 23.8
+            - color: '#fd9644'
+              value: 26.6
+            - color: '#fa8231'
+              value: 29.3
+            - color: '#fc5c65'
+              value: 32.1
+            - color: '#eb3b5a'
+              value: 35.9
+          entities:
+            # temerature
+            - entity: sensor.hvac_garage_temperature
+              name: "Temperature"
+              show_fill: false
+              show_legend: false
+              state_adaptive_color: true
+            # humidity
+            - entity: sensor.snr_garageclimate_humidity
               name: Humidity
-              show_state: true
-              show_icon: false
-              styles:
-                card:
-                  - margin: -3px
-                  - height: 60px
-                name:
-                  - margin: 10px
-                  - font-size: 11px
-                state:
-                  - margin: -10px
-                  - font-size: 22px
+              line_width: 1
+              show_legend: false
+              show_fill: false
+              state_adaptive_color: true
+              color: '#5f9bea'
+              y_axis: secondary
 
-          # SHED TEMPERATURE GRAPH CARD
-          - type: 'custom:mini-graph-card'
-            show:
-              extrema: false
-              icon: false
-              labels: hover
-              labels_secondary: hover
-              name: false
-              state: false
-            line_width: 2
-            hours_to_show: 24
-            points_per_hour: 4
-            lower_bound_secondary: 20
-            upper_bound_secondary: 80
-            group: true
-            color_thresholds:
-              - color: '#a55eea'
-                value: -6.9
-              - color: '#8854d0'
-                value: -3.9
-              - color: '#3867d6'
-                value: -1.2
-              - color: '#4b7bec'
-                value: 1.6
-              - color: '#2d98da'
-                value: 4.3
-              - color: '#45aaf2'
-                value: 7.1
-              - color: '#0fb9b1'
-                value: 9.9
-              - color: '#2bcbba'
-                value: 12.7
-              - color: '#20bf6b'
-                value: 15.5
-              - color: '#26de81'
-                value: 18.2
-              - color: '#fed330'
-                value: 21
-              - color: '#f7b731'
-                value: 23.8
-              - color: '#fd9644'
-                value: 26.6
-              - color: '#fa8231'
-                value: 29.3
-              - color: '#fc5c65'
-                value: 32.1
-              - color: '#eb3b5a'
-                value: 35.9
-            entities:
-              # temerature
-              - entity: sensor.shed_temperature_f1
-                name: "Temperature"
-                show_legend: false
-                state_adaptive_color: true
-              # humidity
-              - entity: sensor.shed_humidity_int
-                name: Humidity
-                line_width: 1
-                show_legend: false
-                show_fill: false
-                state_adaptive_color: true
-                color: '#5f9bea'
-                y_axis: secondary
+        # GARAGE FUNCTION GRAPHS
+        - type: 'custom:mini-graph-card'
+          show:
+            extrema: false
+            fill: fade
+            icon: false
+            labels: hover
+            labels_secondary: hover
+            name: false
+            state: false
+          height: 20
+          line_width: 1
+          hours_to_show: 24
+          points_per_hour: 60
+          group: true
+          entities:
+            # garage heater on/off
+            - entity: sensor.hvac_garage_heating_bool
+              name: Heating
+              color: '#f4ce71'
+              show_legend: false
+              show_line: false
+              show_points: false
+            # garage car door opened/closed
+            - entity: sensor.garage_door_contact_bool
+              name: 'Car Door'
+              color: '#cccccc'
+              show_legend: true
+              show_line: false
+              show_points: false
+          state_map:
+            - label: 'Off'
+              value: '0'
+            - label: 'On'
+              value: '1'
 
-        ## GARAGE TEMPERATURE CARDS
-        - type: 'custom:vertical-stack-in-card'
+      ## SHED CLIMATE CARDS
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Shed
+          card_mod:
+            style: |
+              ha-card {
+                padding-left: 5px;
+                border-radius: 0px;
+                font-size: 1.1em;
+              }
+              :host ha-markdown.no-header {
+                padding: 7px 2px 5px 5px;
+              }
+        - type: horizontal-stack
           cards:
-          - type: markdown
-            content: >
-              ###  Garage
-            card_mod:
-              style: |
-                ha-card {
-                  padding-left: 5px;
-                  border-radius: 0px;
-                  font-size: 1.1em;
-                }
-                :host ha-markdown.no-header {
-                  padding: 7px 2px 5px 5px;
-                }
-          - type: horizontal-stack
-            cards:
-            # garage temperature
-            - type: 'custom:button-card'
-              entity: sensor.garage_temperature_f1
-              name: Temperature
-              show_state: true
-              show_icon: false
-              styles:
-                card:
-                  - margin: -3px
-                  - height: 60px
-                name:
-                  - margin: 10px
-                  - font-size: 11px
-                state:
-                  - margin: -10px
-                  - font-size: 22px
-            # garage humidity
-            - type: 'custom:button-card'
-              entity: sensor.garage_humidity_int
+          # shed temperature
+          - type: 'custom:button-card'
+            entity: sensor.shed_temperature_f1
+            name: Temperature
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+          # shed humidity
+          - type: 'custom:button-card'
+            entity: sensor.shed_humidity_int
+            name: Humidity
+            show_state: true
+            show_icon: false
+            styles:
+              card:
+                - margin: -3px
+                - height: 60px
+              name:
+                - margin: 10px
+                - font-size: 11px
+              state:
+                - margin: -10px
+                - font-size: 22px
+
+        # SHED TEMPERATURE GRAPH CARD
+        - type: 'custom:mini-graph-card'
+          show:
+            extrema: false
+            icon: false
+            labels: hover
+            labels_secondary: hover
+            name: false
+            state: false
+          height: 60
+          line_width: 1
+          hours_to_show: 24
+          points_per_hour: 4
+          lower_bound_secondary: 20
+          upper_bound_secondary: 80
+          group: true
+          color_thresholds:
+            - color: '#a55eea'
+              value: -6.9
+            - color: '#8854d0'
+              value: -3.9
+            - color: '#3867d6'
+              value: -1.2
+            - color: '#4b7bec'
+              value: 1.6
+            - color: '#2d98da'
+              value: 4.3
+            - color: '#45aaf2'
+              value: 7.1
+            - color: '#0fb9b1'
+              value: 9.9
+            - color: '#2bcbba'
+              value: 12.7
+            - color: '#20bf6b'
+              value: 15.5
+            - color: '#26de81'
+              value: 18.2
+            - color: '#fed330'
+              value: 21
+            - color: '#f7b731'
+              value: 23.8
+            - color: '#fd9644'
+              value: 26.6
+            - color: '#fa8231'
+              value: 29.3
+            - color: '#fc5c65'
+              value: 32.1
+            - color: '#eb3b5a'
+              value: 35.9
+          entities:
+            # temerature
+            - entity: sensor.shed_temperature_f1
+              name: "Temperature"
+              show_fill: false
+              show_legend: false
+              state_adaptive_color: true
+            # humidity
+            - entity: sensor.shed_humidity_int
               name: Humidity
-              show_state: true
-              show_icon: false
-              styles:
-                card:
-                  - margin: -3px
-                  - height: 60px
-                name:
-                  - margin: 10px
-                  - font-size: 11px
-                state:
-                  - margin: -10px
-                  - font-size: 22px
+              line_width: 1
+              show_legend: false
+              show_fill: false
+              state_adaptive_color: true
+              color: '#5f9bea'
+              y_axis: secondary
 
-          # GARAGE TEMPERATURE GRAPH CARD
-          - type: 'custom:mini-graph-card'
-            show:
-              extrema: false
-              fill: fade
-              icon: false
-              labels: hover
-              labels_secondary: hover
-              name: false
-              state: false
-            line_width: 2
-            hours_to_show: 24
-            points_per_hour: 4
-            lower_bound_secondary: 20
-            upper_bound_secondary: 80
-            group: true
-            color_thresholds:
-              - color: '#a55eea'
-                value: -6.9
-              - color: '#8854d0'
-                value: -3.9
-              - color: '#3867d6'
-                value: -1.2
-              - color: '#4b7bec'
-                value: 1.6
-              - color: '#2d98da'
-                value: 4.3
-              - color: '#45aaf2'
-                value: 7.1
-              - color: '#0fb9b1'
-                value: 9.9
-              - color: '#2bcbba'
-                value: 12.7
-              - color: '#20bf6b'
-                value: 15.5
-              - color: '#26de81'
-                value: 18.2
-              - color: '#fed330'
-                value: 21
-              - color: '#f7b731'
-                value: 23.8
-              - color: '#fd9644'
-                value: 26.6
-              - color: '#fa8231'
-                value: 29.3
-              - color: '#fc5c65'
-                value: 32.1
-              - color: '#eb3b5a'
-                value: 35.9
-            entities:
-              # temerature
-              - entity: sensor.garage_temperature_f1
-                name: "Garage"
-                show_legend: false
-                state_adaptive_color: true
-              # humidity
-              - entity: sensor.garage_humidity_int
-                name: "Humidity_1"
-                line_width: 2
-                show_legend: true
-                show_fill: false
-                state_adaptive_color: true
-                color: '#5f9bea'
-                y_axis: secondary
-
-      ## OUTDSIDE CLIMATE INFO
+      ## OUTDSIDE CLIMATE CARDS
       - type: 'custom:vertical-stack-in-card'
         cards:
         - type: markdown
