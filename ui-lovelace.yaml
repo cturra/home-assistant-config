@@ -973,7 +973,7 @@ views:
             state: true
             temperature: true
           sensors:
-            - entity: sensor.amazon_temperature
+            - entity: sensor.hvac_indoor_avg_temperature
               name: 'Temperature'
             - entity: sensor.amazon_humidity
               name: 'Humidity'
@@ -1162,21 +1162,21 @@ views:
           points_per_hour: 60
           group: true
           entities:
-            # sensor template (true/false) for if A/C is running
+            # air conditioner on/off
             - entity: sensor.hvac_cooling_bool
               name: Cooling
               color: '#71b7f4'
               show_legend: false
               show_line: false
               show_points: false
-            # sensor template (true/false) for if furnace is running
+            # furnace heating on/off
             - entity: sensor.hvac_heating_bool
               name: Heating
               color: '#f4ce71'
               show_legend: false
               show_line: false
               show_points: false
-            # sensor template (true/false) for if fan is running
+            # hvac fan on/off
             - entity: sensor.hvac_fan_bool
               name: Fan
               color: '#cccccc'
@@ -1316,6 +1316,13 @@ views:
             - entity: sensor.hvac_garage_heating_bool
               name: Heating
               color: '#f4ce71'
+              show_legend: false
+              show_line: false
+              show_points: false
+            # garage dehumidifier on/off
+            - entity: sensor.garage_dehumidifier_bool
+              name: 'Dehumidifier'
+              color: '#71b7f4'
               show_legend: false
               show_line: false
               show_points: false

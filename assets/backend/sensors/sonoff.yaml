@@ -1,6 +1,7 @@
 - platform: template
   sensors:
-    ## ENERGY
+    ## -- energy sensors --
+
     # deep freezer today total (2 decimals)
     deep_freezer_plug_energy_today_f2:
       friendly_name: 'Deep Freezer Plug Energy Today 2 decimal places'
@@ -36,3 +37,16 @@
       friendly_name: 'Garage Dehumidifier Plug Energy Current 2 decimal places'
       unit_of_measurement: 'A'
       value_template: '{{ states("sensor.garage_dehumidifier_plug_energy_current") | round(2) }}'
+    
+
+    ## -- boolean sensors --
+
+    # garage dehumidifier (switch)
+    garage_dehumidifier_bool:
+      friendly_name: 'Garage Dehumidifier boolean'
+      value_template: >-
+        {% if states('switch.plg_garagedehumidifier') == 'on' %}
+          1
+        {% else %}
+          0
+        {% endif %}

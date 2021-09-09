@@ -70,6 +70,14 @@
           off
         {% endif %}
 
+    # current_temperature (calculated by ecobee)
+    hvac_indoor_avg_temperature:
+      friendly_name: 'HVAC Indoor Average Temperature from Ecobee'
+      unit_of_measurement: '°C'
+      device_class: temperature
+      value_template: "{{ state_attr('climate.amazon', 'current_temperature') }}"
+
+
 ## cooling time on today
 - platform: history_stats
   name: 'HVAC Cooling Time On Today'

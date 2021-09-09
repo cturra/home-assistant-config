@@ -6,6 +6,7 @@
     hvac_garage_temperature:
       friendly_name: 'HVAC Garage Temperature'
       unit_of_measurement: '°C'
+      device_class: temperature
       value_template: "{{ state_attr('climate.hvac_garagethermostat', 'current_temperature') }}"
     
     # heating on/off
