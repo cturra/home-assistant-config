@@ -39,13 +39,34 @@
       value_template: '{{ states("sensor.garage_dehumidifier_plug_energy_current") | round(2) }}'
     
 
-    ## -- boolean sensors --
+    ## -- other sensors --
+
+    # garage door (vehicle) contact state
+    garage_door_contact_state:
+      friendly_name: 'Garage Door Contact state'
+      value_template: >-
+        {% if states('switch.sw_garagedoorcontact') == 'on' %}
+          Open
+        {% else %}
+          Closed
+        {% endif %}
+
+    # garage door (vehicle) contact boolean
+    garage_door_contact_bool:
+      friendly_name: 'Garage Door Contact boolean'
+      value_template: >-
+        {% if states('switch.sw_garagedoorcontact') == 'on' %}
+          1
+        {% else %}
+          0
+        {% endif %}
 
     # garage dehumidifier (switch)
     garage_dehumidifier_bool:
       friendly_name: 'Garage Dehumidifier boolean'
+      # power reported in watts
       value_template: >-
-        {% if states('switch.plg_garagedehumidifier') == 'on' %}
+        {% if (states('sensor.garage_dehumidifier_plug_energy_power') | int) > 10 %}
           1
         {% else %}
           0

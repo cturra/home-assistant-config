@@ -1,19 +1,19 @@
 - platform: template
 
   covers:
-    # garage door opener
+    # garage vehicle door opener
     garage_door:
       friendly_name: 'Garage Door'
       device_class: garage
-      value_template: "{{ is_state('binary_sensor.wyzesense_77a05475','on') }}"
+      value_template: "{{ is_state('switch.sw_garagedoorcontact','on') }}"
       open_cover:
         service: switch.turn_on
-        entity_id: switch.sw_garagedooropener1
+        entity_id: switch.sw_garagedooropener
       close_cover:
         service: switch.turn_on
-        entity_id: switch.sw_garagedooropener1
+        entity_id: switch.sw_garagedooropener
       icon_template: >-
-        {% if is_state('binary_sensor.wyzesense_77a05475','on') %}
+        {% if is_state('switch.sw_garagedoorcontact','on') %}
           mdi:garage-open-variant
         {% else %}
           mdi:garage-variant

@@ -119,9 +119,6 @@ views:
               name: 'Spare Bedroom: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
             # contact sensors
-            - entity: sensor.garage_door_contact_battery
-              name: 'Garage: Door Contact Battery'
-              icon: 'mdi:battery-alert-variant-outline'
             - entity: sensor.crawlspace_door_contact_battery
               name: 'Crawlspace: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
@@ -438,9 +435,10 @@ views:
             - entity: binary_sensor.snr_frontdoorcontact_contact
               name: 'Front Door'
               secondary_info: last-changed
-            # garage car
-            - entity: binary_sensor.wyzesense_77a05475
-              name: 'Garage: Car Door'
+            # garage (vehicle) door
+            - entity: sensor.garage_door_contact_state
+              name: 'Garage: Vehicle Door'
+              icon: 'mdi:garage-open-variant'
               secondary_info: last-changed
             # garage house
             - entity: binary_sensor.snr_garagedoorhousecontact_contact
@@ -494,6 +492,8 @@ views:
           state_filter:
             - operator: '=='
               value: 'on'
+            - operator: '=='
+              value: 'Open'
           show_empty: false
 
 
@@ -801,10 +801,10 @@ views:
               }
         - type: horizontal-stack
           cards:
-            # car door opener
+            # vehicle door opener
             - type: 'custom:button-card'
               entity: cover.garage_door
-              name: 'Car Door'
+              name: 'Vehicle Door'
               tap_action:
                 action: toggle
               confirmation:
@@ -1962,10 +1962,6 @@ views:
             # garage side door
             - entity: sensor.snr_garagedoorsidecontact_battery
               name: 'Garage Side Door'
-              tap_action: more-info
-            # garage car door
-            - entity: sensor.garage_door_contact_battery
-              name: 'Garage Car Door'
               tap_action: more-info
             # kitchen window
             - entity: sensor.snr_kitchenwindowcontact_battery

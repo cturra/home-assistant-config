@@ -77,17 +77,6 @@ binary_sensor.snr_familyroomwindowsiderightcontact_contact:
   friendly_name: 'Family Room Side/Right Window contact'
   device_class: window
 
-# garage door
-binary_sensor.wyzesense_77a05475:
-  friendly_name: 'Garage Door Sensor'
-  device_class: garage_door
-  icon_template: >-
-    {% if is_state('binary_sensor.wyzesense_77a05475','on') %}
-      mdi:garage-open-variant
-    {% else %}
-      mdi:garage-variant
-    {% endif %}
-
 # kitchen window
 binary_sensor.snr_kitchenwindowcontact_contact:
   friendly_name: 'Kitchen Window contact'
@@ -102,3 +91,17 @@ binary_sensor.snr_laundryroomwindowcontact_contact:
 binary_sensor.snr_mainbedroomwindowcontact_contact:
   friendly_name: 'Main Bedroom Window contact'
   device_class: window
+
+
+## ------ switch ------
+
+# garage (vehicle) door
+switch.sw_garagedoorcontact:
+  friendly_name: 'Garage Door Contact Sensor'
+  device_class: garage_door
+  icon_template: >-
+    {% if is_state('switch.sw_garagedoorcontact','on') %}
+      mdi:garage-open-variant
+    {% else %}
+      mdi:garage-variant
+    {% endif %}

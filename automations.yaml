@@ -328,7 +328,7 @@
   description: turn off dehumidifier when garage car door is opened.
   trigger:
   - platform: state
-    entity_id: binary_sensor.wyzesense_77a05475
+    entity_id: switch.sw_garagedoorcontact
     from: 'off'
     to: 'on'
     for: 00:00:20
@@ -342,11 +342,11 @@
     entity_id: switch.plg_garagedehumidifier
   mode: single
 - id: '1612462859674'
-  alias: Garage / Dehumidifier / Check - door closes
+  alias: 'Garage Inside: Dehumidifier check when vehicle door closes'
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.wyzesense_77a05475
+    entity_id: switch.sw_garagedoorcontact
     from: 'on'
     to: 'off'
     for: 00:00:20
@@ -381,7 +381,7 @@
       entity_id: switch.plg_garagedehumidifier
       state: 'off'
     - condition: state
-      entity_id: binary_sensor.wyzesense_77a05475
+      entity_id: switch.sw_garagedoorcontact
       state: 'off'
   action:
   - service: switch.turn_on
@@ -422,7 +422,7 @@
       - '{{ range(80,101) | random }}'
       brightness_pct: 100
       transition: 1
-    entity_id: light.lgt_kidsroom1
+    entity_id: light.blb_driveway1
   mode: single
 - id: '1612673570521'
   alias: (Testing) IKEA button press (right click)
@@ -806,7 +806,7 @@
     to: home
   condition:
   - condition: state
-    entity_id: binary_sensor.wyzesense_77a05475
+    entity_id: switch.sw_garagedoorcontact
     state: 'off'
   action:
   - service: notify.mobile_app_turraphone
@@ -828,7 +828,7 @@
     continue_on_timeout: false
   - service: switch.turn_on
     target:
-      entity_id: switch.sw_garagedooropener1
+      entity_id: switch.sw_garagedooropener
   mode: single
 - id: '1624131994582'
   alias: 'Garage Indoor: notify Chris when car door opened'
@@ -836,7 +836,7 @@
     the garage door has been opened.
   trigger:
   - platform: state
-    entity_id: binary_sensor.wyzesense_77a05475
+    entity_id: switch.sw_garagedoorcontact
     from: 'off'
     to: 'on'
     for: 00:00:10
@@ -896,7 +896,7 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.wyzesense_77a05475
+    entity_id: switch.sw_garagedoorcontact
     from: 'off'
     to: 'on'
     for:
@@ -919,7 +919,7 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.wyzesense_77a05475
+    entity_id: switch.sw_garagedoorcontact
     from: 'on'
     to: 'off'
     for:
