@@ -23,15 +23,14 @@ For now, please enjoy, and feedback always welcome!
 | Contact Sensor | Xiaomi | MCCGQ11LM | 15 | Zigbee2MQTT |
 | Leak Sensor | Xiaomi | SJCGQ11LM | 9 | Zigbee2MQTT |
 | Motion Sensor | Ikea | E1745 | 1 | Zigbee2MQTT |
-| Motion Sensor | Wyze | Sense | 1 | HACS :: Wyze Sense Component |
 | Motion Sensor | Xiaomi | RTCGQ11LM | 3 | Zigbee2MQTT |
 | Plug | Gosund | WP2 | 1 | Tasmota |
 | Plug | Gosund | WP5 | 3 | Tasmota |
 | Plug | Sonoff | S31 | 3 | Tasmota |
 | Plug | Sonoff | S31ZB | 3 |  Zigbee2MQTT |
 | Thermostat | Ecobee | Ecobee3 | 1 | HA :: Ecobee |
-| Thermostat | Sinopé | TH11400ZB | 1 | Zigbee2MQTT |
-| Switch | Sonoff | Mini v1 | 3 | Tasmota |
+| Thermostat | Sinopé | TH1400ZB | 1 | Zigbee2MQTT |
+| Switch | Sonoff | Mini R1 | 3 | Tasmota |
 | Switch | Sonoff | SV | 1 | Tasmota |
 | Switch | Treatlife | SS02S | 9 | Tasmota |
 | Switch (3 Way) | Treatlife | SS02 | 2 | Tasmota |

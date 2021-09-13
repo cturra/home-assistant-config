@@ -1,8 +1,0 @@
-- platform: template
-  sensors:
-    ## -- battery level motion sensors --
-    # front yard motion sensor
-    front_yard_motion_battery:
-      friendly_name: 'Front Yard Motion Sensor Battery Level'
-      unit_of_measurement: '%'
-      value_template: '{{ state_attr("binary_sensor.wyzesense_779f1f3a","battery_level") }}'

@@ -78,6 +78,7 @@
 
       purpleair_temp:
         friendly_name: 'PurpleAir Temperature'
+        device_class: temperature
         value_template: "{{ state_attr('sensor.purpleair','results')[0]['temp_f'] }}"
         unit_of_measurement: "°F"
 

@@ -1,16 +1,3 @@
-## ------ motion sensors ------
-
-# front yard
-binary_sensor.wyzesense_779f1f3a:
-  friendly_name: 'Front Yard Motion Sensor'
-  device_class: motion
-  icon_template: >-
-    {% if is_state('binary_sensor.wyzesense_779f1f3a','on') %}
-      mdi:motion-sense
-    {% else %}
-      mdi:walk
-    {% endif %}
-
 ## ------ leak sensors ------
 
 # dishwasher

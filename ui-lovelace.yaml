@@ -209,10 +209,6 @@ views:
             - entity: sensor.snr_shedoutsidemotion_battery
               name: 'Shed: Outdoor Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-            # motion sensors (wyze)
-            - entity: sensor.front_yard_motion_battery
-              name: 'Front Yard: Motion Sensor Battery'
-              icon: 'mdi:battery-alert-variant-outline'
           state_filter:
             - operator: regex
               # matches 0-24 (less than 25)
@@ -2089,10 +2085,6 @@ views:
                 margin: 0px 0;
               }
           entities:
-            # front yard
-            - entity: sensor.front_yard_motion_battery
-              name: 'Front Yard'
-              tap_action: more-info
             # garage outdoor :: side
             - entity: sensor.snr_garageoutsidemotion_battery
               name: 'Garage Outdoor'
