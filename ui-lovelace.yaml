@@ -580,7 +580,7 @@ views:
               card_mod:
                 style: |
                   :host {
-                    --card-mod-icon-color: var(--primary-text-color)
+                    --card-mod-icon-color: var(--secondary-text-color)
                   }
             # Stairwell
             - entity: light.stairwell_ceiling
@@ -591,6 +591,11 @@ views:
             - entity: light.kitchen_ceiling
               name: 'Kitchen: Ceiling'
               icon: 'mdi:lightbulb-outline'
+              card_mod:
+                style: |
+                  :host {
+                    --card-mod-icon-color: var(--secondary-text-color)
+                  }
               secondary_info: last-changed
             - entity: switch.sw_kitchensink
               name: 'Kitchen: Sink'
@@ -604,7 +609,7 @@ views:
               card_mod:
                 style: |
                   :host {
-                    --card-mod-icon-color: var(--primary-text-color)
+                    --card-mod-icon-color: var(--secondary-text-color)
                   }
             - entity: switch.plg_espressomachine
               name: 'Espresso Machine'
@@ -623,7 +628,7 @@ views:
               card_mod:
                 style: |
                   :host {
-                    --card-mod-icon-color: var(--primary-text-color)
+                    --card-mod-icon-color: var(--secondary-text-color)
                   }
             # Office
             - entity: switch.sw_office
@@ -643,7 +648,7 @@ views:
               card_mod:
                 style: |
                   :host {
-                    --card-mod-icon-color: var(--primary-text-color)
+                    --card-mod-icon-color: var(--secondary-text-color)
                   }
             #- entity: switch.plg_mainbedroom1
             #  name: 'Main Bedroom: Heater'
@@ -658,7 +663,7 @@ views:
               card_mod:
                 style: |
                   :host {
-                    --card-mod-icon-color: var(--primary-text-color)
+                    --card-mod-icon-color: var(--secondary-text-color)
                   }
             # Laundry
             - entity: switch.plg_zbrpt_laundryroom
