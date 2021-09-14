@@ -30,6 +30,12 @@ views:
             - entity: sensor.fridge_temperature_f1
               name: 'Kitchen: Fridge Temperature'
               icon: 'mdi:fridge-alert-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
           state_filter:
             - operator: ">"
               value: "7.5"
@@ -40,6 +46,12 @@ views:
             - entity: sensor.freezer_temperature_f1
               name: 'Crawlspace: Freezer Temperature'
               icon: 'mdi:fridge-alert-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
           state_filter:
             - operator: regex
               value: '^\-(([1][0-3]\.[0-9])|([0-9]\.[0-9]))$'
@@ -50,27 +62,75 @@ views:
           - entity: binary_sensor.snr_dishwasherleak_water_leak
             name: 'Dishwasher: Water Detected'
             icon: 'mdi:water-alert'
+            card_mod:
+              style: |
+                :host {
+                  color: #ff4444;
+                  --card-mod-icon-color: #ff4444;
+                }
           - entity: binary_sensor.snr_downtoiletleak_water_leak
             name: 'Downstairs Bathroom: Toilet Water Detected'
             icon: 'mdi:water-alert'
+            card_mod:
+              style: |
+                :host {
+                  color: #ff4444;
+                  --card-mod-icon-color: #ff4444;
+                }
           - entity: binary_sensor.snr_espressoleak_water_leak
             name: 'Espresso Machine: Water Detected'
             icon: 'mdi:water-alert'
+            card_mod:
+              style: |
+                :host {
+                  color: #ff4444;
+                  --card-mod-icon-color: #ff4444;
+                }
           - entity: binary_sensor.snr_ensuitebathtubleak_water_leak
             name: 'Ensuite Bathtub: Water Detected'
             icon: 'mdi:water-alert'
+            card_mod:
+              style: |
+                :host {
+                  color: #ff4444;
+                  --card-mod-icon-color: #ff4444;
+                }
           - entity: binary_sensor.snr_ensuitetoiletleak_water_leak
             name: 'Ensuite Toilet: Water Detected'
             icon: 'mdi:water-alert'
+            card_mod:
+              style: |
+                :host {
+                  color: #ff4444;
+                  --card-mod-icon-color: #ff4444;
+                }
           - entity: binary_sensor.snr_fridgeleak_water_leak
             name: 'Fridge: Water Detected'
             icon: 'mdi:water-alert'
+            card_mod:
+              style: |
+                :host {
+                  color: #ff4444;
+                  --card-mod-icon-color: #ff4444;
+                }
           - entity: binary_sensor.snr_hotwatertankleak_water_leak
             name: 'Hot Water Tank: Water Detected'
             icon: 'mdi:water-alert'
+            card_mod:
+              style: |
+                :host {
+                  color: #ff4444;
+                  --card-mod-icon-color: #ff4444;
+                }
           - entity: binary_sensor.snr_laundryleak_water_leak
             name: 'Laundry Water Detected'
             icon: 'mdi:water-alert'
+            card_mod:
+              style: |
+                :host {
+                  color: #ff4444;
+                  --card-mod-icon-color: #ff4444;
+                }
           - entity: binary_sensor.snr_upcommontoiletleak_water_leak
             name: 'Upstairs Bathroom: Toilet Water Detected'
             icon: 'mdi:water-alert'
@@ -83,6 +143,12 @@ views:
             - entity: sensor.purpleair_description
               name: 'Outdoor Air Quality'
               icon: 'mdi:chemical-weapon'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
           state_filter:
             - operator: regex
               value: '(Unhealthy|Hazardous)'
@@ -94,121 +160,349 @@ views:
             - entity: sensor.snr_crawlspacedoorcontact_battery
               name: 'Crawlspace: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_garageclimate_battery
               name: 'Garage: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_kidsroomclimate_battery
               name: 'Kids Room: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_laundryclimate_battery
               name: 'Laundry: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_mainbedroomclimate_battery
               name: 'Main Bedroom: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_officeclimate_battery
               name: 'Office: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_outsideclimate_battery            
               name: 'Outside: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_shedclimate_battery
               name: 'Shed: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_sparebedroomclimate_battery
               name: 'Spare Bedroom: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             # contact sensors
             - entity: sensor.crawlspace_door_contact_battery
               name: 'Crawlspace: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_ensuitewindowcontact_battery
               name: 'Ensuite: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.srn_familyroomwindowfrontcontact_battery
               name: 'Family Room: Front Window Contact battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_familyroomwindowsideleftcontact_battery
               name: 'Family Room: Side/Left Window Contact battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_familyroomwindowsiderightcontact_battery
               name: 'Family Room: Side/Right Window Contact battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_frontdoorcontact_battery
               name: 'Front: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_garagedoorhousecontact_battery
               name: 'Garage: House Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_garagedoorsidecontact_battery
               name: 'Garage: Side Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_kitchenwindowcontact_battery
               name: 'Kitchen: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_laundryroomwindowcontact_battery
               name: 'Laundry: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_lockercontact_battery
               name:  'Crawlspace: Locker Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_mainbedroomwindowcontact_battery
               name: 'Main Bedroom: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_patiodoorcontact_battery
               name: 'Patio Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.family_room_front_window_contact_battery
               name: 'Family Room: Front Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_sheddoorcontact_battery
               name: 'Shed: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_upcommonbathroomwindowcontact_battery
               name: 'Upstairs Bathroom: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             # leak sensors
             - entity: sensor.snr_downtoiletleak_battery
               name: 'Downstairs: Toilet Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_ensuitebathtubleak_battery
               name: 'Ensuite: Bathtub Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_ensuitetoiletleak_battery
               name: 'Ensuite: Toilet Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_dishwasherleak_battery
               name: 'Kitchen: Dishwasher Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_espressoleak_battery
               name: 'Kitchen: Espresso Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_fridgeleak_battery
               name: 'Kitchen: Fridge Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_hotwatertankleak_battery
               name: 'Crawspace: Hot Water Tank Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_laundryleak_battery
               name: 'Laundry: Washer Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_upcommontoiletleak_battery
               name: 'Upstairs Bathroom: Toilet Leak Sensor Battery'  
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             # motion sensors (aqara)
             - entity: sensor.snr_garageoutsidemotion_battery
               name: 'Garage: Outside Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_officemotion_battery
               name: 'Office: Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             - entity: sensor.snr_porchfrontdoormotion_battery
               name: 'Porch: Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
             # motion sensors (ikea)
             - entity: sensor.snr_shedoutsidemotion_battery
               name: 'Shed: Outdoor Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
           state_filter:
             - operator: regex
               # matches 0-24 (less than 25)
@@ -220,6 +514,12 @@ views:
             - entity: sensor.warnings
               name: 'Weather'
               icon: 'mdi:weather-cloudy-alert'
+              card_mod:
+                style: |
+                  :host {
+                    color: #ff4444;
+                    --card-mod-icon-color: #ff4444;
+                  }
           state_filter:
             - operator: regex
               # will match any string that contains at least one non-space character
@@ -277,6 +577,11 @@ views:
               name: 'Family Room: Wall'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
+              card_mod:
+                style: |
+                  :host {
+                    --card-mod-icon-color: var(--primary-text-color)
+                  }
             # Stairwell
             - entity: light.stairwell_ceiling
               name: 'Stairwell'
@@ -296,6 +601,11 @@ views:
               name: 'Kitchen: Table'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
+              card_mod:
+                style: |
+                  :host {
+                    --card-mod-icon-color: var(--primary-text-color)
+                  }
             - entity: switch.plg_espressomachine
               name: 'Espresso Machine'
               icon: 'mdi:coffee-maker'
@@ -310,6 +620,11 @@ views:
               name: 'TV Room: Ceiling'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
+              card_mod:
+                style: |
+                  :host {
+                    --card-mod-icon-color: var(--primary-text-color)
+                  }
             # Office
             - entity: switch.sw_office
               name: "Office: Ceiling"
@@ -325,6 +640,11 @@ views:
               name: 'Main Bedroom'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
+              card_mod:
+                style: |
+                  :host {
+                    --card-mod-icon-color: var(--primary-text-color)
+                  }
             #- entity: switch.plg_mainbedroom1
             #  name: 'Main Bedroom: Heater'
             #  icon: 'mdi:radiator'
@@ -335,6 +655,11 @@ views:
               name: 'Kids Bedroom'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
+              card_mod:
+                style: |
+                  :host {
+                    --card-mod-icon-color: var(--primary-text-color)
+                  }
             # Laundry
             - entity: switch.plg_zbrpt_laundryroom
               name: 'Laundry: Dehumidifier'
