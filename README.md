@@ -22,6 +22,7 @@ For now, please enjoy, and feedback always welcome!
 | Climate Sensor | Ecobee | v1 | 3 | HA :: Ecobee |
 | Contact Sensor | Xiaomi | MCCGQ11LM | 15 | Zigbee2MQTT |
 | Leak Sensor | Xiaomi | SJCGQ11LM | 9 | Zigbee2MQTT |
+| Light Bulb | Ikea | LED1624G9 | 1 | Zigbee2MQTT |
 | Motion Sensor | Ikea | E1745 | 1 | Zigbee2MQTT |
 | Motion Sensor | Xiaomi | RTCGQ11LM | 3 | Zigbee2MQTT |
 | Plug | Gosund | WP2 | 1 | Tasmota |
@@ -30,6 +31,7 @@ For now, please enjoy, and feedback always welcome!
 | Plug | Sonoff | S31ZB | 3 |  Zigbee2MQTT |
 | Thermostat | Ecobee | Ecobee3 | 1 | HA :: Ecobee |
 | Thermostat | Sinopé | TH1400ZB | 1 | Zigbee2MQTT |
+| Remote | Ikea | E1810 | 1 | Zigbee2MQTT |
 | Switch | Sonoff | Mini R1 | 3 | Tasmota |
 | Switch | Sonoff | SV | 1 | Tasmota |
 | Switch | Treatlife | SS02S | 9 | Tasmota |

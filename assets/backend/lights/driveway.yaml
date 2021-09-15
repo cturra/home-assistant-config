@@ -1,0 +1,5 @@
+  ## group light bulbs
+  - platform: group
+    name: Driveway Lights
+    entities:
+      - light.blb_driveway1

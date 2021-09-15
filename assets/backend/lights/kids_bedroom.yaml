@@ -2,8 +2,8 @@
   - platform: group
     name: Kids Bedroom Lights
     entities:
-      - light.lgt_kidsroom1
-      - light.lgt_kidsroom2
+      - light.blb_kidsroomlamp
+
 
   ## ceiling dimmer switch
   - platform: mqtt

@@ -1,0 +1,106 @@
+blueprint:
+  name: zigbee2mqtt IKEA 5-button remote
+  description: This blueprint is for the IKEA round, 5-button remote when used with
+    zigbee2mqtt. It is for genral use so all buttons can be connected to any action
+    of your choice
+  domain: automation
+  input:
+    remote:
+      name: Remote
+      description: IKEA remote to use
+      selector:
+        entity:
+          integration: mqtt
+          domain: sensor
+    button_on_off:
+      name: On off button press
+      description: Action to run when toggle on/off-button
+      default: []
+      selector:
+        action: {}
+    button_brightness_up_short:
+      name: Brightness up button - short press
+      description: Action to run when SHORT press on brighness UP button
+      default: []
+      selector:
+        action: {}
+    button_brightness_up_long:
+      name: Brightness up button - long press
+      description: Action to run when LONG press on brightness UP button
+      default: []
+      selector:
+        action: {}
+    button_brightness_down_short:
+      name: Brightness down button - short press
+      description: Action to run when SHORT press on brighness DOWN button
+      default: []
+      selector:
+        action: {}
+    button_brightness_down_long:
+      name: Brightness down button - long press
+      description: Action to run when LONG press on brighness DOWN button
+      default: []
+      selector:
+        action: {}
+    button_left_short:
+      name: Left button - short press
+      description: Action to run when SHORT press on LEFT button
+      default: []
+      selector:
+        action: {}
+    button_left_long:
+      name: Left button - long press
+      description: Action to run when LONG press on LEFT button
+      default: []
+      selector:
+        action: {}
+    button_right_short:
+      name: Right button - short press
+      description: Action to run when SHORT press on RIGHT button
+      default: []
+      selector:
+        action: {}
+    button_right_long:
+      name: Right button - long press
+      description: Action to run when LONG press on RIGHT button
+      default: []
+      selector:
+        action: {}
+  source_url: https://community.home-assistant.io/t/zigbee2mqtt-ikea-5-button-remote-general-use/263885
+mode: restart
+max_exceeded: silent
+trigger:
+- platform: state
+  entity_id: !input 'remote'
+  attribute: action
+action:
+- variables:
+    command: '{{ trigger.to_state.state }}'
+- choose:
+  - conditions:
+    - '{{ command == ''toggle'' }}'
+    sequence: !input 'button_on_off'
+  - conditions:
+    - '{{ command == ''brightness_up_click'' }}'
+    sequence: !input 'button_brightness_up_short'
+  - conditions:
+    - '{{ command == ''brightness_up_hold'' }}'
+    sequence: !input 'button_brightness_up_long'
+  - conditions:
+    - '{{ command == ''brightness_down_click'' }}'
+    sequence: !input 'button_brightness_down_short'
+  - conditions:
+    - '{{ command == ''brightness_down_hold'' }}'
+    sequence: !input 'button_brightness_down_long'
+  - conditions:
+    - '{{ command == ''arrow_left_click'' }}'
+    sequence: !input 'button_left_short'
+  - conditions:
+    - '{{ command == ''arrow_left_hold'' }}'
+    sequence: !input 'button_left_long'
+  - conditions:
+    - '{{ command == ''arrow_right_click'' }}'
+    sequence: !input 'button_right_short'
+  - conditions:
+    - '{{ command == ''arrow_right_hold'' }}'
+    sequence: !input 'button_right_long'

@@ -657,7 +657,7 @@ views:
             # Kids Bedroom
             - entity: light.kids_bedroom_ceiling
               type: 'custom:slider-entity-row'
-              name: 'Kids Bedroom'
+              name: 'Kids Bedroom: Ceiling'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
               card_mod:
@@ -665,6 +665,10 @@ views:
                   :host {
                     --card-mod-icon-color: var(--secondary-text-color)
                   }
+            - entity: light.blb_kidsroomlamp
+              name: "Kids Bedroom: Lamp"
+              icon: 'mdi:lamp' #lamp-outline not working?
+              secondary_info: last-changed
             # Laundry
             - entity: switch.plg_zbrpt_laundryroom
               name: 'Laundry: Dehumidifier'
@@ -1073,8 +1077,18 @@ views:
                   name: 'Ceiling'
                   icon: 'mdi:lightbulb-outline'
                   state_color: true
-            - type: 'custom:button-card'
-              color_type: blank
+            - type: entities
+              show_header_toggle: false
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px;
+                  }
+              entities:
+                - entity: light.blb_kidsroomlamp
+                  name: 'Lamp'
+                  icon: 'mdi:lamp' # lamp-outline not working
+                  state_color: true
 
       # Laundry
       - type: 'custom:vertical-stack-in-card'

@@ -407,101 +407,6 @@
     data: {}
     entity_id: switch.plg_garagedehumidifier
   mode: single
-- id: '1612671461820'
-  alias: (TESTING) Ikea Light Disco
-  description: ''
-  trigger:
-  - platform: time_pattern
-    seconds: /5
-  condition: []
-  action:
-  - service: light.turn_on
-    data:
-      hs_color:
-      - '{{ range(360) | random }}'
-      - '{{ range(80,101) | random }}'
-      brightness_pct: 100
-      transition: 1
-    entity_id: light.blb_driveway1
-  mode: single
-- id: '1612673570521'
-  alias: (Testing) IKEA button press (right click)
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: sensor.sw_kidsroomremote_action
-    to: arrow_right_click
-  condition: []
-  action:
-  - service: light.turn_on
-    data:
-      hs_color:
-      - '{{ range(360) | random }}'
-      - '{{ range(80,101) | random }}'
-      brightness_pct: 100
-      transition: 1
-    entity_id: light.kids_bedroom_lights
-  mode: single
-- id: '1612674226139'
-  alias: (Testing) IKEA button press (toggle)
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: sensor.sw_kidsroomremote_action
-    to: toggle
-  condition: []
-  action:
-  - service: light.toggle
-    entity_id: light.kids_bedroom_lights
-  mode: single
-- id: '1612674480083'
-  alias: (Testing) IKEA button press (left arrow)
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: sensor.sw_kidsroomremote_action
-    to: arrow_left_click
-  condition: []
-  action:
-  - service: light.turn_on
-    data:
-      rgb_color:
-      - 255
-      - 196
-      - 137
-      transition: 1
-    entity_id: light.kids_bedroom_lights
-  mode: single
-- id: '1612674611182'
-  alias: (Testing) IKEA button press (down arrow)
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: sensor.sw_kidsroomremote_action
-    to: brightness_down_click
-  condition: []
-  action:
-  - service: light.turn_on
-    data:
-      brightness_step_pct: -20
-      transition: 1
-    entity_id: light.kids_bedroom_lights
-  mode: single
-- id: '1612674710463'
-  alias: (Testing) IKEA button press (up arrow)
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: sensor.sw_kidsroomremote_action
-    to: brightness_up_click
-  condition: []
-  action:
-  - service: light.turn_on
-    data:
-      brightness_step_pct: 20
-      transition: 1
-    entity_id: light.kids_bedroom_lights
-  mode: single
 - id: '1613012241426'
   alias: 'Office: Air Purifier on with occupancy'
   description: ''
@@ -903,3 +808,47 @@
       topic: zigbee2mqtt/HVAC_GarageThermostat/set
       payload: '{"system_mode": "heat"}'
   mode: single
+- id: '1631637344914'
+  alias: 'Kids Bedroom: control lamp'
+  description: control Ikea bulb in kids room from 5 button remote
+  use_blueprint:
+    path: fich/zigbee2mqtt-ikea-5-button-remote-general-use.yaml
+    input:
+      remote: sensor.sw_kidsroomremote_action
+      button_on_off:
+      - service: light.toggle
+        target:
+          entity_id: light.blb_kidsroomlamp
+      button_brightness_up_short:
+      - service: light.turn_on
+        target:
+          entity_id: light.blb_kidsroomlamp
+        data:
+          transition: 1
+          brightness_step_pct: 10
+      button_brightness_down_short:
+      - service: light.turn_on
+        target:
+          entity_id: light.blb_kidsroomlamp
+        data:
+          transition: 1
+          brightness_step_pct: -10
+      button_right_short:
+      - service: light.turn_on
+        data:
+          hs_color:
+          - '{{ range(360) | random }}'
+          - '{{ range(80,101) | random }}'
+          brightness_pct: 100
+          transition: 1
+        entity_id: light.blb_kidsroomlamp
+      button_left_short:
+      - service: light.turn_on
+        target:
+          entity_id: light.blb_kidsroomlamp
+        data:
+          transition: 1
+          rgb_color:
+          - 255
+          - 196
+          - 137
