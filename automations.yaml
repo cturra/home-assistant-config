@@ -852,3 +852,31 @@
           - 255
           - 196
           - 137
+- id: '1631739108301'
+  alias: 'Garage Indoor: Notify when vehicle door left open at night'
+  description: notify chris' phone if the vehicle door is left open for 5 minutes
+    when the time is after 22:30.
+  trigger:
+  - platform: time_pattern
+    minutes: /10
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: switch.sw_garagedoorcontact
+      state: 'on'
+      for: 00:05:00
+    - condition: time
+      after: '22:30:00'
+  action:
+  - service: notify.mobile_app_turraphone
+    data:
+      message: Garage Vehicle Door has been left open
+      title: ❗🚪 Garage Vehicle Door Open
+      data:
+        push:
+          sound:
+            name: default
+            critical: 1
+            volume: 1
+  mode: single
