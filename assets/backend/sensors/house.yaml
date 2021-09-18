@@ -73,12 +73,26 @@
           off
         {% endif %}
 
-    # current_temperature (calculated by ecobee)
-    hvac_indoor_avg_temperature:
-      friendly_name: 'HVAC Indoor Average Temperature from Ecobee'
+    # current_temperature from ecobee
+    hvac_ecobee_indoor_avg_temperature:
+      friendly_name: 'Indoor Average Temperature from Ecobee'
       unit_of_measurement: '°C'
       device_class: temperature
       value_template: "{{ state_attr('climate.amazon', 'current_temperature') }}"
+
+    # current humidity from ecobee
+    hvac_ecobee_indoor_avg_humidity:
+      friendly_name: 'Indoor Average Humidity from Ecobee'
+      unit_of_measurement: '%'
+      device_class: humidity
+      value_template: "{{ state_attr('climate.amazon', 'current_humidity') | float(2) }}"
+
+    # current mean humidity from min_max calculation
+    indoor_mean_humidity:
+      friendly_name: 'Indoor Mean Humidity'
+      unit_of_measurement: '%'
+      device_class: humidity
+      value_template: "{{ states('sensor.indoor_mean_humidity_calculation') | int }}"
 
 
 ## cooling time on today
@@ -107,3 +121,16 @@
   type: time
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"
   end: "{{ now() }}"
+
+# mean indoor humidity from climate sensors
+- platform: min_max
+  name: 'Indoor Mean Humidity Calculation'
+  type: mean
+  round_digits: 0
+  entity_ids:
+    - sensor.snr_crawlspaceclimate_humidity
+    - sensor.snr_officeclimate_humidity
+    - sensor.hvac_ecobee_indoor_avg_humidity
+    - sensor.snr_mainbedroomclimate_humidity
+    - sensor.snr_kidsroomclimate_humidity
+    - sensor.snr_sparebedroomclimate_humidity

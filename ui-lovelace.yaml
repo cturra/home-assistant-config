@@ -1023,9 +1023,9 @@ views:
             state: true
             temperature: true
           sensors:
-            - entity: sensor.hvac_indoor_avg_temperature
+            - entity: sensor.hvac_ecobee_indoor_avg_temperature
               name: 'Temperature'
-            - entity: sensor.amazon_humidity
+            - entity: sensor.indoor_mean_humidity
               name: 'Humidity'
             - entity: sensor.hvac_time_on_today
               attribute: value
@@ -1139,8 +1139,8 @@ views:
               show_fill: false
               show_points: false
               color: '#eb3b5a'
-            # humidity at ecobee
-            - entity: sensor.amazon_humidity
+            # humidity (mean from all climate sensors)
+            - entity: sensor.indoor_mean_humidity
               name: Humidity
               show_fill: false
               state_adaptive_color: true
@@ -1211,7 +1211,7 @@ views:
             state: true
             temperature: true
           sensors:
-            - entity: sensor.hvac_garage_temperature
+            - entity: sensor.garage_mean_temperature_calculation
               name: 'Temperature'
             - entity: sensor.garage_humidity_int
               name: 'Humidity'
@@ -1228,14 +1228,14 @@ views:
           height: 60
           line_width: 1
           hours_to_show: 24
-          points_per_hour: 4
-          lower_bound_secondary: 20
-          upper_bound_secondary: 80
+          points_per_hour: 6
+          lower_bound_secondary: 30
+          upper_bound_secondary: 75
           group: true
           <<: *temp-graph-color_thresholds
           entities:
             # temerature
-            - entity: sensor.hvac_garage_temperature
+            - entity: sensor.garage_mean_temperature_calculation
               name: "Temperature"
               show_fill: false
               show_legend: false
