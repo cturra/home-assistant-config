@@ -814,7 +814,7 @@
   use_blueprint:
     path: fich/zigbee2mqtt-ikea-5-button-remote-general-use.yaml
     input:
-      remote: sensor.sw_kidsroomremote_action
+      remote: sensor.rmt_kidsroomremote_action
       button_on_off:
       - service: light.toggle
         target:

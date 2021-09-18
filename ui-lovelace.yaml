@@ -1,3 +1,126 @@
+anchors:
+  # headers
+  header-style: &header-style
+    card_mod:
+      style: |
+        ha-card {
+          padding-left: 5px;
+          border-radius: 0px;
+          font-size: 1.1em;
+        }
+        :host ha-markdown.no-header {
+          padding: 7px 2px 5px 5px;
+        }
+  # alerts
+  alert-style: &alert-style
+    card_mod:
+      style: |
+        :host {
+          color: #e63900;
+          --card-mod-icon-color: #e63900;
+          --secondary-text-color: #aa3300;
+        }
+  # entities
+  entities-style: &entities-style
+    card_mod:
+      style: |
+        :host .card-content {
+          padding: 0px 10px;
+        }
+  # thermostat
+  thermostat-style: &thermostat-style
+    card_mod:
+      style: |
+        ha-card {
+          --st-font-size-xl: 60px;
+          --st-font-size-m: 20px;
+          --st-font-size-sensors: 14px;
+          --st-spacing: 2px;
+        }
+  # climate button
+  climate-button-style: &climate-button-style
+    card_mod:
+      style: |
+        ha-card {
+          height: 50px;
+        }
+    styles:
+      name:
+        - font-size: 11px
+      state:
+        - font-size: 20px
+  # battery state
+  battery-state-style: &battery-state-style
+    card_mod:
+      style: |
+        :host .card-content {
+          padding: 5px 15px 5px 10px;
+        }
+        :host .entity-spacing {
+          margin: 0px 0;
+        }
+  # dimmer entity
+  dimmer-entity-style: &dimmer-entity-style
+    card_mod:
+      style: |
+        :host {
+          --card-mod-icon-color: var(--secondary-text-color)
+        }
+  # graph button-card style
+  graph-button-card-style: &graph-button-card-style
+    styles:
+      card:
+        - margin: -3px
+        - height: 60px
+      name:
+        - margin: 10px
+        - font-size: 11px
+      state:
+        - margin: -10px
+        - font-size: 20px
+  # battery state color_gradient
+  battery-state-color_gradient: &battery-state-color_gradient
+    color_gradient:
+      - "#a21c10" # red
+      - "#b3b300" # yellow
+      - "#24b300" # green
+  # mini-graph-card temperature color_thresholds
+  temp-graph-color_thresholds: &temp-graph-color_thresholds
+    color_thresholds:
+      - color: '#a55eea'
+        value: -6.9
+      - color: '#8854d0'
+        value: -3.9
+      - color: '#3867d6'
+        value: -1.2
+      - color: '#4b7bec'
+        value: 1.6
+      - color: '#2d98da'
+        value: 4.3
+      - color: '#45aaf2'
+        value: 7.1
+      - color: '#0fb9b1'
+        value: 9.9
+      - color: '#2bcbba'
+        value: 12.7
+      - color: '#20bf6b'
+        value: 15.5
+      - color: '#26de81'
+        value: 18.2
+      - color: '#fed330'
+        value: 21
+      - color: '#f7b731'
+        value: 23.8
+      - color: '#fd9644'
+        value: 26.6
+      - color: '#fa8231'
+        value: 29.3
+      - color: '#fc5c65'
+        value: 32.1
+      - color: '#eb3b5a'
+        value: 35.9
+
+
 title: Home
 custom_header:
   compact_mode: true
@@ -14,28 +137,15 @@ views:
         - type: markdown
           content: >
             ### Alerts
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         # fridge temperature above normal!
         - type: entity-filter
           entities:
             - entity: sensor.fridge_temperature_f1
               name: 'Kitchen: Fridge Temperature'
               icon: 'mdi:fridge-alert-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
           state_filter:
             - operator: ">"
               value: "7.5"
@@ -46,12 +156,8 @@ views:
             - entity: sensor.freezer_temperature_f1
               name: 'Crawlspace: Freezer Temperature'
               icon: 'mdi:fridge-alert-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
           state_filter:
             - operator: regex
               value: '^\-(([1][0-3]\.[0-9])|([0-9]\.[0-9]))$'
@@ -62,78 +168,48 @@ views:
           - entity: binary_sensor.snr_dishwasherleak_water_leak
             name: 'Dishwasher: Water Detected'
             icon: 'mdi:water-alert'
-            card_mod:
-              style: |
-                :host {
-                  color: #ff4444;
-                  --card-mod-icon-color: #ff4444;
-                }
+            secondary_info: last-changed
+            <<: *alert-style
           - entity: binary_sensor.snr_downtoiletleak_water_leak
             name: 'Downstairs Bathroom: Toilet Water Detected'
             icon: 'mdi:water-alert'
-            card_mod:
-              style: |
-                :host {
-                  color: #ff4444;
-                  --card-mod-icon-color: #ff4444;
-                }
+            secondary_info: last-changed
+            <<: *alert-style
           - entity: binary_sensor.snr_espressoleak_water_leak
             name: 'Espresso Machine: Water Detected'
             icon: 'mdi:water-alert'
-            card_mod:
-              style: |
-                :host {
-                  color: #ff4444;
-                  --card-mod-icon-color: #ff4444;
-                }
+            secondary_info: last-changed
+            <<: *alert-style
           - entity: binary_sensor.snr_ensuitebathtubleak_water_leak
             name: 'Ensuite Bathtub: Water Detected'
             icon: 'mdi:water-alert'
-            card_mod:
-              style: |
-                :host {
-                  color: #ff4444;
-                  --card-mod-icon-color: #ff4444;
-                }
+            secondary_info: last-changed
+            <<: *alert-style
           - entity: binary_sensor.snr_ensuitetoiletleak_water_leak
             name: 'Ensuite Toilet: Water Detected'
             icon: 'mdi:water-alert'
-            card_mod:
-              style: |
-                :host {
-                  color: #ff4444;
-                  --card-mod-icon-color: #ff4444;
-                }
+            secondary_info: last-changed
+            <<: *alert-style
           - entity: binary_sensor.snr_fridgeleak_water_leak
             name: 'Fridge: Water Detected'
             icon: 'mdi:water-alert'
-            card_mod:
-              style: |
-                :host {
-                  color: #ff4444;
-                  --card-mod-icon-color: #ff4444;
-                }
+            secondary_info: last-changed
+            <<: *alert-style
           - entity: binary_sensor.snr_hotwatertankleak_water_leak
             name: 'Hot Water Tank: Water Detected'
             icon: 'mdi:water-alert'
-            card_mod:
-              style: |
-                :host {
-                  color: #ff4444;
-                  --card-mod-icon-color: #ff4444;
-                }
+            secondary_info: last-changed
+            <<: *alert-style
           - entity: binary_sensor.snr_laundryleak_water_leak
             name: 'Laundry Water Detected'
             icon: 'mdi:water-alert'
-            card_mod:
-              style: |
-                :host {
-                  color: #ff4444;
-                  --card-mod-icon-color: #ff4444;
-                }
+            secondary_info: last-changed
+            <<: *alert-style
           - entity: binary_sensor.snr_upcommontoiletleak_water_leak
             name: 'Upstairs Bathroom: Toilet Water Detected'
             icon: 'mdi:water-alert'
+            secondary_info: last-changed
+            <<: *alert-style
           state_filter:
             - "on"
           show_empty: false
@@ -143,12 +219,8 @@ views:
             - entity: sensor.purpleair_description
               name: 'Outdoor Air Quality'
               icon: 'mdi:chemical-weapon'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
           state_filter:
             - operator: regex
               value: '(Unhealthy|Hazardous)'
@@ -160,359 +232,203 @@ views:
             - entity: sensor.snr_crawlspacedoorcontact_battery
               name: 'Crawlspace: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_garageclimate_battery
               name: 'Garage: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_kidsroomclimate_battery
               name: 'Kids Room: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_laundryclimate_battery
               name: 'Laundry: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_mainbedroomclimate_battery
               name: 'Main Bedroom: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_officeclimate_battery
               name: 'Office: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_outsideclimate_battery            
               name: 'Outside: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_shedclimate_battery
               name: 'Shed: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_sparebedroomclimate_battery
               name: 'Spare Bedroom: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             # contact sensors
             - entity: sensor.crawlspace_door_contact_battery
               name: 'Crawlspace: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_ensuitewindowcontact_battery
               name: 'Ensuite: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.srn_familyroomwindowfrontcontact_battery
               name: 'Family Room: Front Window Contact battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_familyroomwindowsideleftcontact_battery
               name: 'Family Room: Side/Left Window Contact battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_familyroomwindowsiderightcontact_battery
               name: 'Family Room: Side/Right Window Contact battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_frontdoorcontact_battery
               name: 'Front: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_garagedoorhousecontact_battery
               name: 'Garage: House Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_garagedoorsidecontact_battery
               name: 'Garage: Side Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_kitchenwindowcontact_battery
               name: 'Kitchen: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_laundryroomwindowcontact_battery
               name: 'Laundry: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_lockercontact_battery
               name:  'Crawlspace: Locker Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_mainbedroomwindowcontact_battery
               name: 'Main Bedroom: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_patiodoorcontact_battery
               name: 'Patio Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.family_room_front_window_contact_battery
               name: 'Family Room: Front Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_sheddoorcontact_battery
               name: 'Shed: Door Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_upcommonbathroomwindowcontact_battery
               name: 'Upstairs Bathroom: Window Contact Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             # leak sensors
             - entity: sensor.snr_downtoiletleak_battery
               name: 'Downstairs: Toilet Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_ensuitebathtubleak_battery
               name: 'Ensuite: Bathtub Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_ensuitetoiletleak_battery
               name: 'Ensuite: Toilet Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_dishwasherleak_battery
               name: 'Kitchen: Dishwasher Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_espressoleak_battery
               name: 'Kitchen: Espresso Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_fridgeleak_battery
               name: 'Kitchen: Fridge Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_hotwatertankleak_battery
               name: 'Crawspace: Hot Water Tank Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_laundryleak_battery
               name: 'Laundry: Washer Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_upcommontoiletleak_battery
               name: 'Upstairs Bathroom: Toilet Leak Sensor Battery'  
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             # motion sensors (aqara)
             - entity: sensor.snr_garageoutsidemotion_battery
               name: 'Garage: Outside Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_officemotion_battery
               name: 'Office: Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_porchfrontdoormotion_battery
               name: 'Porch: Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             # motion sensors (ikea)
             - entity: sensor.snr_shedoutsidemotion_battery
               name: 'Shed: Outdoor Motion Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
             # remote controls
             - entity: sensor.sw_kidsroomremote_battery
               name: 'Kids Room: Lamp Remote Battery'
               icon: 'mdi:battery-alert-variant-outline'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
           state_filter:
             - operator: regex
               # matches 0-24 (less than 25)
@@ -524,12 +440,8 @@ views:
             - entity: sensor.warnings
               name: 'Weather'
               icon: 'mdi:weather-cloudy-alert'
-              card_mod:
-                style: |
-                  :host {
-                    color: #ff4444;
-                    --card-mod-icon-color: #ff4444;
-                  }
+              secondary_info: last-changed
+              <<: *alert-style
           state_filter:
             - operator: regex
               # will match any string that contains at least one non-space character
@@ -542,16 +454,7 @@ views:
         - type: markdown
           content: >
             ### Active Devices
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: entity-filter
           card:
             show_header_toggle: false
@@ -587,11 +490,7 @@ views:
               name: 'Family Room: Wall'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
-              card_mod:
-                style: |
-                  :host {
-                    --card-mod-icon-color: var(--secondary-text-color)
-                  }
+              <<: *dimmer-entity-style
             # Stairwell
             - entity: light.stairwell_ceiling
               name: 'Stairwell'
@@ -601,11 +500,7 @@ views:
             - entity: light.kitchen_ceiling
               name: 'Kitchen: Ceiling'
               icon: 'mdi:lightbulb-outline'
-              card_mod:
-                style: |
-                  :host {
-                    --card-mod-icon-color: var(--secondary-text-color)
-                  }
+              <<: *dimmer-entity-style
               secondary_info: last-changed
             - entity: switch.sw_kitchensink
               name: 'Kitchen: Sink'
@@ -616,11 +511,7 @@ views:
               name: 'Kitchen: Table'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
-              card_mod:
-                style: |
-                  :host {
-                    --card-mod-icon-color: var(--secondary-text-color)
-                  }
+              <<: *dimmer-entity-style
             - entity: switch.plg_espressomachine
               name: 'Espresso Machine'
               icon: 'mdi:coffee-maker'
@@ -635,11 +526,7 @@ views:
               name: 'TV Room: Ceiling'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
-              card_mod:
-                style: |
-                  :host {
-                    --card-mod-icon-color: var(--secondary-text-color)
-                  }
+              <<: *dimmer-entity-style
             # Office
             - entity: switch.sw_office
               name: "Office: Ceiling"
@@ -655,11 +542,7 @@ views:
               name: 'Main Bedroom'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
-              card_mod:
-                style: |
-                  :host {
-                    --card-mod-icon-color: var(--secondary-text-color)
-                  }
+              <<: *dimmer-entity-style
             #- entity: switch.plg_mainbedroom1
             #  name: 'Main Bedroom: Heater'
             #  icon: 'mdi:radiator'
@@ -670,11 +553,7 @@ views:
               name: 'Kids Bedroom: Ceiling'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
-              card_mod:
-                style: |
-                  :host {
-                    --card-mod-icon-color: var(--secondary-text-color)
-                  }
+              <<: *dimmer-entity-style
             - entity: light.blb_kidsroomlamp
               name: "Kids Bedroom: Lamp"
               icon: 'mdi:lamp' #lamp-outline not working?
@@ -748,16 +627,7 @@ views:
         - type: markdown
           content: >
             ### Doors & Windows
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: entity-filter
           card:
             show_header_toggle: false
@@ -850,25 +720,12 @@ views:
         - type: markdown
           content: >
             ### Family Room
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
                 - entity: switch.sw_familyroomceiling
                   name: Ceiling
@@ -883,11 +740,7 @@ views:
                   state_color: true
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
                 - entity: switch.plg_familyroomcabinet
                   name: Cabinet
@@ -904,25 +757,12 @@ views:
         - type: markdown
           content: >
             ### Kitchen
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
                 - entity: light.kitchen_ceiling
                   name: "Ceiling"
@@ -937,11 +777,7 @@ views:
                   state_color: true
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
                 - entity: switch.sw_kitchensink
                   name: Sink
@@ -961,22 +797,9 @@ views:
         - type: markdown
           content: >
             ### TV Room
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: entities
-          card_mod:
-            style: |
-              :host .card-content {
-                padding: 0px 10px;
-              }
+          <<: *entities-style
           entities:
             - entity: light.tv_room_ceiling
               name: 'Ceiling'
@@ -989,35 +812,18 @@ views:
         - type: markdown
           content: >
             ### Office
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
               - entity: switch.sw_office
                 name: 'Ceiling'
                 icon: 'mdi:lightbulb-outline'
                 state_color: true
             - type: entities
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
               - entity: switch.plg_officeairpurifier
                 name: 'Air Purifier'
@@ -1030,25 +836,12 @@ views:
         - type: markdown
           content: >
             ### Main Bedroom
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
                 - entity: light.main_bedroom_ceiling
                   name: 'Ceiling'
@@ -1063,25 +856,12 @@ views:
         - type: markdown
           content: >
             ### Kids Bedroom
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
                 - entity: light.kids_bedroom_ceiling
                   name: 'Ceiling'
@@ -1089,11 +869,7 @@ views:
                   state_color: true
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
                 - entity: light.blb_kidsroomlamp
                   name: 'Lamp'
@@ -1106,25 +882,12 @@ views:
         - type: markdown
           content: >
             ### Laundry
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
                 - entity: switch.plg_zbrpt_laundryroom
                   name: 'Dehumidifier'
@@ -1139,16 +902,7 @@ views:
         - type: markdown
           content: >
             ### Garage
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: horizontal-stack
           cards:
             # vehicle door opener
@@ -1166,11 +920,7 @@ views:
             # switches
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
                 # ceiling light
                 - entity: switch.sw_garageceilingmain
@@ -1194,25 +944,12 @@ views:
         - type: markdown
           content: >
             ### Outdoor Front
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
                 - entity: switch.sw_driveway
                   name: Driveway
@@ -1224,11 +961,7 @@ views:
                   state_color: true
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px;
-                  }
+              <<: *entities-style
               entities:
                 - entity: switch.sw_porch
                   name: Porch
@@ -1241,25 +974,12 @@ views:
         - type: markdown
           content: >
             ### Shed
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px 10px 10px;
-                  }
+              <<: *entities-style
               entities:
                 # ventilation fan
                 - entity: switch.sw_shedfan
@@ -1268,11 +988,7 @@ views:
                   state_color: true
             - type: entities
               show_header_toggle: false
-              card_mod:
-                style: |
-                  :host .card-content {
-                    padding: 0px 10px 10px 10px;
-                  }
+              <<: *entities-style
               entities:
                 # flood light
                 - entity: switch.sw_shedflood
@@ -1293,28 +1009,12 @@ views:
         - type: markdown
           content: >
             ### House
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
 
         ## HOUSE THERMOSTAT 
         - type: 'custom:simple-thermostat'
           entity: climate.amazon
-          card_mod:
-            style: |
-              ha-card {
-                --st-font-size-xl: 60px;
-                --st-font-size-m: 20px;
-                --st-font-size-sensors: 14px;
-                --st-spacing: 2px;
-              }
+          <<: *thermostat-style
           layout:
             step: row
           header: false
@@ -1341,13 +1041,7 @@ views:
             name: Upstairs Hall
             show_state: true
             show_icon: false
-            card_mod:
-              style: "ha-card { height: 50px; }"
-            styles:
-              name:
-                - font-size: 11px
-              state:
-                - font-size: 20px
+            <<: *climate-button-style
 
           # main bedroom
           - type: 'custom:button-card'
@@ -1355,13 +1049,7 @@ views:
             name: 'Main Bedroom'
             show_state: true
             show_icon: false
-            card_mod:
-              style: "ha-card { height: 50px; }"
-            styles:
-              name:
-                - font-size: 11px
-              state:
-                - font-size: 20px
+            <<: *climate-button-style
 
           # kids room
           - type: 'custom:button-card'
@@ -1369,13 +1057,7 @@ views:
             name: 'Kids Bedroom'
             show_state: true
             show_icon: false
-            card_mod:
-              style: "ha-card { height: 50px; }"
-            styles:
-              name:
-                - font-size: 11px
-              state:
-                - font-size: 20px
+            <<: *climate-button-style
 
           # spare bedroom
           - type: 'custom:button-card'
@@ -1383,13 +1065,7 @@ views:
             name: Spare Bedroom
             show_state: true
             show_icon: false
-            card_mod:
-              style: "ha-card { height: 50px; }"
-            styles:
-              name:
-                - font-size: 11px
-              state:
-                - font-size: 20px
+            <<: *climate-button-style
 
         # TEMPERATURE BUTTONS
         # row 2
@@ -1401,13 +1077,7 @@ views:
             name: 'Dining Room'
             show_state: true
             show_icon: false
-            card_mod:
-              style: "ha-card { height: 60px; }"
-            styles:
-              name:
-                - font-size: 11px
-              state:
-                - font-size: 20px
+            <<: *climate-button-style
 
           # family room
           - type: 'custom:button-card'
@@ -1415,13 +1085,7 @@ views:
             name: Family Room
             show_state: true
             show_icon: false
-            card_mod:
-              style: "ha-card { height: 60px; }"
-            styles:
-              name:
-                - font-size: 11px
-              state:
-                - font-size: 20px
+            <<: *climate-button-style
 
           # office
           - type: 'custom:button-card'
@@ -1429,13 +1093,7 @@ views:
             name: Office
             show_state: true
             show_icon: false
-            card_mod:
-              style: "ha-card { height: 60px; }"
-            styles:
-              name:
-                - font-size: 11px
-              state:
-                - font-size: 20px
+            <<: *climate-button-style
 
           # crawlspace
           - type: 'custom:button-card'
@@ -1443,13 +1101,7 @@ views:
             name: 'Crawlspace'
             show_state: true
             show_icon: false
-            card_mod:
-              style: "ha-card { height: 60px; }"
-            styles:
-              name:
-                - font-size: 11px
-              state:
-                - font-size: 20px
+            <<: *climate-button-style
 
         # INDOOR TEMPERATURE GRAPHS
         - type: 'custom:mini-graph-card'
@@ -1545,28 +1197,12 @@ views:
         - type: markdown
           content: >
             ### Garage
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
 
         ## GARAGE THERMOSTAT 
         - type: 'custom:simple-thermostat'
           entity: climate.hvac_garagethermostat
-          card_mod:
-            style: |
-              ha-card {
-                --st-font-size-xl: 60px;
-                --st-font-size-m: 20px;
-                --st-font-size-sensors: 14px;
-                --st-spacing: 2px;
-              }
+          <<: *thermostat-style
           layout:
             step: row
           header: false
@@ -1596,39 +1232,7 @@ views:
           lower_bound_secondary: 20
           upper_bound_secondary: 80
           group: true
-          color_thresholds:
-            - color: '#a55eea'
-              value: -6.9
-            - color: '#8854d0'
-              value: -3.9
-            - color: '#3867d6'
-              value: -1.2
-            - color: '#4b7bec'
-              value: 1.6
-            - color: '#2d98da'
-              value: 4.3
-            - color: '#45aaf2'
-              value: 7.1
-            - color: '#0fb9b1'
-              value: 9.9
-            - color: '#2bcbba'
-              value: 12.7
-            - color: '#20bf6b'
-              value: 15.5
-            - color: '#26de81'
-              value: 18.2
-            - color: '#fed330'
-              value: 21
-            - color: '#f7b731'
-              value: 23.8
-            - color: '#fd9644'
-              value: 26.6
-            - color: '#fa8231'
-              value: 29.3
-            - color: '#fc5c65'
-              value: 32.1
-            - color: '#eb3b5a'
-              value: 35.9
+          <<: *temp-graph-color_thresholds
           entities:
             # temerature
             - entity: sensor.hvac_garage_temperature
@@ -1695,16 +1299,7 @@ views:
         - type: markdown
           content: >
             ### Shed
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
         - type: horizontal-stack
           cards:
           # shed temperature
@@ -1713,32 +1308,14 @@ views:
             name: Temperature
             show_state: true
             show_icon: false
-            styles:
-              card:
-                - margin: -3px
-                - height: 60px
-              name:
-                - margin: 10px
-                - font-size: 11px
-              state:
-                - margin: -10px
-                - font-size: 22px
+            <<: *graph-button-card-style
           # shed humidity
           - type: 'custom:button-card'
             entity: sensor.shed_humidity_int
             name: Humidity
             show_state: true
             show_icon: false
-            styles:
-              card:
-                - margin: -3px
-                - height: 60px
-              name:
-                - margin: 10px
-                - font-size: 11px
-              state:
-                - margin: -10px
-                - font-size: 22px
+            <<: *graph-button-card-style
 
         # SHED TEMPERATURE GRAPH CARD
         - type: 'custom:mini-graph-card'
@@ -1756,39 +1333,7 @@ views:
           lower_bound_secondary: 20
           upper_bound_secondary: 80
           group: true
-          color_thresholds:
-            - color: '#a55eea'
-              value: -6.9
-            - color: '#8854d0'
-              value: -3.9
-            - color: '#3867d6'
-              value: -1.2
-            - color: '#4b7bec'
-              value: 1.6
-            - color: '#2d98da'
-              value: 4.3
-            - color: '#45aaf2'
-              value: 7.1
-            - color: '#0fb9b1'
-              value: 9.9
-            - color: '#2bcbba'
-              value: 12.7
-            - color: '#20bf6b'
-              value: 15.5
-            - color: '#26de81'
-              value: 18.2
-            - color: '#fed330'
-              value: 21
-            - color: '#f7b731'
-              value: 23.8
-            - color: '#fd9644'
-              value: 26.6
-            - color: '#fa8231'
-              value: 29.3
-            - color: '#fc5c65'
-              value: 32.1
-            - color: '#eb3b5a'
-              value: 35.9
+          <<: *temp-graph-color_thresholds
           entities:
             # temerature
             - entity: sensor.shed_temperature_f1
@@ -1812,16 +1357,8 @@ views:
         - type: markdown
           content: >
             ### Outside
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 7px 2px 5px 5px;
-              }
+          <<: *header-style
+
         # WEATHER
         - type: 'custom:simple-weather-card'
           entity: weather.pitt_meadows
@@ -1854,16 +1391,7 @@ views:
             name: ' '
             show_state: true
             show_icon: false
-            styles:
-              card:
-                - margin: -3px
-                - height: 60px
-              name:
-                - margin: 10px
-                - font-size: 11px
-              state:
-                - margin: -10px
-                - font-size: 20px
+            <<: *graph-button-card-style
           # blank card to add spacing
           - type: 'custom:button-card'
             color_type: blank
@@ -1876,32 +1404,14 @@ views:
             name: 'PM 2.5'
             show_state: true
             show_icon: false
-            styles:
-              card:
-                - margin: -3px
-                - height: 60px
-              name:
-                - margin: 10px
-                - font-size: 11px
-              state:
-                - margin: -10px
-                - font-size: 20px
+            <<: *graph-button-card-style
           # pm 10
           - type: 'custom:button-card'
             entity: sensor.purpleair_pm10
             name: 'PM 10'
             show_state: true
             show_icon: false
-            styles:
-              card:
-                - margin: -3px
-                - height: 60px
-              name:
-                - margin: 10px
-                - font-size: 11px
-              state:
-                - margin: -10px
-                - font-size: 20px
+            <<: *graph-button-card-style
         - type: 'custom:mini-graph-card'
           entities:
             - sensor.purpleair
@@ -1948,29 +1458,10 @@ views:
         - type: markdown
           content: >
             ### Climate Sensors
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 10px 10px 0px 10px;
-              }
+          <<: *header-style
         - type: 'custom:battery-state-card'
-          color_gradient:
-            - "#a21c10" # red
-            - "#b3b300" # yellow
-            - "#24b300" # green
-          card_mod:
-            style: |
-              :host .card-content {
-                padding: 5px 15px 5px 10px;
-              }
-              :host .entity-spacing {
-                margin: 0px 0;
-              }
+          <<: *battery-state-color_gradient
+          <<: *battery-state-style
           entities:
             # crawlspace
             - entity: sensor.snr_crawlspaceclimate_battery
@@ -2015,29 +1506,10 @@ views:
         - type: markdown
           content: >
             ### Contact Sensors
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 10px 10px 0px 10px;
-              }
+          <<: *header-style
         - type: 'custom:battery-state-card'
-          color_gradient:
-            - "#a21c10" # red
-            - "#b3b300" # yellow
-            - "#24b300" # green
-          card_mod:
-            style: |
-              :host .card-content {
-                padding: 5px 15px 5px 10px;
-              }
-              :host .entity-spacing {
-                margin: 0px 0;
-              }
+          <<: *battery-state-color_gradient
+          <<: *battery-state-style
           entities:
             # crawlspace door
             - entity: sensor.snr_crawlspacedoorcontact_battery
@@ -2106,29 +1578,10 @@ views:
         - type: markdown
           content: >
             ### Leak Sensors
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 10px 10px 0px 10px;
-              }
+          <<: *header-style
         - type: 'custom:battery-state-card'
-          color_gradient:
-            - "#a21c10" # red
-            - "#b3b300" # yellow
-            - "#24b300" # green
-          card_mod:
-            style: |
-              :host .card-content {
-                padding: 5px 15px 5px 10px;
-              }
-              :host .entity-spacing {
-                margin: 0px 0;
-              }
+          <<: *battery-state-color_gradient
+          <<: *battery-state-style
           entities:
             # dishwasher
             - entity: sensor.snr_dishwasherleak_battery
@@ -2173,29 +1626,10 @@ views:
         - type: markdown
           content: >
             ### Motion Sensors
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 10px 10px 0px 10px;
-              }
+          <<: *header-style
         - type: 'custom:battery-state-card'
-          color_gradient:
-            - "#a21c10" # red
-            - "#b3b300" # yellow
-            - "#24b300" # green
-          card_mod:
-            style: |
-              :host .card-content {
-                padding: 5px 15px 5px 10px;
-              }
-              :host .entity-spacing {
-                margin: 0px 0;
-              }
+          <<: *battery-state-color_gradient
+          <<: *battery-state-style
           entities:
             # garage outdoor :: side
             - entity: sensor.snr_garageoutsidemotion_battery
@@ -2220,32 +1654,16 @@ views:
         - type: markdown
           content: >
             ### Remote Controls
-          card_mod:
-            style: |
-              ha-card {
-                padding-left: 5px;
-                border-radius: 0px;
-                font-size: 1.1em;
-              }
-              :host ha-markdown.no-header {
-                padding: 10px 10px 0px 10px;
-              }
+          <<: *header-style
         - type: 'custom:battery-state-card'
           color_gradient:
             - "#a21c10" # red
             - "#b3b300" # yellow
             - "#24b300" # green
-          card_mod:
-            style: |
-              :host .card-content {
-                padding: 5px 15px 5px 10px;
-              }
-              :host .entity-spacing {
-                margin: 0px 0;
-              }
+          <<: *battery-state-style
           entities:
             # kids room remote
-            - entity: sensor.sw_kidsroomremote_battery
+            - entity: sensor.rmt_kidsroomremote_battery
               name: 'Kids Room Lamp'
               tap_action: more-info
 
@@ -2262,15 +1680,7 @@ views:
           - type: markdown
             content: >
               ## Sonos
-            card_mod:
-              style: |
-                ha-card {
-                  padding-left: 5px;
-                  border-radius: 0px;
-                }
-                :host ha-markdown.no-header {
-                  padding: 7px 2px 5px 5px;
-                }
+            <<: *header-style
           - type: entities
             show_header_toggle: false
             entities:
@@ -2285,15 +1695,7 @@ views:
           - type: markdown
             content: >
               ## Chromecast
-            card_mod:
-              style: |
-                ha-card {
-                  padding-left: 5px;
-                  border-radius: 0px;
-                }
-                :host ha-markdown.no-header {
-                  padding: 7px 2px 5px 5px;
-                }
+            <<: *header-style
                 
           - type: entities
             show_header_toggle: false
