@@ -1,8 +1,11 @@
-## sensor templates from ecobee devices
+## HOUSE
+
+# sensor templates from ecobee devices
 # state: used for alerts dashboard
 # bool:  used to annotate climate graphs
 - platform: template
   sensors:
+    # -- ecobee --
     # cooling on/off
     hvac_cooling_state:
       friendly_name: 'HVAC Action Cooling state'

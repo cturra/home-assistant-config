@@ -3,3 +3,4 @@
     name: Driveway Lights
     entities:
       - light.blb_driveway1
+      - light.blb_kidsroom2

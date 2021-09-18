@@ -1,0 +1,15 @@
+## SHED
+
+# custom sensors templates
+- platform: template
+  sensors:
+    # -- xiaomi aqara --
+    # climate sensor
+    shed_temperature_f1:
+      friendly_name: 'Shed Temperature 1 decimal'
+      unit_of_measurement: '°C'
+      value_template: '{{ states("sensor.snr_shedclimate_temperature") | round(1) }}'   
+    shed_humidity_int:
+      friendly_name: 'Shed Humidity integer'
+      unit_of_measurement: '%'
+      value_template: '{{ states("sensor.snr_shedclimate_humidity") | int }}'

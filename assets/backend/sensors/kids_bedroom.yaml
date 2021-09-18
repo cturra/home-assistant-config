@@ -1,0 +1,11 @@
+## KIDS BEDROOM
+
+# custom sensors templates
+- platform: template
+  sensors:
+    # -- xiaomi aqara --
+    # climate sensor
+    kids_room_temperature_f1:
+      friendly_name: 'Kids Room Temperature 1 decimal'
+      unit_of_measurement: '°C'
+      value_template: '{{ states("sensor.snr_kidsroomclimate_temperature") | round(1) }}'

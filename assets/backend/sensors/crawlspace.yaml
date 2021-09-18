@@ -1,0 +1,26 @@
+## CRAWLSPACE
+
+# custom sensors templates
+- platform: template
+  sensors:
+    # -- xiaomi aqara --
+    # crawlspace
+    crawlspace_temperature_f1:
+      friendly_name: 'Crawlspace Temperature 1 decimal'
+      unit_of_measurement: '°C'
+      value_template: '{{ states("sensor.snr_crawlspaceclimate_temperature") | round(1) }}'      
+
+    # -- sensor push --
+    # freezer
+    freezer_temperature_f1:
+      friendly_name: 'Freezer Temperature 1 decimal'
+      unit_of_measurement: '°C'
+      value_template: '{{ states("sensor.freezer_temperature") | round(1) }}'
+    freezer_humidity_int:
+      friendly_name: 'Freezer Humidity without decimal'
+      unit_of_measurement: '%'
+      value_template: '{{ states("sensor.freezer_humidity") | int }}'
+    freezer_sensor_battery_voltage:
+      friendly_name: 'freezer SensorPush battery voltage'
+      unit_of_measurement: 'V'
+      value_template: '{{ state_attr("sensor.freezer_humidity", "battery_voltage") }}'
