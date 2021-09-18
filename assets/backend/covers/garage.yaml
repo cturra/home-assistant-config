@@ -1,5 +1,7 @@
-- platform: template
+## GARAGE
 
+# custom sensors templates
+- platform: template
   covers:
     # garage vehicle door opener
     garage_door:

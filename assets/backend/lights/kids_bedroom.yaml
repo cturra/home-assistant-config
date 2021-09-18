@@ -1,32 +1,34 @@
-  ## group light bulbs
-  - platform: group
-    name: Kids Bedroom Lights
-    entities:
-      - light.blb_kidsroomlamp
+## KIDS BEDROOM
+
+# group light bulbs
+- platform: group
+  name: Kids Bedroom Lights
+  entities:
+    - light.blb_kidsroomlamp
 
 
-  ## ceiling dimmer switch
-  - platform: mqtt
-    name: "Kids Bedroom Ceiling"
-    state_topic: "stat/SW_KidsBedroomCeiling/POWER"
-    command_topic: "cmnd/SW_KidsBedroomCeiling/POWER"
-    availability_topic: "tele/SW_KidsBedroomCeiling/LWT"
-    brightness_state_topic: "stat/SW_KidsBedroomCeiling/RESULT"
-    brightness_command_topic: "cmnd/SW_KidsBedroomCeiling/Dimmer"
-    brightness_scale: 100
-    brightness_value_template: >
-      {% if value_json.Dimmer is defined %}
-        {{ value_json.Dimmer }}
+# ceiling dimmer switch
+- platform: mqtt
+  name: "Kids Bedroom Ceiling"
+  state_topic: "stat/SW_KidsBedroomCeiling/POWER"
+  command_topic: "cmnd/SW_KidsBedroomCeiling/POWER"
+  availability_topic: "tele/SW_KidsBedroomCeiling/LWT"
+  brightness_state_topic: "stat/SW_KidsBedroomCeiling/RESULT"
+  brightness_command_topic: "cmnd/SW_KidsBedroomCeiling/Dimmer"
+  brightness_scale: 100
+  brightness_value_template: >
+    {% if value_json.Dimmer is defined %}
+      {{ value_json.Dimmer }}
+    {% else %}
+      {% if state_attr('light.kids_bedroom_ceiling','brightness') == none %}
+        100
       {% else %}
-        {% if state_attr('light.kids_bedroom_ceiling','brightness') == none %}
-          100
-        {% else %}
-          {{ state_attr('light.kids_bedroom_ceiling','brightness') / 255 * 100 }}
-        {% endif %}
+        {{ state_attr('light.kids_bedroom_ceiling','brightness') / 255 * 100 }}
       {% endif %}
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
+    {% endif %}
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  retain: false

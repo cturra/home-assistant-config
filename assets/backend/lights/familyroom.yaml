@@ -1,39 +1,41 @@
-  ## stairwell ceiling light (chandelier)
-  # needed for EVENT command_topic due to multi-replay (3 ways switch)
-  - platform: mqtt
-    name: "Stairwell Ceiling"
-    state_topic: "stat/SW_StairwellCeiling/POWER1"
-    command_topic: "cmnd/SW_StairwellCeiling/EVENT"
-    availability_topic: "tele/SW_StairwellCeiling/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
+## FAMILY ROOM
 
-  ## fireplace scones dimmer
-  - platform: mqtt
-    name: "Family Room Wall"
-    state_topic: "stat/SW_FamilyRoomWall/POWER"
-    command_topic: "cmnd/SW_FamilyRoomWall/POWER"
-    availability_topic: "tele/SW_FamilyRoomWall/LWT"
-    brightness_state_topic: "stat/SW_FamilyRoomWall/RESULT"
-    brightness_command_topic: "cmnd/SW_FamilyRoomWall/Dimmer"
-    brightness_scale: 100
-    brightness_value_template: >
-      {% if value_json.Dimmer is defined %}
-        {{ value_json.Dimmer }}
+# stairwell ceiling light (chandelier)
+# *needed for EVENT command_topic due to multi-replay (3 ways switch)
+- platform: mqtt
+  name: "Stairwell Ceiling"
+  state_topic: "stat/SW_StairwellCeiling/POWER1"
+  command_topic: "cmnd/SW_StairwellCeiling/EVENT"
+  availability_topic: "tele/SW_StairwellCeiling/LWT"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  retain: false
+
+# fireplace scones dimmer
+- platform: mqtt
+  name: "Family Room Wall"
+  state_topic: "stat/SW_FamilyRoomWall/POWER"
+  command_topic: "cmnd/SW_FamilyRoomWall/POWER"
+  availability_topic: "tele/SW_FamilyRoomWall/LWT"
+  brightness_state_topic: "stat/SW_FamilyRoomWall/RESULT"
+  brightness_command_topic: "cmnd/SW_FamilyRoomWall/Dimmer"
+  brightness_scale: 100
+  brightness_value_template: >
+    {% if value_json.Dimmer is defined %}
+      {{ value_json.Dimmer }}
+    {% else %}
+      {% if state_attr('light.family_room_wall','brightness') == none %}
+        100
       {% else %}
-        {% if state_attr('light.family_room_wall','brightness') == none %}
-          100
-        {% else %}
-          {{ state_attr('light.family_room_wall','brightness') / 255 * 100 }}
-        {% endif %}
+        {{ state_attr('light.family_room_wall','brightness') / 255 * 100 }}
       {% endif %}
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
+    {% endif %}
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  retain: false

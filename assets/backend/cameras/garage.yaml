@@ -1,0 +1,6 @@
+## GARAGE
+
+# wyze cam (v2) garage
+- platform: ffmpeg
+  name: amzn-cam04
+  input: !secret cam04_rtsp_url

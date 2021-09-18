@@ -1,40 +1,42 @@
-  ## dining room table dimmer
-  - platform: mqtt
-    name: "Dining Room Ceiling"
-    state_topic: "stat/SW_DiningRoom/POWER"
-    command_topic: "cmnd/SW_DiningRoom/POWER"
-    availability_topic: "tele/SW_DiningRoom/LWT"
-    brightness_state_topic: "stat/SW_DiningRoom/RESULT"
-    brightness_command_topic: "cmnd/SW_DiningRoom/Dimmer"
-    brightness_scale: 100
-    brightness_value_template: >
-      {% if value_json.Dimmer is defined %}
-        {{ value_json.Dimmer }}
+## KITCHEN
+
+# dining room table dimmer
+- platform: mqtt
+  name: "Dining Room Ceiling"
+  state_topic: "stat/SW_DiningRoom/POWER"
+  command_topic: "cmnd/SW_DiningRoom/POWER"
+  availability_topic: "tele/SW_DiningRoom/LWT"
+  brightness_state_topic: "stat/SW_DiningRoom/RESULT"
+  brightness_command_topic: "cmnd/SW_DiningRoom/Dimmer"
+  brightness_scale: 100
+  brightness_value_template: >
+    {% if value_json.Dimmer is defined %}
+      {{ value_json.Dimmer }}
+    {% else %}
+      {% if state_attr('light.dining_room_ceiling','brightness') == none %}
+        100
       {% else %}
-        {% if state_attr('light.dining_room_ceiling','brightness') == none %}
-          100
-        {% else %}
-          {{ state_attr('light.dining_room_ceiling','brightness') / 255 * 100 }}
-        {% endif %}
+        {{ state_attr('light.dining_room_ceiling','brightness') / 255 * 100 }}
       {% endif %}
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
+    {% endif %}
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  retain: false
 
 
-  ## kitchen ceiling lights
-  # needed for EVENT command_topic due to multi-replay (3 ways switch)
-  - platform: mqtt
-    name: "Kitchen Ceiling"
-    state_topic: "stat/SW_KitchenCeiling/POWER1"
-    command_topic: "cmnd/SW_KitchenCeiling/EVENT"
-    availability_topic: "tele/SW_KitchenCeiling/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
+# kitchen ceiling lights
+# *needed for EVENT command_topic due to multi-replay (3 ways switch)
+- platform: mqtt
+  name: "Kitchen Ceiling"
+  state_topic: "stat/SW_KitchenCeiling/POWER1"
+  command_topic: "cmnd/SW_KitchenCeiling/EVENT"
+  availability_topic: "tele/SW_KitchenCeiling/LWT"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  retain: false
