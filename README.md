@@ -27,11 +27,11 @@ For now, please enjoy, and feedback always welcome!
 | Motion Sensor | Xiaomi | RTCGQ11LM | 3 | Zigbee2MQTT |
 | Plug | Gosund | WP2 | 1 | Tasmota |
 | Plug | Gosund | WP5 | 3 | Tasmota |
-| Plug | Sonoff | S31 | 3 | Tasmota |
+| Plug | Sonoff | S31 | 4 | Tasmota |
 | Plug | Sonoff | S31ZB | 3 |  Zigbee2MQTT |
 | Thermostat | Ecobee | Ecobee3 | 1 | HA :: Ecobee |
 | Thermostat | Sinopé | TH1400ZB | 1 | Zigbee2MQTT |
-| Remote | Ikea | E1810 | 1 | Zigbee2MQTT |
+| Remote Control | Ikea | E1810 | 1 | Zigbee2MQTT |
 | Switch | Sonoff | Mini R1 | 3 | Tasmota |
 | Switch | Sonoff | SV | 1 | Tasmota |
 | Switch | Treatlife | SS02S | 9 | Tasmota |

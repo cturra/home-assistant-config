@@ -9,3 +9,15 @@
       friendly_name: 'Kids Room Temperature 1 decimal'
       unit_of_measurement: '°C'
       value_template: '{{ states("sensor.snr_kidsroomclimate_temperature") | round(1) }}'
+    
+    # -- sonoff --
+    # plug
+    kids_room_heater_state:
+      friendly_name: 'Kids Room Heater state'
+      # power reported in watts
+      value_template: >-
+        {% if (states('sensor.kids_room_heater_plug_energy_power') | int) > 10 %}
+          On
+        {% else %}
+          Off
+        {% endif %}

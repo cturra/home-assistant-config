@@ -160,6 +160,7 @@ views:
               <<: *alert-style
           state_filter:
             - operator: regex
+              # matches number greater than -14°C
               value: '^\-(([1][0-3]\.[0-9])|([0-9]\.[0-9]))$'
           show_empty: false
         # water leak!!
@@ -223,6 +224,7 @@ views:
               <<: *alert-style
           state_filter:
             - operator: regex
+              # matches Unhealthy OR Hazardous
               value: '(Unhealthy|Hazardous)'
           show_empty: false
         # battery level low (< 25%)
@@ -444,7 +446,7 @@ views:
               <<: *alert-style
           state_filter:
             - operator: regex
-              # will match any string that contains at least one non-space character
+              # matches any string that contains at least one non-space character
               value: '^(?!\s*$).+'
           show_empty: false
 
@@ -555,8 +557,12 @@ views:
               secondary_info: last-changed
               <<: *dimmer-entity-style
             - entity: light.blb_kidsroomlamp
-              name: "Kids Bedroom: Lamp"
+              name: 'Kids Bedroom: Lamp'
               icon: 'mdi:lamp' #lamp-outline not working?
+              secondary_info: last-changed
+            - entity: sensor.kids_room_heater_state
+              name: 'Kids Bedroom: Heater'
+              icon: 'mdi:radiator'
               secondary_info: last-changed
             # Laundry
             - entity: switch.plg_zbrpt_laundryroom
@@ -615,10 +621,9 @@ views:
               name: 'Family Room: Play:5'
               icon: 'mdi:speaker'
           state_filter:
-            - operator: '=='
-              value: 'on'
-            - operator: '=='
-              value: 'playing'
+            - operator: regex
+              # matches On/on OR playing
+              value: '^([Oo]n|playing)$'
           show_empty: false
 
       # doors and windows active
@@ -700,10 +705,9 @@ views:
               name: 'Upstairs Bathroom: Window'
               secondary_info: last-changed
           state_filter:
-            - operator: '=='
-              value: 'on'
-            - operator: '=='
-              value: 'Open'
+            - operator: regex
+              # matches on OR Open
+              value: '^(on|Open)$'
           show_empty: false
 
 
@@ -1179,7 +1183,7 @@ views:
               show_line: false
               show_points: false
             # hvac fan on/off
-            - entity: sensor.hvac_fan_bool
+            - entity: sensor.hvac_fan_state
               name: Fan
               color: '#cccccc'
               show_legend: true
@@ -1228,7 +1232,7 @@ views:
           height: 60
           line_width: 1
           hours_to_show: 24
-          points_per_hour: 6
+          points_per_hour: 4
           lower_bound_secondary: 30
           upper_bound_secondary: 75
           group: true
@@ -1427,6 +1431,7 @@ views:
               labels_secondary: hover
               name: false
               state: false
+          height: 60
           line_width: 1
           points_per_hour: 6
           hours_to_show: 24
