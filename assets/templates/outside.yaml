@@ -1,0 +1,58 @@
+## OUTSIDE
+
+- sensor:
+    # -- purple air --
+    # aqi description
+    - name: 'PurpleAir AQI Description'
+      unique_id: purpleair_aqi_description
+      state: >
+        {% if (states('sensor.purpleair')|float) >= 401.0 %}
+          Hazardous
+        {% elif (states('sensor.purpleair')|float) >= 301.0 %}
+          Hazardous
+        {% elif (states('sensor.purpleair')|float) >= 201.0 %}
+          Very Unhealthy
+        {% elif (states('sensor.purpleair')|float) >= 151.0 %}
+          Unhealthy
+        {% elif (states('sensor.purpleair')|float) >= 101.0 %}
+          Unhealthy for Sensitive Groups
+        {% elif (states('sensor.purpleair')|float) >= 51.0 %}
+          Moderate
+        {% elif (states('sensor.purpleair')|float) >= 0.0 %}
+          Good
+        {% else %}
+          Undefined
+        {% endif %}
+
+    # fine particulate matter 2.5
+    - name: 'PurpleAir PM 2.5'
+      unique_id: purpleair_pm25
+      device_class: pm25
+      unit_of_measurement: "μg/m³"
+      state: >
+        {{ state_attr('sensor.purpleair','results')[0]['PM2_5Value'] | round(1) }}
+
+    # fine particulate matter 10
+    - name: 'PurpleAir PM 10'
+      unique_id: purpleair_pm10
+      device_class: pm10
+      unit_of_measurement: "μg/m³"
+      state: >
+        {{ state_attr('sensor.purpleair','results')[0]['pm10_0_atm'] | round(1) }}
+
+    # -- xiaomi aqara --
+    # temperature
+    - name: 'Outside Temperature 1 Decimal'
+      unique_id: outside_temperature_1_decimal
+      device_class: temperature
+      unit_of_measurement: '°C'
+      state: >
+        {{ states('sensor.snr_outsideclimate_temperature') | round(1) }}
+
+    # humidity
+    - name: 'Outside Climate Humidity Rounded'
+      unique_id: outside_climate_humidity_rounded
+      device_class: humidity
+      unit_of_measurement: '%'
+      state: > 
+        {{ states('sensor.snr_outsideclimate_humidity') | int }}

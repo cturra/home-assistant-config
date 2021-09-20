@@ -141,7 +141,7 @@ views:
         # fridge temperature above normal!
         - type: entity-filter
           entities:
-            - entity: sensor.fridge_temperature_f1
+            - entity: sensor.fridge_temperature_1_decimal
               name: 'Kitchen: Fridge Temperature'
               icon: 'mdi:fridge-alert-outline'
               secondary_info: last-changed
@@ -153,7 +153,7 @@ views:
         # freezer temperature above normal (> -14.0)
         - type: entity-filter
           entities:
-            - entity: sensor.freezer_temperature_f1
+            - entity: sensor.freezer_temperature_1_decimal
               name: 'Crawlspace: Freezer Temperature'
               icon: 'mdi:fridge-alert-outline'
               secondary_info: last-changed
@@ -217,7 +217,7 @@ views:
         # outdoor air quality unhealthy
         - type: entity-filter
           entities:
-            - entity: sensor.purpleair_description
+            - entity: sensor.purpleair_aqi_description
               name: 'Outdoor Air Quality'
               icon: 'mdi:chemical-weapon'
               secondary_info: last-changed
@@ -560,7 +560,7 @@ views:
               name: 'Kids Bedroom: Lamp'
               icon: 'mdi:lamp' #lamp-outline not working?
               secondary_info: last-changed
-            - entity: sensor.kids_room_heater_state
+            - entity: binary_sensor.kids_bedroom_heating_state
               name: 'Kids Bedroom: Heater'
               icon: 'mdi:radiator'
               secondary_info: last-changed
@@ -596,17 +596,17 @@ views:
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
             # HVAC (ecobee) / fan
-            - entity: sensor.hvac_fan_state
+            - entity: binary_sensor.hvac_ecobee_fan_state
               name: 'HVAC: Fan'
               icon: 'mdi:fan'
               secondary_info: last-changed
-            # HVAC (ecobee) / ac
-            - entity: sensor.hvac_cooling_state
+            # HVAC (ecobee) / cooling
+            - entity: binary_sensor.hvac_ecobee_cooling_state
               name: 'HVAC: Cooling'
               icon: 'mdi:snowflake'
               secondary_info: last-changed
-            # HVAC (ecobee) / furtnace
-            - entity: sensor.hvac_heating_state
+            # HVAC (ecobee) / heating
+            - entity: sbinary_sensor.hvac_ecobee_heating_state
               name: 'HVAC: Heating'
               icon: 'mdi:fire'
               secondary_info: last-changed
@@ -623,7 +623,7 @@ views:
           state_filter:
             - operator: regex
               # matches On/on OR playing
-              value: '^([Oo]n|playing)$'
+              value: '^(on|playing)$'
           show_empty: false
 
       # doors and windows active
@@ -651,7 +651,7 @@ views:
               name: 'Front Door'
               secondary_info: last-changed
             # garage (vehicle) door
-            - entity: sensor.garage_door_contact_state
+            - entity: binary_sensor.garage_vehicle_door_contact_state
               name: 'Garage: Vehicle Door'
               icon: 'mdi:garage-open-variant'
               secondary_info: last-changed
@@ -1027,7 +1027,7 @@ views:
             state: true
             temperature: true
           sensors:
-            - entity: sensor.hvac_ecobee_indoor_avg_temperature
+            - entity: sensor.hvac_ecobee_indoor_average_temperature
               name: 'Temperature'
             - entity: sensor.indoor_mean_humidity
               name: 'Humidity'
@@ -1042,14 +1042,14 @@ views:
           # upstairs hallway
           - type: 'custom:button-card'
             entity: sensor.uptairs_hallway_temperature
-            name: Upstairs Hall
+            name: 'Upstairs Hall'
             show_state: true
             show_icon: false
             <<: *climate-button-style
 
           # main bedroom
           - type: 'custom:button-card'
-            entity: sensor.main_bedroom_temperature_f1
+            entity: sensor.main_bedroom_temperature_1_decimal
             name: 'Main Bedroom'
             show_state: true
             show_icon: false
@@ -1057,7 +1057,7 @@ views:
 
           # kids room
           - type: 'custom:button-card'
-            entity: sensor.kids_room_temperature_f1
+            entity: sensor.kids_bedroom_temperature_1_decimal
             name: 'Kids Bedroom'
             show_state: true
             show_icon: false
@@ -1065,8 +1065,8 @@ views:
 
           # spare bedroom
           - type: 'custom:button-card'
-            entity: sensor.sparebedroom_temperature_f1
-            name: Spare Bedroom
+            entity: sensor.spare_bedroom_temperature_1_decimal
+            name: 'Spare Bedroom'
             show_state: true
             show_icon: false
             <<: *climate-button-style
@@ -1086,14 +1086,14 @@ views:
           # family room
           - type: 'custom:button-card'
             entity: sensor.family_room_temperature
-            name: Family Room
+            name: 'Family Room'
             show_state: true
             show_icon: false
             <<: *climate-button-style
 
           # office
           - type: 'custom:button-card'
-            entity: sensor.office_temperature_f1
+            entity: sensor.office_temperature_1_decimal
             name: Office
             show_state: true
             show_icon: false
@@ -1101,8 +1101,8 @@ views:
 
           # crawlspace
           - type: 'custom:button-card'
-            entity: sensor.crawlspace_temperature_f1
-            name: 'Crawlspace'
+            entity: sensor.crawlspace_temperature_1_decimal
+            name: Crawlspace
             show_state: true
             show_icon: false
             <<: *climate-button-style
@@ -1127,19 +1127,19 @@ views:
           entities:
             # temerature in downstairs family room
             - entity: sensor.family_room_temperature
-              name: "Downstairs"
+              name: Downstairs
               show_fill: false
               show_points: false
               color: '#fd9644'
             # temerature at upstairs hallway ecobee remote sensor
             - entity: sensor.uptairs_hallway_temperature
-              name: "Upstairs"
+              name: Upstairs
               show_fill: false
               show_points: false
               color: '#21b064'
             # temerature at crawlspace aqara sensor
-            - entity: sensor.crawlspace_temperature_f1
-              name: "Crawlspace"
+            - entity: sensor.crawlspace_temperature_1_decimal
+              name: Crawlspace
               show_fill: false
               show_points: false
               color: '#eb3b5a'
@@ -1168,32 +1168,30 @@ views:
           points_per_hour: 60
           group: true
           entities:
-            # air conditioner on/off
-            - entity: sensor.hvac_cooling_bool
+            # cooling on/off
+            - entity: binary_sensor.hvac_ecobee_cooling_state
               name: Cooling
               color: '#71b7f4'
               show_legend: false
               show_line: false
               show_points: false
-            # furnace heating on/off
-            - entity: sensor.hvac_heating_bool
+            # heating on/off
+            - entity: binary_sensor.hvac_ecobee_heating_state
               name: Heating
               color: '#f4ce71'
               show_legend: false
               show_line: false
               show_points: false
             # hvac fan on/off
-            - entity: sensor.hvac_fan_state
+            - entity: binary_sensor.hvac_ecobee_fan_state
               name: Fan
               color: '#cccccc'
               show_legend: true
               show_line: false
               show_points: false
           state_map:
-            - label: 'Off'
-              value: '0'
-            - label: 'On'
-              value: '1'
+            - value: 'off'
+            - value: 'on'
 
       ## GARAGE CLIMATE CARDS
       - type: 'custom:vertical-stack-in-card'
@@ -1217,7 +1215,7 @@ views:
           sensors:
             - entity: sensor.garage_mean_temperature_calculation
               name: 'Temperature'
-            - entity: sensor.garage_humidity_int
+            - entity: sensor.garage_climate_humidity_rounded
               name: 'Humidity'
 
         # GARAGE TEMPERATURE GRAPHS
@@ -1245,7 +1243,7 @@ views:
               show_legend: false
               state_adaptive_color: true
             # humidity
-            - entity: sensor.snr_garageclimate_humidity
+            - entity: sensor.garage_climate_humidity_rounded
               name: Humidity
               line_width: 1
               show_legend: false
@@ -1270,32 +1268,30 @@ views:
           points_per_hour: 60
           group: true
           entities:
+            # garage car door opened/closed
+            - entity: binary_sensor.garage_vehicle_door_contact_state
+              name: 'Vehicle Door'
+              color: '#cccccc'
+              show_legend: true
+              show_line: false
+              show_points: false
             # garage heater on/off
-            - entity: sensor.hvac_garage_heating_bool
+            - entity: binary_sensor.hvac_garage_heating_state
               name: Heating
               color: '#f4ce71'
               show_legend: false
               show_line: false
               show_points: false
             # garage dehumidifier on/off
-            - entity: sensor.garage_dehumidifier_bool
+            - entity: binary_sensor.garage_dehumidifier_state
               name: 'Dehumidifier'
               color: '#71b7f4'
               show_legend: false
               show_line: false
               show_points: false
-            # garage car door opened/closed
-            - entity: sensor.garage_door_contact_bool
-              name: 'Car Door'
-              color: '#cccccc'
-              show_legend: true
-              show_line: false
-              show_points: false
           state_map:
-            - label: 'Off'
-              value: '0'
-            - label: 'On'
-              value: '1'
+            - value: 'off'
+            - value: 'on'
 
       ## SHED CLIMATE CARDS
       - type: 'custom:vertical-stack-in-card'
@@ -1308,14 +1304,14 @@ views:
           cards:
           # shed temperature
           - type: 'custom:button-card'
-            entity: sensor.shed_temperature_f1
+            entity: sensor.shed_temperature_1_decimal
             name: Temperature
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
           # shed humidity
           - type: 'custom:button-card'
-            entity: sensor.shed_humidity_int
+            entity: sensor.shed_humidity_rounded
             name: Humidity
             show_state: true
             show_icon: false
@@ -1340,13 +1336,13 @@ views:
           <<: *temp-graph-color_thresholds
           entities:
             # temerature
-            - entity: sensor.shed_temperature_f1
-              name: "Temperature"
+            - entity: sensor.shed_temperature_1_decimal
+              name: Temperature
               show_fill: false
               show_legend: false
               state_adaptive_color: true
             # humidity
-            - entity: sensor.shed_humidity_int
+            - entity: sensor.shed_humidity_rounded
               name: Humidity
               line_width: 1
               show_legend: false
@@ -1368,9 +1364,9 @@ views:
           entity: weather.pitt_meadows
           name: " "
           custom:
-            - humidity: sensor.outside_humidity_int
+            - humidity: sensor.outside_climate_humidity_rounded
             - pressure: sensor.snr_outsideclimate_pressure
-            - temp: sensor.outside_temperature_f1
+            - temp: sensor.outside_temperature_1_decimal
           primary_info:
             - humidity
             - pressure
@@ -1404,14 +1400,14 @@ views:
                 - width: 25px
           # pm 2.5
           - type: 'custom:button-card'
-            entity: sensor.purpleair_pm25
+            entity: sensor.purpleair_pm_2_5
             name: 'PM 2.5'
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
           # pm 10
           - type: 'custom:button-card'
-            entity: sensor.purpleair_pm10
+            entity: sensor.purpleair_pm_10
             name: 'PM 10'
             show_state: true
             show_icon: false
@@ -1421,7 +1417,6 @@ views:
             - sensor.purpleair
           unit: AQI
           name: AQI
-          height: 75
           hour24: true
           show:
               extrema: false

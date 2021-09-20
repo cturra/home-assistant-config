@@ -1,0 +1,19 @@
+## SHED
+
+- sensor:
+    # -- xiaomi aqara --
+    # temperature
+    - name: 'Shed Temperature 1 Decimal'
+      unique_id: shed_temperature_1_decimal
+      device_class: temperature
+      unit_of_measurement: '°C'
+      state: >
+        {{ states('sensor.snr_shedclimate_temperature') | round(1) }}
+
+    # humidity
+    - name: 'Shed Humidity Rounded'
+      unique_id: shed_humidity_rounded
+      device_class: humidity
+      unit_of_measurement: '%'
+      state: > 
+        {{ states('sensor.snr_shedclimate_humidity') | int }}

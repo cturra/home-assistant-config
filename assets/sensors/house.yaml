@@ -1,0 +1,41 @@
+## HOUSE
+
+## cooling time on today
+- platform: history_stats
+  name: 'HVAC Cooling Time On Today'
+  entity_id: sensor.hvac_cooling_state
+  state: 'on'
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+## heating time on today
+- platform: history_stats
+  name: 'HVAC Heating Time On Today'
+  entity_id: sensor.hvac_heating_state
+  state: 'on'
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+## hvac time on today
+- platform: history_stats
+  name: 'HVAC Time On Today'
+  entity_id: sensor.hvac_state
+  state: 'on'
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+# mean indoor humidity from climate sensors
+- platform: min_max
+  name: 'Indoor Mean Humidity Calculation'
+  type: mean
+  round_digits: 0
+  entity_ids:
+    - sensor.snr_crawlspaceclimate_humidity
+    - sensor.snr_officeclimate_humidity
+    - sensor.hvac_ecobee_indoor_average_humidity
+    - sensor.snr_mainbedroomclimate_humidity
+    - sensor.snr_kidsroomclimate_humidity
+    - sensor.snr_sparebedroomclimate_humidity

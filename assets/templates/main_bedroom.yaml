@@ -1,0 +1,11 @@
+## MAIN BEDROOM
+
+- sensor:
+    # -- xiaomi aqara --
+    # temperature
+    - name: 'Main Bedroom Temperature 1 Decimal'
+      unique_id: main_bedroom_temperature_1_decimal
+      device_class: temperature
+      unit_of_measurement: '°C'
+      state: >
+        {{ states('sensor.snr_mainbedroomclimate_temperature') | round(1) }}

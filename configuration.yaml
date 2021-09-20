@@ -12,13 +12,14 @@ lovelace: !include assets/core/lovelace.yaml
 
 
 automation: !include automations.yaml
-binary_sensor: !include_dir_merge_list assets/backend/binary_sensors
-cover: !include_dir_merge_list assets/backend/covers
+binary_sensor: !include_dir_merge_list assets/binary_sensors
+cover: !include_dir_merge_list assets/covers
 group: !include groups.yaml
-light: !include_dir_merge_list assets/backend/lights
+light: !include_dir_merge_list assets/lights
 scene: !include scenes.yaml
 script: !include_dir_merge_named assets/scripts
-sensor: !include_dir_merge_list assets/backend/sensors
+sensor: !include_dir_merge_list assets/sensors
+template: !include_dir_merge_list assets/templates
 
 ## hass-sensorpush
 # https://github.com/rsnodgrass/hass-sensorpush
@@ -35,4 +36,4 @@ weather:
 tts: !include assets/core/tts.yaml
 
 ## rtsp cameras
-camera: !include_dir_merge_list assets/backend/cameras
+camera: !include_dir_merge_list assets/cameras

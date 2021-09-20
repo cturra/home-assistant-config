@@ -1,0 +1,19 @@
+## GARAGE
+
+# heating time on today
+- platform: history_stats
+  name: 'HVAC Garage Heating Time On Today'
+  entity_id: sensor.hvac_garage_heating_state
+  state: 'on'
+  type: time
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"
+
+# mean temperature from climate sensors
+- platform: min_max
+  name: 'Garage Mean Temperature Calculation'
+  type: mean
+  round_digits: 1
+  entity_ids:
+    - sensor.snr_garageclimate_temperature
+    - sensor.hvac_garagethermostat_temperature

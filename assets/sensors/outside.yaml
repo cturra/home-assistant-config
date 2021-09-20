@@ -3,7 +3,6 @@
 # weather canada
 - platform: environment_canada
 
-
 # purple air :: rest
 - platform: rest
   name: 'PurpleAir'
@@ -49,53 +48,3 @@
   # attributes can.  Store away all the data for use by the templates below.
   json_attributes:
     - results
-
-
-# custom sensors templates
-- platform: template
-  sensors:
-    # -- purple air --
-    # aqi description
-    purpleair_description:
-      friendly_name: 'PurpleAir AQI Description'
-      value_template: >
-        {% if (states('sensor.purpleair')|float) >= 401.0 %}
-          Hazardous
-        {% elif (states('sensor.purpleair')|float) >= 301.0 %}
-          Hazardous
-        {% elif (states('sensor.purpleair')|float) >= 201.0 %}
-          Very Unhealthy
-        {% elif (states('sensor.purpleair')|float) >= 151.0 %}
-          Unhealthy
-        {% elif (states('sensor.purpleair')|float) >= 101.0 %}
-          Unhealthy for Sensitive Groups
-        {% elif (states('sensor.purpleair')|float) >= 51.0 %}
-          Moderate
-        {% elif (states('sensor.purpleair')|float) >= 0.0 %}
-          Good
-        {% else %}
-          undefined
-        {% endif %}
-
-    # fine particulate matter 2.5
-    purpleair_pm25:
-      friendly_name: 'PurpleAir PM 2.5'
-      value_template: "{{ state_attr('sensor.purpleair','results')[0]['PM2_5Value'] | round(1) }}"
-      unit_of_measurement: "μg/m³"
-
-    # fine particulate matter 10
-    purpleair_pm10:
-      friendly_name: 'PurpleAir PM 10'
-      value_template: "{{ state_attr('sensor.purpleair','results')[0]['pm10_0_atm'] | round(1) }}"
-      unit_of_measurement: "μg/m³"
-
-    # -- xiaomi aqara --
-    # climate sensor
-    outside_temperature_f1:
-      friendly_name: 'Outside Temperature 1 decimal'
-      unit_of_measurement: '°C'
-      value_template: '{{ states("sensor.snr_outsideclimate_temperature") | round(1) }}'   
-    outside_humidity_int:
-      friendly_name: 'Outside Humidity integer'
-      unit_of_measurement: '%'
-      value_template: '{{ states("sensor.snr_outsideclimate_humidity") | int }}'

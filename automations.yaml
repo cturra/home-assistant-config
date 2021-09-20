@@ -354,8 +354,8 @@
   - condition: and
     conditions:
     - condition: numeric_state
-      entity_id: sensor.garage_humidity_int
-      above: '65'
+      above: '65.0'
+      entity_id: sensor.snr_garageclimate_humidity
     - condition: state
       entity_id: switch.plg_garagedehumidifier
       state: 'off'
@@ -373,8 +373,8 @@
     minutes: /10
   condition:
   - condition: numeric_state
-    entity_id: sensor.garage_humidity_int
-    above: '65'
+    above: '65.0'
+    entity_id: sensor.snr_garageclimate_humidity
   - condition: and
     conditions:
     - condition: state
@@ -397,8 +397,8 @@
     minutes: /15
   condition:
   - condition: numeric_state
-    entity_id: sensor.garage_humidity_int
-    below: '61'
+    entity_id: sensor.snr_garageclimate_humidity
+    below: '61.0'
   - condition: state
     entity_id: switch.plg_garagedehumidifier
     state: 'on'
@@ -688,7 +688,7 @@
         - action: OPEN_DOOR
           title: Yes Please
         - action: NO_ACTION
-          title: 'No'
+          title: No Thanks
   - wait_for_trigger:
     - platform: event
       event_type: mobile_app_notification_action
