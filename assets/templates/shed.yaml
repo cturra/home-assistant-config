@@ -8,7 +8,7 @@
       device_class: temperature
       unit_of_measurement: '°C'
       state: >
-        {{ states('sensor.snr_shedclimate_temperature') | round(1) }}
+        {{ state_attr('sensor.snr_shedclimate_temperature', 'temperature') | round(1) }}
 
     # humidity
     - name: 'Shed Humidity Rounded'
@@ -16,4 +16,4 @@
       device_class: humidity
       unit_of_measurement: '%'
       state: > 
-        {{ states('sensor.snr_shedclimate_humidity') | int }}
+        {{ state_attr('sensor.snr_shedclimate_humidity', 'humidity') | int }}

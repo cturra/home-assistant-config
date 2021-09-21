@@ -34,7 +34,7 @@
       device_class: humidity
       unit_of_measurement: '%'
       state: > 
-        {{ states('sensor.snr_garageclimate_humidity') | int }}
+        {{ state_attr('sensor.snr_garageclimate_humidity', 'humidity') | int }}
     
     # -- sinopé --
     # temperature
