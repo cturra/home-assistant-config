@@ -2,10 +2,19 @@
 
 - binary_sensor:
     # -- ecobee --
+    # HVAC any equipment running
+    - name: 'HVAC Ecobee State'
+      unique_id: hvac_ecobee_state
+      state: >
+        {{
+          state_attr('climate.amazon', 'fan')                       or
+          is_state_attr('climate.amazon', 'hvac_action', 'heating') or
+          is_state_attr('climate.amazon', 'hvac_action', 'cooling')
+        }}
+
     # HVAC fan on/off
     - name: 'HVAC Ecobee Fan State'
       unique_id: hvac_ecobee_fan_state
-      # is_state() vs. states() to avoid unknown state at startup
       state: >
         {{ state_attr('climate.amazon', 'fan') }}
 

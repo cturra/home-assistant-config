@@ -776,7 +776,7 @@
       milliseconds: 0
   condition:
   - condition: state
-    entity_id: sensor.hvac_garage_heating_state
+    entity_id: binary_sensor.hvac_garage_heating_state
     state: 'on'
   action:
   - service: mqtt.publish

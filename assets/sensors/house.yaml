@@ -1,27 +1,9 @@
 ## HOUSE
 
-## cooling time on today
-- platform: history_stats
-  name: 'HVAC Cooling Time On Today'
-  entity_id: sensor.hvac_cooling_state
-  state: 'on'
-  type: time
-  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
-  end: "{{ now() }}"
-
-## heating time on today
-- platform: history_stats
-  name: 'HVAC Heating Time On Today'
-  entity_id: sensor.hvac_heating_state
-  state: 'on'
-  type: time
-  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
-  end: "{{ now() }}"
-
-## hvac time on today
+## hvac ecobee time on today
 - platform: history_stats
   name: 'HVAC Time On Today'
-  entity_id: sensor.hvac_state
+  entity_id: binary_sensor.hvac_ecobee_state
   state: 'on'
   type: time
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"
