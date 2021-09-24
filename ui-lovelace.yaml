@@ -917,6 +917,11 @@ views:
                 action: toggle
               confirmation:
                 text: '[[[ return `Are you sure you want to toggle the Garage Door?` ]]]'
+              state:
+                - value: 'open'
+                  color: 'var(--paper-item-icon-active-color)'
+                - value: 'closed'
+                  color: 'var(--primary-text-color)'
               styles:
                 card:
                   - height: 100px
