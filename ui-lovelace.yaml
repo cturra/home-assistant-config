@@ -466,7 +466,7 @@ views:
               name: 'Porch'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
-            - entity: switch.sw_driveway
+            - entity: light.group_driveway_lights
               name: 'Driveway'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
@@ -921,7 +921,7 @@ views:
                 - value: 'open'
                   color: 'var(--paper-item-icon-active-color)'
                 - value: 'closed'
-                  color: 'var(--primary-text-color)'
+                  color: 'var(--paper-item-icon-color)'
               styles:
                 card:
                   - height: 100px
@@ -960,7 +960,7 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
-                - entity: switch.sw_driveway
+                - entity: light.group_driveway_lights
                   name: Driveway
                   icon: 'mdi:lightbulb-outline'
                   state_color: true

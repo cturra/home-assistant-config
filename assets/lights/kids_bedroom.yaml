@@ -2,7 +2,7 @@
 
 # group light bulbs
 - platform: group
-  name: Kids Bedroom Lights
+  name: 'Kids Bedroom Lights'
   entities:
     - light.blb_kidsroomlamp
 

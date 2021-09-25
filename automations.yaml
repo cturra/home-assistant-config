@@ -133,12 +133,15 @@
     offset: 00:15:00
   condition:
   - condition: state
-    entity_id: switch.sw_driveway
+    entity_id: light.group_driveway_lights
     state: 'off'
   action:
-  - service: switch.turn_on
-    data: {}
-    entity_id: switch.sw_driveway
+  - service: light.turn_on
+    data:
+      kelvin: 2000
+      brightness_pct: 100
+    target:
+      entity_id: light.group_driveway_lights
   mode: single
 - id: '1612295061627'
   alias: 'Driveway: Lights off at sunrise'
@@ -149,12 +152,12 @@
     offset: -00:15:00
   condition:
   - condition: state
-    entity_id: switch.sw_driveway
+    entity_id: light.group_driveway_lights
     state: 'on'
   action:
-  - service: switch.turn_off
-    data: {}
-    entity_id: switch.sw_driveway
+  - service: light.turn_off
+    target:
+      entity_id: light.group_driveway_lights
   mode: single
 - id: '1612295242635'
   alias: Outside / Outlet / ON - Holiday Schedule

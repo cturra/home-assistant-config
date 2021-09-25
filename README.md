@@ -22,6 +22,7 @@ For now, please enjoy, and feedback always welcome!
 | Climate Sensor | Ecobee | v1 | 3 | HA :: Ecobee |
 | Contact Sensor | Xiaomi | MCCGQ11LM | 15 | Zigbee2MQTT |
 | Leak Sensor | Xiaomi | SJCGQ11LM | 9 | Zigbee2MQTT |
+| Light Bulb | Athom | LB01-15W | 2 | Tasmota |
 | Light Bulb | Ikea | LED1624G9 | 1 | Zigbee2MQTT |
 | Motion Sensor | Ikea | E1745 | 1 | Zigbee2MQTT |
 | Motion Sensor | Xiaomi | RTCGQ11LM | 3 | Zigbee2MQTT |
