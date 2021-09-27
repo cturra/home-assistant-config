@@ -489,6 +489,7 @@ views:
               secondary_info: last-changed
             - entity: light.family_room_wall
               type: 'custom:slider-entity-row'
+              hide_state: true
               name: 'Family Room: Wall'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
@@ -498,6 +499,7 @@ views:
               name: 'Stairwell'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
+              <<: *dimmer-entity-style
             # Kitchen
             - entity: light.kitchen_ceiling
               name: 'Kitchen: Ceiling'
@@ -510,6 +512,7 @@ views:
               secondary_info: last-changed
             - entity: light.dining_room_ceiling
               type: 'custom:slider-entity-row'
+              hide_state: true
               name: 'Kitchen: Table'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
@@ -525,6 +528,7 @@ views:
             # TV Room
             - entity: light.tv_room_ceiling
               type: 'custom:slider-entity-row'
+              hide_state: true
               name: 'TV Room: Ceiling'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
@@ -541,6 +545,7 @@ views:
             # Main Bedroom
             - entity: light.main_bedroom_ceiling
               type: 'custom:slider-entity-row'
+              hide_state: true
               name: 'Main Bedroom'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
@@ -552,11 +557,14 @@ views:
             # Kids Bedroom
             - entity: light.kids_bedroom_ceiling
               type: 'custom:slider-entity-row'
+              hide_state: true
               name: 'Kids Bedroom: Ceiling'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
               <<: *dimmer-entity-style
             - entity: light.blb_kidsroomlamp
+              type: 'custom:slider-entity-row'
+              hide_state: true
               name: 'Kids Bedroom: Lamp'
               icon: 'mdi:lamp' #lamp-outline not working?
               secondary_info: last-changed
@@ -808,6 +816,7 @@ views:
             - entity: light.tv_room_ceiling
               name: 'Ceiling'
               type: 'custom:slider-entity-row'
+              hide_state: true
               icon: 'mdi:lightbulb-outline'
 
       # Office
@@ -873,12 +882,53 @@ views:
                   state_color: true
             - type: entities
               show_header_toggle: false
-              <<: *entities-style
+              # not using entities-style anchor to allow for some extra padding
+              # for the rgb-light-card.
+              card_mod:
+                style: |
+                  :host .card-content {
+                    padding: 0px 10px 10px 10px;
+                  }
               entities:
+                # lamp light bulb on/off control
                 - entity: light.blb_kidsroomlamp
                   name: 'Lamp'
                   icon: 'mdi:lamp' # lamp-outline not working
                   state_color: true
+                # lamp light bulb color quick picker
+                - type: 'custom:rgb-light-card'
+                  entity: light.blb_kidsroomlamp
+                  size: 20
+                  justify: center
+                  colors:
+                    # red
+                    - rgb_color:
+                        - 255
+                        - 0
+                        - 0
+                    # orange
+                    - rgb_color:
+                        - 255
+                        - 128
+                        - 0
+                    # green
+                    - rgb_color:
+                        - 0
+                        - 255
+                        - 0
+                      icon_color: '#33ff33'
+                    # blue
+                    - rgb_color:
+                        - 0
+                        - 0
+                        - 255
+                      icon_color: '#3333ff'
+                    # purple
+                    - rgb_color:
+                        - 128
+                        - 0
+                        - 255
+                      icon_color: '#9933ff'
 
       # Laundry
       - type: 'custom:vertical-stack-in-card'

@@ -15,6 +15,9 @@ resources:
   # mini-graph-card
 - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
   type: module
+  # rgb light card
+- url: /hacsfiles/rgb-light-card/card.js
+  type: module
   # slider-entity-row
 - url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js
   type: module
