@@ -906,29 +906,34 @@ views:
                         - 255
                         - 0
                         - 0
+                      transition: 1
                     # orange
                     - rgb_color:
                         - 255
                         - 128
                         - 0
+                      transition: 1
                     # green
                     - rgb_color:
                         - 0
                         - 255
                         - 0
                       icon_color: '#33ff33'
+                      transition: 1
                     # blue
                     - rgb_color:
                         - 0
                         - 0
                         - 255
                       icon_color: '#3333ff'
+                      transition: 1
                     # purple
                     - rgb_color:
                         - 128
                         - 0
                         - 255
                       icon_color: '#9933ff'
+                      transition: 1
 
       # Laundry
       - type: 'custom:vertical-stack-in-card'

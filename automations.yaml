@@ -358,7 +358,7 @@
     conditions:
     - condition: numeric_state
       above: '65.0'
-      entity_id: sensor.snr_garageclimate_humidity
+      entity_id: sensor.garage_mean_humidity_calculation
     - condition: state
       entity_id: switch.plg_garagedehumidifier
       state: 'off'
@@ -377,7 +377,7 @@
   condition:
   - condition: numeric_state
     above: '65.0'
-    entity_id: sensor.snr_garageclimate_humidity
+    entity_id: sensor.garage_mean_humidity_calculation
   - condition: and
     conditions:
     - condition: state
@@ -400,7 +400,7 @@
     minutes: /15
   condition:
   - condition: numeric_state
-    entity_id: sensor.snr_garageclimate_humidity
+    entity_id: sensor.garage_mean_humidity_calculation
     below: '61.0'
   - condition: state
     entity_id: switch.plg_garagedehumidifier

@@ -9,7 +9,20 @@
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"
   end: "{{ now() }}"
 
-# mean temperature from climate sensors
+# mean humidity from climate sensors:
+#  - xiaomi aqara
+#  - am2302 (wired dht22)
+- platform: min_max
+  name: 'Garage Mean Humidity Calculation'
+  type: mean
+  round_digits: 0
+  entity_ids:
+    - sensor.snr_garageclimate_humidity
+    - sensor.garage_door_opener_am2301_humidity
+
+# mean temperature from climate sensors:
+#  - xiaomi aqara
+#  - sinopé
 - platform: min_max
   name: 'Garage Mean Temperature Calculation'
   type: mean
