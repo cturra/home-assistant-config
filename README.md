@@ -18,9 +18,9 @@ For now, please enjoy, and feedback always welcome!
 | Audio | Sonos | Play:5 | 1 | HA :: Sonos |
 | Audio | Sonos | Beam | 1 | HA :: Sonos |
 | Climate Sensor | SensorPush | HT1 | 4 | HACS :: SensorPush |
-| Climate Sensor | Xiaomi | WSDCGQ11LM | 9 | Zigbee2MQTT |
 | Climate Sensor | Ecobee | v1 | 3 | HA :: Ecobee |
 | Climate Sensor | Tuya | TS0201 | 1 | Zigbee2MQTT |
+| Climate Sensor | Xiaomi | WSDCGQ11LM | 9 | Zigbee2MQTT |
 | Contact Sensor | Xiaomi | MCCGQ11LM | 15 | Zigbee2MQTT |
 | Leak Sensor | Xiaomi | SJCGQ11LM | 9 | Zigbee2MQTT |
 | Light Bulb | Athom | LB01-15W | 2 | Tasmota |
@@ -40,3 +40,4 @@ For now, please enjoy, and feedback always welcome!
 | Switch (3 Way) | Treatlife | SS02 | 2 | Tasmota |
 | Switch (Dimmer) | Treatlife | DS02S | 3 | Tasmota |
 | Switch  (Dimmer) | Treatlife | DS01C | 2 | Tasmota |
+| Vibration Sensor | Xiaomi | DJT11LM | 1 | Zigbee2MQTT |

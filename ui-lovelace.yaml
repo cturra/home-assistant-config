@@ -431,6 +431,12 @@ views:
               icon: 'mdi:battery-alert-variant-outline'
               secondary_info: last-changed
               <<: *alert-style
+            # vibration sensors (aqara)
+            - entity: sensor.snr_officechairvibration_battery
+              name: 'Office: Chair Vibration Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
           state_filter:
             - operator: regex
               # matches 0-24 (less than 25)
@@ -614,7 +620,7 @@ views:
               icon: 'mdi:snowflake'
               secondary_info: last-changed
             # HVAC (ecobee) / heating
-            - entity: sbinary_sensor.hvac_ecobee_heating_state
+            - entity: binary_sensor.hvac_ecobee_heating_state
               name: 'HVAC: Heating'
               icon: 'mdi:fire'
               secondary_info: last-changed
@@ -783,6 +789,7 @@ views:
                 - entity: switch.plg_espressomachine
                   name: 'Espresso Machine'
                   icon: 'mdi:coffee-maker'
+                  state_color: true
                 - entity: switch.plg_kitchenspeaker
                   name: Speaker
                   icon: 'mdi:speaker'
@@ -1725,4 +1732,23 @@ views:
             # kids room remote
             - entity: sensor.rmt_kidsroomremote_battery
               name: 'Kids Room Lamp'
+              tap_action: more-info
+
+      # Vibration Sensors
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Vibration Sensors
+          <<: *header-style
+        - type: 'custom:battery-state-card'
+          color_gradient:
+            - "#a21c10" # red
+            - "#b3b300" # yellow
+            - "#24b300" # green
+          <<: *battery-state-style
+          entities:
+            # office chair
+            - entity: sensor.snr_officechairvibration_battery
+              name: 'Office Chair'
               tap_action: more-info

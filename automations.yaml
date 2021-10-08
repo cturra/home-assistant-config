@@ -415,23 +415,14 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.snr_officemotion_occupancy
-    from: 'off'
-    to: 'on'
+    entity_id: sensor.snr_officechairvibration_action
+    to: tilt
   condition:
   - condition: and
     conditions:
-    - condition: time
-      after: 08:00
-      before: '22:00'
-      weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-      - sat
-      - sun
+    - condition: state
+      entity_id: binary_sensor.snr_officemotion_occupancy
+      state: 'on'
     - condition: state
       entity_id: switch.plg_officeairpurifier
       state: 'off'
@@ -449,22 +440,9 @@
     to: 'off'
     for: 00:10:00
   condition:
-  - condition: and
-    conditions:
-    - condition: time
-      after: 08:00
-      before: '22:30'
-      weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-      - sat
-      - sun
-    - condition: state
-      entity_id: switch.plg_officeairpurifier
-      state: 'on'
+  - condition: state
+    entity_id: switch.plg_officeairpurifier
+    state: 'on'
   action:
   - service: switch.turn_off
     data: {}
