@@ -525,7 +525,7 @@ views:
               <<: *dimmer-entity-style
             - entity: switch.plg_espressomachine
               name: 'Espresso Machine'
-              icon: 'mdi:coffee-maker'
+              icon: 'mdi:coffee-maker-outline'
               secondary_info: last-changed
             - entity: switch.plg_kitchenoutlet1
               name: 'Kitchen: Baby Monitor'
@@ -572,7 +572,7 @@ views:
               type: 'custom:slider-entity-row'
               hide_state: true
               name: 'Kids Bedroom: Lamp'
-              icon: 'mdi:lamp' #lamp-outline not working?
+              icon: 'mdi:lamp-outline'
               secondary_info: last-changed
             - entity: binary_sensor.kids_bedroom_heating_state
               name: 'Kids Bedroom: Heater'
@@ -788,7 +788,7 @@ views:
                   state_color: true
                 - entity: switch.plg_espressomachine
                   name: 'Espresso Machine'
-                  icon: 'mdi:coffee-maker'
+                  icon: 'mdi:coffee-maker-outline'
                   state_color: true
                 - entity: switch.plg_kitchenspeaker
                   name: Speaker
@@ -900,7 +900,7 @@ views:
                 # lamp light bulb on/off control
                 - entity: light.blb_kidsroomlamp
                   name: 'Lamp'
-                  icon: 'mdi:lamp' # lamp-outline not working
+                  icon: 'mdi:lamp-outline'
                   state_color: true
                 # lamp light bulb color quick picker
                 - type: 'custom:rgb-light-card'
