@@ -482,8 +482,9 @@
   - service: notify.mobile_app_turraphone
     data:
       title: ❗💧 Water Detected
-      message: '"Water detected at {{ trigger.to_state.attributes.friendly_name }}
-        sensor."'
+      message: "{% for entity in trigger.to_state.attributes.entity_id %}\n  {% if\
+        \ is_state(entity, 'on') %}\n    Water detected at {{ state_attr(entity, 'friendly_name')\
+        \ }} sensor.\n  {% endif %}\n{% endfor %}"
       data:
         push:
           sound:
@@ -499,8 +500,9 @@
           - media_player.family_room
           - media_player.main_bedroom
           volume: 0.8
-          message: '"ALERT. Water detected at {{ trigger.to_state.attributes.friendly_name
-            }} sensor."'
+          message: "{% for entity in trigger.to_state.attributes.entity_id %}\n  {%\
+            \ if is_state(entity, 'on') %}\n    ALERT. Water detected at {{ state_attr(entity,\
+            \ 'friendly_name') }} sensor.\n  {% endif %}\n{% endfor %}"
           delay: 00:00:07
   mode: single
 - id: '1616274628046'
