@@ -745,8 +745,9 @@
       payload: ''
   mode: single
 - id: '1631040582872'
-  alias: 'Garage Inside: HVAC off when car door opened'
-  description: ''
+  alias: 'Garage Inside: HVAC off when vehicle door opened'
+  description: turn heating mode off on thermostat every time door is opened to ensure
+    heater doesn't turn on while vehicle door is open.
   trigger:
   - platform: state
     entity_id: switch.sw_garagedoorcontact
@@ -757,10 +758,7 @@
       minutes: 0
       seconds: 2
       milliseconds: 0
-  condition:
-  - condition: state
-    entity_id: binary_sensor.hvac_garage_heating_state
-    state: 'on'
+  condition: []
   action:
   - service: mqtt.publish
     data:
@@ -768,8 +766,9 @@
       payload: '{"system_mode": "off"}'
   mode: single
 - id: '1631040781299'
-  alias: 'Garage Inside: HVAC on when car door closed'
-  description: ''
+  alias: 'Garage Inside: HVAC on when vehicle door closed'
+  description: wait a couple mins after vehicle door closes to ensure temp normalizes
+    before returning the thermostat to heating mode.
   trigger:
   - platform: state
     entity_id: switch.sw_garagedoorcontact
@@ -786,6 +785,11 @@
     state: 'off'
     attribute: system_mode
   action:
+  - delay:
+      hours: 0
+      minutes: 2
+      seconds: 0
+      milliseconds: 0
   - service: mqtt.publish
     data:
       topic: zigbee2mqtt/HVAC_GarageThermostat/set
