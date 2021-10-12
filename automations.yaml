@@ -510,7 +510,7 @@
       entity_id: switch.plg_espressomachine
   mode: single
 - id: '1616875296550'
-  alias: 'Crawlspace: notify when locker door opened'
+  alias: 'Crawlspace: Notify when locker door opened'
   description: when locker door is opened notify chris' iphone.
   trigger:
   - platform: state
@@ -866,4 +866,34 @@
             name: default
             critical: 1
             volume: 1
+  mode: single
+- id: '1634068451425'
+  alias: 'Crawlspace: Locker heater ON when humidity high'
+  description: turn on golden rod (heater) when humidity is above 51% RH
+  trigger:
+  - platform: time_pattern
+    hours: /1
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.snr_lockerclimate_humidity
+    above: '51.0'
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.plg_zbrpt_crawlspace
+  mode: single
+- id: '1634070537275'
+  alias: 'Crawlspace: Locker heater OFF when humidity low'
+  description: turn off golden rod (heater) when humidity is below 49% RH
+  trigger:
+  - platform: time_pattern
+    hours: /1
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.snr_lockerclimate_humidity
+    below: '49.0'
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.plg_zbrpt_crawlspace
   mode: single

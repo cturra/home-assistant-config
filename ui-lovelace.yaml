@@ -6,7 +6,7 @@ anchors:
         ha-card {
           padding-left: 5px;
           border-radius: 0px;
-          font-size: 1.1em;
+          font-size: 1.0em;
         }
         :host ha-markdown.no-header {
           padding: 7px 2px 5px 5px;
@@ -248,6 +248,11 @@ views:
               <<: *alert-style
             - entity: sensor.snr_laundryclimate_battery
               name: 'Laundry: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            - entity: sensor.snr_lockerclimate_battery
+              name: 'Locker: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
               secondary_info: last-changed
               <<: *alert-style
@@ -986,6 +991,7 @@ views:
                   color: 'var(--paper-item-icon-color)'
               styles:
                 card:
+                  - font-size: 1.0em
                   - height: 100px
               entities:
             # switches
@@ -1545,6 +1551,10 @@ views:
             # laundry
             - entity: sensor.snr_laundryclimate_battery
               name: 'Laundry'
+              tap_action: more-info
+            # locker
+            - entity: sensor.snr_lockerclimate_battery
+              name: 'Locker'
               tap_action: more-info
             # main bedroom
             - entity: sensor.snr_mainbedroomclimate_battery
