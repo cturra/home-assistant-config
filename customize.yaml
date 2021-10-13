@@ -12,6 +12,10 @@ binary_sensor.snr_downtoiletleak_water_leak:
 binary_sensor.snr_espressoleak_water_leak:
   friendly_name: 'Espresso Machine leak'
 
+# espresso water filter (crawlspace)
+binary_sensor.snr_espressowaterfilterleak_water_leak:
+  friendly_name: 'Espresso Water Filter (Crawlspace) leak'
+
 # ensuite bathtub
 binary_sensor.snr_ensuitebathtubleak_water_leak:
   friendly_name: 'Ensuite Bathtub leak'

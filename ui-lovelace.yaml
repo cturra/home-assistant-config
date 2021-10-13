@@ -181,6 +181,11 @@ views:
             icon: 'mdi:water-alert'
             secondary_info: last-changed
             <<: *alert-style
+          - entity: binary_sensor.snr_espressowaterfilterleak_water_leak
+            name: 'Espresso Filter (Crawlspace): Water Detected'
+            icon: 'mdi:water-alert'
+            secondary_info: last-changed
+            <<: *alert-style
           - entity: binary_sensor.snr_ensuitebathtubleak_water_leak
             name: 'Ensuite Bathtub: Water Detected'
             icon: 'mdi:water-alert'
@@ -385,6 +390,11 @@ views:
               <<: *alert-style
             - entity: sensor.snr_espressoleak_battery
               name: 'Kitchen: Espresso Leak Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            - entity: sensor.snr_espressowaterfilterleak_battery
+              name: 'Crawlspace: Espresso Filter Leak Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
               secondary_info: last-changed
               <<: *alert-style
@@ -1679,6 +1689,10 @@ views:
             # espresso machine
             - entity: sensor.snr_espressoleak_battery
               name: 'Espresso Machine'
+              tap_action: more-info
+            # espresso water filter (in crawlspace)
+            - entity: sensor.snr_espressowaterfilterleak_battery
+              name: 'Espresso Water Filter'
               tap_action: more-info
             # fridge
             - entity: sensor.snr_fridgeleak_battery

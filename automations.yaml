@@ -449,8 +449,8 @@
     entity_id: switch.plg_officeairpurifier
   mode: single
 - id: '1613958937211'
-  alias: 'House: Nofity if leak detected'
-  description: send notification and announce on sonos speakers if leak is detected.
+  alias: 'House: Nofity if water leak detected'
+  description: send notification if water leak is detected.
   trigger:
   - platform: state
     entity_id: group.leak_sensors
@@ -469,19 +469,6 @@
             name: default
             critical: 1
             volume: 1
-  - repeat:
-      count: '3'
-      sequence:
-      - service: script.sonos_say
-        data:
-          sonos_entity:
-          - media_player.family_room
-          - media_player.main_bedroom
-          volume: 0.8
-          message: "{% for entity in trigger.to_state.attributes.entity_id %}\n  {%\
-            \ if is_state(entity, 'on') %}\n    ALERT. Water detected at {{ state_attr(entity,\
-            \ 'friendly_name') }} sensor.\n  {% endif %}\n{% endfor %}"
-          delay: 00:00:07
   mode: single
 - id: '1616274628046'
   alias: 'Espresso Machine: On in the morning'
@@ -896,4 +883,27 @@
   - service: switch.turn_off
     target:
       entity_id: switch.plg_zbrpt_crawlspace
+  mode: single
+- id: '1634077407692'
+  alias: 'House: Announce if water leak detected'
+  description: Announce on Sonos speakers if water leak is detected.
+  trigger:
+  - platform: state
+    entity_id: group.leak_sensors
+    to: 'on'
+  condition: []
+  action:
+  - repeat:
+      count: '3'
+      sequence:
+      - service: script.sonos_say
+        data:
+          sonos_entity:
+          - media_player.family_room
+          - media_player.main_bedroom
+          volume: 0.8
+          message: "{% for entity in trigger.to_state.attributes.entity_id %}\n  {%\
+            \ if is_state(entity, 'on') %}\n    ALERT. Water detected at {{ state_attr(entity,\
+            \ 'friendly_name') }} sensor.\n  {% endif %}\n{% endfor %}"
+          delay: 00:00:07
   mode: single
