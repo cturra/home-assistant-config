@@ -450,14 +450,14 @@
   mode: single
 - id: '1613958937211'
   alias: 'House: Nofity if water leak detected'
-  description: send notification if water leak is detected.
+  description: send notification to everyone if water leak is detected.
   trigger:
   - platform: state
     entity_id: group.leak_sensors
     to: 'on'
   condition: []
   action:
-  - service: notify.mobile_app_turraphone
+  - service: notify.grp_anne_chris_phones
     data:
       title: ❗💧 Water Detected
       message: "{% for entity in trigger.to_state.attributes.entity_id %}\n  {% if\

@@ -1,0 +1,8 @@
+# notification group
+- name: 'grp_anne_chris_phones'
+  platform: group
+  services:
+    # anne
+    - service: mobile_app_megatron
+    # chris
+    - service: mobile_app_turraphone
