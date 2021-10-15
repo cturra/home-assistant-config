@@ -30,7 +30,7 @@
       device_class: pm25
       unit_of_measurement: "μg/m³"
       state: >
-        {{ state_attr('sensor.purpleair','results')[0]['PM2_5Value'] | round(1) }}
+        {{ state_attr('sensor.purpleair','results')[0]['PM2_5Value'] | round(1, default=1.0) }}
 
     # fine particulate matter 10
     - name: 'PurpleAir PM 10'
@@ -38,7 +38,7 @@
       device_class: pm10
       unit_of_measurement: "μg/m³"
       state: >
-        {{ state_attr('sensor.purpleair','results')[0]['pm10_0_atm'] | round(1) }}
+        {{ state_attr('sensor.purpleair','results')[0]['pm10_0_atm'] | round(1, default=1.0) }}
 
     # -- xiaomi aqara --
     # temperature
@@ -47,7 +47,7 @@
       device_class: temperature
       unit_of_measurement: '°C'
       state: >
-        {{ state_attr('sensor.snr_outsideclimate_temperature', 'temperature') | round(1) }}
+        {{ state_attr('sensor.snr_outsideclimate_temperature', 'temperature') | round(1, default=10.0) }}
 
     # humidity
     - name: 'Outside Climate Humidity Rounded'
