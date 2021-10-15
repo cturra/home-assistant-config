@@ -327,8 +327,8 @@
     entity_id: switch.sw_porch
   mode: restart
 - id: '1612462343806'
-  alias: 'Garage Inside: Dehumidifier off when car door opened'
-  description: turn off dehumidifier when garage car door is opened.
+  alias: 'Garage Inside: Dehumidifier off when vehicle door opened'
+  description: turn off dehumidifier when garage vehicle door is opened.
   trigger:
   - platform: state
     entity_id: switch.sw_garagedoorcontact
@@ -636,12 +636,12 @@
       entity_id: switch.sw_shedfan
   mode: single
 - id: '1623889405239'
-  alias: 'Garage Inside: offer to open car door on Chris'' return'
+  alias: 'Garage Inside: Offer to open vehicle door on return home'
   description: notify chris' phone when it returns home from away and offer to open
     the garage door.
   trigger:
   - platform: state
-    entity_id: device_tracker.turraphone
+    entity_id: device_tracker.turraphone,device_tracker.iphone
     from: not_home
     to: home
   condition:
@@ -671,7 +671,7 @@
       entity_id: switch.sw_garagedooropener
   mode: single
 - id: '1624131994582'
-  alias: 'Garage Indoor: notify Chris when car door opened'
+  alias: 'Garage Indoor: notify Chris when vehicle door opened'
   description: send a notification to chris' phone, including a dynamic image, when
     the garage door has been opened.
   trigger:
