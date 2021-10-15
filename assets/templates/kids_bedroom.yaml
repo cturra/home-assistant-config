@@ -1,15 +1,5 @@
 ## KIDS BEDROOM
 
-- binary_sensor:
-    # -- sonoff --
-    # heating on/off (via plug)
-    - name: 'Kids Bedroom Heating State'
-      unique_id: kids_bedroom_heating_state
-      # power reported in watts
-      state: >
-        {{ (states('sensor.kids_room_heater_plug_energy_power') | int) > 10 }}
-
-
 - sensor:
     # -- xiaomi aqara --
     # temperature
