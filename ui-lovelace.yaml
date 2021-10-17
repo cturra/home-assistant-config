@@ -483,7 +483,7 @@ views:
             show_header_toggle: false
           entities:
             # Outdoor/Front
-            - entity: switch.sw_porch
+            - entity: light.group_porch_lights
               name: 'Porch'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
@@ -1050,7 +1050,7 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
-                - entity: switch.sw_porch
+                - entity: light.group_porch_lights
                   name: Porch
                   icon: 'mdi:lightbulb-outline'
                   state_color: true

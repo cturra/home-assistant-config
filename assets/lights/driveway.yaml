@@ -1,8 +1,0 @@
-## DRIVEWAY
-
-# group light bulbs
-- platform: group
-  name: 'Group Driveway Lights'
-  entities:
-    - light.blb_driveway1
-    - light.blb_driveway2
