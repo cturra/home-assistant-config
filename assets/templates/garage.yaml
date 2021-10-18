@@ -5,21 +5,18 @@
     # -- sinopé --
     # heating on/off
     - name: 'HVAC Garage Heating State'
-      unique_id: hvac_garage_heating_state
       state: >
         {{ (state_attr('climate.hvac_garagethermostat', 'pi_heating_demand') | int) > 0 }}
 
     # -- sonoff --
     # dehumidifier running (via plug)
     - name: 'Garage Dehumidifier State'
-      unique_id: garage_dehumidifier_state
       # power reported in watts
       state: >
         {{ (states('sensor.garage_dehumidifier_plug_energy_power') | int) > 10 }}
     
     # garage door open/closed
     - name: 'Garage Vehicle Door Contact State'
-      unique_id: garage_vehicle_door_contact_state
       device_class: garage_door
       # is_state() vs. states() to avoid unknown state at startup
       state: >
@@ -30,7 +27,6 @@
     # -- xiaomi aqara --
     # humidity
     - name: 'Garage Climate Humidity Rounded'
-      unique_id: garage_climate_humidity_rounded
       device_class: humidity
       unit_of_measurement: '%'
       state: > 
@@ -39,7 +35,6 @@
     # -- sinopé --
     # temperature
     - name: 'HVAC_GarageThermostat Temperature'
-      unique_id: hvac_garagethermostat_temperature
       device_class: temperature
       unit_of_measurement: '°C'
       state: > 

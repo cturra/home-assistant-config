@@ -4,7 +4,6 @@
     # -- ecobee --
     # HVAC any equipment running
     - name: 'HVAC Ecobee State'
-      unique_id: hvac_ecobee_state
       state: >
         {{
           state_attr('climate.amazon', 'fan')                       or
@@ -14,19 +13,16 @@
 
     # HVAC fan on/off
     - name: 'HVAC Ecobee Fan State'
-      unique_id: hvac_ecobee_fan_state
       state: >
         {{ state_attr('climate.amazon', 'fan') }}
 
     # HVAC heating on/off
     - name: 'HVAC Ecobee Heating State'
-      unique_id: hvac_ecobee_heating_state
       state: >
         {{ is_state_attr('climate.amazon', 'hvac_action', 'heating') }}
 
     # HVAC cooling on/off
     - name: 'HVAC Ecobee Cooling State'
-      unique_id: hvac_ecobee_cooling_state
       state: >
         {{ is_state_attr('climate.amazon', 'hvac_action', 'cooling') }}
 
@@ -35,7 +31,6 @@
     # -- ecobee --
     # current_temperature from ecobee
     - name: 'HVAC Ecobee Indoor Average Temperature'
-      unique_id: hvac_ecobee_indoor_avg_temperature
       device_class: temperature
       unit_of_measurement: '°C'
       state: >
@@ -43,7 +38,6 @@
 
     # humidity from ecobee
     - name: 'HVAC Ecobee Indoor Average Humidity'
-      unique_id: hvac_ecobee_indoor_avg_humidity
       device_class: humidity
       unit_of_measurement: '%'
       state: >
@@ -51,7 +45,6 @@
 
     # current mean humidity from min_max calculation
     - name: 'Indoor Mean Humidity'
-      unique_id: indoor_mean_humidity
       device_class: humidity
       unit_of_measurement: '%'
       state: >
