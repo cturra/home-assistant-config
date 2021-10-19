@@ -11,10 +11,10 @@
           is_state_attr('climate.amazon', 'hvac_action', 'cooling')
         }}
 
-    # HVAC fan on/off
+    # HVAC fan on/off (when heating/cooling NOT running)
     - name: 'HVAC Ecobee Fan State'
       state: >
-        {{ state_attr('climate.amazon', 'fan') }}
+        {{ is_state_attr('climate.amazon', 'hvac_action', 'fan') }}
 
     # HVAC heating on/off
     - name: 'HVAC Ecobee Heating State'
