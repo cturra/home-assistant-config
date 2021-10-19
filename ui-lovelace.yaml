@@ -546,14 +546,18 @@ views:
               name: 'Kitchen: Baby Monitor'
               icon: 'mdi:speaker'
               secondary_info: last-changed
-            # TV Room
-            - entity: light.tv_room_ceiling
+            # Living Room
+            - entity: light.living_room_ceiling
               type: 'custom:slider-entity-row'
               hide_state: true
-              name: 'TV Room: Ceiling'
+              name: 'Living Room: Ceiling'
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
               <<: *dimmer-entity-style
+            - entity: binary_sensor.living_room_tv_state
+              name: 'Living Room: TV'
+              icon: 'mdi:television'
+              secondary_info: last-changed
             # Office
             - entity: switch.sw_office
               name: "Office: Ceiling"
@@ -825,17 +829,17 @@ views:
                   icon: 'mdi:speaker'
                   state_color: true
 
-      # TV Room
+      # Living Room
       - type: 'custom:vertical-stack-in-card'
         cards:
         - type: markdown
           content: >
-            ### TV Room
+            ### Living Room
           <<: *header-style
         - type: entities
           <<: *entities-style
           entities:
-            - entity: light.tv_room_ceiling
+            - entity: light.living_room_ceiling
               name: 'Ceiling'
               type: 'custom:slider-entity-row'
               hide_state: true

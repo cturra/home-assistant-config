@@ -1,0 +1,13 @@
+## LIVING ROOM
+
+# Yamaha HTR-8063
+- platform: yamaha
+  name: 'Living Room Receiver'
+  host: !secret living_room_receiver_ip
+  source_names:
+    AUDIO2: 'HTPC'
+    AUDIO3: 'Airplay'
+  zone_ignore:
+    - 'Zone_2'
+  zone_names:
+    Main_Zone: 'Main Zone'

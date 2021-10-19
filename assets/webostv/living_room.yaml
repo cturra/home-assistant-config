@@ -1,0 +1,5 @@
+## LIVING ROOM
+
+# LG OLED55B8
+- name: 'Living Room TV'
+  host: !secret living_room_tv_ip
