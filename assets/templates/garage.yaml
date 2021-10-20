@@ -38,6 +38,13 @@
       state: >
         {{ state_attr('sensor.snr_garagefreezerclimate_temperature', 'temperature') | round(1, default=-20) }}
 
+    # fridge temperature
+    - name: 'Garage Fridge Temperature 1 Decimal'
+      device_class: temperature
+      unit_of_measurement: '°C'
+      state: >
+        {{ state_attr('sensor.snr_garagefridgeclimate_temperature', 'temperature') | round(1, default=1) }}
+
     # -- sinopé --
     # room temperature
     - name: 'HVAC_GarageThermostat Temperature'

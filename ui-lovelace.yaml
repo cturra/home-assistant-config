@@ -138,26 +138,35 @@ views:
           content: >
             ### Alerts
           <<: *header-style
-        # fridge temperature above normal!
+        # fridge temperature above normal (> 6.9c)
         - type: entity-filter
           entities:
-            - entity: sensor.fridge_temperature_1_decimal
+            # kitchen
+            - entity: sensor.kitchen_fridge_temperature_1_decimal
               name: 'Kitchen: Fridge Temperature'
+              icon: 'mdi:fridge-alert-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            # garage
+            - entity: sensor.garage_fridge_temperature_1_decimal
+              name: 'Garage: Fridge Temperature'
               icon: 'mdi:fridge-alert-outline'
               secondary_info: last-changed
               <<: *alert-style
           state_filter:
             - operator: ">"
-              value: "7.5"
+              value: "6.9"
           show_empty: false
         # freezer temperature above normal (> -14.0)
         - type: entity-filter
           entities:
+            # kitchen
             - entity: sensor.freezer_temperature_1_decimal
               name: 'Crawlspace: Freezer Temperature'
               icon: 'mdi:fridge-alert-outline'
               secondary_info: last-changed
               <<: *alert-style
+            # garage
             - entity: sensor.garage_freezer_temperature_1_decimal
               name: 'Garage: Freezer Temperature'
               icon: 'mdi:fridge-alert-outline'
@@ -253,6 +262,11 @@ views:
               <<: *alert-style
             - entity: sensor.snr_garagefreezerclimate_battery
               name: 'Garage Freezer: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            - entity: sensor.snr_garagefridgeclimate_battery
+              name: 'Garage Fridge: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
               secondary_info: last-changed
               <<: *alert-style
@@ -1577,6 +1591,10 @@ views:
             # garage freezer
             - entity: sensor.snr_garagefreezerclimate_battery
               name: 'Garage Freezer'
+              tap_action: more-info
+            # garage fridge
+            - entity: sensor.snr_garagefridgeclimate_battery
+              name: 'Garage Fridge'
               tap_action: more-info
             # kids bedroom
             - entity: sensor.snr_kidsroomclimate_battery

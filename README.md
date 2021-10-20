@@ -1,13 +1,14 @@
 ## About
 
-This is my personal Home Assistant configuration. My guiding princile is to have
-full local control of all my devices. I intend everything to run Tasmota, 
-ESPHome or speak Zigbee to my MQTT broker.
+This is my personal Home Assistant configuration. My guiding principle is to have
+full local control of all my devices. Below you will find a table of all the devices
+in my house that are integrated into home assistant. i've captured a bit about how
+they're connected.
 
-This project still an active work in progress. Stay tuned for more information about
-what hardware I am using, how it's configured, etc.
+You will notice there are frequent updates here, so please feel free to follow along.
+And, if you have any feedback, please feel free to reach out :smile:
 
-For now, please enjoy, and feedback always welcome!
+### Devices
 
 | Type              | Make       | Model         | Count | Connectivity       |
 | :---              | :---       | :---          | :--:  | :--                |
@@ -29,7 +30,7 @@ For now, please enjoy, and feedback always welcome!
 | Climate           | SensorPush | HT1           | 4     | HACS :: SensorPush |
 | Climate           | Ecobee     | v1            | 3     | HA :: Ecobee       |
 | Climate           | Tuya       | TS0201        | 1     | Zigbee2MQTT        |
-| Climate           | Xiaomi     | WSDCGQ11LM    | 11    | Zigbee2MQTT        |
+| Climate           | Xiaomi     | WSDCGQ11LM    | 12    | Zigbee2MQTT        |
 | Contact           | Xiaomi     | MCCGQ11LM     | 15    | Zigbee2MQTT        |
 | Leak              | Xiaomi     | SJCGQ11LM     | 10    | Zigbee2MQTT        |
 | Motion            | Ikea       | E1745         | 1     | Zigbee2MQTT        |
@@ -47,3 +48,10 @@ For now, please enjoy, and feedback always welcome!
 | Switch (3 Way)    | Treatlife  | SS02          | 2     | Tasmota            |
 | Switch (Dimmer)   | Treatlife  | DS02S         | 3     | Tasmota            |
 | Switch (Dimmer)   | Treatlife  | DS01C         | 2     | Tasmota            |
+
+ ### Infrastructure
+
+ | Model           | Role                                                              |
+ | :---            | :---                                                              |
+ | Odroid-N2+      | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
+ | Slaesh CC2652RB | [Zigbee Adapter ](https://slae.sh/projects/cc2652/)               |
