@@ -585,10 +585,10 @@ views:
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
               <<: *dimmer-entity-style
-            #- entity: switch.plg_mainbedroom1
-            #  name: 'Main Bedroom: Heater'
-            #  icon: 'mdi:radiator'
-            #  secondary_info: last-changed
+            - entity: switch.plg_mainbedroom1
+              name: 'Main Bedroom: Heater'
+              icon: 'mdi:radiator'
+              secondary_info: last-changed
             # Kids Bedroom
             - entity: light.kids_bedroom_ceiling
               type: 'custom:slider-entity-row'
@@ -896,8 +896,14 @@ views:
                   name: 'Ceiling'
                   icon: 'mdi:lightbulb-outline'
                   state_color: true
-            - type: 'custom:button-card'
-              color_type: blank
+            - type: entities
+              show_header_toggle: false
+              <<: *entities-style
+              entities:
+                - entity: switch.plg_mainbedroom1
+                  name: 'Heater'
+                  icon: 'mdi:radiator'
+                  state_color: true
 
       # Kids Bedroom
       - type: 'custom:vertical-stack-in-card'

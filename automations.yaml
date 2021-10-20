@@ -193,11 +193,11 @@
     entity_id: switch.sw_fronthouseoutlet
   mode: single
 - id: '1612298561421'
-  alias: Main Bedroom / Heater / OFF - morning
-  description: ''
+  alias: 'Main Bedroom: Heater Off in morning'
+  description: turn off heater before hvac system runs to heat house
   trigger:
   - platform: time
-    at: 05:30
+    at: 05:30:00
   condition:
   - condition: state
     entity_id: switch.plg_mainbedroom1
@@ -208,8 +208,8 @@
     entity_id: switch.plg_mainbedroom1
   mode: single
 - id: '1612299207142'
-  alias: Main Bedroom / Heater / ON
-  description: ''
+  alias: 'Main Bedroom: Heater On at night'
+  description: turn on heater when temperatures drop below 21.1c at night.
   trigger:
   - platform: time_pattern
     minutes: /15
@@ -217,11 +217,11 @@
   - condition: and
     conditions:
     - condition: numeric_state
-      below: '21.6'
+      below: '21.1'
       entity_id: sensor.snr_mainbedroomclimate_temperature
     - condition: time
-      after: '21:00'
-      before: 05:29
+      after: '21:00:00'
+      before: 05:29:00
     - condition: state
       entity_id: switch.plg_mainbedroom1
       state: 'off'

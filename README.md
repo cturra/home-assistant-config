@@ -36,7 +36,7 @@ For now, please enjoy, and feedback always welcome!
 | Motion            | Xiaomi     | RTCGQ11LM     | 3     | Zigbee2MQTT        |
 | Vibration         | Xiaomi     | DJT11LM       | 1     | Zigbee2MQTT        |
 | **Switches**      |
-| Plug              | Gosund     | WP2           | 1     | Tasmota            |
+| Plug              | Gosund     | WP2           | 2     | Tasmota            |
 | Plug              | Gosund     | WP5           | 3     | Tasmota            |
 | Plug              | Sonoff     | S31           | 4     | Tasmota            |
 | Plug              | Sonoff     | S31ZB         | 3     | Zigbee2MQTT        |
