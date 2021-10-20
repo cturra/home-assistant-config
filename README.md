@@ -29,7 +29,7 @@ For now, please enjoy, and feedback always welcome!
 | Climate           | SensorPush | HT1           | 4     | HACS :: SensorPush |
 | Climate           | Ecobee     | v1            | 3     | HA :: Ecobee       |
 | Climate           | Tuya       | TS0201        | 1     | Zigbee2MQTT        |
-| Climate           | Xiaomi     | WSDCGQ11LM    | 10    | Zigbee2MQTT        |
+| Climate           | Xiaomi     | WSDCGQ11LM    | 11    | Zigbee2MQTT        |
 | Contact           | Xiaomi     | MCCGQ11LM     | 15    | Zigbee2MQTT        |
 | Leak              | Xiaomi     | SJCGQ11LM     | 10    | Zigbee2MQTT        |
 | Motion            | Ikea       | E1745         | 1     | Zigbee2MQTT        |

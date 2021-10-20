@@ -158,6 +158,11 @@ views:
               icon: 'mdi:fridge-alert-outline'
               secondary_info: last-changed
               <<: *alert-style
+            - entity: sensor.garage_freezer_temperature_1_decimal
+              name: 'Garage: Freezer Temperature'
+              icon: 'mdi:fridge-alert-outline'
+              secondary_info: last-changed
+              <<: *alert-style
           state_filter:
             - operator: regex
               # matches number greater than -14°C
@@ -243,6 +248,11 @@ views:
               <<: *alert-style
             - entity: sensor.snr_garageclimate_battery
               name: 'Garage: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            - entity: sensor.snr_garagefreezerclimate_battery
+              name: 'Garage Freezer: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
               secondary_info: last-changed
               <<: *alert-style
@@ -454,8 +464,8 @@ views:
               <<: *alert-style
           state_filter:
             - operator: regex
-              # matches 0-24 (less than 25)
-              value: '^([0-2][0-4])$'
+              # matches 0-24 (less than 25) OR None
+              value: '^(([0-2][0-4])|(None))$'
           show_empty: false
         # weather advisories
         - type: entity-filter
@@ -1417,8 +1427,8 @@ views:
           line_width: 1
           hours_to_show: 24
           points_per_hour: 4
-          lower_bound_secondary: 20
-          upper_bound_secondary: 80
+          lower_bound_secondary: 25
+          upper_bound_secondary: 85
           group: true
           <<: *temp-graph-color_thresholds
           entities:
@@ -1557,6 +1567,10 @@ views:
             # garage
             - entity: sensor.snr_garageclimate_battery
               name: 'Garage'
+              tap_action: more-info
+            # garage freezer
+            - entity: sensor.snr_garagefreezerclimate_battery
+              name: 'Garage Freezer'
               tap_action: more-info
             # kids bedroom
             - entity: sensor.snr_kidsroomclimate_battery
