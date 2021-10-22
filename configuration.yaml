@@ -4,7 +4,7 @@ default_config:
 frontend:
   themes: !include_dir_merge_named themes
 homeassistant:
-  customize: !include customize.yaml
+  customize: !include_dir_merge_named assets/customize
 # http
 http: !include assets/core/http.yaml
 # lovelace
@@ -22,8 +22,10 @@ notify: !include notify.yaml
 scene: !include scenes.yaml
 script: !include_dir_merge_named assets/scripts
 sensor: !include_dir_merge_list assets/sensors
+switch: !include_dir_merge_list assets/switches
 template: !include_dir_merge_list assets/templates
 tts: !include assets/core/tts.yaml
+wake_on_lan:
 webostv: !include_dir_merge_list assets/webostv
 
 ## hass-sensorpush

@@ -1,0 +1,24 @@
+## MEDIA PLAYERS
+
+# chromecast audio > m-audio av40
+media_player.kitchen_speaker:
+  icon: 'mdi:cast-audio'
+
+# lg tv
+media_player.living_room_tv:
+  icon: 'mdi:television'
+
+# sonos play:5
+media_player.family_room:
+  friendly_name: 'Family Room Speaker'
+  icon: 'mdi:speaker'
+
+# sonos beam
+media_player.main_bedroom:
+  friendly_name: 'Main Bedroom Soundbar'
+  icon: 'mdi:soundbar'
+
+# yamaha receiver
+media_player.living_room_receiver_main_zone:
+  device_class: receiver
+  icon: 'mdi:audio-video'

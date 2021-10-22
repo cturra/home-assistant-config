@@ -578,7 +578,7 @@ views:
               icon: 'mdi:lightbulb-outline'
               secondary_info: last-changed
               <<: *dimmer-entity-style
-            - entity: binary_sensor.living_room_tv_state
+            - entity: switch.living_room_entertainment
               name: 'Living Room: TV'
               icon: 'mdi:television'
               secondary_info: last-changed
@@ -650,7 +650,7 @@ views:
               secondary_info: last-changed
             - entity: switch.sw_shedflood
               name: 'Shed: Flood'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:lightbulb-outline' # mdi:light-flood-down when v6.5.95 supported
               secondary_info: last-changed
             # HVAC (ecobee) / fan
             - entity: binary_sensor.hvac_ecobee_fan_state
@@ -670,13 +670,13 @@ views:
             # Media
             - entity: media_player.main_bedroom
               name: 'Main: Beam'
-              icon: 'mdi:speaker'
+              icon: 'mdi:cast-audio'
             - entity: 'media_player.kitchen_speaker'
               name: 'Kitchen: Speakers'
-              icon: 'mdi:speaker'
+              icon: 'mdi:cast-audio'
             - entity: media_player.family_room
               name: 'Family Room: Play:5'
-              icon: 'mdi:speaker'
+              icon: 'mdi:cast-audio'
           state_filter:
             - operator: regex
               # matches On/on OR playing
@@ -860,14 +860,22 @@ views:
           content: >
             ### Living Room
           <<: *header-style
-        - type: entities
-          <<: *entities-style
-          entities:
-            - entity: light.living_room_ceiling
-              name: 'Ceiling'
-              type: 'custom:slider-entity-row'
-              hide_state: true
-              icon: 'mdi:lightbulb-outline'
+        - type: horizontal-stack
+          cards:
+          - type: entities
+            <<: *entities-style
+            entities:
+              - entity: light.living_room_ceiling
+                name: 'Ceiling'
+                icon: 'mdi:lightbulb-outline'
+                state_color: true
+          - type: entities
+            <<: *entities-style
+            entities:
+              - entity: switch.living_room_entertainment
+                name: 'TV'
+                icon: 'mdi:television'
+                state_color: true
 
       # Office
       - type: 'custom:vertical-stack-in-card'
@@ -1114,7 +1122,7 @@ views:
                 # flood light
                 - entity: switch.sw_shedflood
                   name: Flood
-                  icon: 'mdi:lightbulb-outline'
+                  icon: 'mdi:lightbulb-outline' # mdi:light-flood-down when v6.5.95 supported
                   state_color: true
 
 

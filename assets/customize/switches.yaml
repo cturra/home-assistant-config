@@ -1,0 +1,12 @@
+## SWITCHES
+
+# garage (vehicle) door
+switch.sw_garagedoorcontact:
+  friendly_name: 'Garage Door Contact Sensor'
+  device_class: garage_door
+  icon_template: >-
+    {% if is_state('switch.sw_garagedoorcontact','on') %}
+      mdi:garage-open-variant
+    {% else %}
+      mdi:garage-variant
+    {% endif %}
