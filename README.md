@@ -12,20 +12,20 @@ And, if you have any feedback, please feel free to reach out :smile:
 
 | Type              | Make       | Model         | Count | Connectivity       |
 | :---              | :---       | :---          | :--:  | :--                |
-| **HVAC**          |
+| **HVAC**                                                                    |
 | Thermostat        | Ecobee     | Ecobee3       | 1     | HA :: Ecobee       |
 | Thermostat        | Sinopé     | TH1400ZB      | 1     | Zigbee2MQTT        |
-| **Lights**        |
+| **Lights**                                                                  |
 | Bulb (A25)        | Athom      | LB01-15W-E27  | 2     | Tasmota            |
 | Bulb (BR30)       | Athom      | LB03-12W-BR30 | 2     | Tasmota            |
 | Bulb (A19)        | Ikea       | LED1624G9     | 1     | Zigbee2MQTT        |
-| **Entertainment** |
+| **Entertainment**                                                           |
 | Audio             | Chromecast | Audio         | 1     | HA :: Chromecast   |
 | Speaker           | Sonos      | Play:5        | 1     | HA :: Sonos        |
 | Receiver          | Yamaha     | HTR-8063      | 1     | HA :: MediaPlayers |
 | Speaker           | Sonos      | Beam          | 1     | HA :: Sonos        |
 | TV                | LG         | OLED55B8      | 1     | HA :: WebOSTV      |
-| **Sensors**       |
+| **Sensors**                                                                 |
 | Air Quality       | PurpleAir  | PA-II         | 1     | RESP API           |
 | Climate           | SensorPush | HT1           | 4     | HACS :: SensorPush |
 | Climate           | Ecobee     | v1            | 3     | HA :: Ecobee       |
@@ -36,7 +36,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Motion            | Ikea       | E1745         | 1     | Zigbee2MQTT        |
 | Motion            | Xiaomi     | RTCGQ11LM     | 3     | Zigbee2MQTT        |
 | Vibration         | Xiaomi     | DJT11LM       | 1     | Zigbee2MQTT        |
-| **Switches**      |
+| **Switches**                                                                |
 | Plug              | Gosund     | WP2           | 2     | Tasmota            |
 | Plug              | Gosund     | WP5           | 3     | Tasmota            |
 | Plug              | Sonoff     | S31           | 4     | Tasmota            |
@@ -44,7 +44,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Remote            | Ikea       | E1810         | 1     | Zigbee2MQTT        |
 | Switch            | Sonoff     | Mini R1       | 3     | Tasmota            |
 | Switch            | Sonoff     | SV            | 1     | Tasmota            |
-| Switch            | Treatlife  | SS02S         | 9     | Tasmota            |
+| Switch            | Treatlife  | SS02S         | 10    | Tasmota            |
 | Switch (3 Way)    | Treatlife  | SS02          | 2     | Tasmota            |
 | Switch (Dimmer)   | Treatlife  | DS02S         | 3     | Tasmota            |
 | Switch (Dimmer)   | Treatlife  | DS01C         | 2     | Tasmota            |

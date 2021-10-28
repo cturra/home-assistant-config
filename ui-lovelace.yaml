@@ -506,60 +506,61 @@ views:
           card:
             show_header_toggle: false
           entities:
-            # Outdoor/Front
+            # Porch
             - entity: light.group_porch_lights
               name: 'Porch'
-              icon: 'mdi:lightbulb-outline'
-              secondary_info: last-changed
-            - entity: light.group_driveway_lights
-              name: 'Driveway'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:light-recessed'
               secondary_info: last-changed
             - entity: switch.sw_fronthouseoutlet
               name: 'Front: Outlet'
               icon: 'mdi:power'
               secondary_info: last-changed
+            # Driveway
+            - entity: light.group_driveway_lights
+              name: 'Driveway'
+              icon: 'mdi:coach-lamp'
+              secondary_info: last-changed
             # Family Room
             - entity: switch.sw_familyroomceiling
               name: 'Family Room: Ceiling'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:ceiling-light-outline'
               secondary_info: last-changed
             - entity: switch.plg_familyroomcabinet
               name: 'Family Room: Cabinet'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:light-recessed'
               secondary_info: last-changed
             - entity: switch.sw_familyroomcorner
               name: 'Family Room: Corner'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:light-recessed'
               secondary_info: last-changed
             - entity: light.family_room_wall
               type: 'custom:slider-entity-row'
               hide_state: true
-              name: 'Family Room: Wall'
-              icon: 'mdi:lightbulb-outline'
+              name: 'Family Room: Wall Sconce'
+              icon: 'mdi:wall-sconce-round-variant'
               secondary_info: last-changed
               <<: *dimmer-entity-style
             # Stairwell
             - entity: light.stairwell_ceiling
               name: 'Stairwell'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:chandelier'
               secondary_info: last-changed
               <<: *dimmer-entity-style
             # Kitchen
             - entity: light.kitchen_ceiling
               name: 'Kitchen: Ceiling'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:light-recessed'
               <<: *dimmer-entity-style
               secondary_info: last-changed
             - entity: switch.sw_kitchensink
               name: 'Kitchen: Sink'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:light-recessed'
               secondary_info: last-changed
             - entity: light.dining_room_ceiling
               type: 'custom:slider-entity-row'
               hide_state: true
               name: 'Kitchen: Table'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:ceiling-light-outline'
               secondary_info: last-changed
               <<: *dimmer-entity-style
             - entity: switch.plg_espressomachine
@@ -575,7 +576,7 @@ views:
               type: 'custom:slider-entity-row'
               hide_state: true
               name: 'Living Room: Ceiling'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:track-light'
               secondary_info: last-changed
               <<: *dimmer-entity-style
             - entity: switch.living_room_entertainment
@@ -585,7 +586,7 @@ views:
             # Office
             - entity: switch.sw_office
               name: "Office: Ceiling"
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:track-light'
               secondary_info: last-changed
             - entity: switch.plg_officeairpurifier
               name: 'Office: Air Purifier'
@@ -596,7 +597,7 @@ views:
               type: 'custom:slider-entity-row'
               hide_state: true
               name: 'Main Bedroom'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:dome-light'
               secondary_info: last-changed
               <<: *dimmer-entity-style
             - entity: switch.plg_mainbedroom1
@@ -608,7 +609,7 @@ views:
               type: 'custom:slider-entity-row'
               hide_state: true
               name: 'Kids Bedroom: Ceiling'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:dome-light'
               secondary_info: last-changed
               <<: *dimmer-entity-style
             - entity: light.blb_kidsroomlamp
@@ -626,14 +627,23 @@ views:
               name: 'Laundry: Dehumidifier'
               icon: 'mdi:water-outline'
               secondary_info: last-changed
+            # Crawlspace
+            - entity: switch.sw_crawlspaceentrance
+              name: 'Crawlspace: Entrance'
+              icon: 'mdi:lightbulb-outline'
+              secondary_info: last-changed
+            - entity: switch.plg_zbrtr_crawlspace
+              name: 'Crawlspace: Locker Dehumidifier'
+              icon: 'mdi:water-outline'
+              secondary_info: last-changed
             # Garage
             - entity: switch.sw_garageceilingmain
               name: 'Garage: Ceiling (Main)'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:lightbulb-fluorescent-tube-outline'
               secondary_info: last-changed
             - entity: switch.sw_garagesidedoor
               name: 'Garage: Side Door'
-              icon: 'mdi:lightbulb-outline'
+              icon: 'mdi:coach-lamp'
               secondary_info: last-changed
             - entity: switch.plg_garagedehumidifier
               name: 'Garage: Dehumidifier'
@@ -669,7 +679,7 @@ views:
               secondary_info: last-changed
             # Media
             - entity: media_player.main_bedroom
-              name: 'Main: Beam'
+              name: 'Main Bedroom: Beam'
               icon: 'mdi:cast-audio'
             - entity: 'media_player.kitchen_speaker'
               name: 'Kitchen: Speakers'
@@ -788,28 +798,33 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
-                - entity: switch.sw_familyroomceiling
-                  name: Ceiling
-                  icon: 'mdi:lightbulb-outline'
+                # display cabinet
+                - entity: switch.plg_familyroomcabinet
+                  name: Cabinet
+                  icon: 'mdi:light-recessed'
                   state_color: true
+                # display corner
+                - entity: switch.sw_familyroomcorner
+                  name: Corner
+                  icon: 'mdi:light-recessed'
+                  state_color: true
+                # wall sconce
                 - entity: light.family_room_wall
-                  name: Wall
-                  icon: 'mdi:lightbulb-outline'
-                - entity: light.stairwell_ceiling
-                  name: Stairwell
-                  icon: 'mdi:lightbulb-outline'
-                  state_color: true
+                  name: 'Wall Sconce'
+                  icon: 'mdi:wall-sconce-round-variant'
             - type: entities
               show_header_toggle: false
               <<: *entities-style
               entities:
-                - entity: switch.plg_familyroomcabinet
-                  name: Cabinet
-                  icon: 'mdi:lightbulb-outline'
+                # ceiling light
+                - entity: switch.sw_familyroomceiling
+                  name: Ceiling
+                  icon: 'mdi:ceiling-light-outline'
                   state_color: true
-                - entity: switch.sw_familyroomcorner
-                  name: Corner
-                  icon: 'mdi:lightbulb-outline'
+                # stairwell chandelier
+                - entity: light.stairwell_ceiling
+                  name: Stairwell
+                  icon: 'mdi:chandelier'
                   state_color: true
 
       # Kitchen
@@ -825,33 +840,39 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
-                - entity: light.kitchen_ceiling
-                  name: "Ceiling"
-                  icon: 'mdi:lightbulb-outline'
+                # baby monitor
+                - entity: switch.plg_kitchenoutlet1
+                  name: 'Baby Monitor'
+                  icon: 'mdi:speaker'
                   state_color: true
+                # espresso machine
                 - entity: switch.plg_espressomachine
-                  name: 'Espresso Machine'
+                  name: 'Espresso'
                   icon: 'mdi:coffee-maker-outline'
                   state_color: true
-                - entity: switch.plg_kitchenspeaker
-                  name: Speaker
-                  icon: 'mdi:speaker'
+                # sink
+                - entity: switch.sw_kitchensink
+                  name: Sink
+                  icon: 'mdi:light-recessed'
                   state_color: true
             - type: entities
               show_header_toggle: false
               <<: *entities-style
               entities:
-                - entity: switch.sw_kitchensink
-                  name: Sink
-                  icon: 'mdi:lightbulb-outline'
+                # ceiling light
+                - entity: light.kitchen_ceiling
+                  name: "Ceiling"
+                  icon: 'mdi:light-recessed'
                   state_color: true
-                - entity: light.dining_room_ceiling
-                  name: Table
-                  icon: 'mdi:lightbulb-outline'
-                - entity: switch.plg_kitchenoutlet1
-                  name: 'Baby Monitor'
+                # speaker
+                - entity: switch.plg_kitchenspeaker
+                  name: Speaker
                   icon: 'mdi:speaker'
                   state_color: true
+                # dining table
+                - entity: light.dining_room_ceiling
+                  name: Table
+                  icon: 'mdi:ceiling-light-outline'
 
       # Living Room
       - type: 'custom:vertical-stack-in-card'
@@ -865,16 +886,18 @@ views:
           - type: entities
             <<: *entities-style
             entities:
-              - entity: light.living_room_ceiling
-                name: 'Ceiling'
-                icon: 'mdi:lightbulb-outline'
+              # entertainment
+              - entity: switch.living_room_entertainment
+                name: 'TV'
+                icon: 'mdi:television'
                 state_color: true
           - type: entities
             <<: *entities-style
             entities:
-              - entity: switch.living_room_entertainment
-                name: 'TV'
-                icon: 'mdi:television'
+              # ceiling light
+              - entity: light.living_room_ceiling
+                name: 'Ceiling'
+                icon: 'mdi:track-light'
                 state_color: true
 
       # Office
@@ -889,16 +912,18 @@ views:
             - type: entities
               <<: *entities-style
               entities:
-              - entity: switch.sw_office
-                name: 'Ceiling'
-                icon: 'mdi:lightbulb-outline'
+              # air purifier
+              - entity: switch.plg_officeairpurifier
+                name: 'Air Purifier'
+                icon: 'mdi:air-purifier'
                 state_color: true
             - type: entities
               <<: *entities-style
               entities:
-              - entity: switch.plg_officeairpurifier
-                name: 'Air Purifier'
-                icon: 'mdi:air-purifier'
+              # ceiling light
+              - entity: switch.sw_office
+                name: 'Ceiling'
+                icon: 'mdi:track-light'
                 state_color: true
 
       # Main Bedroom
@@ -914,14 +939,16 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
+                # ceiling light
                 - entity: light.main_bedroom_ceiling
                   name: 'Ceiling'
-                  icon: 'mdi:lightbulb-outline'
+                  icon: 'mdi:dome-light'
                   state_color: true
             - type: entities
               show_header_toggle: false
               <<: *entities-style
               entities:
+                # heater
                 - entity: switch.plg_mainbedroom1
                   name: 'Heater'
                   icon: 'mdi:radiator'
@@ -940,9 +967,10 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
+                # ceiling light
                 - entity: light.kids_bedroom_ceiling
                   name: 'Ceiling'
-                  icon: 'mdi:lightbulb-outline'
+                  icon: 'mdi:dome-light'
                   state_color: true
             - type: entities
               show_header_toggle: false
@@ -1012,7 +1040,8 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
-                - entity: switch.plg_zbrpt_laundryroom
+                # dehumidifier
+                - entity: switch.plg_zbrtr_laundryroom
                   name: 'Dehumidifier'
                   icon: 'mdi:water-outline'
                   state_color: true
@@ -1054,7 +1083,7 @@ views:
                 # ceiling light
                 - entity: switch.sw_garageceilingmain
                   name: 'Ceiling'
-                  icon: 'mdi:lightbulb-outline'
+                  icon: 'mdi:lightbulb-fluorescent-tube-outline'
                   state_color: true
                 # dehumidifier
                 - entity: switch.plg_garagedehumidifier
@@ -1064,7 +1093,35 @@ views:
                 # side door light
                 - entity: switch.sw_garagesidedoor
                   name: 'Side Door'
+                  icon: 'mdi:coach-lamp'
+                  state_color: true
+
+      # Crawlspace
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Crawlspace
+          <<: *header-style
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              show_header_toggle: false
+              <<: *entities-style
+              entities:
+                # entrance light
+                - entity: switch.sw_crawlspaceentrance
+                  name: 'Entrance'
                   icon: 'mdi:lightbulb-outline'
+                  state_color: true
+            - type: entities
+              show_header_toggle: false
+              <<: *entities-style
+              entities:
+                # locker heater (dehumidifier)
+                - entity: switch.plg_zbrtr_crawlspace
+                  name: 'Locker'
+                  icon: 'mdi:water-outline'
                   state_color: true
 
       # Outdoor (Front)
@@ -1080,10 +1137,12 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
+                # driveway
                 - entity: light.group_driveway_lights
                   name: Driveway
-                  icon: 'mdi:lightbulb-outline'
+                  icon: 'mdi:coach-lamp'
                   state_color: true
+                # front outlet
                 - entity: switch.sw_fronthouseoutlet
                   name: Outlet
                   icon: 'mdi:power'
@@ -1092,9 +1151,10 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
+                # porch
                 - entity: light.group_porch_lights
                   name: Porch
-                  icon: 'mdi:lightbulb-outline'
+                  icon: 'mdi:light-recessed'
                   state_color: true
 
       # Shed
