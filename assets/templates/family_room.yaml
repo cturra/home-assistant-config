@@ -1,0 +1,8 @@
+## TEMPLATES / FAMILY ROOM
+
+- binary_sensor:
+  # -- xiaomi mi flora --
+  # plant needs water
+  - name: 'Plnt Parlor Palm Dry'
+    state: >
+      {{ state_attr('plant.family_room_parlor_palm', 'problem') | regex_search('moisture', ignorecase=True) }}

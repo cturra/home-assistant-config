@@ -11,7 +11,7 @@ anchors:
         :host ha-markdown.no-header {
           padding: 7px 2px 5px 5px;
         }
-  # alerts
+  # alerts (generic)
   alert-style: &alert-style
     card_mod:
       style: |
@@ -19,6 +19,15 @@ anchors:
           color: #e63900;
           --card-mod-icon-color: #e63900;
           --secondary-text-color: #aa3300;
+        }
+  # alerts (plants)
+  alert-plant-style: &alert-plant-style
+    card_mod:
+      style: |
+        :host {
+          color: #00b32d;
+          --card-mod-icon-color: #00b32d;
+          --secondary-text-color: #008020;
         }
   # entities
   entities-style: &entities-style
@@ -464,6 +473,17 @@ views:
               icon: 'mdi:battery-alert-variant-outline'
               secondary_info: last-changed
               <<: *alert-style
+            # plant sensors
+            - entity: sensor.plnt_family_room_parlor_palm_battery
+              name: 'Family Room: Parlor Palm Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            - entity: sensor.plnt_office_dracaena_trifasciata_battery
+              name: 'Office: Dracaena Trifasciata Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
             # remote controls
             - entity: sensor.sw_kidsroomremote_battery
               name: 'Kids Room: Lamp Remote Battery'
@@ -493,6 +513,22 @@ views:
             - operator: regex
               # matches any string that contains at least one non-space character
               value: '^(?!\s*$).+'
+          show_empty: false
+        # plants needs water!
+        - type: entity-filter
+          entities:
+            - entity: binary_sensor.plnt_dracaena_trifasciata_dry
+              name: 'Dracaena Trifasciata (Office)'
+              icon: 'mdi:sprout-outline'
+              secondary_info: last-changed
+              <<: *alert-plant-style
+            - entity: binary_sensor.plnt_parlor_palm_dry
+              name: 'Parlor Palm (Family Room)'
+              icon: 'mdi:sprout-outline'
+              secondary_info: last-changed
+              <<: *alert-plant-style
+          state_filter:
+            - "on"
           show_empty: false
 
       # devices that are active
@@ -1847,6 +1883,29 @@ views:
             # shed (bbq pad)
             - entity: sensor.snr_shedoutsidemotion_battery
               name: 'Shed Outdoor'
+              tap_action: more-info
+
+      # Plant Sensors
+      - type: 'custom:vertical-stack-in-card'
+        cards:
+        - type: markdown
+          content: >
+            ### Plant Sensors
+          <<: *header-style
+        - type: 'custom:battery-state-card'
+          color_gradient:
+            - "#a21c10" # red
+            - "#b3b300" # yellow
+            - "#24b300" # green
+          <<: *battery-state-style
+          entities:
+            # dracaena trifasciata (office)
+            - entity: sensor.plnt_office_dracaena_trifasciata_battery
+              name: 'Dracaena Trifasciata'
+              tap_action: more-info
+            # parlor palm (family room)
+            - entity: sensor.plnt_family_room_parlor_palm_battery
+              name: 'Parlor Palm'
               tap_action: more-info
 
       # Remote Controls

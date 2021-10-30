@@ -34,3 +34,10 @@ leak_sensors:
     - binary_sensor.snr_hotwatertankleak_water_leak
     - binary_sensor.snr_laundryleak_water_leak
     - binary_sensor.snr_upcommontoiletleak_water_leak
+
+# plants
+plants:
+  name: 'House Plants'
+  entities:
+    - plant.family_room_parlor_palm
+    - plant.office_dracaena_trifasciata

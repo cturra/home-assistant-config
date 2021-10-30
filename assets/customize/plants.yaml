@@ -1,0 +1,9 @@
+## CUSTOMIZE / PLANTS
+
+# family room parlor palm
+plant.family_room_parlor_palm:
+  icon: 'mdi:sprout-outline'
+
+# office snake plant
+plant.office_dracaena_trifasciata:
+  icon: 'mdi:sprout-outline'
