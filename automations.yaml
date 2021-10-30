@@ -984,3 +984,17 @@
     target:
       entity_id: light.group_porch_lights
   mode: single
+- id: '1635620369445'
+  alias: 'Crawlspace: Entrance light ON when door opened'
+  description: turn on crawlspace entrance lights when door is opened.
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.snr_crawlspacedoorcontact_contact
+    from: 'off'
+    to: 'on'
+  condition: []
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.sw_crawlspaceentrance
+  mode: single
