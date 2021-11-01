@@ -35,7 +35,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Leak              | Xiaomi     | SJCGQ11LM       | 10    | Zigbee2MQTT        |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT        |
 | Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT        |
-| Plant             | Xiammi     | Mi Flora (HHCC) | 2     | HA :: Mi Flora     |
+| Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | HA :: Mi Flora     |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT        |
 | **Switches**                                                                  |
 | Plug              | Gosund     | WP2             | 2     | Tasmota            |
@@ -56,3 +56,4 @@ And, if you have any feedback, please feel free to reach out :smile:
  | :---            | :---                                                              |
  | Odroid-N2+      | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
  | Slaesh CC2652RB | [Zigbee Adapter ](https://slae.sh/projects/cc2652/)               |
+ | TP-Link UB400   | Bluetooth USB Adapter                                             |

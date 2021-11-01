@@ -231,8 +231,8 @@
     entity_id: switch.plg_mainbedroom1
   mode: single
 - id: '1612306243899'
-  alias: 'Garage Inside: Lights on when side door opened'
-  description: turn on garage lights when side door is opened after sunset.
+  alias: 'Garage Inside: Lights on when person doors opened'
+  description: turn on garage lights when house or side door is opened after sunset.
   trigger:
   - platform: state
     to: 'on'
@@ -992,7 +992,15 @@
     entity_id: binary_sensor.snr_crawlspacedoorcontact_contact
     from: 'off'
     to: 'on'
-  condition: []
+  condition:
+  - condition: state
+    entity_id: switch.sw_crawlspaceentrance
+    state: 'off'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 10
+      milliseconds: 0
   action:
   - service: switch.turn_on
     target:

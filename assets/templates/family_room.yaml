@@ -1,8 +1,14 @@
 ## TEMPLATES / FAMILY ROOM
 
-- binary_sensor:
+- sensor:
   # -- xiaomi mi flora --
   # plant needs water
-  - name: 'Plnt Parlor Palm Dry'
+  - name: 'Plnt Parlor Palm Soil'
     state: >
-      {{ state_attr('plant.family_room_parlor_palm', 'problem') | regex_search('moisture', ignorecase=True) }}
+      {% if state_attr('plant.family_room_parlor_palm', 'problem') | regex_search('moisture low', ignorecase=True) %}
+        Soil Moisture Low
+      {% elif state_attr('plant.family_room_parlor_palm', 'problem') | regex_search('moisture high', ignorecase=True) %}
+        Soil Moisture High
+      {% else %}
+        Normal
+      {% endif %}

@@ -517,18 +517,19 @@ views:
         # plants needs water!
         - type: entity-filter
           entities:
-            - entity: binary_sensor.plnt_dracaena_trifasciata_dry
+            - entity: sensor.plnt_dracaena_trifasciata_soil
               name: 'Dracaena Trifasciata (Office)'
               icon: 'mdi:sprout-outline'
               secondary_info: last-changed
               <<: *alert-plant-style
-            - entity: binary_sensor.plnt_parlor_palm_dry
+            - entity: sensor.plnt_parlor_palm_soil
               name: 'Parlor Palm (Family Room)'
               icon: 'mdi:sprout-outline'
               secondary_info: last-changed
               <<: *alert-plant-style
           state_filter:
-            - "on"
+            - operator: regex
+              value: '(Moisture)'
           show_empty: false
 
       # devices that are active
