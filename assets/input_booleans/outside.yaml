@@ -1,0 +1,6 @@
+## INPUT BOOLEANS / OUTSIDE
+
+holiday_string_lights_outlet:
+  name: 'Holiday String Lighting Outlet'
+  icon: 'mdi:string-lights'
+  initial: false

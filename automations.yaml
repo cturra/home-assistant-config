@@ -11,25 +11,31 @@
     service: hassio.addon_restart
   mode: single
 - id: '1612291452533'
-  alias: Shed / Grow Light / ON - Sunrise
-  description: ''
+  alias: 'Shed: Plant Light On at Sunrise'
+  description: used when Rosemary plant is brought indoors during the winter.
   trigger:
   - platform: sun
     event: sunrise
-  condition: []
+  condition:
+  - condition: state
+    entity_id: input_boolean.shed_plant_lighting
+    state: 'on'
   action:
   - service: switch.turn_on
     data: {}
     entity_id: switch.plg_utility
   mode: single
 - id: '1612291484467'
-  alias: Shed / Grow Light / OFF - after 8 hrs
-  description: ''
+  alias: 'Shed: Plant Light Off after 8 hours'
+  description: used when Rosemary plant is brought indoors during the winter.
   trigger:
   - platform: sun
     event: sunrise
     offset: 08:00:00
-  condition: []
+  condition:
+  - condition: state
+    entity_id: input_boolean.shed_plant_lighting
+    state: 'on'
   action:
   - service: switch.turn_off
     data: {}
@@ -37,14 +43,19 @@
   mode: single
 - id: '1612291548796'
   alias: 'Shed: cycle fan ON for 10 minutes each hour'
-  description: (used for extra ventilation when drying garlic)
+  description: used for extra ventilation when drying garlic.
   trigger:
   - hours: /1
     platform: time_pattern
   condition:
-  - condition: state
-    entity_id: switch.sw_shedfan
-    state: 'off'
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.dry_garlic
+      state: 'on'
+    - condition: state
+      entity_id: switch.sw_shedfan
+      state: 'off'
   action:
   - service: switch.turn_on
     data: {}
@@ -163,30 +174,40 @@
       transition: 2
   mode: single
 - id: '1612295242635'
-  alias: Outside / Outlet / ON - Holiday Schedule
+  alias: 'Outside: Turn On holiday string lights around sunset'
   description: ''
   trigger:
   - platform: sun
     event: sunset
   condition:
-  - condition: state
-    entity_id: switch.sw_fronthouseoutlet
-    state: 'off'
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.holiday_string_lights_outlet
+      state: 'on'
+    - condition: state
+      entity_id: switch.sw_fronthouseoutlet
+      state: 'off'
   action:
   - service: switch.turn_on
     data: {}
     entity_id: switch.sw_fronthouseoutlet
   mode: single
 - id: '1612295307179'
-  alias: Outside / Outlet / OFF - Holiday Schedule
+  alias: 'Outside: Turn Off holiday string lights'
   description: ''
   trigger:
   - platform: time
-    at: '22:30'
+    at: '22:30:00'
   condition:
-  - condition: state
-    entity_id: switch.sw_fronthouseoutlet
-    state: 'on'
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: input_boolean.holiday_string_lights_outlet
+      state: 'on'
+    - condition: state
+      entity_id: switch.sw_fronthouseoutlet
+      state: 'on'
   action:
   - service: switch.turn_off
     data: {}
@@ -735,7 +756,7 @@
     data:
       topic: zigbee2mqtt/HVAC_GarageThermostat/set/thermostat_time
       payload: ''
-  mode: single
+  mode: restart
 - id: '1631040582872'
   alias: 'Garage Inside: HVAC off when vehicle door opened'
   description: turn heating mode off on thermostat every time door is opened to ensure
@@ -779,7 +800,7 @@
   action:
   - delay:
       hours: 0
-      minutes: 2
+      minutes: 4
       seconds: 0
       milliseconds: 0
   - service: mqtt.publish
