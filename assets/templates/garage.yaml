@@ -1,4 +1,4 @@
-## GARAGE
+## TEMPLATES / GARAGE
 
 # -- binary sensors --
 - binary_sensor:
@@ -28,8 +28,15 @@
     - name: 'Garage Climate Humidity Rounded'
       device_class: humidity
       unit_of_measurement: '%'
+      # return last value if we get 'unknown' state attribute from device. this
+      # happens for zigbee devices after home assistant restart.
       state: > 
-        {{ states('sensor.garage_mean_humidity_calculation') | int }}
+        {% if is_number(states('sensor.garage_mean_humidity_calculation')) %}
+          {{ states('sensor.garage_mean_humidity_calculation') | int }}
+        {% else %}
+          {# use previous value if sensor returns unknown #}
+          {{ states('sensor.garage_climate_humidity_rounded') }}
+        {% endif %}
     
     # freezer temperature
     - name: 'Garage Freezer Temperature 1 Decimal'

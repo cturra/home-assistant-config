@@ -1,4 +1,4 @@
-## SHED
+## TEMPLATES / SHED
 
 - sensor:
     # -- xiaomi aqara --
@@ -6,12 +6,26 @@
     - name: 'Shed Temperature 1 Decimal'
       device_class: temperature
       unit_of_measurement: '°C'
+      # return last value if we get 'unknown' state attribute from device. this
+      # happens for zigbee devices after home assistant restart.
       state: >
-        {{ state_attr('sensor.snr_shedclimate_temperature', 'temperature') | round(1, default=10.0) }}
+        {% if is_number(state_attr('sensor.snr_shedclimate_temperature', 'temperature')) %}
+          {{ state_attr('sensor.snr_shedclimate_temperature', 'temperature') | round(1, default=10.0) }}
+        {% else %}
+          {# use previous value if sensor returns unknown #}
+          {{ states('sensor.shed_temperature_1_decimal') }}
+        {% endif %}
 
     # humidity
     - name: 'Shed Humidity Rounded'
       device_class: humidity
       unit_of_measurement: '%'
+      # return last value if we get 'unknown' state attribute from device. this
+      # happens for zigbee devices after home assistant restart.
       state: > 
-        {{ state_attr('sensor.snr_shedclimate_humidity', 'humidity') | int }}
+        {% if is_number(state_attr('sensor.snr_shedclimate_humidity', 'humidity')) %}
+          {{ state_attr('sensor.snr_shedclimate_humidity', 'humidity') | int }}
+        {% else %}
+          {# use previous value if sensor returns unknown #}
+          {{ states('sensor.shed_humidity_rounded') }}
+        {% endif %}

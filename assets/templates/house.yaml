@@ -1,4 +1,4 @@
-## HOUSE
+## TEMPLATES / HOUSE
 
 - binary_sensor:
     # -- ecobee --
@@ -47,5 +47,12 @@
     - name: 'Indoor Mean Humidity'
       device_class: humidity
       unit_of_measurement: '%'
+      # return last value if we get 'unknown' state attribute from device. this
+      # happens for zigbee devices after home assistant restart.
       state: >
-        {{ states('sensor.indoor_mean_humidity_calculation') | int }}
+        {% if is_number(states('sensor.indoor_mean_humidity_calculation')) %}
+          {{ states('sensor.indoor_mean_humidity_calculation') | int }}
+        {% else %}
+          {# use previous value if sensor returns unknown #}
+          {{ states('sensor.indoor_mean_humidity') }}
+        {% endif %}
