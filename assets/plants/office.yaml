@@ -1,6 +1,18 @@
 ## PLANTS / OFFICE
 
-  # dracaena trifasciata (also known as: sansevieria trifasciata)
+  ## dracaena trifasciata (sansevieria trifasciata)
+  #   "max_light_mmol": 5400,
+  #   "min_light_mmol": 2000,
+  #   "max_light_lux": 60000,
+  #   "min_light_lux": 1500,
+  #   "max_temp": 32,
+  #   "min_temp": 10,
+  #   "max_env_humid": 85,
+  #   "min_env_humid": 30,
+  #   "max_soil_moist": 50,
+  #   "min_soil_moist": 7,
+  #   "max_soil_ec": 1000,
+  #   "min_soil_ec": 300
   office_dracaena_trifasciata:
     sensors:
       moisture: sensor.plnt_office_dracaena_trifasciata_moisture
