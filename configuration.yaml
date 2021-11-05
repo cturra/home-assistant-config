@@ -30,13 +30,8 @@ tts: !include assets/core/tts.yaml
 wake_on_lan:
 webostv: !include_dir_merge_list assets/webostv
 
-## hass-sensorpush
+## hacs: hass-sensorpush
 # https://github.com/rsnodgrass/hass-sensorpush
 sensorpush:
   username: !secret sensorpush_username
   password: !secret sensorpush_password
-
-# environment canada weather
-weather:
-  - platform: environment_canada
-    station: !secret environment_canada_station

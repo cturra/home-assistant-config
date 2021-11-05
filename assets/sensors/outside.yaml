@@ -1,7 +1,4 @@
-## OUTSIDE
-
-# weather canada
-- platform: environment_canada
+## SENSORS / OUTSIDE
 
 # purple air :: rest
 - platform: rest
