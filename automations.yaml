@@ -221,12 +221,13 @@
     at: 05:30:00
   condition:
   - condition: state
-    entity_id: switch.plg_mainbedroom1
     state: 'on'
+    entity_id: switch.plg_mainbedroomheater
   action:
   - service: switch.turn_off
     data: {}
-    entity_id: switch.plg_mainbedroom1
+    target:
+      entity_id: switch.plg_mainbedroomheater
   mode: single
 - id: '1612299207142'
   alias: 'Main Bedroom: Heater On at night'
@@ -244,12 +245,13 @@
       after: '21:00:00'
       before: 05:29:00
     - condition: state
-      entity_id: switch.plg_mainbedroom1
       state: 'off'
+      entity_id: switch.plg_mainbedroomheater
   action:
   - service: switch.turn_on
     data: {}
-    entity_id: switch.plg_mainbedroom1
+    target:
+      entity_id: switch.plg_mainbedroomheater
   mode: single
 - id: '1612306243899'
   alias: 'Garage Inside: Lights on when person doors opened'
@@ -800,14 +802,14 @@
   action:
   - delay:
       hours: 0
-      minutes: 4
+      minutes: 6
       seconds: 0
       milliseconds: 0
   - service: mqtt.publish
     data:
       topic: zigbee2mqtt/HVAC_GarageThermostat/set
       payload: '{"system_mode": "heat"}'
-  mode: single
+  mode: restart
 - id: '1631637344914'
   alias: 'Kids Bedroom: control lamp'
   description: control Ikea bulb in kids room from 5 button remote

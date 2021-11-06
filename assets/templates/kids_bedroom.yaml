@@ -1,5 +1,18 @@
-## KIDS BEDROOM
+## TEMPLATES / KIDS BEDROOM
 
+# -- binary sensors --
+- binary_sensor:
+    # -- sonoff --
+    # heater running (via plug)
+    - name: 'Kids Bedroom Heating State'
+      icon: 'mdi:radiator'
+      # power reported in watts
+      state: >
+        {% if is_number(states('sensor.kids_room_heater_plug_energy_power')) %}
+          {{ (states('sensor.kids_room_heater_plug_energy_power') | int(default=0)) > 10 }}
+        {% endif %}
+
+# -- sensors --
 - sensor:
     # -- xiaomi aqara --
     # temperature
@@ -7,4 +20,9 @@
       device_class: temperature
       unit_of_measurement: '°C'
       state: >
-        {{ state_attr('sensor.snr_kidsroomclimate_temperature', 'temperature') | round(1, default=20.0) }}
+        {% if is_number(state_attr('sensor.snr_kidsroomclimate_temperature', 'temperature')) %}
+          {{ state_attr('sensor.snr_kidsroomclimate_temperature', 'temperature') | round(1, default=20.0) }}
+        {% else %}
+          {# use previous value if sensor returns unknown #}
+          {{ states('sensor.kids_bedroom_temperature_1_decimal') }}
+        {% endif %}

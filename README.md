@@ -40,7 +40,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Switches**                                                                  |
 | Plug              | Gosund     | WP2             | 2     | Tasmota            |
 | Plug              | Gosund     | WP5             | 3     | Tasmota            |
-| Plug              | Sonoff     | S31             | 4     | Tasmota            |
+| Plug              | Sonoff     | S31             | 6     | Tasmota            |
 | Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT        |
 | Remote            | Ikea       | E1810           | 1     | Zigbee2MQTT        |
 | Switch            | Sonoff     | Mini R1         | 3     | Tasmota            |

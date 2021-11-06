@@ -138,6 +138,7 @@ views:
   - title: Overview
     path: overview
     icon: 'mdi:alert-box-outline'
+    theme: google-dark-theme
     badges: []
     cards:
       # devices in state out of normal range
@@ -518,12 +519,12 @@ views:
         - type: entity-filter
           entities:
             - entity: sensor.plnt_dracaena_trifasciata_soil
-              name: 'Dracaena Trifasciata (Office)'
+              name: 'Dracaena Trifasciata'
               icon: 'mdi:sprout-outline'
               secondary_info: last-changed
               <<: *alert-plant-style
             - entity: sensor.plnt_parlor_palm_soil
-              name: 'Parlor Palm (Family Room)'
+              name: 'Parlor Palm'
               icon: 'mdi:sprout-outline'
               secondary_info: last-changed
               <<: *alert-plant-style
@@ -637,7 +638,7 @@ views:
               icon: 'mdi:dome-light'
               secondary_info: last-changed
               <<: *dimmer-entity-style
-            - entity: switch.plg_mainbedroom1
+            - entity: switch.plg_mainbedroomheater
               name: 'Main Bedroom: Heater'
               icon: 'mdi:radiator'
               secondary_info: last-changed
@@ -657,10 +658,9 @@ views:
               secondary_info: last-changed
             - entity: binary_sensor.kids_bedroom_heating_state
               name: 'Kids Bedroom: Heater'
-              icon: 'mdi:radiator'
               secondary_info: last-changed
             # Laundry
-            - entity: switch.plg_zbrpt_laundryroom
+            - entity: switch.plg_zbrtr_laundryroom
               name: 'Laundry: Dehumidifier'
               icon: 'mdi:water-outline'
               secondary_info: last-changed
@@ -820,6 +820,7 @@ views:
     panel: false
     path: default_view
     icon: 'mdi:home-outline'
+    theme: google-dark-theme
     badges: []
     cards:
       # Family Room
@@ -923,18 +924,18 @@ views:
           - type: entities
             <<: *entities-style
             entities:
-              # entertainment
-              - entity: switch.living_room_entertainment
-                name: 'TV'
-                icon: 'mdi:television'
-                state_color: true
-          - type: entities
-            <<: *entities-style
-            entities:
               # ceiling light
               - entity: light.living_room_ceiling
                 name: 'Ceiling'
                 icon: 'mdi:track-light'
+                state_color: true
+          - type: entities
+            <<: *entities-style
+            entities:
+              # entertainment
+              - entity: switch.living_room_entertainment
+                name: 'TV'
+                icon: 'mdi:television'
                 state_color: true
 
       # Office
@@ -986,7 +987,7 @@ views:
               <<: *entities-style
               entities:
                 # heater
-                - entity: switch.plg_mainbedroom1
+                - entity: switch.plg_mainbedroomheater
                   name: 'Heater'
                   icon: 'mdi:radiator'
                   state_color: true
@@ -1227,6 +1228,7 @@ views:
   - title: Climate
     path: climate
     icon: 'mdi:home-thermometer-outline'
+    theme: google-dark-theme
     badges: []
     cards:
       # HOUSE INDOOR CLIMATE CARDS
@@ -1346,25 +1348,26 @@ views:
           group: true
           lower_bound_secondary: 35
           upper_bound_secondary: 70
+          font_size: 85
           entities:
             # temerature in downstairs family room
             - entity: sensor.family_room_temperature
               name: Downstairs
               show_fill: false
               show_points: false
-              color: '#fd9644'
+              color: '#eb3b5a'
             # temerature at upstairs hallway ecobee remote sensor
             - entity: sensor.uptairs_hallway_temperature
               name: Upstairs
               show_fill: false
               show_points: false
-              color: '#21b064'
+              color: '#e6b800'
             # temerature at crawlspace aqara sensor
             - entity: sensor.crawlspace_temperature_1_decimal
               name: Crawlspace
               show_fill: false
               show_points: false
-              color: '#eb3b5a'
+              color: '#21b064'
             # humidity (mean from all climate sensors)
             - entity: sensor.indoor_mean_humidity
               name: Humidity
@@ -1400,14 +1403,14 @@ views:
             # heating on/off
             - entity: binary_sensor.hvac_ecobee_heating_state
               name: Heating
-              color: '#f4ce71'
+              color: '#ffad33'
               show_legend: false
               show_line: false
               show_points: false
             # hvac fan on/off
             - entity: binary_sensor.hvac_ecobee_fan_state
               name: Fan
-              color: '#cccccc'
+              color: '#ffffff'
               show_legend: true
               show_line: false
               show_points: false
@@ -1493,14 +1496,14 @@ views:
             # garage car door opened/closed
             - entity: binary_sensor.garage_vehicle_door_contact_state
               name: 'Vehicle Door'
-              color: '#cccccc'
+              color: '#ffffff'
               show_legend: true
               show_line: false
               show_points: false
             # garage heater on/off
             - entity: binary_sensor.hvac_garage_heating_state
               name: Heating
-              color: '#f4ce71'
+              color: '#ffad33'
               show_legend: false
               show_line: false
               show_points: false
@@ -1672,6 +1675,7 @@ views:
   - title: Battery
     path: battery
     icon: 'mdi:battery-outline'
+    theme: google-dark-theme
     badges: []
     cards:
       # Climate Sensors
