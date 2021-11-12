@@ -8,7 +8,7 @@
       {% if state_attr('plant.family_room_parlor_palm', 'problem') | regex_search('moisture low', ignorecase=True) %}
         {# report the moisture unit difference - #}
         {% if is_number(state_attr('plant.family_room_parlor_palm', 'moisture') | int) %}
-          {% set offset = "%-g" | format((15 - (state_attr('plant.family_room_parlor_palm', 'moisture') | int))) %}
+          {% set offset = "%-g" | format((19 - (state_attr('plant.family_room_parlor_palm', 'moisture') | int))) %}
           Soil Moisture Low ({{ offset }}%)
         {% else %}
           Soil Moisture Low

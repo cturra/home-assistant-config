@@ -1,26 +1,30 @@
-## OUTSIDE
+## TEMPLATES / OUTSIDE
 
 - sensor:
     # -- purple air --
     # aqi description
     - name: 'PurpleAir AQI Description'
       state: >
-        {% if (states('sensor.purpleair')|float) >= 401.0 %}
-          Hazardous
-        {% elif (states('sensor.purpleair')|float) >= 301.0 %}
-          Hazardous
-        {% elif (states('sensor.purpleair')|float) >= 201.0 %}
-          Very Unhealthy
-        {% elif (states('sensor.purpleair')|float) >= 151.0 %}
-          Unhealthy
-        {% elif (states('sensor.purpleair')|float) >= 101.0 %}
-          Unhealthy for Sensitive Groups
-        {% elif (states('sensor.purpleair')|float) >= 51.0 %}
-          Moderate
-        {% elif (states('sensor.purpleair')|float) >= 0.0 %}
-          Good
+        {% if is_number(states('sensor.purpleair')) %}
+          {% if (states('sensor.purpleair') | float) >= 401.0 %}
+            Hazardous
+          {% elif (states('sensor.purpleair') | float) >= 301.0 %}
+            Hazardous
+          {% elif (states('sensor.purpleair') | float) >= 201.0 %}
+            Very Unhealthy
+          {% elif (states('sensor.purpleair') | float) >= 151.0 %}
+            Unhealthy
+          {% elif (states('sensor.purpleair') | float) >= 101.0 %}
+            Unhealthy for Sensitive Groups
+          {% elif (states('sensor.purpleair') | float) >= 51.0 %}
+            Moderate
+          {% elif (states('sensor.purpleair') | float) >= 0.0 %}
+            Good
+          {% else %}
+            Unknown
+          {% endif %}
         {% else %}
-          Undefined
+          Unknown
         {% endif %}
 
     # fine particulate matter 2.5
@@ -50,4 +54,9 @@
       device_class: humidity
       unit_of_measurement: '%'
       state: > 
-        {{ state_attr('sensor.snr_outsideclimate_humidity', 'humidity') | int }}
+        {% if is_number(state_attr('sensor.snr_outsideclimate_humidity', 'humidity')) %}
+          {{ state_attr('sensor.snr_outsideclimate_humidity', 'humidity') | int(default=50) }}
+        {% else %}
+          {# use previous value if sensor returns unknown #}
+          {{ states('sensor.outside_climate_humidity_rounded') }}
+        {% endif %}

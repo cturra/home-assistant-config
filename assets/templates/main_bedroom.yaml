@@ -1,4 +1,4 @@
-## MAIN BEDROOM
+## TEMPLATES / MAIN BEDROOM
 
 - sensor:
     # -- xiaomi aqara --
@@ -7,4 +7,9 @@
       device_class: temperature
       unit_of_measurement: '°C'
       state: >
-        {{ state_attr('sensor.snr_mainbedroomclimate_temperature', 'temperature') | round(1, default=20.0) }}
+        {% if is_number(state_attr('sensor.snr_mainbedroomclimate_temperature', 'temperature')) %}
+          {{ state_attr('sensor.snr_mainbedroomclimate_temperature', 'temperature') | round(1, default=20.0) }}
+        {% else %}
+          {# use previous value if sensor returns unknown #}
+          {{ states('sensor.main_bedroom_temperature_1_decimal') }}
+        {% endif %}

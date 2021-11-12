@@ -34,14 +34,18 @@
       device_class: temperature
       unit_of_measurement: '°C'
       state: >
-        {{ state_attr('climate.amazon', 'current_temperature') }}
+        {% if is_number(state_attr('climate.amazon', 'current_temperature')) %}
+          {{ state_attr('climate.amazon', 'current_temperature') }}
+        {% endif %}
 
     # humidity from ecobee
     - name: 'HVAC Ecobee Indoor Average Humidity'
       device_class: humidity
       unit_of_measurement: '%'
       state: >
-        {{ state_attr('climate.amazon', 'current_humidity') | float(2) }}
+        {% if is_number(state_attr('climate.amazon', 'current_humidity')) %}
+          {{ state_attr('climate.amazon', 'current_humidity') | float(2) }}
+        {% endif %}
 
     # current mean humidity from min_max calculation
     - name: 'Indoor Mean Humidity'

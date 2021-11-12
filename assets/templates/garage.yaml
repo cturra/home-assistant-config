@@ -6,14 +6,18 @@
     # heating on/off
     - name: 'HVAC Garage Heating State'
       state: >
-        {{ (state_attr('climate.hvac_garagethermostat', 'pi_heating_demand') | int) > 0 }}
+        {% if is_number(state_attr('climate.hvac_garagethermostat', 'pi_heating_demand')) %}
+          {{ state_attr('climate.hvac_garagethermostat', 'pi_heating_demand') > 0 }}
+        {% endif %}
 
     # -- sonoff --
     # dehumidifier running (via plug)
     - name: 'Garage Dehumidifier State'
       # power reported in watts
       state: >
-        {{ (states('sensor.garage_dehumidifier_plug_energy_power') | int) > 10 }}
+        {% if is_number(states('sensor.garage_dehumidifier_plug_energy_power')) %}
+          {{ (states('sensor.garage_dehumidifier_plug_energy_power') | int(default=0)) > 10 }}
+        {% endif %}
     
     # vehicle door open/closed
     - name: 'Garage Vehicle Door Contact State'
@@ -28,8 +32,6 @@
     - name: 'Garage Climate Humidity Rounded'
       device_class: humidity
       unit_of_measurement: '%'
-      # return last value if we get 'unknown' state attribute from device. this
-      # happens for zigbee devices after home assistant restart.
       state: > 
         {% if is_number(states('sensor.garage_mean_humidity_calculation')) %}
           {{ states('sensor.garage_mean_humidity_calculation') | int }}
@@ -43,19 +45,31 @@
       device_class: temperature
       unit_of_measurement: '°C'
       state: >
-        {{ state_attr('sensor.snr_garagefreezerclimate_temperature', 'temperature') | round(1, default=-20) }}
+        {% if is_number(state_attr('sensor.snr_garagefreezerclimate_temperature', 'temperature')) %}
+          {{ state_attr('sensor.snr_garagefreezerclimate_temperature', 'temperature') | round(1, default=-20) }}
+        {% else %}
+          {# use previous value if sensor returns unknown #}
+          {{ states('sensor.garage_freezer_temperature_1_decimal') }}
+        {% endif %}
 
     # fridge temperature
     - name: 'Garage Fridge Temperature 1 Decimal'
       device_class: temperature
       unit_of_measurement: '°C'
       state: >
-        {{ state_attr('sensor.snr_garagefridgeclimate_temperature', 'temperature') | round(1, default=1) }}
+        {% if is_number(state_attr('sensor.snr_garagefridgeclimate_temperature', 'temperature')) %}
+          {{ state_attr('sensor.snr_garagefridgeclimate_temperature', 'temperature') | round(1, default=1) }}
+        {% else %}
+          {# use previous value if sensor returns unknown #}
+          {{ states('sensor.garage_fridge_temperature_1_decimal') }}
+        {% endif %}
 
     # -- sinopé --
     # room temperature
     - name: 'HVAC_GarageThermostat Temperature'
       device_class: temperature
       unit_of_measurement: '°C'
-      state: > 
-        {{ state_attr('climate.hvac_garagethermostat', 'current_temperature') }}
+      state: >
+        {% if is_number(state_attr('climate.hvac_garagethermostat', 'current_temperature')) %}
+          {{ state_attr('climate.hvac_garagethermostat', 'current_temperature') }}
+        {% endif %}
