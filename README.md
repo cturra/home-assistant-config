@@ -52,8 +52,15 @@ And, if you have any feedback, please feel free to reach out :smile:
 
  ### Infrastructure
 
- | Model           | Role                                                              |
- | :---            | :---                                                              |
- | Odroid-N2+      | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
- | Slaesh CC2652RB | [Zigbee Adapter ](https://slae.sh/projects/cc2652/)               |
- | TP-Link UB400   | Bluetooth USB Adapter                                             |
+ | Model           | Count | Role                                                              |
+ | :---            | :--:  | :---                                                              |
+ | Odroid-N2+      | 1     | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
+ | Raspberry Pi 4  | 1     | Secondary Zigbee2MQTT server *                                    |
+ | Slaesh CC2652RB | 2     | [Zigbee Adapter ](https://slae.sh/projects/cc2652/)               |
+ | TP-Link UB400   | 1     | Bluetooth USB Adapter                                             |
+
+ \* *I was having some issues with Zigbee mesh stability when running the Sinopé thermostat
+ alongside the Xiaomi devices. From my understanding this is because Ziaomi doesn't completely
+ comply with the Zigbee standards. I've decided to seperate them onto different Zigbee2MQTT
+ servers and this seems to have addressed the issue with my lager mesh. Important note, I
+ am carefully running these networks on channels far away from one another.*
