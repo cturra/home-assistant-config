@@ -775,10 +775,9 @@
       milliseconds: 0
   condition: []
   action:
-  - service: mqtt.publish
-    data:
-      topic: zigbee2mqtt-pi/HVAC_GarageThermostat/set
-      payload: '{"system_mode": "off"}'
+  - service: switch.turn_off
+    target:
+      entity_id: switch.sw_hvac_garage_thermostat
   mode: single
 - id: '1631040781299'
   alias: 'Garage Inside: HVAC on when vehicle door closed'
@@ -794,21 +793,16 @@
       minutes: 0
       seconds: 2
       milliseconds: 0
-  condition:
-  - condition: state
-    entity_id: climate.hvac_garagethermostat
-    state: 'off'
-    attribute: system_mode
+  condition: []
   action:
   - delay:
       hours: 0
       minutes: 6
       seconds: 0
       milliseconds: 0
-  - service: mqtt.publish
-    data:
-      topic: zigbee2mqtt-pi/HVAC_GarageThermostat/set
-      payload: '{"system_mode": "heat"}'
+  - service: switch.turn_on
+    target:
+      entity_id: switch.sw_hvac_garage_thermostat
   mode: restart
 - id: '1631637344914'
   alias: 'Kids Bedroom: control lamp'
