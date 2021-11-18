@@ -23,7 +23,8 @@
   action:
   - service: switch.turn_on
     data: {}
-    entity_id: switch.plg_utility
+    target:
+      entity_id: switch.plg_zbrtr_shed
   mode: single
 - id: '1612291484467'
   alias: 'Shed: Plant Light Off after 8 hours'
@@ -39,7 +40,8 @@
   action:
   - service: switch.turn_off
     data: {}
-    entity_id: switch.plg_utility
+    target:
+      entity_id: switch.plg_zbrtr_shed
   mode: single
 - id: '1612291548796'
   alias: 'Shed: cycle fan ON for 10 minutes each hour'
