@@ -3,7 +3,7 @@
 # heating time on today
 - platform: history_stats
   name: 'HVAC Garage Heating Time On Today'
-  entity_id: sensor.hvac_garage_heating_state
+  entity_id: binary_sensor.hvac_garage_heating_state
   state: 'on'
   type: time
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"

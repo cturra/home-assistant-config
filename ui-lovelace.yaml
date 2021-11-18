@@ -170,15 +170,9 @@ views:
         # freezer temperature above normal (> -14.0)
         - type: entity-filter
           entities:
-            # kitchen
+            # crawlspace
             - entity: sensor.freezer_temperature_1_decimal
               name: 'Crawlspace: Freezer Temperature'
-              icon: 'mdi:fridge-alert-outline'
-              secondary_info: last-changed
-              <<: *alert-style
-            # garage
-            - entity: sensor.garage_freezer_temperature_1_decimal
-              name: 'Garage: Freezer Temperature'
               icon: 'mdi:fridge-alert-outline'
               secondary_info: last-changed
               <<: *alert-style
@@ -267,11 +261,6 @@ views:
               <<: *alert-style
             - entity: sensor.snr_garageclimate_battery
               name: 'Garage: Climate Sensor Battery'
-              icon: 'mdi:battery-alert-variant-outline'
-              secondary_info: last-changed
-              <<: *alert-style
-            - entity: sensor.snr_garagefreezerclimate_battery
-              name: 'Garage Freezer: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
               secondary_info: last-changed
               <<: *alert-style
@@ -505,7 +494,7 @@ views:
         # weather advisories
         - type: entity-filter
           entities:
-            - entity: sensor.warnings
+            - entity: sensor.pitt_meadows_warnings
               name: 'Weather'
               icon: 'mdi:weather-cloudy-alert'
               secondary_info: last-changed
@@ -686,7 +675,7 @@ views:
               name: 'Garage: Dehumidifier'
               icon: 'mdi:water-outline'
               secondary_info: last-changed
-            - entity: sensor.hvac_garage_heating_state
+            - entity: binary_sensor.hvac_garage_heating_state
               name: 'Garage: Heater'
               icon: 'mdi:radiator'
               secondary_info: last-changed
@@ -1696,10 +1685,6 @@ views:
             # garage
             - entity: sensor.snr_garageclimate_battery
               name: 'Garage'
-              tap_action: more-info
-            # garage freezer
-            - entity: sensor.snr_garagefreezerclimate_battery
-              name: 'Garage Freezer'
               tap_action: more-info
             # garage fridge
             - entity: sensor.snr_garagefridgeclimate_battery
