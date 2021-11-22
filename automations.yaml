@@ -194,8 +194,8 @@
     entity_id: switch.sw_fronthouseoutlet
   mode: single
 - id: '1612295307179'
-  alias: 'Outside: Turn Off holiday string lights'
-  description: ''
+  alias: 'Outside: Holiday Lighting Off'
+  description: turn off string lights and transition driveway lights to normal colour.
   trigger:
   - platform: time
     at: '22:30:00'
@@ -212,6 +212,9 @@
   - service: switch.turn_off
     data: {}
     entity_id: switch.sw_fronthouseoutlet
+  - service: scene.turn_on
+    target:
+      entity_id: scene.driveway_bulbs_normal_colour
   mode: single
 - id: '1612298561421'
   alias: 'Main Bedroom: Heater Off in morning'
@@ -988,8 +991,8 @@
       transition: 2
   mode: restart
 - id: '1634327400385'
-  alias: 'Outside: Turn off holiday lighting at midnight'
-  description: turn porch lights and transition driveway lights to normal colour.
+  alias: 'Porch: Lights Off at midnight'
+  description: turn porch lights off at midnight.
   trigger:
   - platform: time
     at: '23:59:00'
@@ -1000,9 +1003,6 @@
       transition: 2
     target:
       entity_id: light.group_porch_lights
-  - service: scene.turn_on
-    target:
-      entity_id: scene.driveway_bulbs_normal_colour
   mode: single
 - id: '1635620369445'
   alias: 'Crawlspace: Entrance light ON when door opened'
