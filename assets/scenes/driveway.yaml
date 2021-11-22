@@ -1,0 +1,24 @@
+## SCENES / DRIVEWAY
+
+- name: 'Driveway Bulbs Holiday Colour'
+  entities:
+    light.blb_driveway1:
+      state: 'on'
+      brightness_pct: 100
+      # green
+      rgb_color: [0,255,0]
+      transition: 2
+    light.blb_driveway2:
+      state: 'on'
+      brightness_pct: 100
+      # red
+      rgb_color: [255,0,0]
+      transition: 2
+
+- name: 'Driveway Bulbs Normal Colour'
+  entities:
+    light.group_driveway_lights:
+      state: 'on'
+      brightness_pct: 100
+      kelvin: 2100
+      transition: 2

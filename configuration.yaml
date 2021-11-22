@@ -21,7 +21,7 @@ light: !include_dir_merge_list assets/lights
 media_player: !include_dir_merge_list assets/media_players
 notify: !include notify.yaml
 plant: !include_dir_merge_named assets/plants
-scene: !include scenes.yaml
+scene: !include_dir_merge_list assets/scenes
 script: !include_dir_merge_named assets/scripts
 sensor: !include_dir_merge_list assets/sensors
 switch: !include_dir_merge_list assets/switches
