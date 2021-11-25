@@ -9,9 +9,6 @@ resources:
   # button-card
 - url: /hacsfiles/button-card/button-card.js
   type: module
-  # card-mod
-- url: /hacsfiles/lovelace-card-mod/card-mod.js
-  type: module
   # mini-graph-card
 - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
   type: module

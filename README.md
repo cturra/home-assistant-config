@@ -27,10 +27,10 @@ And, if you have any feedback, please feel free to reach out :smile:
 | TV                | LG         | OLED55B8        | 1     | HA :: WebOSTV      |
 | **Sensors**                                                                   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API           |
-| Climate           | SensorPush | HT1             | 4     | HACS :: SensorPush |
+| Climate           | SensorPush | HT1             | 3     | HACS :: SensorPush |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee       |
 | Climate           | Tuya       | TS0201          | 1     | Zigbee2MQTT        |
-| Climate           | Xiaomi     | WSDCGQ11LM      | 12    | Zigbee2MQTT        |
+| Climate           | Xiaomi     | WSDCGQ11LM      | 9     | Zigbee2MQTT        |
 | Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT        |
 | Leak              | Xiaomi     | SJCGQ11LM       | 10    | Zigbee2MQTT        |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT        |
