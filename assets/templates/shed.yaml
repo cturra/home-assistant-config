@@ -1,5 +1,6 @@
 ## TEMPLATES / SHED
 
+# --- sensors ---
 - sensor:
     # -- xiaomi aqara --
     # temperature

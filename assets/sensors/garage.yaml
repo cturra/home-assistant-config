@@ -43,3 +43,24 @@
     {% else %}
       0
     {% endif %}
+
+# -- LaCrosse TX141Bv3 (published by rtl_433) --
+# freezer
+- platform: mqtt
+  name: 'SNR Garage Freezer Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-127
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-127
+  value_template: >
+    {{ value_json.temperature_C }}
+
+# fridge
+- platform: mqtt
+  name: 'SNR Garage Fridge Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-57
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-57
+  value_template: >
+    {{ value_json.temperature_C }}

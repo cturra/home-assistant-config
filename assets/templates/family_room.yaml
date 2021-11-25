@@ -1,5 +1,6 @@
 ## TEMPLATES / FAMILY ROOM
 
+# --- sensors ---
 - sensor:
   # -- xiaomi mi flora --
   # plant soil moisture

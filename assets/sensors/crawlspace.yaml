@@ -1,0 +1,11 @@
+## SENSORS / CRAWLSPACE
+
+# grab temperature value from LaCrosse TX141Bv3 (published by rtl_433)
+- platform: mqtt
+  name: 'SNR Crawlspace Freezer Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-41
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-41
+  value_template: >
+    {{ value_json.temperature_C }}

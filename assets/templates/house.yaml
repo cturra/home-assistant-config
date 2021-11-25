@@ -1,5 +1,6 @@
 ## TEMPLATES / HOUSE
 
+# -- binary sensors --
 - binary_sensor:
     # -- ecobee --
     # HVAC any equipment running
@@ -27,6 +28,7 @@
         {{ is_state_attr('climate.amazon', 'hvac_action', 'cooling') }}
 
 
+# --- sensors ---
 - sensor:
     # -- ecobee --
     # current_temperature from ecobee

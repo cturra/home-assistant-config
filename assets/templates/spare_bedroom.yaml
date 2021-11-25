@@ -1,5 +1,6 @@
 ## TEMPLATES / SPARE BEDROOM
 
+# --- sensors ---
 - sensor:
     # -- xiaomi aqara --
     # temperature

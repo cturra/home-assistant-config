@@ -68,8 +68,8 @@ anchors:
         :host .entity-spacing {
           margin: 0px 0;
         }
-  # dimmer entity
-  dimmer-entity-style: &dimmer-entity-style
+  # neutral icon entity
+  neutral-icon-entity-style: &neutral-icon-entity-style
     card_mod:
       style: |
         :host {
@@ -171,8 +171,20 @@ views:
         - type: entity-filter
           entities:
             # crawlspace
-            - entity: sensor.freezer_temperature_1_decimal
+            - entity: sensor.snr_crawlspace_freezer_temperature
               name: 'Crawlspace: Freezer Temperature'
+              icon: 'mdi:fridge-alert-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            # kitchen
+            - entity: sensor.snr_kitchen_freezer_temperature
+              name: 'Kitchen: Freezer Temperature'
+              icon: 'mdi:fridge-alert-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            # garage
+            - entity: sensor.snr_garage_freezer_temperature
+              name: 'Garage: Freezer Temperature'
               icon: 'mdi:fridge-alert-outline'
               secondary_info: last-changed
               <<: *alert-style
@@ -264,11 +276,6 @@ views:
               icon: 'mdi:battery-alert-variant-outline'
               secondary_info: last-changed
               <<: *alert-style
-            - entity: sensor.snr_garagefridgeclimate_battery
-              name: 'Garage Fridge: Climate Sensor Battery'
-              icon: 'mdi:battery-alert-variant-outline'
-              secondary_info: last-changed
-              <<: *alert-style
             - entity: sensor.snr_kidsroomclimate_battery
               name: 'Kids Room: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
@@ -291,11 +298,6 @@ views:
               <<: *alert-style
             - entity: sensor.snr_officeclimate_battery
               name: 'Office: Climate Sensor Battery'
-              icon: 'mdi:battery-alert-variant-outline'
-              secondary_info: last-changed
-              <<: *alert-style
-            - entity: sensor.snr_outsideclimate_battery            
-              name: 'Outside: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
               secondary_info: last-changed
               <<: *alert-style
@@ -480,6 +482,37 @@ views:
               icon: 'mdi:battery-alert-variant-outline'
               secondary_info: last-changed
               <<: *alert-style
+            # temperature
+            - entity: binary_sensor.snr_crawlspace_freezer_temperature_battery_low
+              name: 'Crawlspace: Freezer Temperature Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            - entity: binary_sensor.snr_garage_freezer_temperature_battery_low
+              name: 'Garage: Freezer Temperature Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            - entity: binary_sensor.snr_garage_fridge_temperature_battery_low
+              name: 'Garage: Fridge Temperature Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            - entity: binary_sensor.snr_kitchen_freezer_temperature_battery_low
+              name: 'Kitchen: Freezer Temperature Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            - entity: binary_sensor.snr_kitchen_fridge_temperature_battery_low
+              name: 'Kitchen: Fridge Temperature Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
+            - entity: binary_sensor.snr_outside_temperature_battery_low
+              name: 'Outside: Temperature Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
             # vibration sensors (aqara)
             - entity: sensor.snr_officechairvibration_battery
               name: 'Office: Chair Vibration Sensor Battery'
@@ -488,8 +521,8 @@ views:
               <<: *alert-style
           state_filter:
             - operator: regex
-              # matches 0-24 (less than 25) OR None
-              value: '^(([0-2][0-4])|(None))$'
+              # matches 0-24 (less than 25) OR on
+              value: '^((0?[1-9]|1[0-9]|2[0-4])|(on))$'
           show_empty: false
         # weather advisories
         - type: entity-filter
@@ -538,6 +571,7 @@ views:
               name: 'Porch'
               icon: 'mdi:light-recessed'
               secondary_info: last-changed
+              <<: *neutral-icon-entity-style
             - entity: switch.sw_fronthouseoutlet
               name: 'Front: Outlet'
               icon: 'mdi:power'
@@ -547,6 +581,7 @@ views:
               name: 'Driveway'
               icon: 'mdi:coach-lamp'
               secondary_info: last-changed
+              <<: *neutral-icon-entity-style
             # Family Room
             - entity: switch.sw_familyroomceiling
               name: 'Family Room: Ceiling'
@@ -566,18 +601,26 @@ views:
               name: 'Family Room: Wall Sconce'
               icon: 'mdi:wall-sconce-round-variant'
               secondary_info: last-changed
-              <<: *dimmer-entity-style
+              <<: *neutral-icon-entity-style
+            - entity: switch.plg_holidaylights1
+              name: 'Family Room: Christmas Tree'
+              icon: 'mdi:pine-tree'
+              secondary_info: last-changed
+            - entity: switch.plg_holidaylights2
+              name: 'Family Room: Mantle Lights'
+              icon: 'mdi:string-lights'
+              secondary_info: last-changed
             # Stairwell
             - entity: light.stairwell_ceiling
               name: 'Stairwell'
               icon: 'mdi:chandelier'
               secondary_info: last-changed
-              <<: *dimmer-entity-style
+              <<: *neutral-icon-entity-style
             # Kitchen
             - entity: light.kitchen_ceiling
               name: 'Kitchen: Ceiling'
               icon: 'mdi:light-recessed'
-              <<: *dimmer-entity-style
+              <<: *neutral-icon-entity-style
               secondary_info: last-changed
             - entity: switch.sw_kitchensink
               name: 'Kitchen: Sink'
@@ -589,7 +632,7 @@ views:
               name: 'Kitchen: Table'
               icon: 'mdi:ceiling-light-outline'
               secondary_info: last-changed
-              <<: *dimmer-entity-style
+              <<: *neutral-icon-entity-style
             - entity: switch.plg_espressomachine
               name: 'Espresso Machine'
               icon: 'mdi:coffee-maker-outline'
@@ -605,7 +648,7 @@ views:
               name: 'Living Room: Ceiling'
               icon: 'mdi:track-light'
               secondary_info: last-changed
-              <<: *dimmer-entity-style
+              <<: *neutral-icon-entity-style
             - entity: switch.living_room_entertainment
               name: 'Living Room: TV'
               icon: 'mdi:television'
@@ -626,7 +669,7 @@ views:
               name: 'Main Bedroom'
               icon: 'mdi:dome-light'
               secondary_info: last-changed
-              <<: *dimmer-entity-style
+              <<: *neutral-icon-entity-style
             - entity: switch.plg_mainbedroomheater
               name: 'Main Bedroom: Heater'
               icon: 'mdi:radiator'
@@ -638,7 +681,7 @@ views:
               name: 'Kids Bedroom: Ceiling'
               icon: 'mdi:dome-light'
               secondary_info: last-changed
-              <<: *dimmer-entity-style
+              <<: *neutral-icon-entity-style
             - entity: light.blb_kidsroomlamp
               type: 'custom:slider-entity-row'
               hide_state: true
@@ -830,10 +873,15 @@ views:
                   name: Cabinet
                   icon: 'mdi:light-recessed'
                   state_color: true
-                # display corner
-                - entity: switch.sw_familyroomcorner
-                  name: Corner
-                  icon: 'mdi:light-recessed'
+                # christmas tree
+                - entity: switch.plg_holidaylights1
+                  name: 'Christmas Tree'
+                  icon: 'mdi:pine-tree'
+                  state_color: true
+                # mantle holiday lights
+                - entity: switch.plg_holidaylights2
+                  name: Mantle
+                  icon: 'mdi:string-lights'
                   state_color: true
                 # wall sconce
                 - entity: light.family_room_wall
@@ -848,11 +896,17 @@ views:
                   name: Ceiling
                   icon: 'mdi:ceiling-light-outline'
                   state_color: true
+                # display corner
+                - entity: switch.sw_familyroomcorner
+                  name: Corner
+                  icon: 'mdi:light-recessed'
+                  state_color: true
                 # stairwell chandelier
                 - entity: light.stairwell_ceiling
                   name: Stairwell
                   icon: 'mdi:chandelier'
                   state_color: true
+
 
       # Kitchen
       - type: 'custom:vertical-stack-in-card'
@@ -1578,9 +1632,8 @@ views:
           entity: weather.pitt_meadows
           name: " "
           custom:
-            - humidity: sensor.outside_climate_humidity_rounded
-            - pressure: sensor.snr_outsideclimate_pressure
-            - temp: sensor.outside_temperature_1_decimal
+            - humidity: sensor.snr_outside_humidity
+            - temp: sensor.snr_outside_temperature
           primary_info:
             - humidity
             - pressure
@@ -1686,10 +1739,6 @@ views:
             - entity: sensor.snr_garageclimate_battery
               name: 'Garage'
               tap_action: more-info
-            # garage fridge
-            - entity: sensor.snr_garagefridgeclimate_battery
-              name: 'Garage Fridge'
-              tap_action: more-info
             # kids bedroom
             - entity: sensor.snr_kidsroomclimate_battery
               name: 'Kids Bedroom'
@@ -1709,10 +1758,6 @@ views:
             # office
             - entity: sensor.snr_officeclimate_battery
               name: 'Office'
-              tap_action: more-info
-            # outside
-            - entity: sensor.snr_outsideclimate_battery
-              name: 'Outside'
               tap_action: more-info
             # shed
             - entity: sensor.snr_shedclimate_battery

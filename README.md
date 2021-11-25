@@ -36,6 +36,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT        |
 | Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT        |
 | Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | HA :: Mi Flora     |
+| Temperature       | Acurite    | 592TXR          | 1     | MQTT               |
+| Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT               |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT        |
 | **Switches**                                                                  |
 | Plug              | Gosund     | WP2             | 2     | Tasmota            |
@@ -54,6 +56,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 
  | Model           | Count | Role                                                              |
  | :---            | :--:  | :---                                                              |
+ | NooElec RTL-SDR | 1     | SDR USB Adapter w/ Antenna                                        |
  | Odroid-N2+      | 1     | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
  | Raspberry Pi 4  | 1     | Secondary Zigbee2MQTT server *                                    |
  | Slaesh CC2652RB | 2     | [Zigbee Adapter ](https://slae.sh/projects/cc2652/)               |

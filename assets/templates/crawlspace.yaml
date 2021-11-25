@@ -1,25 +1,38 @@
 ## TEMPLATES / CRAWLSPACE
 
-- sensor:
-    # -- xiaomi aqara --
-    # temperature
-    - name: 'Crawlspace Temperature 1 Decimal'
-      device_class: temperature
-      unit_of_measurement: '°C'
-      # return last value if we get 'unknown' state attribute from device. this
-      # happens for zigbee devices after home assistant restart.
-      state: >
-        {% if is_number(state_attr('sensor.snr_crawlspaceclimate_temperature', 'temperature')) %}
-          {{ state_attr('sensor.snr_crawlspaceclimate_temperature', 'temperature') | round(1, default=20.0) }}
-        {% else %}
-          {# use previous value if sensor returns unknown #}
-          {{ states('sensor.crawlspace_temperature_1_decimal') }}
-        {% endif %}
+# -- binary sensors --
+- binary_sensor:
+  # -- la crosse (rtl) --
+  # freezer temperature battery state
+  - name: 'SNR Crawlspace Freezer Temperature Battery Low'
+    state: >
+      {# battery_ok: 1=normal, 0=low #}
+      {% if is_number(state_attr('sensor.snr_crawlspace_freezer_temperature', 'battery_ok')) %}
+        {{ is_state_attr('sensor.snr_crawlspace_freezer_temperature', 'battery_ok', 0) }}
+      {% endif %}
 
-    # -- sensor push --
-    # (deep) freezer temperature
-    - name: 'Freezer Temperature 1 Decimal'
-      device_class: temperature
-      unit_of_measurement: '°C'
-      state: > 
-        {{ states('sensor.freezer_temperature') | round(1, default=0.0) }}
+
+# --- sensors ---
+- sensor:
+  # -- xiaomi aqara --
+  # temperature
+  - name: 'Crawlspace Temperature 1 Decimal'
+    device_class: temperature
+    unit_of_measurement: '°C'
+    # return last value if we get 'unknown' state attribute from device. this
+    # happens for zigbee devices after home assistant restart.
+    state: >
+      {% if is_number(state_attr('sensor.snr_crawlspaceclimate_temperature', 'temperature')) %}
+        {{ state_attr('sensor.snr_crawlspaceclimate_temperature', 'temperature') | round(1, default=20.0) }}
+      {% else %}
+        {# use previous value if sensor returns unknown #}
+        {{ states('sensor.crawlspace_temperature_1_decimal') }}
+      {% endif %}
+
+  # -- sensor push --
+  # (deep) freezer temperature
+  - name: 'Freezer Temperature 1 Decimal'
+    device_class: temperature
+    unit_of_measurement: '°C'
+    state: > 
+      {{ states('sensor.freezer_temperature') | round(1, default=0.0) }}
