@@ -9,7 +9,7 @@
   state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-189
   json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-189
   value_template: >
-    {{ value_json.temperature_C }}
+    {{ value_json.temperature_C | round(1, default=-15.0) }}
 
 # fridge
 - platform: mqtt
@@ -19,4 +19,4 @@
   state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-187
   json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-187
   value_template: >
-    {{ value_json.temperature_C }}
+    {{ value_json.temperature_C | round(1, default=1.0) }}

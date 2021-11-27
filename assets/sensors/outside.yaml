@@ -9,7 +9,7 @@
   state_topic: rtl_433/sensor/Acurite-Tower-9142
   json_attributes_topic: rtl_433/sensor/Acurite-Tower-9142
   value_template: >
-    {{ value_json.temperature_C | round(1, default=10) }}
+    {{ value_json.temperature_C | round(1, default=10.0) }}
 
 # humidity
 - platform: mqtt
@@ -22,7 +22,7 @@
     {{ value_json.humidity | int(default=50) }}
 
 
-# -- Purple Air :: rest --
+# -- Purple Air (rest) --
 - platform: rest
   name: 'PurpleAir'
 
