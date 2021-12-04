@@ -582,6 +582,10 @@ views:
               icon: 'mdi:coach-lamp'
               secondary_info: last-changed
               <<: *neutral-icon-entity-style
+            - entity: switch.plg_utility
+              name: 'Garage Door: Christmas Lights'
+              icon: 'mdi:string-lights'
+              secondary_info: last-changed
             # Family Room
             - entity: switch.sw_familyroomceiling
               name: 'Family Room: Ceiling'
@@ -1225,17 +1229,22 @@ views:
                   state_color: true
                 # front outlet
                 - entity: switch.sw_fronthouseoutlet
-                  name: Outlet
+                  name: 'Driveway Outlet'
                   icon: 'mdi:power'
                   state_color: true
             - type: entities
               show_header_toggle: false
               <<: *entities-style
               entities:
-                # porch
+                # porch lights
                 - entity: light.group_porch_lights
                   name: Porch
                   icon: 'mdi:light-recessed'
+                  state_color: true
+                # porch outlet
+                - entity: switch.plg_utility
+                  name: 'Porch Outlet'
+                  icon: 'mdi:power'
                   state_color: true
 
       # Shed
@@ -1599,7 +1608,7 @@ views:
           hours_to_show: 24
           points_per_hour: 4
           lower_bound_secondary: 25
-          upper_bound_secondary: 85
+          upper_bound_secondary: 90
           group: true
           <<: *temp-graph-color_thresholds
           entities:
