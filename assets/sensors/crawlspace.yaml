@@ -8,4 +8,4 @@
   state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-41
   json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-41
   value_template: >
-    {{ value_json.temperature_C | round(1, default=-15.0 }}
+    {{ value_json.temperature_C | round(1, default=-15.0) }}
