@@ -599,7 +599,7 @@ views:
               name: 'Family Room: Corner'
               icon: 'mdi:light-recessed'
               secondary_info: last-changed
-            - entity: light.family_room_wall
+            - entity: light.sw_familyroomwall
               type: 'custom:slider-entity-row'
               hide_state: true
               name: 'Family Room: Wall Sconce'
@@ -630,7 +630,7 @@ views:
               name: 'Kitchen: Sink'
               icon: 'mdi:light-recessed'
               secondary_info: last-changed
-            - entity: light.dining_room_ceiling
+            - entity: light.sw_diningroomceiling
               type: 'custom:slider-entity-row'
               hide_state: true
               name: 'Kitchen: Table'
@@ -646,7 +646,7 @@ views:
               icon: 'mdi:speaker'
               secondary_info: last-changed
             # Living Room
-            - entity: light.living_room_ceiling
+            - entity: light.sw_livingroomceiling
               type: 'custom:slider-entity-row'
               hide_state: true
               name: 'Living Room: Ceiling'
@@ -667,7 +667,7 @@ views:
               icon: 'mdi:air-purifier'
               secondary_info: last-changed
             # Main Bedroom
-            - entity: light.main_bedroom_ceiling
+            - entity: light.sw_mainbedroomceiling
               type: 'custom:slider-entity-row'
               hide_state: true
               name: 'Main Bedroom'
@@ -679,7 +679,7 @@ views:
               icon: 'mdi:radiator'
               secondary_info: last-changed
             # Kids Bedroom
-            - entity: light.kids_bedroom_ceiling
+            - entity: light.sw_kidsbedroomceiling
               type: 'custom:slider-entity-row'
               hide_state: true
               name: 'Kids Bedroom: Ceiling'
@@ -888,7 +888,7 @@ views:
                   icon: 'mdi:string-lights'
                   state_color: true
                 # wall sconce
-                - entity: light.family_room_wall
+                - entity: light.sw_familyroomwall
                   name: 'Wall Sconce'
                   icon: 'mdi:wall-sconce-round-variant'
             - type: entities
@@ -955,7 +955,7 @@ views:
                   icon: 'mdi:speaker'
                   state_color: true
                 # dining table
-                - entity: light.dining_room_ceiling
+                - entity: light.sw_diningroomceiling
                   name: Table
                   icon: 'mdi:ceiling-light-outline'
 
@@ -972,7 +972,7 @@ views:
             <<: *entities-style
             entities:
               # ceiling light
-              - entity: light.living_room_ceiling
+              - entity: light.sw_livingroomceiling
                 name: 'Ceiling'
                 icon: 'mdi:track-light'
                 state_color: true
@@ -1025,7 +1025,7 @@ views:
               <<: *entities-style
               entities:
                 # ceiling light
-                - entity: light.main_bedroom_ceiling
+                - entity: light.sw_mainbedroomceiling
                   name: 'Ceiling'
                   icon: 'mdi:dome-light'
                   state_color: true
@@ -1053,7 +1053,7 @@ views:
               <<: *entities-style
               entities:
                 # ceiling light
-                - entity: light.kids_bedroom_ceiling
+                - entity: light.sw_kidsbedroomceiling
                   name: 'Ceiling'
                   icon: 'mdi:dome-light'
                   state_color: true
