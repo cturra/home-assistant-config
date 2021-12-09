@@ -790,8 +790,8 @@
   mode: single
 - id: '1631040781299'
   alias: 'Garage Inside: HVAC on when vehicle door closed'
-  description: wait a couple mins after vehicle door closes to ensure temp normalizes
-    before returning the thermostat to heating mode.
+  description: wait a couple mins after vehicle door closes to ensure temp normalizes,
+    if current is below target temp, before returning the thermostat to heating mode.
   trigger:
   - platform: state
     entity_id: switch.sw_garagedoorcontact
@@ -806,7 +806,14 @@
   action:
   - delay:
       hours: 0
-      minutes: 6
+      minutes: "{% set current_temp = state_attr('climate.hvac_garagethermostat','current_temperature')\
+        \ %} {% set target_temp = state_attr('climate.hvac_garagethermostat','temperature')\
+        \ %} {% if is_number(current_temp) and is_number(target_temp) %}\n  {% set\
+        \ temp_diff = current_temp | float - target_temp | float %}\n  {# delay if\
+        \ temp diff is lower to give room time for normalization #}\n  {% if (temp_diff\
+        \ >= 3.0) %}\n    0\n  {% elif (temp_diff < 3.0) and (temp_diff > 0.0) %}\n\
+        \    3\n  {% else %}\n    6\n  {% endif %}\n{% else %}\n  {# non-numeric number\
+        \ returned. set a longer delay to be safe #}\n  6\n{% endif %}\n"
       seconds: 0
       milliseconds: 0
   - service: switch.turn_on
@@ -1029,4 +1036,31 @@
   - service: switch.turn_on
     target:
       entity_id: switch.sw_crawlspaceentrance
+  mode: single
+- id: '1638686806697'
+  alias: 'Garage Inside: Lights on when vehicle doors opened after sunset'
+  description: turn on garage lights when vehicle door is opened after sunset (returning
+    home only).
+  trigger:
+  - platform: state
+    entity_id: switch.sw_garagedoorcontact
+    to: 'on'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: sun.sun
+      state: below_horizon
+    - condition: state
+      entity_id: binary_sensor.snr_garagedoorhousecontact_contact
+      state: 'off'
+      for:
+        hours: 0
+        minutes: 10
+        seconds: 0
+        milliseconds: 0
+  action:
+  - service: switch.turn_on
+    data: {}
+    entity_id: switch.sw_garageceilingmain
   mode: single
