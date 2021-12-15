@@ -271,6 +271,11 @@ views:
               icon: 'mdi:battery-alert-variant-outline'
               secondary_info: last-changed
               <<: *alert-style
+            - entity: sensor.snr_ensuiteclimate_battery
+              name: 'Ensuite: Climate Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: sensor.snr_garageclimate_battery
               name: 'Garage: Climate Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'
@@ -733,7 +738,7 @@ views:
               secondary_info: last-changed
             - entity: switch.sw_shedflood
               name: 'Shed: Flood'
-              icon: 'mdi:lightbulb-outline' # mdi:light-flood-down when v6.5.95 supported
+              icon: 'mdi:light-flood-down'
               secondary_info: last-changed
             # HVAC (ecobee) / fan
             - entity: binary_sensor.hvac_ecobee_fan_state
@@ -1272,7 +1277,7 @@ views:
                 # flood light
                 - entity: switch.sw_shedflood
                   name: Flood
-                  icon: 'mdi:lightbulb-outline' # mdi:light-flood-down when v6.5.95 supported
+                  icon: 'mdi:light-flood-down'
                   state_color: true
 
 
@@ -1743,6 +1748,10 @@ views:
             # crawlspace
             - entity: sensor.snr_crawlspaceclimate_battery
               name: 'Crawspace'
+              tap_action: more-info
+            # ensuite
+            - entity: sensor.snr_ensuiteclimate_battery
+              name: 'Ensuite'
               tap_action: more-info
             # garage
             - entity: sensor.snr_garageclimate_battery

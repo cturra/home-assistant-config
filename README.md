@@ -30,7 +30,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Climate           | SensorPush | HT1             | 3     | HACS :: SensorPush |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee       |
 | Climate           | Tuya       | TS0201          | 1     | Zigbee2MQTT        |
-| Climate           | Xiaomi     | WSDCGQ11LM      | 9     | Zigbee2MQTT        |
+| Climate           | Xiaomi     | WSDCGQ11LM      | 10    | Zigbee2MQTT        |
 | Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT        |
 | Leak              | Xiaomi     | SJCGQ11LM       | 10    | Zigbee2MQTT        |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT        |
@@ -42,8 +42,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Switches**                                                                  |
 | Plug              | Gosund     | WP2             | 2     | Tasmota            |
 | Plug              | Gosund     | WP5             | 3     | Tasmota            |
-| Plug              | Sonoff     | S31             | 6     | Tasmota            |
-| Plug              | Sonoff     | S31ZB           | 4     | Zigbee2MQTT        |
+| Plug              | Sonoff     | S31             | 7     | Tasmota            |
+| Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT        |
 | Remote            | Ikea       | E1810           | 1     | Zigbee2MQTT        |
 | Switch            | Sonoff     | Mini R1         | 3     | Tasmota            |
 | Switch            | Sonoff     | SV              | 1     | Tasmota            |
