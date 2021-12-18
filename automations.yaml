@@ -1031,7 +1031,6 @@
       hours: 0
       minutes: 0
       seconds: 10
-      milliseconds: 0
   action:
   - service: switch.turn_on
     target:

@@ -7,6 +7,7 @@ anchors:
           padding-left: 5px;
           border-radius: 0px;
           font-size: 1.0em;
+          box-shadow: none;
         }
         :host ha-markdown.no-header {
           padding: 7px 2px 5px 5px;
@@ -36,6 +37,9 @@ anchors:
         :host .card-content {
           padding: 0px 10px;
         }
+        ha-card {
+          box-shadow: none;
+        }
   # thermostat
   thermostat-style: &thermostat-style
     card_mod:
@@ -51,6 +55,7 @@ anchors:
     card_mod:
       style: |
         ha-card {
+          box-shadow: none;
           height: 50px;
         }
     styles:
@@ -77,6 +82,10 @@ anchors:
         }
   # graph button-card style
   graph-button-card-style: &graph-button-card-style
+    style: |
+      ha-card {
+        box-shadow: none;
+      }
     styles:
       card:
         - margin: -3px
@@ -570,6 +579,11 @@ views:
         - type: entity-filter
           card:
             show_header_toggle: false
+          card_mod:
+            style: |
+              ha-card {
+                background-color: #ff0000;
+              }
           entities:
             # Porch
             - entity: light.group_porch_lights
@@ -1071,6 +1085,9 @@ views:
                   :host .card-content {
                     padding: 0px 10px 10px 10px;
                   }
+                  ha-card {
+                    box-shadow: none;
+                  }
               entities:
                 # lamp light bulb on/off control
                 - entity: light.blb_kidsroomlamp
@@ -1136,6 +1153,7 @@ views:
                   icon: 'mdi:water-outline'
                   state_color: true
             - type: 'custom:button-card'
+              <<: *entities-style
               color_type: blank
 
       # Garage
@@ -1164,6 +1182,10 @@ views:
                 card:
                   - font-size: 1.0em
                   - height: 100px
+              style: |
+                ha-card {
+                  box-shadow: none;
+                }
               entities:
             # switches
             - type: entities
@@ -1679,6 +1701,10 @@ views:
             styles:
               card:
                 - width: 25px
+            style: |
+              ha-card {
+                box-shadow: none;
+              }
           # pm 2.5
           - type: 'custom:button-card'
             entity: sensor.purpleair_pm_2_5
