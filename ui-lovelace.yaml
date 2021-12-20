@@ -161,13 +161,13 @@ views:
         - type: entity-filter
           entities:
             # kitchen
-            - entity: sensor.kitchen_fridge_temperature_1_decimal
+            - entity: sensor.snr_kitchen_fridge_temperature
               name: 'Kitchen: Fridge Temperature'
               icon: 'mdi:fridge-alert-outline'
               secondary_info: last-changed
               <<: *alert-style
             # garage
-            - entity: sensor.garage_fridge_temperature_1_decimal
+            - entity: sensor.snr_garage_fridge_temperature
               name: 'Garage: Fridge Temperature'
               icon: 'mdi:fridge-alert-outline'
               secondary_info: last-changed

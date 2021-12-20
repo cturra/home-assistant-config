@@ -18,19 +18,3 @@
       {% if is_number(state_attr('sensor.snr_kitchen_freezer_temperature', 'battery_ok')) %}
         {{ is_state_attr('sensor.snr_kitchen_freezer_temperature', 'battery_ok', 0) }}
       {% endif %}
-
-
-# --- sensors ---
-- sensor:
-  # -- sensor push --
-  # fridge temperature
-  - name: 'Kitchen Fridge Temperature 1 Decimal'
-    device_class: temperature
-    unit_of_measurement: '°C'
-    state: >
-      {% if is_number(states('sensor.kitchen_fridge_temperature')) %}
-        {{ states('sensor.kitchen_fridge_temperature') | round(1, default=1.0) }}
-      {% else %}
-        {# use previous value if sensor returns unknown #}
-        {{ states('sensor.kitchen_fridge_temperature_1_decimal') }}
-      {% endif %}

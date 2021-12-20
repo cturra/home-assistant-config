@@ -28,11 +28,3 @@
         {# use previous value if sensor returns unknown #}
         {{ states('sensor.crawlspace_temperature_1_decimal') }}
       {% endif %}
-
-  # -- sensor push --
-  # (deep) freezer temperature
-  - name: 'Freezer Temperature 1 Decimal'
-    device_class: temperature
-    unit_of_measurement: '°C'
-    state: > 
-      {{ states('sensor.freezer_temperature') | round(1, default=0.0) }}
