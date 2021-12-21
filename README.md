@@ -27,7 +27,6 @@ And, if you have any feedback, please feel free to reach out :smile:
 | TV                | LG         | OLED55B8        | 1     | HA :: WebOSTV      |
 | **Sensors**                                                                   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API           |
-| Climate           | SensorPush | HT1             | 3     | HACS :: SensorPush |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee       |
 | Climate           | Tuya       | TS0201          | 1     | Zigbee2MQTT        |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 10    | Zigbee2MQTT        |
@@ -44,6 +43,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Plug              | Gosund     | WP5             | 3     | Tasmota            |
 | Plug              | Sonoff     | S31             | 7     | Tasmota            |
 | Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT        |
+| Plug              | Wyze       | WLPPO1          | 1     | Tasmota            |
 | Remote            | Ikea       | E1810           | 1     | Zigbee2MQTT        |
 | Switch            | Sonoff     | Mini R1         | 3     | Tasmota            |
 | Switch            | Sonoff     | SV              | 1     | Tasmota            |

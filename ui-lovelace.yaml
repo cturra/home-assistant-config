@@ -601,7 +601,7 @@ views:
               icon: 'mdi:coach-lamp'
               secondary_info: last-changed
               <<: *neutral-icon-entity-style
-            - entity: switch.plg_utility
+            - entity: switch.plg_outsideutility1
               name: 'Garage Door: Christmas Lights'
               icon: 'mdi:string-lights'
               secondary_info: last-changed
@@ -1269,7 +1269,7 @@ views:
                   icon: 'mdi:light-recessed'
                   state_color: true
                 # porch outlet
-                - entity: switch.plg_utility
+                - entity: switch.plg_outsideutility1
                   name: 'Porch Outlet'
                   icon: 'mdi:power'
                   state_color: true
@@ -1972,10 +1972,7 @@ views:
             ### Plant Sensors
           <<: *header-style
         - type: 'custom:battery-state-card'
-          color_gradient:
-            - "#a21c10" # red
-            - "#b3b300" # yellow
-            - "#24b300" # green
+          <<: *battery-state-color_gradient
           <<: *battery-state-style
           entities:
             # dracaena trifasciata (office)
@@ -1995,10 +1992,7 @@ views:
             ### Remote Controls
           <<: *header-style
         - type: 'custom:battery-state-card'
-          color_gradient:
-            - "#a21c10" # red
-            - "#b3b300" # yellow
-            - "#24b300" # green
+          <<: *battery-state-color_gradient
           <<: *battery-state-style
           entities:
             # kids room remote
@@ -2014,10 +2008,7 @@ views:
             ### Vibration Sensors
           <<: *header-style
         - type: 'custom:battery-state-card'
-          color_gradient:
-            - "#a21c10" # red
-            - "#b3b300" # yellow
-            - "#24b300" # green
+          <<: *battery-state-color_gradient
           <<: *battery-state-style
           entities:
             # office chair
