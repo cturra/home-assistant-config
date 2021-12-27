@@ -24,7 +24,7 @@
   - service: switch.turn_on
     data: {}
     target:
-      entity_id: switch.plg_zbrtr_shed
+      entity_id: switch.plg_utility
   mode: single
 - id: '1612291484467'
   alias: 'Shed: Plant Light Off after 8 hours'
@@ -41,7 +41,7 @@
   - service: switch.turn_off
     data: {}
     target:
-      entity_id: switch.plg_zbrtr_shed
+      entity_id: switch.plg_utility
   mode: single
 - id: '1612291548796'
   alias: 'Shed: cycle fan ON for 10 minutes each hour'
@@ -900,7 +900,7 @@
     hours: /1
   condition:
   - condition: numeric_state
-    entity_id: sensor.snr_lockerclimate_humidity
+    entity_id: sensor.crawlspace_locker_mean_humidity_calculation
     above: '51.0'
   action:
   - service: switch.turn_on
@@ -915,7 +915,7 @@
     hours: /1
   condition:
   - condition: numeric_state
-    entity_id: sensor.snr_lockerclimate_humidity
+    entity_id: sensor.crawlspace_locker_mean_humidity_calculation
     below: '49.0'
   action:
   - service: switch.turn_off

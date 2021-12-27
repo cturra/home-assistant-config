@@ -497,6 +497,11 @@ views:
               secondary_info: last-changed
               <<: *alert-style
             # temperature
+            - entity: binary_sensor.snr_crawlspace_locker_temperature_battery_low
+              name: 'Crawlspace: Locker Temperature Sensor Battery'
+              icon: 'mdi:battery-alert-variant-outline'
+              secondary_info: last-changed
+              <<: *alert-style
             - entity: binary_sensor.snr_crawlspace_freezer_temperature_battery_low
               name: 'Crawlspace: Freezer Temperature Sensor Battery'
               icon: 'mdi:battery-alert-variant-outline'

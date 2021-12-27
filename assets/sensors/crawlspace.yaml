@@ -1,6 +1,18 @@
 ## SENSORS / CRAWLSPACE
 
-# grab temperature value from LaCrosse TX141Bv3 (published by rtl_433)
+# mean humidity from locker climate sensors:
+#  - xiaomi aqara
+#  - infactory ht
+- platform: min_max
+  name: 'Crawlspace Locker Mean Humidity Calculation'
+  type: mean
+  round_digits: 0
+  entity_ids:
+    - sensor.snr_lockerclimate_humidity
+    - sensor.snr_crawlspace_locker_humidity
+
+# -- LaCrosse TX141Bv3 (published by rtl_433) --
+# deep freezer temperature
 - platform: mqtt
   name: 'SNR Crawlspace Freezer Temperature'
   device_class: temperature
@@ -9,3 +21,24 @@
   json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-41
   value_template: >
     {{ value_json.temperature_C | round(1, default=-15.0) }}
+
+# -- inFactory TH / FanJu (published by rtl_433) --
+# locker temperature
+- platform: mqtt
+  name: 'SNR Crawlspace Locker Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: rtl_433/sensor/inFactory-TH-235
+  json_attributes_topic: rtl_433/sensor/inFactory-TH-235
+  value_template: >
+    {{ value_json.temperature_C | round(1, default=15.0) }}
+
+# locker humidity
+- platform: mqtt
+  name: 'SNR Crawlspace Locker Humidity'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state_topic: rtl_433/sensor/inFactory-TH-235
+  json_attributes_topic: rtl_433/sensor/inFactory-TH-235
+  value_template: >
+    {{ value_json.humidity }}
