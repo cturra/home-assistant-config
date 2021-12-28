@@ -759,6 +759,10 @@ views:
               name: 'Shed: Flood'
               icon: 'mdi:light-flood-down'
               secondary_info: last-changed
+            - entity: switch.plg_utility
+              name: 'Shed: Grow Light'
+              icon: 'mdi:ceiling-light-outline'
+              secondary_info: last-changed
             # HVAC (ecobee) / fan
             - entity: binary_sensor.hvac_ecobee_fan_state
               name: 'HVAC: Fan'
@@ -1296,6 +1300,11 @@ views:
                 - entity: switch.sw_shedfan
                   name: Fan
                   icon: 'mdi:fan'
+                  state_color: true
+                # grow light
+                - entity: switch.plg_utility
+                  name: 'Grow Light'
+                  icon: 'mdi:ceiling-light-outline'
                   state_color: true
             - type: entities
               show_header_toggle: false
