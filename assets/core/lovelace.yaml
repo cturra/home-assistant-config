@@ -3,6 +3,9 @@ mode: yaml
 
 # add-ons
 resources:
+  # auto-entities
+- url: /hacsfiles/lovelace-auto-entities/auto-entities.js
+  type: module              
   # battery-state-card
 - url: /hacsfiles/battery-state-card/battery-state-card.js
   type: module

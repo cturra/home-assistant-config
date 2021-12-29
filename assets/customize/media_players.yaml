@@ -2,6 +2,7 @@
 
 # chromecast audio > m-audio av40
 media_player.kitchen_speaker:
+  friendly_name: 'Kitchen: Speakers'
   icon: 'mdi:cast-audio'
 
 # lg tv
@@ -9,13 +10,13 @@ media_player.living_room_tv:
   icon: 'mdi:television'
 
 # sonos play:5
-media_player.family_room:
-  friendly_name: 'Family Room Speaker'
+media_player.family_room_speaker:
+  friendly_name: 'Family Room: Speaker'
   icon: 'mdi:speaker'
 
 # sonos beam
-media_player.main_bedroom:
-  friendly_name: 'Main Bedroom Soundbar'
+media_player.main_bedroom_speaker:
+  friendly_name: 'Main Bedroom: Soundbar'
   icon: 'mdi:soundbar'
 
 # yamaha receiver

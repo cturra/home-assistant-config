@@ -2,6 +2,41 @@
 
 ## ------ contact sensors ------
 
+## doors
+# crawlspace door
+binary_sensor.snr_crawlspacedoorcontact_contact:
+  friendly_name: 'Crawlspace: Door'
+
+# crawlspace locker
+binary_sensor.snr_lockercontact_contact:
+  friendly_name: 'Crawlspace: Locker Door'
+
+# front door
+binary_sensor.snr_frontdoorcontact_contact:
+  friendly_name: 'Front Door'
+
+# garage vehicle door
+binary_sensor.garage_vehicle_door_contact_state:
+  friendly_name: 'Garage: Vehicle Door'
+
+# garage house door
+binary_sensor.snr_garagedoorhousecontact_contact:
+  friendly_name: 'Garage: House Door'
+
+# garage side door
+binary_sensor.snr_garagedoorsidecontact_contact:
+  friendly_name: 'Garage: Side Door'
+
+# patio door 
+binary_sensor.snr_patiodoorcontact_contact:
+  friendly_name: 'Patio Door'
+
+# shed door
+binary_sensor.snr_sheddoorcontact_contact:
+  friendly_name: 'Shed: Door'
+
+
+## windows
 # common bathroom window
 binary_sensor.snr_upcommonbathroomwindowcontact_contact:
   friendly_name: 'Common Bathroom Window contact'
@@ -9,38 +44,73 @@ binary_sensor.snr_upcommonbathroomwindowcontact_contact:
 
 # ensuite window
 binary_sensor.snr_ensuitewindowcontact_contact:
-  friendly_name: 'Ensuite Window contact'
+  friendly_name: 'Ensuite: Window'
   device_class: window
 
 # family room front window
 binary_sensor.srn_familyroomwindowfrontcontact_contact:
-  friendly_name: 'Family Room Front Window contact'
+  friendly_name: 'Family Room: Front Window'
   device_class: window
 
 # family room side/left window
 binary_sensor.snr_familyroomwindowsideleftcontact_contact:
-  friendly_name: 'Family Room Side/Left Window contact'
+  friendly_name: 'Family Room: Side/Left Window'
   device_class: window
 
 # family room side/right window
 binary_sensor.snr_familyroomwindowsiderightcontact_contact:
-  friendly_name: 'Family Room Side/Right Window contact'
+  friendly_name: 'Family Room: Side/Right Window'
   device_class: window
 
 # kitchen window
 binary_sensor.snr_kitchenwindowcontact_contact:
-  friendly_name: 'Kitchen Window contact'
+  friendly_name: 'Kitchen: Window'
   device_class: window
 
 # laundry window
 binary_sensor.snr_laundryroomwindowcontact_contact:
-  friendly_name: 'Laundry Window contact'
+  friendly_name: 'Laundry: Window'
   device_class: window
 
 # main bedroom window
 binary_sensor.snr_mainbedroomwindowcontact_contact:
-  friendly_name: 'Main Bedroom Window contact'
+  friendly_name: 'Main Bedroom: Window'
   device_class: window
+
+# upstairs bathroom window
+binary_sensor.snr_upcommonbathroomwindowcontact_contact:
+  friendly_name: 'Upstairs Bathroom: Window'
+  device_class: window
+
+## ------ hvac binary_sensors ------
+
+# garage heating
+binary_sensor.hvac_garage_heating_state:
+  friendly_name: 'Garage: Heating'
+  icon: 'mdi:fire'
+
+# house cooling
+binary_sensor.hvac_ecobee_cooling_state:
+  friendly_name: 'House: Cooling'
+  icon: 'mdi:snowflake'
+
+# house fan
+binary_sensor.hvac_ecobee_fan_state:
+  friendly_name: 'House: Fan'
+  icon: 'mdi:fan'
+
+# house heating
+binary_sensor.hvac_ecobee_heating_state:
+  friendly_name: 'House: Heating'
+  icon: 'mdi:fire'
+
+# kids bedroom heating
+binary_sensor.kids_bedroom_heating_state:
+  friendly_name: 'Kids Bedroom: Heating'
+
+# main bedroom heating
+binary_sensor.main_bedroom_heating_state:
+  friendly_name: 'Main Bedroom: Heating'
 
 
 ## ------ leak sensors ------
@@ -84,3 +154,39 @@ binary_sensor.snr_laundryleak_water_leak:
 # upstairs common bathroom toilet
 binary_sensor.snr_upcommontoiletleak_water_leak:
   friendly_name: 'Upstairs Bathroom Toilet leak'
+
+
+## ------ plant sensors ------
+
+# office: snake plant
+sensor.plnt_dracaena_trifasciata_soil:
+  friendly_name: 'Office: Dracaena Trifasciata'
+
+# family room: parlor palm
+sensor.plnt_parlor_palm_soil:
+  friendly_name: 'Family Room: Parlor Palm'
+
+
+## ------ temperature sensors ------
+
+## freezers
+# crawlspace freezer
+sensor.snr_crawlspace_freezer_temperature:
+  friendly_name: 'Crawlspace: Deep Freezer'
+
+# garage freezer
+sensor.snr_garage_freezer_temperature:
+  friendly_name: 'Garage: Freezer'
+
+# kitchen freezer
+sensor.snr_kitchen_freezer_temperature:
+  friendly_name: 'Kitchen: Freezer'
+
+## fridges
+# garage fridge
+sensor.snr_garage_fridge_temperature:
+  friendly_name: 'Garage: Fridge'
+
+# kitchen fridge
+sensor.snr_kitchen_fridge_temperature:
+  friendly_name: 'Kitchen: Fridge'

@@ -1,5 +1,18 @@
 ## TEMPLATES / MAIN BEDROOM
 
+# -- binary sensors --
+- binary_sensor:
+    # -- sonoff --
+    # heater running (via plug)
+    - name: 'Main Bedroom Heating State'
+      icon: 'mdi:radiator'
+      # power reported in watts
+      state: >
+        {% if is_number(states('sensor.main_bedroom_heater_plug_energy_power')) %}
+          {{ (states('sensor.main_bedroom_heater_plug_energy_power') | int(default=0)) > 10 }}
+        {% endif %}
+
+
 # --- sensors ---
 - sensor:
   # -- xiaomi aqara --
