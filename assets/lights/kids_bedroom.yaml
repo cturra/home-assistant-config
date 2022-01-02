@@ -1,7 +1,0 @@
-## LIGHTS / KIDS BEDROOM
-
-# group light bulbs
-- platform: group
-  name: 'Group Kids Bedroom Lights'
-  entities:
-    - light.blb_kidsroomlamp

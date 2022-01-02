@@ -489,7 +489,7 @@ views:
                 icon: 'mdi:dome-light'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
-            - entity_id: light.blb_kidsroomlamp
+            - entity_id: light.blb_kidsbedroom_lamp
               state: 'on'
               options:
                 type: 'custom:slider-entity-row'
@@ -807,13 +807,13 @@ views:
                   }
               entities:
                 # lamp light bulb on/off control
-                - entity: light.blb_kidsroomlamp
+                - entity: light.blb_kidsbedroom_lamp
                   name: 'Lamp'
                   icon: 'mdi:lamp-outline'
                   state_color: true
                 # lamp light bulb color quick picker
                 - type: 'custom:rgb-light-card'
-                  entity: light.blb_kidsroomlamp
+                  entity: light.blb_kidsbedroom_lamp
                   size: 20
                   justify: center
                   colors:
@@ -822,18 +822,21 @@ views:
                         - 255
                         - 0
                         - 0
+                      effect: 'solid'
                       transition: 1
                     # orange
                     - rgb_color:
                         - 255
                         - 128
                         - 0
+                      effect: 'solid'
                       transition: 1
                     # green
                     - rgb_color:
                         - 0
                         - 255
                         - 0
+                      effect: 'solid'
                       icon_color: '#33ff33'
                       transition: 1
                     # blue
@@ -841,6 +844,7 @@ views:
                         - 0
                         - 0
                         - 255
+                      effect: 'solid'
                       icon_color: '#3333ff'
                       transition: 1
                     # purple
@@ -848,8 +852,8 @@ views:
                         - 128
                         - 0
                         - 255
+                      effect: 'solid'
                       icon_color: '#9933ff'
-                      transition: 1
 
       # Laundry
       - type: 'custom:vertical-stack-in-card'

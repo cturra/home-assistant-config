@@ -830,40 +830,38 @@
       button_on_off:
       - service: light.toggle
         target:
-          entity_id: light.blb_kidsroomlamp
+          entity_id: light.blb_kidsbedroom_lamp
       button_brightness_up_short:
       - service: light.turn_on
-        target:
-          entity_id: light.blb_kidsroomlamp
         data:
           transition: 1
           brightness_step_pct: 20
+        target:
+          entity_id: light.blb_kidsbedroom_lamp
       button_brightness_down_short:
       - service: light.turn_on
-        target:
-          entity_id: light.blb_kidsroomlamp
         data:
           transition: 1
           brightness_step_pct: -20
+        target:
+          entity_id: light.blb_kidsbedroom_lamp
       button_right_short:
       - service: light.turn_on
         data:
           hs_color:
           - '{{ range(360) | random }}'
           - '{{ range(80,101) | random }}'
+          effect: Solid
           brightness_pct: 100
           transition: 1
-        entity_id: light.blb_kidsroomlamp
+        entity_id: light.blb_kidsbedroom_lamp
       button_left_short:
       - service: light.turn_on
-        target:
-          entity_id: light.blb_kidsroomlamp
         data:
           transition: 1
-          rgb_color:
-          - 255
-          - 196
-          - 137
+          effect: Rainbow Runner
+        target:
+          entity_id: light.blb_kidsbedroom_lamp
 - id: '1631739108301'
   alias: 'Garage Indoor: Notify when vehicle door left open at night'
   description: notify chris' phone if the vehicle door is left open for 5 minutes

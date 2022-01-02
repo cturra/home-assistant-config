@@ -18,7 +18,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Lights**                                                                    |
 | Bulb (A25)        | Athom      | LB01-15W-E27    | 2     | Tasmota            |
 | Bulb (BR30)       | Athom      | LB03-12W-BR30   | 2     | Tasmota            |
-| Bulb (A19)        | Ikea       | LED1624G9       | 1     | Zigbee2MQTT        |
+| Bulb (B22)        | Athom      | LB01-7W-E27     | 1     | WLED               |
 | **Entertainment**                                                             |
 | Audio             | Chromecast | Audio           | 1     | HA :: Chromecast   |
 | Speaker           | Sonos      | Play:5          | 1     | HA :: Sonos        |
