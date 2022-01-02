@@ -1,18 +1,4 @@
 anchors:
-  # headers
-  header-style: &header-style
-    card_mod:
-      style: |
-        ha-card {
-          padding-left: 5px;
-          border-radius: 0px;
-          font-size: 1.0em;
-          box-shadow: none;
-        }
-        :host ha-markdown.no-header {
-          padding: 7px 2px 5px 5px;
-        }
-
   # alerts (generic)
   alert-style: &alert-style
     card_mod:
@@ -33,16 +19,60 @@ anchors:
           --secondary-text-color: #008020;
         }
 
+  # entity header formatting (not used for overivew dashboard)
+  entities-header-style: &entities-header-style
+    card_mod:
+      style: |
+        :host .card-header {
+          padding: 5px 20px 0px 20px;
+          font-size: 1.2em;
+          font-weight: bold;
+          line-height: 20px;
+          display: flex;
+          flex-direction: row;
+        }
+        :host .card-header:before, .card-header:after {
+          content: "";
+          flex: 1 1;
+          border-bottom: 1px solid #505050;
+          margin: auto;
+        }
+        :host .card-header:before {
+          margin-right: 10px;
+        }
+        :host .card-header:after {
+          margin-left: 10px;
+        }
+
+  entities-overview-header-style: &entities-overview-header-style
+    card_mod:
+      style: |
+        :host .card-header {
+          padding: 5px 20px 0px 20px;
+          font-size: 1.2em;
+          font-weight: bold;
+          line-height: 40px;
+          display: flex;
+          flex-direction: row;
+          margin-top: -10px;
+        }
+        :host .card-header:before, .card-header:after {
+          content: "";
+          flex: 1 1;
+          border-bottom: 1px solid #505050;
+          margin: auto;
+        }
+        :host .card-header:before {
+          margin-right: 10px;
+        }
+        :host .card-header:after {
+          margin-left: 10px;
+        }
+
   # entities
   entities-style: &entities-style
     card_mod:
       style: |
-        :host .card-header {
-          padding: 0px 20px;
-          font-size: 1.2em;
-          font-weight: bold;
-          line-height: 45px;
-        }
         :host .card-content {
           padding: 0px 10px 5px;
         }
@@ -79,11 +109,34 @@ anchors:
   battery-state-style: &battery-state-style
     card_mod:
       style: |
+        :host .card-header {
+          padding: 5px 20px 0px 20px;
+          font-size: 1.2em;
+          font-weight: bold;
+          line-height: 20px;
+          display: flex;
+          flex-direction: row;
+        }
+        :host .card-header:before, .card-header:after {
+          content: "";
+          flex: 1 1;
+          border-bottom: 1px solid #505050;
+          margin: auto;
+        }
+        :host .card-header:before {
+          margin-right: 10px;
+        }
+        :host .card-header:after {
+          margin-left: 10px;
+        }
         :host .card-content {
           padding: 5px 15px 5px 10px;
         }
         :host .entity-spacing {
           margin: 0px 0;
+        }
+        .icon {
+          height: 30px;
         }
 
   # neutral icon entity
@@ -171,8 +224,8 @@ views:
         show_empty: false
         card:
           type: entities
-          title: '🚨 Alerts'
-          <<: *entities-style
+          title: '🚨 Alerts 🚨'
+          <<: *entities-overview-header-style
         filter:
           include:
             # battery low: zigbee & ble sensors < 25%
@@ -189,10 +242,9 @@ views:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
                 <<: *alert-style
-            # freezer temperature too warm (< -14.0 °C)
+            # freezer temperature too warm (> -13.9 °C)
             - entity_id: 'sensor.*_freezer_temperature'
-              # regex matches numbers above 13.9
-              state: '/^\-(([1][0-3]\.[0-9])|([0-9]\.[0-9]))$/'
+              state: '> -13.9'
               options:
                 icon: 'mdi:fridge-alert-outline'
                 secondary_info: last-changed
@@ -244,7 +296,7 @@ views:
         card:
           type: entities
           title: 'HVAC'
-          <<: *entities-style
+          <<: *entities-overview-header-style
         filter:
           include:
             # house (ecobee) & garage (sinope)
@@ -270,7 +322,7 @@ views:
           type: entities
           title: 'Devices'
           show_header_toggle: false
-          <<: *entities-style
+          <<: *entities-overview-header-style
         filter:
           include:
             # crawlspace
@@ -306,7 +358,7 @@ views:
               options:
                 name: 'Family Room: Ceiling'
                 icon: 'mdi:ceiling-light-outline'
-                secondary_info: last-
+                secondary_info: last-changed
             - entity_id: switch.plg_familyroomcabinet
               state: 'on'
               options:
@@ -500,7 +552,7 @@ views:
         card:
           type: entities
           title: 'Entertainment'
-          <<: *entities-style
+          <<: *entities-overview-header-style
         filter:
           include:
             # speakers
@@ -524,7 +576,7 @@ views:
         card:
           type: entities
           title: 'Doors & Windows'
-          <<: *entities-style
+          <<: *entities-overview-header-style
         filter:
           include:
             # doors: zigbee (aqara)
@@ -557,11 +609,9 @@ views:
     cards:
       # Family Room
       - type: 'custom:vertical-stack-in-card'
+        title: 'Family Room'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Family Room
-          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
@@ -610,11 +660,9 @@ views:
 
       # Kitchen
       - type: 'custom:vertical-stack-in-card'
+        title: 'Kitchen'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Kitchen
-          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
@@ -657,11 +705,9 @@ views:
 
       # Living Room
       - type: 'custom:vertical-stack-in-card'
+        title: 'Living Room'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Living Room
-          <<: *header-style
         - type: horizontal-stack
           cards:
           - type: entities
@@ -683,11 +729,9 @@ views:
 
       # Office
       - type: 'custom:vertical-stack-in-card'
+        title: 'Office'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Office
-          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
@@ -709,11 +753,9 @@ views:
 
       # Main Bedroom
       - type: 'custom:vertical-stack-in-card'
+        title: 'Main Bedroom'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Main Bedroom
-          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
@@ -737,11 +779,9 @@ views:
 
       # Kids Bedroom
       - type: 'custom:vertical-stack-in-card'
+        title: 'Kids Bedroom'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Kids Bedroom
-          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
@@ -813,11 +853,9 @@ views:
 
       # Laundry
       - type: 'custom:vertical-stack-in-card'
+        title: 'Laundry'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Laundry
-          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
@@ -835,11 +873,9 @@ views:
 
       # Garage
       - type: 'custom:vertical-stack-in-card'
+        title: 'Garage'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Garage
-          <<: *header-style
         - type: horizontal-stack
           cards:
             # vehicle door opener
@@ -887,11 +923,9 @@ views:
 
       # Crawlspace
       - type: 'custom:vertical-stack-in-card'
+        title: 'Crawlspace'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Crawlspace
-          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
@@ -915,11 +949,9 @@ views:
 
       # Outdoor (Front)
       - type: 'custom:vertical-stack-in-card'
+        title: 'Outside'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Outdoor Front
-          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
@@ -953,11 +985,9 @@ views:
 
       # Shed
       - type: 'custom:vertical-stack-in-card'
+        title: 'Shed'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Shed
-          <<: *header-style
         - type: horizontal-stack
           cards:
             - type: entities
@@ -994,12 +1024,9 @@ views:
     cards:
       # HOUSE INDOOR CLIMATE CARDS
       - type: 'custom:vertical-stack-in-card'
+        title: 'House'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### House
-          <<: *header-style
-
         ## HOUSE THERMOSTAT 
         - type: 'custom:simple-thermostat'
           entity: climate.amazon
@@ -1181,12 +1208,9 @@ views:
 
       ## GARAGE CLIMATE CARDS
       - type: 'custom:vertical-stack-in-card'
+        title: 'Garage'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Garage
-          <<: *header-style
-
         ## GARAGE THERMOSTAT 
         - type: 'custom:simple-thermostat'
           entity: climate.hvac_garagethermostat
@@ -1281,11 +1305,9 @@ views:
 
       ## SHED CLIMATE CARDS
       - type: 'custom:vertical-stack-in-card'
+        title: 'Shed'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Shed
-          <<: *header-style
         - type: horizontal-stack
           cards:
           # shed temperature
@@ -1339,12 +1361,9 @@ views:
 
       ## OUTDSIDE CLIMATE CARDS
       - type: 'custom:vertical-stack-in-card'
+        title: 'Outside'
+        <<: *entities-header-style
         cards:
-        - type: markdown
-          content: >
-            ### Outside
-          <<: *header-style
-
         # WEATHER
         - type: 'custom:simple-weather-card'
           entity: weather.pitt_meadows
@@ -1443,257 +1462,94 @@ views:
     badges: []
     cards:
       # Climate Sensors
-      - type: 'custom:vertical-stack-in-card'
-        cards:
-        - type: markdown
-          content: >
-            ### Climate Sensors
-          <<: *header-style
-        - type: 'custom:battery-state-card'
-          <<: *battery-state-color_gradient
-          <<: *battery-state-style
-          entities:
-            # crawlspace
-            - entity: sensor.snr_crawlspaceclimate_battery
-              name: 'Crawspace'
-              tap_action: more-info
-            # ensuite
-            - entity: sensor.snr_ensuiteclimate_battery
-              name: 'Ensuite'
-              tap_action: more-info
-            # garage
-            - entity: sensor.snr_garageclimate_battery
-              name: 'Garage'
-              tap_action: more-info
-            # kids bedroom
-            - entity: sensor.snr_kidsroomclimate_battery
-              name: 'Kids Bedroom'
-              tap_action: more-info
-            # laundry
-            - entity: sensor.snr_laundryclimate_battery
-              name: 'Laundry'
-              tap_action: more-info
-            # locker
-            - entity: sensor.snr_lockerclimate_battery
-              name: 'Locker'
-              tap_action: more-info
-            # main bedroom
-            - entity: sensor.snr_mainbedroomclimate_battery
-              name: 'Main Bedroom'
-              tap_action: more-info
-            # office
-            - entity: sensor.snr_officeclimate_battery
-              name: 'Office'
-              tap_action: more-info
-            # shed
-            - entity: sensor.snr_shedclimate_battery
-              name: 'Shed'
-              tap_action: more-info
-            # spare bedroom
-            - entity: sensor.snr_sparebedroomclimate_battery
-              name: 'Spare Bedroom'
-              tap_action: more-info
+      - type: 'custom:battery-state-card'
+        title: 'Climate Sensors'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.snr_*climate_battery'
 
       # Contact Sensors
-      - type: 'custom:vertical-stack-in-card'
-        cards:
-        - type: markdown
-          content: >
-            ### Contact Sensors
-          <<: *header-style
-        - type: 'custom:battery-state-card'
-          <<: *battery-state-color_gradient
-          <<: *battery-state-style
-          entities:
-            # crawlspace door
-            - entity: sensor.snr_crawlspacedoorcontact_battery
-              name: 'Crawlspace Door'
-              tap_action: more-info
-            # ensuite bathroom window
-            - entity: sensor.snr_ensuitewindowcontact_battery
-              name: 'Ensuite Window'
-              tap_action: more-info
-            # family room front window
-            - entity: sensor.srn_familyroomwindowfrontcontact_battery
-              name: 'Family Room Front Window'
-              tap_action: more-info
-            # family room side :: left window
-            - entity: sensor.snr_familyroomwindowsideleftcontact_battery
-              name: 'Family Room Side/Left Window'
-              tap_action: more-info
-            # family room side :: right window
-            - entity: sensor.snr_familyroomwindowsiderightcontact_battery
-              name: 'Family Room Side/Right Window'
-              tap_action: more-info
-            # front door
-            - entity: sensor.snr_frontdoorcontact_battery
-              name: 'Front Door'
-              tap_action: more-info
-            # garage house door
-            - entity: sensor.snr_garagedoorhousecontact_battery
-              name: 'Garage House Door'
-              tap_action: more-info
-            # garage side door
-            - entity: sensor.snr_garagedoorsidecontact_battery
-              name: 'Garage Side Door'
-              tap_action: more-info
-            # kitchen window
-            - entity: sensor.snr_kitchenwindowcontact_battery
-              name: 'Kitchen Window'
-              tap_action: more-info
-            # laundry window
-            - entity: sensor.snr_laundryroomwindowcontact_battery
-              name: 'Laundry Window Contact'
-              tap_action: more-info
-            # locker door
-            - entity: sensor.snr_lockercontact_battery
-              name: 'Locker Door'
-              tap_action: more-info
-            # main bedroom window
-            - entity: sensor.snr_mainbedroomwindowcontact_battery
-              name: 'Main Bedroom Window'
-              tap_action: more-info
-            # patio door
-            - entity: sensor.snr_patiodoorcontact_battery
-              name: 'Patio Door'
-              tap_action: more-info
-            # shed door
-            - entity: sensor.snr_sheddoorcontact_battery
-              name: 'Shed Door'
-              tap_action: more-info
-            # upstairs common bathroom window
-            - entity: sensor.snr_upcommonbathroomwindowcontact_battery
-              name: 'Upstairs Bathroom Window'
-              tap_action: more-info
+      - type: 'custom:battery-state-card'
+        title: 'Contact Sensors'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.snr_*contact_battery'
 
       # Leak Sensors
-      - type: 'custom:vertical-stack-in-card'
-        cards:
-        - type: markdown
-          content: >
-            ### Leak Sensors
-          <<: *header-style
-        - type: 'custom:battery-state-card'
-          <<: *battery-state-color_gradient
-          <<: *battery-state-style
-          entities:
-            # dishwasher
-            - entity: sensor.snr_dishwasherleak_battery
-              name: 'Dishwasher'
-              tap_action: more-info
-            # downstairs common bathroom toilet
-            - entity: sensor.snr_downtoiletleak_battery
-              name: 'Downstairs Bathroom Toilet'
-              tap_action: more-info
-            # ensuite bathtub
-            - entity: sensor.snr_ensuitebathtubleak_battery
-              name: 'Ensuite Bathtub'
-              tap_action: more-info
-            # ensuite toilet
-            - entity: sensor.snr_ensuitetoiletleak_battery
-              name: 'Ensuite Toilet'
-              tap_action: more-info
-            # espresso machine
-            - entity: sensor.snr_espressoleak_battery
-              name: 'Espresso Machine'
-              tap_action: more-info
-            # espresso water filter (in crawlspace)
-            - entity: sensor.snr_espressowaterfilterleak_battery
-              name: 'Espresso Water Filter'
-              tap_action: more-info
-            # fridge
-            - entity: sensor.snr_fridgeleak_battery
-              name: 'Fridge'
-              tap_action: more-info
-            # hot water tank
-            - entity: sensor.snr_hotwatertankleak_battery
-              name: 'Hot Water Tank'
-              tap_action: more-info
-            # laundry tub
-            - entity: sensor.snr_laundryleak_battery
-              name: 'Laundry'
-              tap_action: more-info
-            # upstairs common bathroom toilet
-            - entity: sensor.snr_upcommontoiletleak_battery
-              name: 'Upstairs Bathroom Toilet'
-              tap_action: more-info
+      - type: 'custom:battery-state-card'
+        title: 'Leak Sensors'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.snr_*leak_battery'
 
       # Motion Sensors
-      - type: 'custom:vertical-stack-in-card'
-        cards:
-        - type: markdown
-          content: >
-            ### Motion Sensors
-          <<: *header-style
-        - type: 'custom:battery-state-card'
-          <<: *battery-state-color_gradient
-          <<: *battery-state-style
-          entities:
-            # garage outdoor :: side
-            - entity: sensor.snr_garageoutsidemotion_battery
-              name: 'Garage Outdoor'
-              tap_action: more-info
-            # office
-            - entity: sensor.snr_officemotion_battery
-              name: 'Office'
-              tap_action: more-info
-            # porch (front door)
-            - entity: sensor.snr_porchfrontdoormotion_battery
-              name: 'Porch'
-              tap_action: more-info
-            # shed (bbq pad)
-            - entity: sensor.snr_shedoutsidemotion_battery
-              name: 'Shed Outdoor'
-              tap_action: more-info
+      - type: 'custom:battery-state-card'
+        title: 'Motion Sensors'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.snr_*motion_battery'
 
       # Plant Sensors
-      - type: 'custom:vertical-stack-in-card'
-        cards:
-        - type: markdown
-          content: >
-            ### Plant Sensors
-          <<: *header-style
-        - type: 'custom:battery-state-card'
-          <<: *battery-state-color_gradient
-          <<: *battery-state-style
-          entities:
-            # dracaena trifasciata (office)
-            - entity: sensor.plnt_office_dracaena_trifasciata_battery
-              name: 'Dracaena Trifasciata'
-              tap_action: more-info
-            # parlor palm (family room)
-            - entity: sensor.plnt_family_room_parlor_palm_battery
-              name: 'Parlor Palm'
-              tap_action: more-info
+      - type: 'custom:battery-state-card'
+        title: 'Plant Sensors'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.plnt_*_battery'
 
       # Remote Controls
-      - type: 'custom:vertical-stack-in-card'
-        cards:
-        - type: markdown
-          content: >
-            ### Remote Controls
-          <<: *header-style
-        - type: 'custom:battery-state-card'
-          <<: *battery-state-color_gradient
-          <<: *battery-state-style
-          entities:
-            # kids room remote
-            - entity: sensor.rmt_kidsroomremote_battery
-              name: 'Kids Room Lamp'
-              tap_action: more-info
+      - type: 'custom:battery-state-card'
+        title: 'Remote Controls'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.rmt_*remote_battery'
+
+      # Temperature Sensors
+      - type: 'custom:battery-state-card'
+        title: 'Temperature Sensors'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        filter:
+          include:
+            - name: entity_id
+              value: 'binary_sensor.snr_*_temperature_battery_low'
+        state_map:
+          - from: 'off'
+            to: 100
+          - from: 'on'
+            to: 20
 
       # Vibration Sensors
-      - type: 'custom:vertical-stack-in-card'
-        cards:
-        - type: markdown
-          content: >
-            ### Vibration Sensors
-          <<: *header-style
-        - type: 'custom:battery-state-card'
-          <<: *battery-state-color_gradient
-          <<: *battery-state-style
-          entities:
-            # office chair
-            - entity: sensor.snr_officechairvibration_battery
-              name: 'Office Chair'
-              tap_action: more-info
+      - type: 'custom:battery-state-card'
+        title: 'Vibration Sensors'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.snr_*vibration_battery'

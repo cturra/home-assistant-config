@@ -4,6 +4,12 @@
 plant.family_room_parlor_palm:
   icon: 'mdi:sprout-outline'
 
+sensor.plnt_family_room_parlor_palm_battery:
+  friendly_name: 'Family Room: Parlor Palm'
+
 # office snake plant
 plant.office_dracaena_trifasciata:
   icon: 'mdi:sprout-outline'
+
+sensor.plnt_office_dracaena_trifasciata_battery:
+  friendly_name: 'Office: Dracaena Trifasciata'
