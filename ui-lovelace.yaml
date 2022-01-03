@@ -586,7 +586,7 @@ views:
                 secondary_info: last-changed
             # doors: tasmota
             - entity_id: binary_sensor.garage_vehicle_door_contact_state
-              state: 'Open'
+              state: 'on'
               options:
                 icon: 'mdi:garage-open-variant'
                 secondary_info: last-changed
