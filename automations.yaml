@@ -852,7 +852,6 @@
           - '{{ range(360) | random }}'
           - '{{ range(80,101) | random }}'
           effect: Solid
-          brightness_pct: 100
           transition: 1
         entity_id: light.blb_kidsbedroom_lamp
       button_left_short:
@@ -862,6 +861,14 @@
           effect: Rainbow Runner
         target:
           entity_id: light.blb_kidsbedroom_lamp
+      button_right_long:
+      - service: light.turn_on
+        target:
+          entity_id: light.blb_kidsbedroom_lamp
+        data:
+          transition: 1
+          kelvin: 3300
+          effect: Solid
 - id: '1631739108301'
   alias: 'Garage Indoor: Notify when vehicle door left open at night'
   description: notify chris' phone if the vehicle door is left open for 5 minutes
