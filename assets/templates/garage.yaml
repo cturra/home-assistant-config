@@ -26,7 +26,7 @@
       {% if is_number(states('sensor.hvac_garage_heating_demand')) %}
         {{ states('sensor.hvac_garage_heating_demand') | int(default=0) > 0 }}
       {% endif %}
-
+  
   # -- sonoff --
   # dehumidifier running (via plug)
   - name: 'Garage Dehumidifier State'
@@ -66,4 +66,17 @@
     state: >
       {% if is_number(state_attr('climate.hvac_garagethermostat', 'current_temperature')) %}
         {{ state_attr('climate.hvac_garagethermostat', 'current_temperature') }}
+      {% endif %}
+
+  # heater mode state if garage door is closed
+  # (used for alerts dashboard in case thermostat is off longer than expected)
+  - name: 'HVAC Garage Mode State'
+    state: >
+      {# thermostat mode state if garage door is closed #}
+      {% if is_state('climate.hvac_garagethermostat', 'off') and
+            is_state('switch.sw_garagedoorcontact', 'off')
+      %}
+        Off ({{ states('sensor.garage_mean_temperature_calculation') }}°C)
+      {% else %}
+        {{ states('climate.hvac_garagethermostat') }}
       {% endif %}

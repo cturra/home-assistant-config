@@ -236,21 +236,21 @@ views:
                 icon: 'mdi:battery-alert-variant-outline'
                 <<: *alert-style
             # battery low: rtl_433 sensors == on
-            - entity_id: 'binary_sensor.*temperature_battery_low'
+            - entity_id: 'binary_sensor.snr_*temperature_battery_low'
               state: 'on'
               options:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
                 <<: *alert-style
             # freezer temperature too warm (> -13.9 °C)
-            - entity_id: 'sensor.*_freezer_temperature'
+            - entity_id: 'sensor.snr_*_freezer_temperature'
               state: '> -13.9'
               options:
                 icon: 'mdi:fridge-alert-outline'
                 secondary_info: last-changed
                 <<: *alert-style
             # fridge temperature too warm (> 6.9 °C)
-            - entity_id: 'sensor.*_fridge_temperature'
+            - entity_id: 'sensor.snr_*_fridge_temperature'
               state: '> 6.9'
               options:
                 icon: 'mdi:fridge-alert-outline'
@@ -272,7 +272,7 @@ views:
                 secondary_info: last-changed
                 <<: *alert-plant-style
             # water leak
-            - entity_id: 'binary_sensor.*_water_leak'
+            - entity_id: 'binary_sensor.snr_*_water_leak'
               state: 'on'
               options:
                 icon: 'mdi:water-alert'
@@ -285,6 +285,14 @@ views:
               options:
                 name: 'Weather'
                 icon: 'mdi:weather-cloudy-alert'
+                secondary_info: last-changed
+                <<: *alert-style
+            # garage heater turned off
+            - entity_id: sensor.hvac_garage_mode_state
+              state: '/Off/'
+              options:
+                name: 'Garage: Heater'
+                icon: 'mdi:fire-off'
                 secondary_info: last-changed
                 <<: *alert-style
         sort:
@@ -300,7 +308,7 @@ views:
         filter:
           include:
             # house (ecobee) & garage (sinope)
-            - entity_id: 'binary_sensor.hvac_*_state'
+            - entity_id: '/binary_sensor.hvac_(ecobee|garage)_(cooling|heating)_state/'
               state: 'on'
               options:
                 secondary_info: last-changed
@@ -309,9 +317,6 @@ views:
               state: 'on'
               options:
                 secondary_info: last-changed
-          exclude:
-            # on when any ecobee hvac function is running
-            - entity_id: binary_sensor.hvac_ecobee_state
         sort:
           method: name
 
@@ -346,12 +351,6 @@ views:
                 icon: 'mdi:coach-lamp'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
-            - entity_id: switch.plg_outsideutility1
-              state: 'on'
-              options:
-                name: 'Garage Door: Christmas Lights'
-                icon: 'mdi:string-lights'
-                secondary_info: last-changed
             # family room
             - entity_id: switch.sw_familyroomceiling
               state: 'on'
@@ -380,18 +379,6 @@ views:
                 icon: 'mdi:wall-sconce-round-variant'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
-            - entity_id: switch.plg_holidaylights1
-              state: 'on'
-              options:
-                name: 'Family Room: Christmas Tree'
-                icon: 'mdi:pine-tree'
-                secondary_info: last-changed
-            - entity_id: switch.plg_holidaylights2
-              state: 'on'
-              options:
-                name: 'Family Room: Mantle Lights'
-                icon: 'mdi:string-lights'
-                secondary_info: last-changed
             # garage
             - entity_id: switch.sw_garageceilingmain
               state: 'on'
@@ -580,7 +567,7 @@ views:
         filter:
           include:
             # doors: zigbee (aqara)
-            - entity_id: 'binary_sensor.*door*_contact'
+            - entity_id: 'binary_sensor.snr_*door*_contact'
               state: 'on'
               options:
                 secondary_info: last-changed
@@ -590,8 +577,10 @@ views:
               options:
                 icon: 'mdi:garage-open-variant'
                 secondary_info: last-changed
+                tap_action:
+                  action: toggle
             # windows: zigbee (aqara)
-            - entity_id: 'binary_sensor.*window*_contact'
+            - entity_id: 'binary_sensor.snr_*window*_contact'
               state: 'on'
               options:
                 secondary_info: last-changed
@@ -623,15 +612,10 @@ views:
                   name: Cabinet
                   icon: 'mdi:light-recessed'
                   state_color: true
-                # christmas tree
-                - entity: switch.plg_holidaylights1
-                  name: 'Christmas Tree'
-                  icon: 'mdi:pine-tree'
-                  state_color: true
-                # mantle holiday lights
-                - entity: switch.plg_holidaylights2
-                  name: Mantle
-                  icon: 'mdi:string-lights'
+                # display corner
+                - entity: switch.sw_familyroomcorner
+                  name: Corner
+                  icon: 'mdi:light-recessed'
                   state_color: true
                 # wall sconce
                 - entity: light.sw_familyroomwall
@@ -645,11 +629,6 @@ views:
                 - entity: switch.sw_familyroomceiling
                   name: Ceiling
                   icon: 'mdi:ceiling-light-outline'
-                  state_color: true
-                # display corner
-                - entity: switch.sw_familyroomcorner
-                  name: Corner
-                  icon: 'mdi:light-recessed'
                   state_color: true
                 # stairwell chandelier
                 - entity: light.stairwell_ceiling
@@ -980,11 +959,6 @@ views:
                 - entity: light.group_porch_lights
                   name: Porch
                   icon: 'mdi:light-recessed'
-                  state_color: true
-                # porch outlet
-                - entity: switch.plg_outsideutility1
-                  name: 'Porch Outlet'
-                  icon: 'mdi:power'
                   state_color: true
 
       # Shed

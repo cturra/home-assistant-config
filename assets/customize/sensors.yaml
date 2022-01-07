@@ -132,7 +132,7 @@ sensor.snr_kitchenwindowcontact_battery:
 binary_sensor.snr_laundryroomwindowcontact_contact:
   friendly_name: 'Laundry: Window'
   device_class: window
-ensor.snr_laundryroomwindowcontact_battery:
+sensor.snr_laundryroomwindowcontact_battery:
   friendly_name: 'Laundry: Window'
 
 # main bedroom window

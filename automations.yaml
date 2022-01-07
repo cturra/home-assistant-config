@@ -194,7 +194,6 @@
     target:
       entity_id:
       - switch.sw_fronthouseoutlet
-      - switch.plg_outsideutility1
   mode: single
 - id: '1612295307179'
   alias: 'Outside: Holiday Lighting Off'
@@ -217,7 +216,6 @@
     target:
       entity_id:
       - switch.sw_fronthouseoutlet
-      - switch.plg_outsideutility1
   - service: scene.turn_on
     target:
       entity_id: scene.driveway_bulbs_normal_colour
