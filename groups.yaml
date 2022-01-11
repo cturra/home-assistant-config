@@ -24,6 +24,7 @@ exterior_doors:
 leak_sensors:
   name: 'Leak Sensors'
   entities:
+    - binary_sensor.snr_crawlspace_roleak_water_leak
     - binary_sensor.snr_dishwasherleak_water_leak
     - binary_sensor.snr_downtoiletleak_water_leak
     - binary_sensor.snr_ensuitebathtubleak_water_leak

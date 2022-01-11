@@ -26,7 +26,7 @@
       {% if is_number(states('sensor.hvac_garage_heating_demand')) %}
         {{ states('sensor.hvac_garage_heating_demand') | int(default=0) > 0 }}
       {% endif %}
-  
+
   # -- sonoff --
   # dehumidifier running (via plug)
   - name: 'Garage Dehumidifier State'
@@ -57,7 +57,7 @@
         {# use previous value if sensor returns unknown #}
         {{ states('sensor.garage_climate_humidity_rounded') }}
       {% endif %}
-  
+
   # -- sinopé --
   # room temperature
   - name: 'HVAC_GarageThermostat Temperature'

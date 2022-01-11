@@ -31,7 +31,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Climate           | Tuya       | TS0201          | 1     | Zigbee2MQTT        |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 10    | Zigbee2MQTT        |
 | Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT        |
-| Leak              | Xiaomi     | SJCGQ11LM       | 10    | Zigbee2MQTT        |
+| Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT        |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT        |
 | Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT        |
 | Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | HA :: Mi Flora     |

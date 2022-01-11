@@ -183,6 +183,12 @@ binary_sensor.main_bedroom_heating_state:
 
 ## ------ leak sensors ------
 
+# crawlspace: reverse osmosis filters
+binary_sensor.snr_crawlspace_roleak_water_leak:
+  friendly_name: 'Reverse Osmosis Filters'
+sensor.snr_crawlspace_roleak_battery:
+  friendly_name: 'Crawlspace: RO Filters'
+
 # dishwasher
 binary_sensor.snr_dishwasherleak_water_leak:
   friendly_name: 'Dishwasher leak'

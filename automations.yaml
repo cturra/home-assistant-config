@@ -490,14 +490,19 @@
   - platform: state
     entity_id: group.leak_sensors
     to: 'on'
+  variables:
+    triggered_leak_sensor: >
+      {% for entity in trigger.to_state.attributes.entity_id %}
+        {% if is_state(entity, 'on') %}
+          {{ state_attr(entity, 'friendly_name') }}
+        {% endif %}
+      {% endfor %}
   condition: []
   action:
   - service: notify.grp_anne_chris_phones
     data:
       title: ❗💧 Water Detected
-      message: "{% for entity in trigger.to_state.attributes.entity_id %}\n  {% if\
-        \ is_state(entity, 'on') %}\n    Water detected at {{ state_attr(entity, 'friendly_name')\
-        \ }} sensor.\n  {% endif %}\n{% endfor %}"
+      message: "Water detected at {{ triggered_leak_sensor }} sensor."
       data:
         push:
           sound:
@@ -932,6 +937,13 @@
   - platform: state
     entity_id: group.leak_sensors
     to: 'on'
+  variables:
+    triggered_leak_sensor: >
+      {% for entity in trigger.to_state.attributes.entity_id %}
+        {% if is_state(entity, 'on') %}
+          {{ state_attr(entity, 'friendly_name') }}
+        {% endif %}
+      {% endfor %}
   condition: []
   action:
   - repeat:
@@ -943,9 +955,7 @@
           - media_player.family_room_speaker
           - media_player.main_bedroom_speaker
           volume: 0.8
-          message: "{% for entity in trigger.to_state.attributes.entity_id %}\n  {%\
-            \ if is_state(entity, 'on') %}\n    ALERT. Water detected at {{ state_attr(entity,\
-            \ 'friendly_name') }} sensor.\n  {% endif %}\n{% endfor %}"
+          message: "ALERT. Water detected at {{ triggered_leak_sensor }} sensor."
           delay: 00:00:07
   mode: single
 - id: '1634324401364'
