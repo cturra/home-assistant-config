@@ -5,31 +5,33 @@
   entities:
     light.group_porch_lights:
       state: 'on'
-      brightness_pct: 10
-      kelvin: 2100
-      transition: 2
+      brightness: 25
+      # 2100 kelvin
+      rgb_color: [255,141,27]
+      color_temp: 476
+      color_mode: color_temp
 
 # porch bulbs normal colour (full) brightness
 - name: 'Porch Bulbs Normal Colour Bright'
   entities:
     light.group_porch_lights:
       state: 'on'
-      brightness_pct: 100
-      kelvin: 2100
-      transition: 1
+      brightness: 255
+      # 2100 kelvin
+      rgb_color: [255,141,27]
+      color_temp: 476
+      color_mode: color_temp
 
 # porch bulbs holiday (christmas) colours
 - name: 'Porch Bulbs Holiday Colour'
   entities:
     light.blb_porch1:
       state: 'on'
-      brightness_pct: 100
+      brightness: 255
       # red
       rgb_color: [255,0,0]
-      transition: 2
     light.blb_porch2:
       state: 'on'
-      brightness_pct: 100
+      brightness: 255
       # green
       rgb_color: [0,255,0]
-      transition: 2
