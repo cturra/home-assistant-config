@@ -1,4 +1,4 @@
 ## CUSTOMIZE / REMOTES
 
-sensor.rmt_kidsroomremote_battery:
+sensor.rmt_kidsbedroom_remote_battery:
   friendly_name: 'Kids Room'

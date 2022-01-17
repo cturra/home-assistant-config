@@ -19,6 +19,5 @@
       state: 'on'
       brightness: 255
       # 2100 kelvin
-      rgb_color: [255,141,27]
       color_temp: 476
       color_mode: color_temp

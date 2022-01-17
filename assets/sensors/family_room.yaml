@@ -3,7 +3,7 @@
 # -- xiaomi mi flora --
 # parlor palm (chamaedorea elegans)
 - platform: miflora
-  name: 'Plnt_Family Room Parlor Palm'
+  name: 'Plnt FamilyRoom Parlor Palm'
   mac: 'C4:7C:8D:6C:E5:89'
   force_update: true
   median: 3

@@ -1,10 +1,10 @@
 ## CUSTOMIZE / PLANTS
 
 # family room parlor palm
-plant.family_room_parlor_palm:
+plant.familyroom_parlor_palm:
   icon: 'mdi:sprout-outline'
 
-sensor.plnt_family_room_parlor_palm_battery:
+sensor.plnt_familyroom_parlor_palm_battery:
   friendly_name: 'Family Room: Parlor Palm'
 
 # office snake plant

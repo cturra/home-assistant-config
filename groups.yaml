@@ -2,43 +2,43 @@
 windows:
   name: 'Windows'
   entities:
-    - binary_sensor.snr_ensuitewindowcontact_contact
-    - binary_sensor.srn_familyroomwindowfrontcontact_contact
-    - binary_sensor.snr_familyroomwindowsideleftcontact_contact
-    - binary_sensor.snr_familyroomwindowsiderightcontact_contact
-    - binary_sensor.snr_kitchenwindowcontact_contact
-    - binary_sensor.snr_laundryroomwindowcontact_contact
-    - binary_sensor.snr_mainbedroomwindowcontact_contact
-    - binary_sensor.snr_upcommonbathroomwindowcontact_contact
+    - binary_sensor.snr_bathroomup_windowcontact_contact
+    - binary_sensor.snr_ensuite_windowcontact_contact
+    - binary_sensor.snr_familyroom_frontwindowcontact_contact
+    - binary_sensor.snr_familyroom_leftsidewindowcontact_contact
+    - binary_sensor.snr_familyroom_rightsidewindowcontact_contact
+    - binary_sensor.snr_kitchen_windowcontact_contact
+    - binary_sensor.snr_laundry_windowcontact_contact
+    - binary_sensor.snr_mainbedroom_windowcontact_contact
 
 # contact sensors on house exterior doors
 exterior_doors:
   name: 'Exterior Doors'
   entities:
-    - binary_sensor.snr_frontdoorcontact_contact
-    - binary_sensor.snr_garagedoorhousecontact_contact
-    - binary_sensor.snr_garagedoorsidecontact_contact
-    - binary_sensor.snr_patiodoorcontact_contact
+    - binary_sensor.snr_diningroom_patiodoorcontact_contact
+    - binary_sensor.snr_familyroom_frontdoorcontact_contact
+    - binary_sensor.snr_garage_housedoorcontact_contact
+    - binary_sensor.snr_garage_sidedoorcontact_contact
 
 # leak sensors
 leak_sensors:
   name: 'Leak Sensors'
   entities:
+    - binary_sensor.snr_bathroomdown_toiletleak_water_leak
+    - binary_sensor.snr_bathroomup_toiletleak_water_leak
+    - binary_sensor.snr_crawlspace_espressowaterfilterleak_water_leak
+    - binary_sensor.snr_crawlspace_hotwatertankleak_water_leak
     - binary_sensor.snr_crawlspace_roleak_water_leak
-    - binary_sensor.snr_dishwasherleak_water_leak
-    - binary_sensor.snr_downtoiletleak_water_leak
-    - binary_sensor.snr_ensuitebathtubleak_water_leak
-    - binary_sensor.snr_ensuitetoiletleak_water_leak
-    - binary_sensor.snr_espressoleak_water_leak
-    - binary_sensor.snr_espressowaterfilterleak_water_leak
-    - binary_sensor.snr_fridgeleak_water_leak
-    - binary_sensor.snr_hotwatertankleak_water_leak
-    - binary_sensor.snr_laundryleak_water_leak
-    - binary_sensor.snr_upcommontoiletleak_water_leak
+    - binary_sensor.snr_ensuite_bathtubleak_water_leak
+    - binary_sensor.snr_ensuite_toiletleak_water_leak
+    - binary_sensor.snr_kitchen_dishwasherleak_water_leak
+    - binary_sensor.snr_kitchen_espressoleak_water_leak
+    - binary_sensor.snr_kitchen_fridgeleak_water_leak
+    - binary_sensor.snr_laundry_washingmachineleak_water_leak
 
 # plants
 plants:
   name: 'House Plants'
   entities:
-    - plant.family_room_parlor_palm
+    - plant.familyroom_parlor_palm
     - plant.office_dracaena_trifasciata

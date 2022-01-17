@@ -17,7 +17,7 @@
   type: mean
   round_digits: 0
   entity_ids:
-    - sensor.snr_garageclimate_humidity
+    - sensor.snr_garage_climate_humidity
     - sensor.garage_door_opener_am2301_humidity
 
 # mean temperature from climate sensors:
@@ -28,8 +28,8 @@
   type: mean
   round_digits: 1
   entity_ids:
-    - sensor.snr_garageclimate_temperature
-    - sensor.hvac_garagethermostat_temperature
+    - sensor.snr_garage_climate_temperature
+    - sensor.hvac_garage_thermostat_temperature
 
 # grab heating demand value from sinopé thermostat
 - platform: mqtt

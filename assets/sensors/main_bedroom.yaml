@@ -6,5 +6,5 @@
   type: mean
   round_digits: 1
   entity_ids:
-    - sensor.snr_mainbedroomclimate_temperature
-    - sensor.snr_mainbedroomclimatedisplay_temperature
+    - sensor.snr_mainbedroom_climate_temperature
+    - sensor.snr_mainbedroom_climatedisplay_temperature

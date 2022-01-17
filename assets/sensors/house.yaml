@@ -15,9 +15,10 @@
   type: mean
   round_digits: 0
   entity_ids:
-    - sensor.snr_crawlspaceclimate_humidity
-    - sensor.snr_officeclimate_humidity
     - sensor.hvac_ecobee_indoor_average_humidity
-    - sensor.snr_mainbedroomclimate_humidity
-    - sensor.snr_kidsroomclimate_humidity
-    - sensor.snr_sparebedroomclimate_humidity
+    - sensor.snr_crawlspace_climate_humidity
+    - sensor.snr_kitchen_climate_humidity
+    - sensor.snr_office_climate_humidity
+    - sensor.snr_mainbedroom_climate_humidity
+    - sensor.snr_kidsbedroom_climate_humidity
+    - sensor.snr_sparebedroom_climate_humidity

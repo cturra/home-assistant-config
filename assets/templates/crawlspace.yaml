@@ -31,8 +31,8 @@
     # return last value if we get 'unknown' state attribute from device. this
     # happens for zigbee devices after home assistant restart.
     state: >
-      {% if is_number(state_attr('sensor.snr_crawlspaceclimate_temperature', 'temperature')) %}
-        {{ state_attr('sensor.snr_crawlspaceclimate_temperature', 'temperature') | round(1, default=20.0) }}
+      {% if is_number(state_attr('sensor.snr_crawlspace_climate_temperature', 'temperature')) %}
+        {{ state_attr('sensor.snr_crawlspace_climate_temperature', 'temperature') | round(1, default=20.0) }}
       {% else %}
         {# use previous value if sensor returns unknown #}
         {{ states('sensor.crawlspace_temperature_1_decimal') }}

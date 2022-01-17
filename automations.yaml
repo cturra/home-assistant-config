@@ -250,7 +250,7 @@
     conditions:
     - condition: numeric_state
       below: '21.1'
-      entity_id: sensor.snr_mainbedroomclimate_temperature
+      entity_id: sensor.main_bedroom_mean_temperature_calculation
     - condition: time
       after: '21:00:00'
       before: 05:29:00
@@ -269,9 +269,9 @@
   trigger:
   - platform: state
     to: 'on'
-    entity_id: binary_sensor.snr_garagedoorhousecontact_contact
+    entity_id: binary_sensor.snr_garage_housedoorcontact_contact
   - platform: state
-    entity_id: binary_sensor.snr_garagedoorsidecontact_contact
+    entity_id: binary_sensor.snr_garage_sidedoorcontact_contact
     from: 'off'
     to: 'on'
   condition:
@@ -295,7 +295,7 @@
     house.
   trigger:
   - platform: state
-    entity_id: binary_sensor.snr_garageoutsidemotion_occupancy
+    entity_id: binary_sensor.snr_outside_garagesidemotion_occupancy
     from: 'off'
     to: 'on'
   condition:
@@ -308,7 +308,7 @@
     entity_id: switch.sw_garagesidedoor
   - wait_for_trigger:
     - platform: state
-      entity_id: binary_sensor.snr_garageoutsidemotion_occupancy
+      entity_id: binary_sensor.snr_outside_garagesidemotion_occupancy
       from: 'on'
       to: 'off'
   - delay:
@@ -326,7 +326,7 @@
     dimmed
   trigger:
   - platform: state
-    entity_id: binary_sensor.snr_porchfrontdoormotion_occupancy
+    entity_id: binary_sensor.snr_outside_frontporchmotion_occupancy
     from: 'off'
     to: 'on'
   condition:
@@ -344,7 +344,7 @@
       entity_id: scene.porch_bulbs_normal_colour_bright
   - wait_for_trigger:
     - platform: state
-      entity_id: binary_sensor.snr_porchfrontdoormotion_occupancy
+      entity_id: binary_sensor.snr_outside_frontporchmotion_occupancy
       from: 'on'
       to: 'off'
   - delay:
@@ -450,13 +450,13 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: sensor.snr_officechairvibration_action
+    entity_id: sensor.snr_office_chairvibration_action
     to: tilt
   condition:
   - condition: and
     conditions:
     - condition: state
-      entity_id: binary_sensor.snr_officemotion_occupancy
+      entity_id: binary_sensor.snr_office_motion_occupancy
       state: 'on'
     - condition: state
       entity_id: switch.plg_officeairpurifier
@@ -471,7 +471,7 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.snr_officemotion_occupancy
+    entity_id: binary_sensor.snr_office_motion_occupancy
     to: 'off'
     for: 00:10:00
   condition:
@@ -485,30 +485,30 @@
   mode: single
 - id: '1613958937211'
   alias: 'House: Nofity if water leak detected'
-  description: send notification to everyone if water leak is detected.
+  description: send notification to everyone, including the TV, if water leak is detected.
   trigger:
   - platform: state
     entity_id: group.leak_sensors
     to: 'on'
-  variables:
-    triggered_leak_sensor: >
-      {% for entity in trigger.to_state.attributes.entity_id %}
-        {% if is_state(entity, 'on') %}
-          {{ state_attr(entity, 'friendly_name') }}
-        {% endif %}
-      {% endfor %}
   condition: []
   action:
   - service: notify.grp_anne_chris_phones
     data:
       title: ❗💧 Water Detected
-      message: "Water detected at {{ triggered_leak_sensor }} sensor."
+      message: Water detected at {{ triggered_leak_sensor }} sensor.
       data:
         push:
           sound:
             name: default
             critical: 1
             volume: 1
+  - service: notify.living_room_tv
+    data:
+      message: ALERT! Water detected at {{ triggered_leak_sensor }} sensor.
+  variables:
+    triggered_leak_sensor: "{% for entity in trigger.to_state.attributes.entity_id\
+      \ %}\n  {% if is_state(entity, 'on') %}\n    {{ state_attr(entity, 'friendly_name')\
+      \ }}\n  {% endif %}\n{% endfor %}\n"
   mode: single
 - id: '1616274628046'
   alias: 'Espresso Machine: On in the morning'
@@ -541,9 +541,9 @@
   description: when locker door is opened notify chris' iphone.
   trigger:
   - platform: state
-    entity_id: binary_sensor.snr_lockercontact_contact
     to: 'on'
     for: 00:00:02
+    entity_id: binary_sensor.snr_crawlspace_lockerdoorcontact_contact
   condition: []
   action:
   - service: notify.mobile_app_turraphone
@@ -564,7 +564,7 @@
   trigger:
   - platform: state
     to: 'on'
-    entity_id: binary_sensor.snr_shedoutsidemotion_occupancy
+    entity_id: binary_sensor.snr_outside_shedmotion_occupancy
   condition:
   - condition: and
     conditions:
@@ -581,9 +581,9 @@
       entity_id: switch.sw_shedflood
   - wait_for_trigger:
     - platform: state
-      entity_id: binary_sensor.snr_shedoutsidemotion_occupancy
       from: 'on'
       to: 'off'
+      entity_id: binary_sensor.snr_outside_shedmotion_occupancy
   - delay:
       hours: 0
       minutes: 5
@@ -604,11 +604,11 @@
   - condition: and
     conditions:
     - condition: state
-      entity_id: binary_sensor.snr_sheddoorcontact_contact
+      entity_id: binary_sensor.snr_shed_doorcontact_contact
       state: 'on'
       for: 00:05:00
     - condition: time
-      after: '22:30'
+      after: '22:30:00'
   action:
   - service: notify.mobile_app_turraphone
     data:
@@ -626,7 +626,7 @@
   description: turn on shed exhaust fan for 10 minutes when the door is opened.
   trigger:
   - platform: state
-    entity_id: binary_sensor.snr_sheddoorcontact_contact
+    entity_id: binary_sensor.snr_shed_doorcontact_contact
     from: 'off'
     to: 'on'
   condition:
@@ -656,7 +656,7 @@
   - condition: and
     conditions:
     - condition: state
-      entity_id: binary_sensor.snr_sheddoorcontact_contact
+      entity_id: binary_sensor.snr_shed_doorcontact_contact
       state: 'on'
     - condition: state
       entity_id: switch.sw_shedfan
@@ -829,7 +829,7 @@
   use_blueprint:
     path: fich/zigbee2mqtt-ikea-5-button-remote-general-use.yaml
     input:
-      remote: sensor.rmt_kidsroomremote_action
+      remote: sensor.rmt_kidsbedroom_remote_action
       button_on_off:
       - service: light.toggle
         target:
@@ -938,12 +938,9 @@
     entity_id: group.leak_sensors
     to: 'on'
   variables:
-    triggered_leak_sensor: >
-      {% for entity in trigger.to_state.attributes.entity_id %}
-        {% if is_state(entity, 'on') %}
-          {{ state_attr(entity, 'friendly_name') }}
-        {% endif %}
-      {% endfor %}
+    triggered_leak_sensor: "{% for entity in trigger.to_state.attributes.entity_id\
+      \ %}\n  {% if is_state(entity, 'on') %}\n    {{ state_attr(entity, 'friendly_name')\
+      \ }}\n  {% endif %}\n{% endfor %}\n"
   condition: []
   action:
   - repeat:
@@ -955,7 +952,7 @@
           - media_player.family_room_speaker
           - media_player.main_bedroom_speaker
           volume: 0.8
-          message: "ALERT. Water detected at {{ triggered_leak_sensor }} sensor."
+          message: ALERT. Water detected at {{ triggered_leak_sensor }} sensor.
           delay: 00:00:07
   mode: single
 - id: '1634324401364'
@@ -978,7 +975,7 @@
   description: turn on porch lights when motion is detected after sunset
   trigger:
   - platform: state
-    entity_id: binary_sensor.snr_porchfrontdoormotion_occupancy
+    entity_id: binary_sensor.snr_outside_frontporchmotion_occupancy
     from: 'off'
     to: 'on'
   condition:
@@ -1000,7 +997,7 @@
       transition: 1
   - wait_for_trigger:
     - platform: state
-      entity_id: binary_sensor.snr_porchfrontdoormotion_occupancy
+      entity_id: binary_sensor.snr_outside_frontporchmotion_occupancy
       from: 'on'
       to: 'off'
   - delay:
@@ -1033,9 +1030,9 @@
   description: turn on crawlspace entrance lights when door is opened.
   trigger:
   - platform: state
-    entity_id: binary_sensor.snr_crawlspacedoorcontact_contact
     from: 'off'
     to: 'on'
+    entity_id: binary_sensor.snr_crawlspace_entrancedoorcontact_contact
   condition:
   - condition: state
     entity_id: switch.sw_crawlspaceentrance
@@ -1064,13 +1061,12 @@
       entity_id: sun.sun
       state: below_horizon
     - condition: state
-      entity_id: binary_sensor.snr_garagedoorhousecontact_contact
+      entity_id: binary_sensor.snr_garage_housedoorcontact_contact
       state: 'off'
       for:
         hours: 0
         minutes: 10
         seconds: 0
-        milliseconds: 0
   action:
   - service: switch.turn_on
     data: {}

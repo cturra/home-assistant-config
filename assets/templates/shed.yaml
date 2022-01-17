@@ -8,8 +8,8 @@
       device_class: temperature
       unit_of_measurement: '°C'
       state: >
-        {% if is_number(state_attr('sensor.snr_shedclimate_temperature', 'temperature')) %}
-          {{ state_attr('sensor.snr_shedclimate_temperature', 'temperature') | round(1, default=10.0) }}
+        {% if is_number(state_attr('sensor.snr_shed_climate_temperature', 'temperature')) %}
+          {{ state_attr('sensor.snr_shed_climate_temperature', 'temperature') | round(1, default=10.0) }}
         {% else %}
           {# use previous value if sensor returns unknown #}
           {{ states('sensor.shed_temperature_1_decimal') }}
@@ -20,8 +20,8 @@
       device_class: humidity
       unit_of_measurement: '%'
       state: > 
-        {% if is_number(state_attr('sensor.snr_shedclimate_humidity', 'humidity')) %}
-          {{ state_attr('sensor.snr_shedclimate_humidity', 'humidity') | int }}
+        {% if is_number(state_attr('sensor.snr_shed_climate_humidity', 'humidity')) %}
+          {{ state_attr('sensor.snr_shed_climate_humidity', 'humidity') | int }}
         {% else %}
           {# use previous value if sensor returns unknown #}
           {{ states('sensor.shed_humidity_rounded') }}

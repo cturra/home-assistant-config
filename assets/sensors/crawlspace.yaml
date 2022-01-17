@@ -8,7 +8,7 @@
   type: mean
   round_digits: 0
   entity_ids:
-    - sensor.snr_lockerclimate_humidity
+    - sensor.snr_crawlspace_lockerclimate_humidity
     - sensor.snr_crawlspace_locker_humidity
 
 # -- LaCrosse TX141Bv3 (published by rtl_433) --

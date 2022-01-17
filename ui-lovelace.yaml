@@ -485,7 +485,7 @@ views:
                 icon: 'mdi:lamp-outline'
                 secondary_info: last-changed
             # laundry
-            - entity_id: switch.plg_zbrtr_laundryroom
+            - entity_id: switch.plg_zbrtr_laundry
               state: 'on'
               options:
                 name: 'Laundry: Dehumidifier'
@@ -578,7 +578,10 @@ views:
                 icon: 'mdi:garage-open-variant'
                 secondary_info: last-changed
                 tap_action:
-                  action: toggle
+                  action: call-service
+                  service: cover.toggle
+                  service_data:
+                    entity_id: cover.garage_door
             # windows: zigbee (aqara)
             - entity_id: 'binary_sensor.snr_*window*_contact'
               state: 'on'
@@ -846,7 +849,7 @@ views:
               <<: *entities-style
               entities:
                 # dehumidifier
-                - entity: switch.plg_zbrtr_laundryroom
+                - entity: switch.plg_zbrtr_laundry
                   name: 'Dehumidifier'
                   icon: 'mdi:water-outline'
                   state_color: true
@@ -1067,8 +1070,8 @@ views:
           cards:
           # kitchen
           - type: 'custom:button-card'
-            entity: sensor.dining_room_temperature
-            name: 'Dining Room'
+            entity: sensor.kitchen_mean_temperature_calculation
+            name: 'Kitchen'
             show_state: true
             show_icon: false
             <<: *climate-button-style
@@ -1445,6 +1448,7 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
+        sort_by_level: 'asc'
         filter:
           include:
             - name: entity_id
@@ -1456,6 +1460,7 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
+        sort_by_level: 'asc'
         filter:
           include:
             - name: entity_id
@@ -1467,6 +1472,7 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
+        sort_by_level: 'asc'
         filter:
           include:
             - name: entity_id
@@ -1478,6 +1484,7 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
+        sort_by_level: 'asc'
         filter:
           include:
             - name: entity_id
@@ -1489,6 +1496,7 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
+        sort_by_level: 'asc'
         filter:
           include:
             - name: entity_id
@@ -1500,6 +1508,7 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
+        sort_by_level: 'asc'
         filter:
           include:
             - name: entity_id
@@ -1511,6 +1520,7 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
+        sort_by_level: 'asc'
         filter:
           include:
             - name: entity_id
@@ -1527,6 +1537,7 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
+        sort_by_level: 'asc'
         filter:
           include:
             - name: entity_id
