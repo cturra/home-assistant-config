@@ -337,7 +337,7 @@ views:
                 name: 'Crawlspace: Entrance'
                 icon: 'mdi:lightbulb-outline'
                 secondary_info: last-changed
-            - entity_id: switch.plg_zbrtr_crawlspace
+            - entity_id: switch.plg_crawlspace_zbrtr
               state: 'on'
               options:
                 name: 'Crawlspace: Locker Dehumidifier'
@@ -485,7 +485,7 @@ views:
                 icon: 'mdi:lamp-outline'
                 secondary_info: last-changed
             # laundry
-            - entity_id: switch.plg_zbrtr_laundry
+            - entity_id: switch.plg_laundry_zbrtr
               state: 'on'
               options:
                 name: 'Laundry: Dehumidifier'
@@ -849,7 +849,7 @@ views:
               <<: *entities-style
               entities:
                 # dehumidifier
-                - entity: switch.plg_zbrtr_laundry
+                - entity: switch.plg_laundry_zbrtr
                   name: 'Dehumidifier'
                   icon: 'mdi:water-outline'
                   state_color: true
@@ -928,7 +928,7 @@ views:
               <<: *entities-style
               entities:
                 # locker heater (dehumidifier)
-                - entity: switch.plg_zbrtr_crawlspace
+                - entity: switch.plg_crawlspace_zbrtr
                   name: 'Locker'
                   icon: 'mdi:water-outline'
                   state_color: true
@@ -1024,7 +1024,7 @@ views:
               name: 'Temperature'
             - entity: sensor.indoor_mean_humidity
               name: 'Humidity'
-            - entity: sensor.hvac_time_on_today
+            - entity: sensor.hvac_ecobee_time_on_today
               attribute: value
               name: 'Runtime'
 

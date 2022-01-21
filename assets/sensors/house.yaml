@@ -2,7 +2,7 @@
 
 ## hvac ecobee time on today
 - platform: history_stats
-  name: 'HVAC Time On Today'
+  name: 'HVAC Ecobee Time On Today'
   entity_id: binary_sensor.hvac_ecobee_state
   state: 'on'
   type: time
