@@ -42,7 +42,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Switches**                                                                  |
 | Plug              | Gosund     | WP2             | 2     | Tasmota            |
 | Plug              | Gosund     | WP5             | 3     | Tasmota            |
-| Plug              | Sonoff     | S31             | 7     | Tasmota            |
+| Plug              | Sonoff     | S31             | 8     | Tasmota            |
 | Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT        |
 | Plug              | Wyze       | WLPPO1          | 1     | Tasmota            |
 | Remote            | Ikea       | E1810           | 1     | Zigbee2MQTT        |

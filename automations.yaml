@@ -434,12 +434,18 @@
   - platform: time_pattern
     minutes: /15
   condition:
-  - condition: numeric_state
-    entity_id: sensor.garage_mean_humidity_calculation
-    below: '61.0'
-  - condition: state
-    entity_id: switch.plg_garagedehumidifier
-    state: 'on'
+  - condition: and
+    conditions:
+    - condition: numeric_state
+      entity_id: sensor.garage_mean_humidity_calculation
+      below: '61.0'
+    - condition: state
+      entity_id: switch.plg_garagedehumidifier
+      state: 'on'
+      for:
+        hours: 1
+        minutes: 0
+        seconds: 0
   action:
   - service: switch.turn_off
     data: {}
@@ -1127,4 +1133,46 @@
           seconds: 0
   action:
   - service: switch.turn_off
+  mode: single
+- id: '1642795421437'
+  alias: 'House: Nofity if any always on plug turned Off'
+  description: send notification to everyone, including the TV, if an always on plug
+    is turned off
+  trigger:
+  - platform: state
+    entity_id: group.plugs_always_on
+    to: 'off'
+  condition: []
+  action:
+  - service: notify.grp_anne_chris_phones
+    data:
+      title: ❗🔌 Plug Power OFF
+      message: Power OFF detected at {{ triggered_plug }}.
+      data:
+        push:
+          sound:
+            name: default
+            critical: 1
+            volume: 1
+  - service: notify.living_room_tv
+    data:
+      message: ALERT! Power OFF at {{ triggered_plug }}.
+  mode: single
+  variables:
+    triggered_plug: "{% for entity in trigger.to_state.attributes.entity_id %}\n \
+      \ {% if is_state(entity, 'off') %}\n    {{ state_attr(entity, 'friendly_name')\
+      \ }}\n  {% endif %}\n{% endfor %}\n"
+- id: '1642826717353'
+  alias: 'Laundry: Washing Machine Off if water leak detected'
+  description: turn off power to washing machine if water leak sensor is triggered
+    in laundry room
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.snr_laundry_washingmachineleak_water_leak
+    to: 'on'
+  condition:
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.plg_laundry_washingmachine
   mode: single

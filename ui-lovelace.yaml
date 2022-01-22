@@ -225,6 +225,7 @@ views:
         card:
           type: entities
           title: '🚨 Alerts 🚨'
+          show_header_toggle: false
           <<: *entities-overview-header-style
         filter:
           include:
@@ -293,6 +294,13 @@ views:
               options:
                 name: 'Garage: Heater'
                 icon: 'mdi:fire-off'
+                secondary_info: last-changed
+                <<: *alert-style
+            # always on plugs off (see: group.plugs_always_on)
+            - entity_id: '/switch.plg_(deepfreezer|garagefridge|laundry_washingmachine)/'
+              state: 'off'
+              options:
+                icon: 'mdi:power-plug-off-outline'
                 secondary_info: last-changed
                 <<: *alert-style
         sort:
@@ -490,6 +498,12 @@ views:
               options:
                 name: 'Laundry: Dehumidifier'
                 icon: 'mdi:water-outline'
+                secondary_info: last-changed
+            - entity_id: binary_sensor.laundry_washing_machine_state
+              state: 'on'
+              options:
+                name: 'Laundry: Washing Machine'
+                icon: 'mdi:washing-machine'
                 secondary_info: last-changed
             # porch
             - entity_id: light.group_porch_lights

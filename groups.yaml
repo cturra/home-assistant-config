@@ -36,9 +36,11 @@ leak_sensors:
     - binary_sensor.snr_kitchen_fridgeleak_water_leak
     - binary_sensor.snr_laundry_washingmachineleak_water_leak
 
-# plants
-plants:
-  name: 'House Plants'
+# ALWAYS ON plugs
+plugs_always_on:
+  name: 'Always On Plugs'
+  all: true # group state should only turn on if all grouped entities are on
   entities:
-    - plant.familyroom_parlor_palm
-    - plant.office_dracaena_trifasciata
+    - switch.plg_deepfreezer
+    - switch.plg_garagefridge
+    - switch.plg_laundry_washingmachine
