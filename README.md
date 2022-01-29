@@ -19,6 +19,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Bulb (A25)        | Athom      | LB01-15W-E27    | 2     | Tasmota            |
 | Bulb (BR30)       | Athom      | LB03-12W-BR30   | 2     | Tasmota            |
 | Bulb (B22)        | Athom      | LB01-7W-E27     | 1     | WLED               |
+| Bulb (A19)        | Ikea       | LED1624G9       | 1     | Zigbee2MQTT        |
 | **Entertainment**                                                             |
 | Audio             | Chromecast | Audio           | 1     | HA :: Chromecast   |
 | Speaker           | Sonos      | Play:5          | 1     | HA :: Sonos        |
@@ -46,6 +47,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT        |
 | Plug              | Wyze       | WLPPO1          | 1     | Tasmota            |
 | Remote            | Ikea       | E1810           | 1     | Zigbee2MQTT        |
+| Remote            | Xiaomi     | WXKG11LM        | 1     | Zigbee2MQTT        |
 | Switch            | Sonoff     | Mini R1         | 3     | Tasmota            |
 | Switch            | Sonoff     | SV              | 1     | Tasmota            |
 | Switch            | Treatlife  | SS02S           | 10    | Tasmota            |

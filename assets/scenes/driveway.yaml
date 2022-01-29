@@ -2,12 +2,12 @@
 
 - name: 'Driveway Bulbs Holiday Colour'
   entities:
-    light.blb_driveway1:
+    light.blb_outside_driveway1:
       state: 'on'
       brightness: 255
       # green
       rgb_color: [0,255,0]
-    light.blb_driveway2:
+    light.blb_outside_driveway2:
       state: 'on'
       brightness: 255
       # red

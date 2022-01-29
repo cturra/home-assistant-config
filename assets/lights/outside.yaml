@@ -4,12 +4,12 @@
 - platform: group
   name: 'Group Driveway Lights'
   entities:
-    - light.blb_driveway1
-    - light.blb_driveway2
+    - light.blb_outside_driveway1
+    - light.blb_outside_driveway2
 
 # porch light bulb group
 - platform: group
   name: 'Group Porch Lights'
   entities:
-    - light.blb_porch1
-    - light.blb_porch2
+    - light.blb_outside_porch1
+    - light.blb_outside_porch2

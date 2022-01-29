@@ -4,9 +4,9 @@
 # *needed for EVENT command_topic due to multi-replay (3 ways switch)
 - platform: mqtt
   name: "Stairwell Ceiling"
-  state_topic: "stat/SW_StairwellCeiling/POWER1"
-  command_topic: "cmnd/SW_StairwellCeiling/EVENT"
-  availability_topic: "tele/SW_StairwellCeiling/LWT"
+  state_topic: "stat/SW_Stairwell_CeilingLight/POWER1"
+  command_topic: "cmnd/SW_Stairwell_CeilingLight/EVENT"
+  availability_topic: "tele/SW_Stairwell_CeilingLight/LWT"
   qos: 1
   payload_on: "ON"
   payload_off: "OFF"

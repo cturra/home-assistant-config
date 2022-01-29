@@ -77,13 +77,13 @@
     for: 00:00:01
   condition:
   - condition: state
-    entity_id: switch.plg_kitchenspeaker
     state: 'off'
+    entity_id: switch.plg_kitchen_speaker
   action:
   - service: switch.turn_on
     data: {}
     target:
-      entity_id: switch.plg_kitchenspeaker
+      entity_id: switch.plg_kitchen_speaker
   mode: single
 - id: '1612292752882'
   alias: 'Kitchen Speakers: Off when music no longer playing'
@@ -99,43 +99,44 @@
     to: 'off'
   condition:
   - condition: state
-    entity_id: switch.plg_kitchenspeaker
     state: 'on'
+    entity_id: switch.plg_kitchen_speaker
   action:
   - service: switch.turn_off
     data: {}
     target:
-      entity_id: switch.plg_kitchenspeaker
+      entity_id: switch.plg_kitchen_speaker
   mode: single
 - id: '1612292819059'
-  alias: 'Kitchen Sink: Lights on at sunset'
-  description: turn on light over kitchen sink at sunset
+  alias: 'House: Lights on at sunset'
+  description: turn on light over kitchen sink and family room cabinet at sunset
   trigger:
   - platform: sun
     event: sunset
-  condition:
-  - condition: state
-    entity_id: switch.sw_kitchensink
-    state: 'off'
+  condition: []
   action:
   - service: switch.turn_on
     data: {}
-    entity_id: switch.sw_kitchensink
+    target:
+      entity_id:
+      - switch.plg_familyroom_cabinetlight
+      - switch.sw_kitchen_sinklight
   mode: single
 - id: '1612292887886'
   alias: 'Kitchen Sink: Lights off for night'
   description: turn kitchen sink light off if it was forgotten.
   trigger:
   - platform: time
-    at: 01:01
+    at: 01:01:00
   condition:
   - condition: state
-    entity_id: switch.sw_kitchensink
+    entity_id: switch.sw_kitchen_sink
     state: 'on'
   action:
   - service: switch.turn_off
     data: {}
-    entity_id: switch.sw_kitchensink
+    target:
+      entity_id: switch.sw_kitchen_sink
   mode: single
 - id: '1612294990194'
   alias: 'Driveway: Lights on at sunset'
@@ -465,12 +466,13 @@
       entity_id: binary_sensor.snr_office_motion_occupancy
       state: 'on'
     - condition: state
-      entity_id: switch.plg_officeairpurifier
+      entity_id: switch.plg_office_airpurifier
       state: 'off'
   action:
   - service: switch.turn_on
     data: {}
-    entity_id: switch.plg_officeairpurifier
+    target:
+      entity_id: switch.plg_office_airpurifier
   mode: restart
 - id: '1613012339822'
   alias: 'Office: Air Purifier off when room is empty'
@@ -482,12 +484,13 @@
     for: 00:10:00
   condition:
   - condition: state
-    entity_id: switch.plg_officeairpurifier
+    entity_id: switch.plg_office_airpurifier
     state: 'on'
   action:
   - service: switch.turn_off
     data: {}
-    entity_id: switch.plg_officeairpurifier
+    target:
+      entity_id: switch.plg_office_airpurifier
   mode: single
 - id: '1613958937211'
   alias: 'House: Nofity if water leak detected'
@@ -532,15 +535,15 @@
       entity_id: device_tracker.turraphone
       state: home
     - condition: time
-      before: '10:00'
+      before: '10:00:00'
       after: 05:00
     - condition: state
-      entity_id: switch.plg_espressomachine
       state: 'off'
+      entity_id: switch.plg_kitchen_espressomachine
   action:
   - service: switch.turn_on
     target:
-      entity_id: switch.plg_espressomachine
+      entity_id: switch.plg_kitchen_espressomachine
   mode: single
 - id: '1616875296550'
   alias: 'Crawlspace: Notify when locker door opened'
@@ -579,12 +582,12 @@
       state: below_horizon
       for: 00:15:00
     - condition: state
-      entity_id: switch.sw_shedflood
+      entity_id: switch.sw_shed_floodlight
       state: 'off'
   action:
   - service: switch.turn_on
     target:
-      entity_id: switch.sw_shedflood
+      entity_id: switch.sw_shed_floodlight
   - wait_for_trigger:
     - platform: state
       from: 'on'
@@ -597,7 +600,8 @@
       milliseconds: 0
   - service: switch.turn_off
     data: {}
-    entity_id: switch.sw_shedflood
+    target:
+      entity_id: switch.sw_shed_floodlight
   mode: restart
 - id: '1619640982634'
   alias: 'Shed: Notify when door left open at night'
@@ -1041,7 +1045,7 @@
     entity_id: binary_sensor.snr_crawlspace_entrancedoorcontact_contact
   condition:
   - condition: state
-    entity_id: switch.sw_crawlspaceentrance
+    entity_id: switch.sw_crawlspace_entrancelight
     state: 'off'
     for:
       hours: 0
@@ -1050,7 +1054,7 @@
   action:
   - service: switch.turn_on
     target:
-      entity_id: switch.sw_crawlspaceentrance
+      entity_id: switch.sw_crawlspace_entrancelight
   mode: single
 - id: '1638686806697'
   alias: 'Garage Inside: Lights on when vehicle doors opened after sunset'
@@ -1137,11 +1141,15 @@
 - id: '1642795421437'
   alias: 'House: Nofity if any always on plug turned Off'
   description: send notification to everyone, including the TV, if an always on plug
-    is turned off
+    has been off for 1 minute
   trigger:
   - platform: state
     entity_id: group.plugs_always_on
     to: 'off'
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
   condition: []
   action:
   - service: notify.grp_anne_chris_phones
@@ -1175,4 +1183,20 @@
   - service: switch.turn_off
     target:
       entity_id: switch.plg_laundry_washingmachine
+  mode: single
+- id: '1643213265225'
+  alias: 'Crawlspace: Lab light toggle when Button is pressed'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.rmt_crawlspace_labremote_click
+    to: single
+  condition: []
+  action:
+  - service: light.toggle
+    target:
+      entity_id: light.blb_crawlspace_lab
+    data:
+      kelvin: 4000
+      brightness: 255
   mode: single

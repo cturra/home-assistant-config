@@ -53,3 +53,34 @@
       unit_of_measurement: "μg/m³"
       state: >
         {{ state_attr('sensor.purpleair','results')[0]['pm10_0_atm'] | round(1, default=1.0) }}
+
+    # AQI calculation code translated from JavaScript found at:
+    # https://docs.google.com/document/d/15ijz94dXJ-YAZLi9iZ_RaBwrZ4KtYeCy08goGBwnbCU
+    - name: 'Office AQI'
+      device_class: AQI
+      state: >
+        {% macro calcAQI(Cp, Ih, Il, BPh, BPl) %}
+          {{ (((Ih - Il)/(BPh - BPl)) * (Cp - BPl) + Il) | round(1, default=0.0) }}
+        {% endmacro %}
+        {% if is_number(states('sensor.office_airquality_pm_2_5')) %}
+          {% set office_25pm = (states('sensor.office_airquality_pm_2_5') | float) %}
+          {% if office_25pm > 1000 %}
+            invalid
+          {% elif office_25pm > 350.5 %}
+            {{ calcAQI(office_25pm, 500.0, 401.0, 500.0, 350.5) }}
+          {% elif office_25pm > 250.5 %}
+            {{ calcAQI(office_25pm, 400.0, 301.0, 350.4, 250.5) }}
+          {% elif office_25pm > 150.5 %}
+            {{ calcAQI(office_25pm, 300.0, 201.0, 250.4, 150.5) }}
+          {% elif office_25pm > 55.5 %}
+            {{ calcAQI(office_25pm, 200.0, 151.0, 150.4, 55.5) }}
+          {% elif office_25pm > 35.5 %}
+            {{ calcAQI(office_25pm, 150.0, 101.0, 55.4, 35.5) }}
+          {% elif office_25pm > 12.1 %}
+            {{ calcAQI(office_25pm, 100.0, 51.0, 35.4, 12.1) }}
+          {% elif office_25pm >= 0.0 %}
+            {{ calcAQI(office_25pm, 50.0, 0.0, 12.0, 0.0) }}
+          {% else %}
+            invalid
+          {% endif %}
+        {% endif %}
