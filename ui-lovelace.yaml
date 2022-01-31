@@ -1051,9 +1051,8 @@ views:
               name: 'Temperature'
             - entity: sensor.indoor_mean_humidity
               name: 'Humidity'
-            - entity: sensor.hvac_ecobee_time_on_today
-              attribute: value
-              name: 'Runtime'
+            - entity: sensor.snr_office_airquality_pm_2_5
+              name: 'Air Quality'
 
         ## INDOOR TEMPERATURE CARDS
         # row 1
@@ -1113,7 +1112,7 @@ views:
 
           # office
           - type: 'custom:button-card'
-            entity: sensor.office_temperature_1_decimal
+            entity: sensor.snr_office_temperature
             name: Office
             show_state: true
             show_icon: false

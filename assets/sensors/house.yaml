@@ -18,7 +18,7 @@
     - sensor.hvac_ecobee_indoor_average_humidity
     - sensor.snr_crawlspace_climate_humidity
     - sensor.snr_kitchen_climate_humidity
-    - sensor.snr_office_climate_humidity
+    - sensor.snr_office_humidity
     - sensor.snr_mainbedroom_climate_humidity
     - sensor.snr_kidsbedroom_climate_humidity
     - sensor.snr_sparebedroom_climate_humidity

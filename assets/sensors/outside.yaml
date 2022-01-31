@@ -25,45 +25,39 @@
 # -- Purple Air (rest) --
 - platform: rest
   name: 'PurpleAir'
-
-  # Substitute in the URL of the sensor you care about.  To find the URL, go
-  # to purpleair.com/map, find your sensor, click on it, click on "Get This
-  # Widget" then click on "JSON".
+  # purpleair sensor
   resource: https://www.purpleair.com/json?key=YY84TD217DXUVWTF&show=80563
-
-  # Only every 120 seconds to avoid rate limits:
   scan_interval: 120
-
-  # Set this sensor to be the AQI value.
-  #
-  # Code translated from JavaScript found at:
-  # https://docs.google.com/document/d/15ijz94dXJ-YAZLi9iZ_RaBwrZ4KtYeCy08goGBwnbCU/edit#
+  # code translated from JavaScript found at:
+  #   https://docs.google.com/document/d/15ijz94dXJ-YAZLi9iZ_RaBwrZ4KtYeCy08goGBwnbCU
   value_template: >
-    {% macro calcAQI(Cp, Ih, Il, BPh, BPl) -%}
+    {% macro calcAQI(Cp, Ih, Il, BPh, BPl) %}
       {{ (((Ih - Il)/(BPh - BPl)) * (Cp - BPl) + Il) | round(1, default=0.0) }}
-    {%- endmacro %}
-    {% if (value_json["results"][0]["PM2_5Value"] | float) > 1000 %}
-      invalid
-    {% elif (value_json["results"][0]["PM2_5Value"] | float) > 350.5 %}
-      {{ calcAQI((value_json["results"][0]["PM2_5Value"] | float), 500.0, 401.0, 500.0, 350.5) }}
-    {% elif (value_json["results"][0]["PM2_5Value"] | float) > 250.5 %}
-      {{ calcAQI((value_json["results"][0]["PM2_5Value"] | float), 400.0, 301.0, 350.4, 250.5) }}
-    {% elif (value_json["results"][0]["PM2_5Value"] | float) > 150.5 %}
-      {{ calcAQI((value_json["results"][0]["PM2_5Value"] | float), 300.0, 201.0, 250.4, 150.5) }}
-    {% elif (value_json["results"][0]["PM2_5Value"] | float) > 55.5 %}
-      {{ calcAQI((value_json["results"][0]["PM2_5Value"] | float), 200.0, 151.0, 150.4, 55.5) }}
-    {% elif (value_json["results"][0]["PM2_5Value"] | float) > 35.5 %}
-      {{ calcAQI((value_json["results"][0]["PM2_5Value"] | float), 150.0, 101.0, 55.4, 35.5) }}
-    {% elif (value_json["results"][0]["PM2_5Value"] | float) > 12.1 %}
-      {{ calcAQI((value_json["results"][0]["PM2_5Value"] | float), 100.0, 51.0, 35.4, 12.1) }}
-    {% elif (value_json["results"][0]["PM2_5Value"] | float) >= 0.0 %}
-      {{ calcAQI((value_json["results"][0]["PM2_5Value"] | float), 50.0, 0.0, 12.0, 0.0) }}
+    {% endmacro %}
+    {% if is_number(value_json["results"][0]["PM2_5Value"]) %}
+      {% set pm25_value =  value_json["results"][0]["PM2_5Value"] | float %}
+      {% if pm25_value > 1000 %}
+        invalid
+      {% elif pm25_value > 350.5 %}
+        {{ calcAQI(pm25_value, 500.0, 401.0, 500.0, 350.5) }}
+      {% elif pm25_value > 250.5 %}
+        {{ calcAQI(pm25_value, 400.0, 301.0, 350.4, 250.5) }}
+      {% elif pm25_value > 150.5 %}
+        {{ calcAQI(pm25_value, 300.0, 201.0, 250.4, 150.5) }}
+      {% elif pm25_value > 55.5 %}
+        {{ calcAQI(pm25_value, 200.0, 151.0, 150.4, 55.5) }}
+      {% elif pm25_value > 35.5 %}
+        {{ calcAQI(pm25_value, 150.0, 101.0, 55.4, 35.5) }}
+      {% elif pm25_value > 12.1 %}
+        {{ calcAQI(pm25_value, 100.0, 51.0, 35.4, 12.1) }}
+      {% elif pm25_value >= 0.0 %}
+        {{ calcAQI(pm25_value, 50.0, 0.0, 12.0, 0.0) }}
+      {% else %}
+        invalid
+      {% endif %}
     {% else %}
       invalid
     {% endif %}
-
   unit_of_measurement: "AQI"
-  # The value of the sensor can't be longer than 255 characters, but the
-  # attributes can.  Store away all the data for use by the templates below.
   json_attributes:
     - results
