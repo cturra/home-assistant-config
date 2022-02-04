@@ -61,3 +61,28 @@
   unit_of_measurement: "AQI"
   json_attributes:
     - results
+
+# -- Xiaomi Mi LYWSD03MMC (published by esphome ble bridge) --
+# battery
+- platform: mqtt
+  name: 'SNR Outside TacomaClimate Battery'
+  device_class: battery
+  unit_of_measurement: '%'
+  state_topic: "esphome/house-ble-bridge/sensor/tacoma_battery_level/state"
+  availability_topic: "esphome/house-ble-bridge/availability/status"
+
+# humidity
+- platform: mqtt
+  name: 'SNR Outside TacomaClimate Humidity'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state_topic: "esphome/house-ble-bridge/sensor/tacoma_humidity/state"
+  availability_topic: "esphome/house-ble-bridge/availability/status"
+
+# temperature
+- platform: mqtt
+  name: 'SNR Outside TacomaClimate Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: "esphome/house-ble-bridge/sensor/tacoma_temperature/state"
+  availability_topic: "esphome/house-ble-bridge/availability/status"
