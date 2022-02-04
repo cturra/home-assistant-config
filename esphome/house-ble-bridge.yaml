@@ -1,0 +1,62 @@
+substitutions:
+  device_name: house-ble-bridge
+
+esphome:
+  name: ${device_name}
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Set up Wifi
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # static ip assignment
+  manual_ip:
+    static_ip: !secret home_ble_bridge_ip
+    gateway: !secret network_gateway
+    subnet: !secret network_subnet
+
+# Enable logging
+logger:
+  level: INFO # DEBUG for sensor readings
+
+ota:
+  password: !secret home_ble_bridge_ip_ota_passwd
+
+
+# Enable MQTT Client
+mqtt:
+  broker: !secret mqtt_broker
+  port: 1883
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
+  discovery: false
+  topic_prefix: esphome/${device_name}
+  birth_message:
+    topic: esphome/${device_name}/availability/status
+    payload: online
+  will_message:
+    topic: esphome/${device_name}/availability/status
+    payload: offline
+
+# Enable Bluetooth Low Energy Tracker Hub
+esp32_ble_tracker:
+
+sensor:
+  # temperature :: truck
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:15:AF:5B"
+    temperature:
+      name: "Tacoma Temperature"
+    humidity:
+      name: "Tacoma Humidity"
+    battery_level:
+      name: "Tacoma Battery Level"
+    battery_voltage:
+      name: "Tacoma Battery Voltage"
+    signal_strength:
+      name: "Tacoma Signal"

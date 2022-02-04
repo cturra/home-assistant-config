@@ -1461,6 +1461,69 @@ views:
                 color: '#731425'
 
 
+## ------ VEHICLE DASHBOARD ------
+  - title: Truck
+    path: truck
+    icon: 'mdi:car-info'
+    theme: google-dark-theme
+    badges: []
+    cards:
+      - type: 'custom:vertical-stack-in-card'
+        title: 'Tacoma'
+        <<: *entities-header-style
+        cards:
+        - type: horizontal-stack
+          cards:
+          # tacoma temperature
+          - type: 'custom:button-card'
+            entity: sensor.snr_outside_tacomaclimate_temperature
+            name: Temperature
+            show_state: true
+            show_icon: false
+            <<: *graph-button-card-style
+          # tacoma humidity
+          - type: 'custom:button-card'
+            entity: sensor.snr_outside_tacomaclimate_humidity
+            name: Humidity
+            show_state: true
+            show_icon: false
+            <<: *graph-button-card-style
+
+        # TRUCK TEMPERATURE GRAPH CARD
+        - type: 'custom:mini-graph-card'
+          show:
+            extrema: false
+            icon: false
+            labels: hover
+            labels_secondary: hover
+            name: false
+            state: false
+          height: 60
+          line_width: 1
+          hours_to_show: 24
+          points_per_hour: 4
+          lower_bound_secondary: 25
+          upper_bound_secondary: 90
+          group: true
+          <<: *temp-graph-color_thresholds
+          entities:
+            # temerature
+            - entity: sensor.snr_outside_tacomaclimate_temperature
+              name: Temperature
+              show_fill: false
+              show_legend: false
+              state_adaptive_color: true
+            # humidity
+            - entity: sensor.snr_outside_tacomaclimate_humidity
+              name: Humidity
+              line_width: 1
+              show_legend: false
+              show_fill: false
+              state_adaptive_color: true
+              color: '#5f9bea'
+              y_axis: secondary
+
+
   ## ------ BATTERY DASHBOARD ------
   - title: Battery
     path: battery

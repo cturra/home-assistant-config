@@ -38,6 +38,10 @@ sensor.snr_mainbedroom_climate_battery:
 sensor.snr_office_climate_battery:
   friendly_name: 'Office'
 
+# outside: tacoma
+sensor.snr_outside_tacomaclimate_battery:
+  friendly_name: 'Outside: Tacoma'
+
 # shed
 sensor.snr_shed_climate_battery:
   friendly_name: 'Shed'
