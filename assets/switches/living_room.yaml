@@ -1,12 +1,5 @@
 ## SWITCHES / LIVING ROOM
 
-# tv on
-- platform: wake_on_lan
-  name: 'living_room_tv_turn_on'
-  host: !secret living_room_tv_ip
-  mac: !secret living_room_tv_mac
-  broadcast_address: !secret living_room_tv_broadcast_ip
-
 # tv & receiver on/off
 - platform: template
   switches:
@@ -19,9 +12,10 @@
         }}
       turn_on:
         # turn devices on
-        - service: media_player.turn_on
-          target:
-            entity_id: media_player.living_room_tv
+        - service: wake_on_lan.send_magic_packet
+          data:
+            broadcast_address: !secret living_room_tv_broadcast_ip
+            mac: !secret living_room_tv_mac
         - service: media_player.turn_on
           target:
             entity_id: media_player.living_room_receiver_main_zone
