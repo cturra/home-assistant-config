@@ -3,6 +3,6 @@
 # simple ios integration to open/close the garage door
 - name: 'Garage Door'
   entities:
-    switch.sw_garagedooropener:
+    switch.sw_garage_vehicledooropener:
       state: 'on'
       icon: 'mdi:garage-variant'

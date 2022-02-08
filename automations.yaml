@@ -56,16 +56,18 @@
       entity_id: input_boolean.dry_garlic
       state: 'on'
     - condition: state
-      entity_id: switch.sw_shedfan
+      entity_id: switch.sw_shed_fan
       state: 'off'
   action:
   - service: switch.turn_on
     data: {}
-    entity_id: switch.sw_shedfan
+    target:
+      entity_id: switch.sw_shed_fan
   - delay: 00:10:00
   - service: switch.turn_off
     data: {}
-    entity_id: switch.sw_shedfan
+    target:
+      entity_id: switch.sw_shed_fan
   mode: single
 - id: '1612292614712'
   alias: 'Kitchen Speakers: ON when music starts playing'
@@ -233,12 +235,12 @@
   condition:
   - condition: state
     state: 'on'
-    entity_id: switch.plg_mainbedroomheater
+    entity_id: switch.plg_mainbedroom_heater
   action:
   - service: switch.turn_off
     data: {}
     target:
-      entity_id: switch.plg_mainbedroomheater
+      entity_id: switch.plg_mainbedroom_heater
   mode: single
 - id: '1612299207142'
   alias: 'Main Bedroom: Heater On at night'
@@ -257,12 +259,12 @@
       before: 05:29:00
     - condition: state
       state: 'off'
-      entity_id: switch.plg_mainbedroomheater
+      entity_id: switch.plg_mainbedroom_heater
   action:
   - service: switch.turn_on
     data: {}
     target:
-      entity_id: switch.plg_mainbedroomheater
+      entity_id: switch.plg_mainbedroom_heater
   mode: single
 - id: '1612306243899'
   alias: 'Garage Inside: Lights on when person doors opened'
@@ -282,13 +284,14 @@
       entity_id: sun.sun
       state: below_horizon
     - condition: state
-      entity_id: switch.sw_garageceilingmain
+      entity_id: switch.sw_garage_ceilingmainlights
       state: 'off'
       for: 00:00:10
   action:
   - service: switch.turn_on
     data: {}
-    entity_id: switch.sw_garageceilingmain
+    target:
+      entity_id: switch.sw_garage_ceilingmainlights
   mode: single
 - id: '1612309818757'
   alias: 'Garage Outside: Side light On at night with motion'
@@ -306,7 +309,8 @@
   action:
   - service: switch.turn_on
     data: {}
-    entity_id: switch.sw_garagesidedoor
+    target:
+      entity_id: switch.sw_outside_garagesidedoorlight
   - wait_for_trigger:
     - platform: state
       entity_id: binary_sensor.snr_outside_garagesidemotion_occupancy
@@ -319,7 +323,8 @@
       milliseconds: 0
   - service: switch.turn_off
     data: {}
-    entity_id: switch.sw_garagesidedoor
+    target:
+      entity_id: switch.sw_outside_garagesidedoorlight
   mode: restart
 - id: '1612312535434'
   alias: 'Porch: Lights On with motion before midnight'
@@ -367,25 +372,26 @@
   description: turn off dehumidifier when garage vehicle door is opened.
   trigger:
   - platform: state
-    entity_id: switch.sw_garagedoorcontact
+    entity_id: switch.sw_garage_vehicledoorcontact
     from: 'off'
     to: 'on'
     for: 00:00:20
   condition:
   - condition: state
-    entity_id: switch.plg_garagedehumidifier
+    entity_id: switch.plg_garage_dehumidifier
     state: 'on'
   action:
   - service: switch.turn_off
     data: {}
-    entity_id: switch.plg_garagedehumidifier
+    target:
+      entity_id: switch.plg_garage_dehumidifier
   mode: single
 - id: '1612462859674'
   alias: 'Garage Inside: Dehumidifier check when vehicle door closes'
   description: ''
   trigger:
   - platform: state
-    entity_id: switch.sw_garagedoorcontact
+    entity_id: switch.sw_garage_vehicledoorcontact
     from: 'on'
     to: 'off'
     for: 00:00:20
@@ -396,12 +402,13 @@
       above: '65.0'
       entity_id: sensor.garage_mean_humidity_calculation
     - condition: state
-      entity_id: switch.plg_garagedehumidifier
+      entity_id: switch.plg_garage_dehumidifier
       state: 'off'
   action:
   - service: switch.turn_on
     data: {}
-    entity_id: switch.plg_garagedehumidifier
+    target:
+      entity_id: switch.plg_garage_dehumidifier
   mode: single
 - id: '1612463000537'
   alias: 'Garage Inside: Dehumidifier on with high humidity'
@@ -417,15 +424,16 @@
   - condition: and
     conditions:
     - condition: state
-      entity_id: switch.plg_garagedehumidifier
+      entity_id: switch.plg_garage_dehumidifier
       state: 'off'
     - condition: state
-      entity_id: switch.sw_garagedoorcontact
+      entity_id: switch.sw_garage_vehicledoorcontact
       state: 'off'
   action:
   - service: switch.turn_on
     data: {}
-    entity_id: switch.plg_garagedehumidifier
+    target:
+      entity_id: switch.plg_garage_dehumidifier
   mode: single
 - id: '1612463100433'
   alias: 'Garage Inside: Dehumidifier off with low humidity'
@@ -441,7 +449,7 @@
       entity_id: sensor.garage_mean_humidity_calculation
       below: '61.0'
     - condition: state
-      entity_id: switch.plg_garagedehumidifier
+      entity_id: switch.plg_garage_dehumidifier
       state: 'on'
       for:
         hours: 1
@@ -450,7 +458,8 @@
   action:
   - service: switch.turn_off
     data: {}
-    entity_id: switch.plg_garagedehumidifier
+    target:
+      entity_id: switch.plg_garage_dehumidifier
   mode: single
 - id: '1613012241426'
   alias: 'Office: Air Purifier on with occupancy'
@@ -520,7 +529,7 @@
       \ }}\n  {% endif %}\n{% endfor %}\n"
   mode: single
 - id: '1616274628046'
-  alias: 'Espresso Machine: On in the morning'
+  alias: 'Kitchen: Espresso Machine On in the morning'
   description: turn on the espresso machine in the morning (between 05:00 - 10:00)
     when chris' iphone is removed from the charger for 1 minute.
   trigger:
@@ -536,7 +545,7 @@
       state: home
     - condition: time
       before: '10:00:00'
-      after: 05:00
+      after: 05:00:00
     - condition: state
       state: 'off'
       entity_id: switch.plg_kitchen_espressomachine
@@ -641,20 +650,22 @@
     to: 'on'
   condition:
   - condition: state
-    entity_id: switch.sw_shedfan
+    entity_id: switch.sw_shed_fan
     state: 'off'
   action:
   - service: switch.turn_on
+    data: {}
     target:
-      entity_id: switch.sw_shedfan
+      entity_id: switch.sw_shed_fan
   - delay:
       hours: 0
       minutes: 10
       seconds: 0
       milliseconds: 0
   - service: switch.turn_off
+    data: {}
     target:
-      entity_id: switch.sw_shedfan
+      entity_id: switch.sw_shed_fan
   mode: single
 - id: '1620159763993'
   alias: 'Shed: cycle Fan while door is open'
@@ -669,21 +680,23 @@
       entity_id: binary_sensor.snr_shed_doorcontact_contact
       state: 'on'
     - condition: state
-      entity_id: switch.sw_shedfan
+      entity_id: switch.sw_shed_fan
       state: 'off'
       for: 00:10:00
   action:
   - service: switch.turn_on
+    data: {}
     target:
-      entity_id: switch.sw_shedfan
+      entity_id: switch.sw_shed_fan
   - delay:
       hours: 0
       minutes: 10
       seconds: 0
       milliseconds: 0
   - service: switch.turn_off
+    data: {}
     target:
-      entity_id: switch.sw_shedfan
+      entity_id: switch.sw_shed_fan
   mode: single
 - id: '1623889405239'
   alias: 'Garage Inside: Offer to open vehicle door on return home'
@@ -696,7 +709,7 @@
     to: home
   condition:
   - condition: state
-    entity_id: switch.sw_garagedoorcontact
+    entity_id: switch.sw_garage_vehicledoorcontact
     state: 'off'
   action:
   - service: notify.mobile_app_turraphone
@@ -718,7 +731,7 @@
     continue_on_timeout: false
   - service: cover.open_cover
     target:
-      entity_id: cover.garage_door
+      entity_id: cover.garage_vehicledoor
   mode: single
 - id: '1624131994582'
   alias: 'Garage Indoor: notify Chris when vehicle door opened'
@@ -726,7 +739,7 @@
     the garage door has been opened.
   trigger:
   - platform: state
-    entity_id: switch.sw_garagedoorcontact
+    entity_id: switch.sw_garage_vehicledoorcontact
     from: 'off'
     to: 'on'
     for: 00:00:10
@@ -787,7 +800,7 @@
     heater doesn't turn on while vehicle door is open.
   trigger:
   - platform: state
-    entity_id: switch.sw_garagedoorcontact
+    entity_id: switch.sw_garage_vehicledoorcontact
     from: 'off'
     to: 'on'
     for:
@@ -807,7 +820,7 @@
     if current is below target temp, before returning the thermostat to heating mode.
   trigger:
   - platform: state
-    entity_id: switch.sw_garagedoorcontact
+    entity_id: switch.sw_garage_vehicledoorcontact
     from: 'on'
     to: 'off'
     for:
@@ -893,7 +906,7 @@
   - condition: and
     conditions:
     - condition: state
-      entity_id: switch.sw_garagedoorcontact
+      entity_id: switch.sw_garage_vehicledoorcontact
       state: 'on'
       for: 00:05:00
     - condition: time
@@ -1062,7 +1075,7 @@
     home only).
   trigger:
   - platform: state
-    entity_id: switch.sw_garagedoorcontact
+    entity_id: switch.sw_garage_vehicledoorcontact
     to: 'on'
   condition:
   - condition: and
@@ -1077,10 +1090,14 @@
         hours: 0
         minutes: 10
         seconds: 0
+    - condition: state
+      entity_id: switch.sw_garage_ceilingmainlights
+      state: 'off'
   action:
   - service: switch.turn_on
     data: {}
-    entity_id: switch.sw_garageceilingmain
+    target:
+      entity_id: switch.sw_garage_ceilingmainlights
   mode: single
 - id: '1642616936013'
   alias: 'Laundry: Turn on dehumidifier if humidity is too high'

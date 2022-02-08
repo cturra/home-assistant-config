@@ -62,6 +62,46 @@
   json_attributes:
     - results
 
+
+# -- Toyota TPMS (reported by: rtl_433) --
+# tire pressure (convert kPa to psi)
+- platform: mqtt
+  name: 'SNR Outside Tacoma TPMS1'
+  device_class: pressure
+  unit_of_measurement: psi
+  state_topic: rtl_433/sensor/Toyota-d8b4ed0a
+  json_attributes_topic: rtl_433/sensor/Toyota-d8b4ed0a
+  value_template: >
+    {{ ( value_json.pressure_kPa * 0.145038) | round(1, default=0.0) }}
+
+- platform: mqtt
+  name: 'SNR Outside Tacoma TPMS2'
+  device_class: pressure
+  unit_of_measurement: psi
+  state_topic: rtl_433/sensor/Toyota-d8b7309e
+  json_attributes_topic: rtl_433/sensor/Toyota-d8b7309e
+  value_template: >
+    {{ (value_json.pressure_kPa * 0.145038) | round(1, default=0.0) }}
+
+- platform: mqtt
+  name: 'SNR Outside Tacoma TPMS3'
+  device_class: pressure
+  unit_of_measurement: psi
+  state_topic: rtl_433/sensor/Toyota-d8b73111
+  json_attributes_topic: rtl_433/sensor/Toyota-d8b73111
+  value_template: >
+    {{ (value_json.pressure_kPa * 0.145038) | round(1, default=0.0) }}
+
+- platform: mqtt
+  name: 'SNR Outside Tacoma TPMS4'
+  device_class: pressure
+  unit_of_measurement: psi
+  state_topic: rtl_433/sensor/Toyota-d8b4f5bf
+  json_attributes_topic: rtl_433/sensor/Toyota-d8b4f5bf
+  value_template: >
+    {{ (value_json.pressure_kPa * 0.145038) | round(1, default=0.0) }}
+
+
 # -- Xiaomi Mi LYWSD03MMC (published by esphome ble bridge) --
 # battery
 - platform: mqtt

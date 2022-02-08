@@ -4,12 +4,12 @@
 switch.plg_deepfreezer:
   friendly_name: 'Crawlspace Deep Freezer Plug'
 
-# garage (vehicle) door
-switch.sw_garagedoorcontact:
+# garage: vehicle door
+switch.sw_garage_vehicledoorcontact:
   friendly_name: 'Garage Door Contact Sensor'
   device_class: garage_door
   icon_template: >-
-    {% if is_state('switch.sw_garagedoorcontact','on') %}
+    {% if is_state('switch.sw_garage_vehicledoorcontact','on') %}
       mdi:garage-open-variant
     {% else %}
       mdi:garage-variant

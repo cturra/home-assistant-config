@@ -40,7 +40,7 @@
   - name: 'Garage Vehicle Door Contact State'
     device_class: garage_door
     state: >
-      {{ is_state('switch.sw_garagedoorcontact', 'on') }}
+      {{ is_state('switch.sw_garage_vehicledoorcontact', 'on') }}
 
 
 # --- sensors ---
@@ -74,7 +74,7 @@
     state: >
       {# thermostat mode state if garage door is closed #}
       {% if is_state('climate.hvac_garagethermostat', 'off') and
-            is_state('switch.sw_garagedoorcontact', 'off')
+            is_state('switch.sw_garage_vehicledoorcontact', 'off')
       %}
         Off ({{ states('sensor.garage_mean_temperature_calculation') }}°C)
       {% else %}

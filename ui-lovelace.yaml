@@ -281,8 +281,8 @@ views:
                 <<: *alert-style
             # weather advisories
             - entity_id: sensor.pitt_meadows_warnings
-              # regex matches any string that contains at least one non-space character
-              state: '/^(?!\s*$).+/'
+              # regex matches any string that contains at a 0 (used for no warning)
+              state: '/^(?!.*(0))/'
               options:
                 name: 'Weather'
                 icon: 'mdi:weather-cloudy-alert'
@@ -395,19 +395,19 @@ views:
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
             # garage
-            - entity_id: switch.sw_garageceilingmain
+            - entity_id: switch.sw_garage_ceilingmainlights
               state: 'on'
               options:
                 name: 'Garage: Ceiling (Main)'
                 icon: 'mdi:lightbulb-fluorescent-tube-outline'
                 secondary_info: last-changed
-            - entity_id: switch.plg_garagedehumidifier
+            - entity_id: switch.plg_garage_dehumidifier
               state: 'on'
               options:
                 name: 'Garage: Dehumidifier'
                 icon: 'mdi:water-outline'
                 secondary_info: last-changed
-            - entity_id: switch.sw_garagesidedoor
+            - entity_id: switch.sw_outside_garagesidedoorlight
               state: 'on'
               options:
                 name: 'Garage: Side Door'
@@ -472,7 +472,7 @@ views:
                 icon: 'mdi:air-purifier'
                 secondary_info: last-changed
             # main bedroom
-            - entity_id: light.sw_mainbedroomceiling
+            - entity_id: light.sw_mainbedroom_ceilinglight
               state: 'on'
               options:
                 type: 'custom:slider-entity-row'
@@ -527,7 +527,7 @@ views:
                 icon: 'mdi:power'
                 secondary_info: last-changed
             # shed
-            - entity_id: switch.sw_shedfan
+            - entity_id: switch.sw_shed_fan
               state: 'on'
               options:
                 name: 'Shed: Fan'
@@ -602,7 +602,7 @@ views:
                   action: call-service
                   service: cover.toggle
                   service_data:
-                    entity_id: cover.garage_door
+                    entity_id: cover.garage_vehicledoor
             # windows: zigbee (aqara)
             - entity_id: 'binary_sensor.snr_*window*_contact'
               state: 'on'
@@ -766,7 +766,7 @@ views:
               <<: *entities-style
               entities:
                 # ceiling light
-                - entity: light.sw_mainbedroomceiling
+                - entity: light.sw_mainbedroom_ceilinglight
                   name: 'Ceiling'
                   icon: 'mdi:dome-light'
                   state_color: true
@@ -775,7 +775,7 @@ views:
               <<: *entities-style
               entities:
                 # heater
-                - entity: switch.plg_mainbedroomheater
+                - entity: switch.plg_mainbedroom_heater
                   name: 'Heater'
                   icon: 'mdi:radiator'
                   state_color: true
@@ -887,7 +887,7 @@ views:
           cards:
             # vehicle door opener
             - type: 'custom:button-card'
-              entity: cover.garage_door
+              entity: cover.garage_vehicledoor
               name: 'Vehicle Door'
               tap_action:
                 action: toggle
@@ -913,17 +913,17 @@ views:
               <<: *entities-style
               entities:
                 # ceiling light
-                - entity: switch.sw_garageceilingmain
+                - entity: switch.sw_garage_ceilingmainlights
                   name: 'Ceiling'
                   icon: 'mdi:lightbulb-fluorescent-tube-outline'
                   state_color: true
                 # dehumidifier
-                - entity: switch.plg_garagedehumidifier
+                - entity: switch.plg_garage_dehumidifier
                   name: 'Dehumidifier'
                   icon: 'mdi:water-outline'
                   state_color: true
                 # side door light
-                - entity: switch.sw_garagesidedoor
+                - entity: switch.sw_outside_garagesidedoorlight
                   name: 'Side Door'
                   icon: 'mdi:coach-lamp'
                   state_color: true
@@ -1003,7 +1003,7 @@ views:
               <<: *entities-style
               entities:
                 # ventilation fan
-                - entity: switch.sw_shedfan
+                - entity: switch.sw_shed_fan
                   name: Fan
                   icon: 'mdi:fan'
                   state_color: true
@@ -1474,6 +1474,13 @@ views:
         cards:
         - type: horizontal-stack
           cards:
+          # tacoma presence
+          - type: 'custom:button-card'
+            entity: binary_sensor.snr_tacoma_location
+            name: 'Location'
+            show_state: true
+            show_icon: false
+            <<: *graph-button-card-style
           # tacoma temperature
           - type: 'custom:button-card'
             entity: sensor.snr_outside_tacomaclimate_temperature
@@ -1523,6 +1530,34 @@ views:
               color: '#5f9bea'
               y_axis: secondary
 
+        # GARAGE FUNCTION GRAPHS
+        - type: 'custom:mini-graph-card'
+          show:
+            extrema: false
+            fill: fade
+            icon: false
+            labels: hover
+            labels_secondary: hover
+            name: false
+            state: false
+          height: 20
+          line_width: 1
+          hours_to_show: 24
+          points_per_hour: 60
+          group: true
+          entities:
+            # garage car door opened/closed
+            - entity: binary_sensor.snr_tacoma_location
+              name: 'Tacoma Location'
+              color: '#afafaf'
+              show_legend: true
+              show_line: false
+              show_points: false
+          state_map:
+            - value: 'on'
+              label: away
+            - value: 'off'
+              label: "home"
 
   ## ------ BATTERY DASHBOARD ------
   - title: Battery

@@ -1,5 +1,5 @@
 ## CUSTOMIZE / SCENES
 
-# garage (vehicle) door
+# garage: vehicle door
 scene.garage_door:
   icon: 'mdi:garage-variant'

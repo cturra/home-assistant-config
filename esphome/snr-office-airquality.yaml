@@ -25,7 +25,7 @@ logger:
 
 # Enable OTA updates
 ota:
-  password: !secret ota_password
+  password: !secret snr_office_airquatliy_ota_password
 
 # Enable MQTT Client
 mqtt:
