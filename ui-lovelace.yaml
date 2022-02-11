@@ -19,6 +19,16 @@ anchors:
           --secondary-text-color: #008020;
         }
 
+  # alerts (info)
+  alert-info-style: &alert-info-style
+    card_mod:
+      style: |
+        :host {
+          color: #0189cd;
+          --card-mod-icon-color: #0189cd;
+          --secondary-text-color: #006ea5;
+        }
+
   # entity header formatting (not used for overivew dashboard)
   entities-header-style: &entities-header-style
     card_mod:
@@ -257,6 +267,14 @@ views:
                 icon: 'mdi:fridge-alert-outline'
                 secondary_info: last-changed
                 <<: *alert-style
+            # home assistant update available
+            - entity_id: 'binary_sensor.updater'
+              state: 'on'
+              options:
+                name: 'Home Assistant'
+                icon: 'mdi:home-assistant'
+                secondary_info: last-changed
+                <<: *alert-info-style
             # outdoor air quality unhealthy
             - entity_id: sensor.purpleair_aqi_description
               state: '/(Unhealthy|Hazardous)/'
@@ -1530,7 +1548,7 @@ views:
               color: '#5f9bea'
               y_axis: secondary
 
-        # GARAGE FUNCTION GRAPHS
+        # TACOMA PRESENCE GRAPH
         - type: 'custom:mini-graph-card'
           show:
             extrema: false
@@ -1546,7 +1564,7 @@ views:
           points_per_hour: 60
           group: true
           entities:
-            # garage car door opened/closed
+            # tacoma is home/away
             - entity: binary_sensor.snr_tacoma_location
               name: 'Tacoma Location'
               color: '#afafaf'
