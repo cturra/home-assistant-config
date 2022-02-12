@@ -1238,7 +1238,7 @@ views:
         cards:
         ## GARAGE THERMOSTAT 
         - type: 'custom:simple-thermostat'
-          entity: climate.hvac_garagethermostat
+          entity: climate.hvac_garage_thermostat
           <<: *thermostat-style
           layout:
             step: row

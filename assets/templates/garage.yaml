@@ -64,8 +64,8 @@
     device_class: temperature
     unit_of_measurement: '°C'
     state: >
-      {% if is_number(state_attr('climate.hvac_garagethermostat', 'current_temperature')) %}
-        {{ state_attr('climate.hvac_garagethermostat', 'current_temperature') }}
+      {% if is_number(state_attr('climate.hvac_garage_thermostat', 'current_temperature')) %}
+        {{ state_attr('climate.hvac_garage_thermostat', 'current_temperature') }}
       {% endif %}
 
   # heater mode state if garage door is closed
@@ -73,10 +73,10 @@
   - name: 'HVAC Garage Mode State'
     state: >
       {# thermostat mode state if garage door is closed #}
-      {% if is_state('climate.hvac_garagethermostat', 'off') and
+      {% if is_state('climate.hvac_garage_thermostat', 'off') and
             is_state('switch.sw_garage_vehicledoorcontact', 'off')
       %}
         Off ({{ states('sensor.garage_mean_temperature_calculation') }}°C)
       {% else %}
-        {{ states('climate.hvac_garagethermostat') }}
+        {{ states('climate.hvac_garage_thermostat') }}
       {% endif %}

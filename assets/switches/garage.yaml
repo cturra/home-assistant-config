@@ -5,10 +5,10 @@
   name: 'SW HVAC Garage Thermostat'
   availability:
     - topic: zigbee2mqtt-pi/bridge/state
-  command_topic: zigbee2mqtt-pi/HVAC_GarageThermostat/set
+  command_topic: zigbee2mqtt-pi/HVAC_Garage_Thermostat/set
   payload_on: '{ "system_mode": "heat" }'
   payload_off: '{ "system_mode": "off" }'
-  state_topic: zigbee2mqtt-pi/HVAC_GarageThermostat
+  state_topic: zigbee2mqtt-pi/HVAC_Garage_Thermostat
   state_on: 'heat'
   state_off: 'off'
   value_template: '{{ value_json.system_mode }}'

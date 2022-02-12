@@ -787,11 +787,11 @@
   action:
   - service: mqtt.publish
     data:
-      topic: zigbee2mqtt-pi/HVAC_GarageThermostat/set/thermostat_outdoor_temperature
+      topic: zigbee2mqtt-pi/HVAC_Garage_Thermostat/set/thermostat_outdoor_temperature
       payload_template: '{{ states(''sensor.snr_outside_temperature'') }}'
   - service: mqtt.publish
     data:
-      topic: zigbee2mqtt-pi/HVAC_GarageThermostat/set/thermostat_time
+      topic: zigbee2mqtt-pi/HVAC_Garage_Thermostat/set/thermostat_time
       payload: ''
   mode: restart
 - id: '1631040582872'
@@ -832,8 +832,8 @@
   action:
   - delay:
       hours: 0
-      minutes: "{% set current_temp = state_attr('climate.hvac_garagethermostat','current_temperature')\
-        \ %} {% set target_temp = state_attr('climate.hvac_garagethermostat','temperature')\
+      minutes: "{% set current_temp = state_attr('climate.hvac_garage_thermostat','current_temperature')\
+        \ %} {% set target_temp = state_attr('climate.hvac_garage_thermostat','temperature')\
         \ %} {% if is_number(current_temp) and is_number(target_temp) %}\n  {% set\
         \ temp_diff = current_temp | float - target_temp | float %}\n  {# delay if\
         \ temp diff is lower to give room time for normalization #}\n  {% if (temp_diff\

@@ -36,7 +36,7 @@
   name: 'HVAC Garage Heating Demand'
   availability:
     - topic: zigbee2mqtt-pi/bridge/state
-  state_topic: zigbee2mqtt-pi/HVAC_GarageThermostat
+  state_topic: zigbee2mqtt-pi/HVAC_Garage_Thermostat
   value_template: >
     {% if is_number(value_json.pi_heating_demand) %}
       {{ value_json.pi_heating_demand }}
