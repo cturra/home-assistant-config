@@ -1337,7 +1337,7 @@ views:
           cards:
           # shed temperature
           - type: 'custom:button-card'
-            entity: sensor.shed_temperature_1_decimal
+            entity: sensor.shed_mean_temperature_calculation
             name: Temperature
             show_state: true
             show_icon: false
@@ -1369,7 +1369,7 @@ views:
           <<: *temp-graph-color_thresholds
           entities:
             # temerature
-            - entity: sensor.shed_temperature_1_decimal
+            - entity: sensor.shed_mean_temperature_calculation
               name: Temperature
               show_fill: false
               show_legend: false

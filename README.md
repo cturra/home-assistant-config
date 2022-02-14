@@ -40,6 +40,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Temperature       | Acurite    | 592TXR          | 1     | MQTT :: rtl_433    |
 | Temperature       | inFactory  | TH              | 1     | MQTT :: rtl_433    |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433    |
+| Temperature       | La Crosse  | TX29IT          | 1     | MQTT :: rtl_433    |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT        |
 | **Switches**                                                                  |
 | Plug              | Gosund     | WP2             | 2     | Tasmota            |
