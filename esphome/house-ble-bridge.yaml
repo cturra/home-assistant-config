@@ -60,3 +60,31 @@ sensor:
       name: "Tacoma Battery Voltage"
     signal_strength:
       name: "Tacoma Signal"
+      
+  # temperature :: main bedroom
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:B3:0C:55"
+    temperature:
+      name: 'Main Bedroom Temperature'
+    humidity:
+      name: "Main Bedroom Humidity"
+    battery_level:
+      name: "Main Bedroom Battery Level"
+    battery_voltage:
+      name: "Main Bedroom Battery Voltage"
+    signal_strength:
+      name: "Main Bedroom Signal"
+
+  # temperature :: crawlspace locker
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:5A:25:8A"
+    temperature:
+      name: 'Crawlspace Locker Temperature'
+    humidity:
+      name: "Crawlspace Locker Humidity"
+    battery_level:
+      name: "Crawlspace Locker Battery Level"
+    battery_voltage:
+      name: "Crawlspace Locker Battery Voltage"
+    signal_strength:
+      name: "Crawlspace Locker Signal"

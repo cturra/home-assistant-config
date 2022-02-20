@@ -8,3 +8,28 @@
   entity_ids:
     - sensor.snr_mainbedroom_climate_temperature
     - sensor.snr_mainbedroom_climatedisplay_temperature
+
+# -- Xiaomi Mi LYWSD03MMC (published by esphome ble bridge) --
+# battery
+- platform: mqtt
+  name: 'SNR MainBedroom ClimateDisplay Battery'
+  device_class: battery
+  unit_of_measurement: '%'
+  state_topic: "esphome/house-ble-bridge/sensor/main_bedroom_battery_level/state"
+  availability_topic: "esphome/house-ble-bridge/availability/status"
+
+# humidity
+- platform: mqtt
+  name: 'SNR MainBedroom ClimateDisplay Humidity'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state_topic: "esphome/house-ble-bridge/sensor/main_bedroom_humidity/state"
+  availability_topic: "esphome/house-ble-bridge/availability/status"
+
+# temperature
+- platform: mqtt
+  name: 'SNR MainBedroom ClimateDisplay Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: "esphome/house-ble-bridge/sensor/main_bedroom_temperature/state"
+  availability_topic: "esphome/house-ble-bridge/availability/status"

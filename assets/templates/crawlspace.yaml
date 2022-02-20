@@ -11,15 +11,6 @@
         {{ is_state_attr('sensor.snr_crawlspace_freezer_temperature', 'battery_ok', 0) }}
       {% endif %}
 
-  # -- inFactory TH / FanJu (published by rtl_433) --
-  # locker temperature (+ humidity) battery state
-  - name: 'SNR Crawlspace Locker Temperature Battery Low'
-    state: >
-      {# battery_ok: 1=normal, 0=low #}
-      {% if is_number(state_attr('sensor.snr_crawlspace_locker_temperature', 'battery_ok')) %}
-        {{ is_state_attr('sensor.snr_crawlspace_locker_temperature', 'battery_ok', 0) }}
-      {% endif %}
-
 
 # --- sensors ---
 - sensor:

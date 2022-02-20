@@ -6,9 +6,13 @@
 sensor.snr_crawlspace_climate_battery:
   friendly_name: 'Crawlspace'
 
-# crawlspace: locker
+# crawlspace: locker (xiaomi aqara)
 sensor.snr_crawlspace_lockerclimate_battery:
   friendly_name: 'Locker'
+
+# crawlspace: locker (xiaomi mi)
+sensor.snr_crawlspace_locker_climatedisplay_battery:
+  friendly_name: 'Locker: Display'
 
 # ensuite
 sensor.snr_ensuite_climate_battery:
@@ -30,9 +34,13 @@ sensor.snr_kitchen_climate_battery:
 sensor.snr_laundry_climate_battery:
   friendly_name: 'Laundry'
 
-# main bedroom
+# main bedroom (xiaomi aquara)
 sensor.snr_mainbedroom_climate_battery:
   friendly_name: 'Main Bedroom'
+
+# main bedroom (xiaomi mi)
+sensor.snr_mainbedroom_climatedisplay_battery:
+  friendly_name: 'Main Bedroom: Display'
 
 # office
 sensor.snr_office_climate_battery:
@@ -322,14 +330,13 @@ sensor.snr_kitchen_fridge_temperature:
 binary_sensor.snr_kitchen_fridge_temperature_battery_low:
   friendly_name: 'Kitchen: Fridge'
 
-## locker
-# crawlspace locker
-binary_sensor.snr_crawlspace_locker_temperature_battery_low:
-  friendly_name: 'Crawlspace: Locker'
-
-## outside
+# outside
 binary_sensor.snr_outside_temperature_battery_low:
   friendly_name: 'Outside'
+
+# shed
+binary_sensor.snr_shed_temperature_battery_low:
+  friendly_name: 'Shed'
 
 ## ------ vibration sensors ------
 

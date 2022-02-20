@@ -69,6 +69,7 @@
   name: 'SNR Outside Tacoma TPMS1'
   device_class: pressure
   unit_of_measurement: psi
+  force_update: true
   state_topic: rtl_433/sensor/Toyota-d8b4ed0a
   json_attributes_topic: rtl_433/sensor/Toyota-d8b4ed0a
   value_template: >
@@ -78,6 +79,7 @@
   name: 'SNR Outside Tacoma TPMS2'
   device_class: pressure
   unit_of_measurement: psi
+  force_update: true
   state_topic: rtl_433/sensor/Toyota-d8b7309e
   json_attributes_topic: rtl_433/sensor/Toyota-d8b7309e
   value_template: >
@@ -87,6 +89,7 @@
   name: 'SNR Outside Tacoma TPMS3'
   device_class: pressure
   unit_of_measurement: psi
+  force_update: true
   state_topic: rtl_433/sensor/Toyota-d8b73111
   json_attributes_topic: rtl_433/sensor/Toyota-d8b73111
   value_template: >
@@ -96,6 +99,7 @@
   name: 'SNR Outside Tacoma TPMS4'
   device_class: pressure
   unit_of_measurement: psi
+  force_update: true
   state_topic: rtl_433/sensor/Toyota-d8b4f5bf
   json_attributes_topic: rtl_433/sensor/Toyota-d8b4f5bf
   value_template: >
@@ -116,6 +120,7 @@
   name: 'SNR Outside TacomaClimate Humidity'
   device_class: humidity
   unit_of_measurement: '%'
+  force_update: true
   state_topic: "esphome/house-ble-bridge/sensor/tacoma_humidity/state"
   availability_topic: "esphome/house-ble-bridge/availability/status"
 
@@ -124,5 +129,6 @@
   name: 'SNR Outside TacomaClimate Temperature'
   device_class: temperature
   unit_of_measurement: '°C'
+  force_update: true
   state_topic: "esphome/house-ble-bridge/sensor/tacoma_temperature/state"
   availability_topic: "esphome/house-ble-bridge/availability/status"

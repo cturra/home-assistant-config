@@ -2,14 +2,14 @@
 
 # mean humidity from locker climate sensors:
 #  - xiaomi aqara
-#  - infactory ht
+#  - xiaomi mi
 - platform: min_max
   name: 'Crawlspace Locker Mean Humidity Calculation'
   type: mean
   round_digits: 0
   entity_ids:
     - sensor.snr_crawlspace_lockerclimate_humidity
-    - sensor.snr_crawlspace_locker_humidity
+    - sensor.snr_crawlspace_locker_climatedisplay_humidity
 
 # -- LaCrosse TX141Bv3 (published by rtl_433) --
 # deep freezer temperature
@@ -22,23 +22,27 @@
   value_template: >
     {{ value_json.temperature_C | round(1, default=-15.0) }}
 
-# -- inFactory TH / FanJu (published by rtl_433) --
-# locker temperature
+# -- Xiaomi Mi LYWSD03MMC (published by esphome ble bridge) --
+# battery
 - platform: mqtt
-  name: 'SNR Crawlspace Locker Temperature'
-  device_class: temperature
-  unit_of_measurement: '°C'
-  state_topic: rtl_433/sensor/inFactory-TH-235
-  json_attributes_topic: rtl_433/sensor/inFactory-TH-235
-  value_template: >
-    {{ value_json.temperature_C | round(1, default=15.0) }}
+  name: 'SNR Crawlspace Locker ClimateDisplay Battery'
+  device_class: battery
+  unit_of_measurement: '%'
+  state_topic: "esphome/house-ble-bridge/sensor/crawlspace_locker_battery_level/state"
+  availability_topic: "esphome/house-ble-bridge/availability/status"
 
-# locker humidity
+# humidity
 - platform: mqtt
-  name: 'SNR Crawlspace Locker Humidity'
+  name: 'SNR Crawlspace Locker ClimateDisplay Humidity'
   device_class: humidity
   unit_of_measurement: '%'
-  state_topic: rtl_433/sensor/inFactory-TH-235
-  json_attributes_topic: rtl_433/sensor/inFactory-TH-235
-  value_template: >
-    {{ value_json.humidity }}
+  state_topic: "esphome/house-ble-bridge/sensor/crawlspace_locker_humidity/state"
+  availability_topic: "esphome/house-ble-bridge/availability/status"
+
+# temperature
+- platform: mqtt
+  name: 'SNR Crawlspace Locker ClimateDisplay Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: "esphome/house-ble-bridge/sensor/crawlspace_locker_temperature/state"
+  availability_topic: "esphome/house-ble-bridge/availability/status"

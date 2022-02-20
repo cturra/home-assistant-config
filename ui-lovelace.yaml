@@ -240,7 +240,7 @@ views:
         filter:
           include:
             # battery low: zigbee & ble sensors < 25%
-            - entity_id: 'sensor.*_battery'
+            - entity_id: 'sensor.snr_*_battery'
               state: '< 25'
               options:
                 secondary_info: last-changed
@@ -1594,7 +1594,7 @@ views:
         filter:
           include:
             - name: entity_id
-              value: 'sensor.snr_*climate_battery'
+              value: 'sensor.snr_*climate*_battery'
 
       # Contact Sensors
       - type: 'custom:battery-state-card'

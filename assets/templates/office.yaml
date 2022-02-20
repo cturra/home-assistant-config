@@ -16,7 +16,7 @@
         {% endif %}
 
   # -- xiaomi mi flora --
-  # soil soil moisture
+  # soil moisture
   - name: 'Plnt Dracaena Trifasciata Soil'
     state: >
       {% if state_attr('plant.office_dracaena_trifasciata', 'problem') | regex_search('moisture low', ignorecase=True) %}

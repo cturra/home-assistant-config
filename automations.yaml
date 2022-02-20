@@ -1165,7 +1165,7 @@
     to: 'off'
     for:
       hours: 0
-      minutes: 1
+      minutes: 2
       seconds: 0
   condition: []
   action:
@@ -1214,6 +1214,6 @@
     target:
       entity_id: light.blb_crawlspace_lab
     data:
-      kelvin: 4000
+      kelvin: 4500
       brightness: 255
   mode: single

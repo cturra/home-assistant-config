@@ -29,16 +29,14 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Sensors**                                                                   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API           |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee       |
-| Climate           | Tuya       | TS0201          | 1     | Zigbee2MQTT        |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 11    | Zigbee2MQTT        |
-| Climate           | Xiaomi Mi  | LYWSD03MMC      | 1     | MQTT :: BLE Bridge |
+| Climate           | Xiaomi Mi  | LYWSD03MMC      | 3     | MQTT :: BLE Bridge |
 | Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT        |
 | Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT        |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT        |
 | Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT        |
 | Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | HA :: Mi Flora     |
 | Temperature       | Acurite    | 592TXR          | 1     | MQTT :: rtl_433    |
-| Temperature       | inFactory  | TH              | 1     | MQTT :: rtl_433    |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433    |
 | Temperature       | La Crosse  | TX29IT          | 1     | MQTT :: rtl_433    |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT        |
