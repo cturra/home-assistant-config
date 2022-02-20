@@ -21,7 +21,7 @@ switch.plg_garagefridge:
 
 # kitchen: dishwasher
 switch.sw_kitchen_dishwasher:
-  friendly_name: 'Kitchen: Dishwasher Switch'
+  friendly_name: 'Kitchen Dishwasher Switch'
 
 # laundry: washing machine
 switch.plg_laundry_washingmachine:

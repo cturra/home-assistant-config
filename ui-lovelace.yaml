@@ -439,6 +439,12 @@ views:
                 icon: 'mdi:light-recessed'
                 <<: *neutral-icon-entity-style
                 secondary_info: last-changed
+            - entity_id: binary_sensor.kitchen_dishwasher_state
+              state: 'on'
+              options:
+                name: 'Kitchen: Dishwasher'
+                icon: 'mdi:dishwasher'
+                secondary_info: last-changed
             - entity_id: switch.sw_kitchen_sinklight
               state: 'on'
               options:
