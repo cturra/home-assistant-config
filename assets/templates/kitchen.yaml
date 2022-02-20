@@ -2,6 +2,16 @@
 
 # -- binary sensors --
 - binary_sensor:
+  # -- shelly plus 1pm --
+  # dishwasher running (via switch)
+  - name: 'Kitchen Dishwasher State'
+    icon: 'mdi:dishwasher'
+    # power reported in watts
+    state: >
+      {% if is_number(states('sensor.kitchen_dishwasher_switch_energy_power')) %}
+        {{ (states('sensor.kitchen_dishwasher_switch_energy_power') | int(default=0)) > 2 }}
+      {% endif %}
+
   # -- la crosse (rtl) --
   # freezer temperature battery state
   - name: 'SNR Kitchen Fridge Temperature Battery Low'

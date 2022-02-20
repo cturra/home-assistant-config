@@ -1217,3 +1217,18 @@
       kelvin: 4500
       brightness: 255
   mode: single
+- id: '1645334376398'
+  alias: 'Kitchen: Dishwasher Off if water leak detected'
+  description: turn off power to dishwasher if water leak sensor is triggered at dishwasher
+    in kitchen.
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.snr_kitchen_dishwasherleak_water_leak
+    to: 'on'
+  condition:
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.sw_kitchen_dishwasher
+  mode: single

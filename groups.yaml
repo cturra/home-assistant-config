@@ -43,4 +43,5 @@ plugs_always_on:
   entities:
     - switch.plg_crawlspace_deepfreezer
     - switch.plg_garage_fridge
+    - switch.sw_kitchen_dishwasher
     - switch.plg_laundry_washingmachine

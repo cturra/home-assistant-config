@@ -19,6 +19,10 @@ switch.sw_garage_vehicledoorcontact:
 switch.plg_garagefridge:
   friendly_name: 'Garage Fridge Plug'
 
+# kitchen: dishwasher
+switch.sw_kitchen_dishwasher:
+  friendly_name: 'Kitchen: Dishwasher Switch'
+
 # laundry: washing machine
 switch.plg_laundry_washingmachine:
   friendly_name: 'Laundry Washing Machine Plug'
