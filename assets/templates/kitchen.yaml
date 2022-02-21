@@ -9,7 +9,7 @@
     # power reported in watts
     state: >
       {% if is_number(states('sensor.kitchen_dishwasher_switch_energy_power')) %}
-        {{ (states('sensor.kitchen_dishwasher_switch_energy_power') | int(default=0)) > 2 }}
+        {{ (states('sensor.kitchen_dishwasher_switch_energy_power') | int(default=0)) > 1 }}
       {% endif %}
 
   # -- la crosse (rtl) --

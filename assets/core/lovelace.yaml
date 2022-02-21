@@ -15,6 +15,9 @@ resources:
   # mini-graph-card
 - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
   type: module
+  # mini media player
+- url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
+  type: module              
   # rgb light card
 - url: /hacsfiles/rgb-light-card/card.js
   type: module
