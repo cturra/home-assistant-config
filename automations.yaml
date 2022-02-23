@@ -667,37 +667,6 @@
     target:
       entity_id: switch.sw_shed_fan
   mode: single
-- id: '1620159763993'
-  alias: 'Shed: cycle Fan while door is open'
-  description: cycle fan on for 10 min every 30 min when the shed door is open.
-  trigger:
-  - platform: time_pattern
-    minutes: /30
-  condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: binary_sensor.snr_shed_doorcontact_contact
-      state: 'on'
-    - condition: state
-      entity_id: switch.sw_shed_fan
-      state: 'off'
-      for: 00:10:00
-  action:
-  - service: switch.turn_on
-    data: {}
-    target:
-      entity_id: switch.sw_shed_fan
-  - delay:
-      hours: 0
-      minutes: 10
-      seconds: 0
-      milliseconds: 0
-  - service: switch.turn_off
-    data: {}
-    target:
-      entity_id: switch.sw_shed_fan
-  mode: single
 - id: '1623889405239'
   alias: 'Garage Inside: Offer to open vehicle door on return home'
   description: notify chris' phone when it returns home from away and offer to open
@@ -1231,4 +1200,91 @@
     data: {}
     target:
       entity_id: switch.sw_kitchen_dishwasher
+  mode: single
+- id: '1645572649812'
+  alias: 'Shed: Ventilation controls'
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: /15
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: switch.sw_shed_fan
+          state: 'off'
+        - condition: state
+          entity_id: sun.sun
+          state: above_horizon
+          for:
+            hours: 0
+            minutes: 0
+            seconds: 0
+        - condition: template
+          value_template: "{{\n  (states('sensor.snr_shed_climate_humidity')|int >\
+            \ (states('sensor.snr_outside_humidity')|int+10))\n}}"
+        - condition: numeric_state
+          entity_id: sensor.shed_mean_temperature_calculation
+          above: '0'
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.sw_shed_fan
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: switch.sw_shed_fan
+          state: 'on'
+        - condition: state
+          entity_id: sun.sun
+          state: below_horizon
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.sw_shed_fan
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: switch.sw_shed_fan
+          state: 'off'
+        - condition: template
+          value_template: "{{\n  (states('sensor.shed_mean_temperature_calculation')|int\
+            \ > (states('sensor.snr_outside_temperature')|int+10)) and\n  (states('sensor.shed_mean_temperature_calculation')|int\
+            \ > 20)\n}}"
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.sw_shed_fan
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: switch.sw_shed_fan
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.snr_shed_doorcontact_contact
+          state: 'on'
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.sw_shed_fan
+      - delay:
+          hours: 0
+          minutes: 10
+          seconds: 0
+          milliseconds: 0
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.sw_shed_fan
+    default: []
   mode: single
