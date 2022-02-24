@@ -598,37 +598,75 @@ views:
           <<: *entities-overview-header-style
         filter:
           include:
-            # speakers
-            - entity_id: 'media_player.*_speaker'
-              state: 'playing'
-              options:
-                type: 'custom:mini-media-player'
-                hide:
-                  controls: true
-                  power: true
-                  progress: true
-                <<: *media-player-card-style
-            # plex media players :: living room
-            - entity_id: 'media_player.plex_media_plex_htpc_for_mac_mini02_home_turra_ca'
-              state: '/(playing|paused)/'
-              options:
-                type: 'custom:mini-media-player'
-                name: 'Living Room: HTPC'
-                info: short
-                hide:
-                  progress: true
-                  prev: true
-                  next: true
-                  power: true
-                  volume: true
-                <<: *media-player-card-style
-            # tvs
+            # tvs :: living room
             - entity_id: switch.living_room_entertainment
               state: 'on'
               options:
                 name: 'Living Room: TV'
                 icon: 'mdi:television'
                 secondary_info: last-changed
+            # plex media players :: living room
+            - entity_id: 'media_player.plex_media_plex_htpc_for_mac_mini02_home_turra_ca'
+              state: '/(playing|paused)/'
+              options:
+                type: 'custom:mini-media-player'
+                name: 'Living Room: HTPC'
+                hide:
+                  progress: true
+                  prev: true
+                  next: true
+                  power: true
+                  volume: true
+                tap_action:
+                  action: call-service
+                  service: media_player.media_play_pause
+                  service_data:
+                    entity_id: this.entity_id
+                <<: *media-player-card-style
+            # speakers :: paused
+            - entity_id: 'media_player.*_speaker'
+              last_changed: < 2 # minutes
+              state: 'paused'
+              options:
+                type: 'custom:mini-media-player'
+                hide:
+                  next: true
+                  prev: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume: true
+                <<: *media-player-card-style
+            # speakers :: playing
+            - entity_id: 'media_player.*_speaker'
+              state: 'playing'
+              options:
+                type: 'custom:mini-media-player'
+                hide:
+                  prev: true
+                  power: true
+                  progress: true
+                  source: true
+                  volume: true
+                <<: *media-player-card-style
+            # plex media players :: main bedroom
+            - entity_id: 'media_player.plex_media_plex_media_player_mini01'
+              state: '/(playing|paused)/'
+              options:
+                type: 'custom:mini-media-player'
+                name: 'Main Bedroom: HTPC'
+                hide:
+                  progress: true
+                  prev: true
+                  next: true
+                  power: true
+                  volume: true
+                tap_action:
+                  action: call-service
+                  service: media_player.media_play_pause
+                  service_data:
+                    entity_id: this.entity_id
+                <<: *media-player-card-style
         sort:
           method: name
 

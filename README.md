@@ -48,8 +48,9 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Plug              | Wyze       | WLPPO1          | 1     | Tasmota            |
 | Remote            | Ikea       | E1810           | 1     | Zigbee2MQTT        |
 | Remote            | Xiaomi     | WXKG11LM        | 1     | Zigbee2MQTT        |
+| Switch            | Shelly     | 1               | 1     | Tasmota            |
 | Switch            | Shelly     | Plus 1PM        | 1     | Tasmota            |
-| Switch            | Sonoff     | Mini R1         | 3     | Tasmota            |
+| Switch            | Sonoff     | Mini R1         | 2     | Tasmota            |
 | Switch            | Sonoff     | SV              | 1     | Tasmota            |
 | Switch            | Treatlife  | SS02S           | 10    | Tasmota            |
 | Switch (3 Way)    | Treatlife  | SS02            | 2     | Tasmota            |
