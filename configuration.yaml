@@ -28,5 +28,4 @@ sensor: !include_dir_merge_list assets/sensors
 switch: !include_dir_merge_list assets/switches
 template: !include_dir_merge_list assets/templates
 tts: !include assets/core/tts.yaml
-updater:
 wake_on_lan:
