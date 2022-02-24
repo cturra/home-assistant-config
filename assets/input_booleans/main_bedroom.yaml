@@ -1,0 +1,5 @@
+## INPUT BOOLEANS / MAIN BEDROOM
+
+main_bedroom_heater:
+  name: 'Main Bedroom Heater'
+  icon: 'mdi:radiator'

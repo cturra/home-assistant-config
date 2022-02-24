@@ -43,32 +43,6 @@
     target:
       entity_id: switch.plg_utility
   mode: single
-- id: '1612291548796'
-  alias: 'Shed: cycle fan ON for 10 minutes each hour'
-  description: used for extra ventilation when drying garlic.
-  trigger:
-  - hours: /1
-    platform: time_pattern
-  condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: input_boolean.dry_garlic
-      state: 'on'
-    - condition: state
-      entity_id: switch.sw_shed_fan
-      state: 'off'
-  action:
-  - service: switch.turn_on
-    data: {}
-    target:
-      entity_id: switch.sw_shed_fan
-  - delay: 00:10:00
-  - service: switch.turn_off
-    data: {}
-    target:
-      entity_id: switch.sw_shed_fan
-  mode: single
 - id: '1612292614712'
   alias: 'Kitchen Speakers: ON when music starts playing'
   description: ''
@@ -227,44 +201,49 @@
       entity_id: scene.porch_bulbs_normal_colour_dimmed
   mode: single
 - id: '1612298561421'
-  alias: 'Main Bedroom: Heater Off in morning'
-  description: turn off heater before hvac system runs to heat house
-  trigger:
-  - platform: time
-    at: 05:30:00
-  condition:
-  - condition: state
-    state: 'on'
-    entity_id: switch.plg_mainbedroom_heater
-  action:
-  - service: switch.turn_off
-    data: {}
-    target:
-      entity_id: switch.plg_mainbedroom_heater
-  mode: single
-- id: '1612299207142'
-  alias: 'Main Bedroom: Heater On at night'
-  description: turn on heater when temperatures drop below 21.1c at night.
+  alias: 'Main Bedroom: Climate controls'
+  description: ''
   trigger:
   - platform: time_pattern
     minutes: /15
   condition:
-  - condition: and
-    conditions:
-    - condition: numeric_state
-      below: '21.1'
-      entity_id: sensor.main_bedroom_mean_temperature_calculation
-    - condition: time
-      after: '21:00:00'
-      before: 05:29:00
-    - condition: state
-      state: 'off'
-      entity_id: switch.plg_mainbedroom_heater
+  - condition: state
+    entity_id: input_boolean.main_bedroom_heater
+    state: 'on'
   action:
-  - service: switch.turn_on
-    data: {}
-    target:
-      entity_id: switch.plg_mainbedroom_heater
+  - choose:
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: numeric_state
+          below: '21.1'
+          entity_id: sensor.main_bedroom_mean_temperature_calculation
+        - condition: time
+          after: '21:00:00'
+          before: 05:29:00
+        - condition: state
+          state: 'off'
+          entity_id: switch.plg_mainbedroom_heater
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.plg_mainbedroom_heater
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: time
+          after: 05:30:00
+          before: '20:59:00'
+        - condition: state
+          entity_id: switch.plg_mainbedroom_heater
+          state: 'on'
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.plg_mainbedroom_heater
+    default: []
   mode: single
 - id: '1612306243899'
   alias: 'Garage Inside: Lights on when person doors opened'
@@ -892,35 +871,44 @@
             critical: 1
             volume: 1
   mode: single
-- id: '1634068451425'
-  alias: 'Crawlspace: Locker heater ON when humidity high'
-  description: turn on golden rod (heater) when humidity is above 51% RH
-  trigger:
-  - platform: time_pattern
-    hours: /1
-  condition:
-  - condition: numeric_state
-    entity_id: sensor.crawlspace_locker_mean_humidity_calculation
-    above: '51.0'
-  action:
-  - service: switch.turn_on
-    target:
-      entity_id: switch.plg_crawlspace_zbrtr
-  mode: single
 - id: '1634070537275'
-  alias: 'Crawlspace: Locker heater OFF when humidity low'
-  description: turn off golden rod (heater) when humidity is below 49% RH
+  alias: 'Crawlspace: Locker climate controls'
+  description: ''
   trigger:
   - platform: time_pattern
     hours: /1
-  condition:
-  - condition: numeric_state
-    entity_id: sensor.crawlspace_locker_mean_humidity_calculation
-    below: '49.0'
+  condition: []
   action:
-  - service: switch.turn_off
-    target:
-      entity_id: switch.plg_crawlspace_zbrtr
+  - choose:
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: switch.plg_crawlspace_zbrtr
+          state: 'on'
+        - condition: numeric_state
+          entity_id: sensor.crawlspace_locker_mean_humidity_calculation
+          below: '49.0'
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.plg_crawlspace_zbrtr
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: switch.plg_crawlspace_zbrtr
+          state: 'off'
+        - condition: numeric_state
+          entity_id: sensor.crawlspace_locker_mean_humidity_calculation
+          above: '51.0'
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.plg_crawlspace_zbrtr
+    default: []
   mode: single
 - id: '1634077407692'
   alias: 'House: Announce if water leak detected'
@@ -1227,7 +1215,7 @@
           value_template: "{{\n  (states('sensor.snr_shed_climate_humidity')|int >\
             \ (states('sensor.snr_outside_humidity')|int+10))\n}}"
         - condition: numeric_state
-          entity_id: sensor.shed_mean_temperature_calculation
+          entity_id: sensor.snr_outside_temperature
           above: '0'
       sequence:
       - service: switch.turn_on
@@ -1272,6 +1260,31 @@
         - condition: state
           entity_id: binary_sensor.snr_shed_doorcontact_contact
           state: 'on'
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.sw_shed_fan
+      - delay:
+          hours: 0
+          minutes: 10
+          seconds: 0
+          milliseconds: 0
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.sw_shed_fan
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: state
+          entity_id: input_boolean.dry_garlic
+          state: 'on'
+        - condition: state
+          entity_id: switch.sw_shed_fan
+          state: 'off'
+        - condition: template
+          value_template: '{{ now().strftime("%M")|int < 15 }}'
       sequence:
       - service: switch.turn_on
         data: {}
