@@ -1142,8 +1142,9 @@
   mode: single
   variables:
     triggered_plug: "{% for entity in trigger.to_state.attributes.entity_id %}\n \
-      \ {% if is_state(entity, 'off') %}\n    {{ state_attr(entity, 'friendly_name')\
-      \ }}\n  {% endif %}\n{% endfor %}\n"
+      \ {# state could be: off, unavailable and none #}\n  {% if not is_state(entity,\
+      \ 'on') %}\n    {{ state_attr(entity, 'friendly_name') }}\n  {% endif %}\n{%\
+      \ endfor %}\n"
 - id: '1642826717353'
   alias: 'Laundry: Washing Machine Off if water leak detected'
   description: turn off power to washing machine if water leak sensor is triggered

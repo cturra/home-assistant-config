@@ -16,7 +16,7 @@ switch.sw_garage_vehicledoorcontact:
     {% endif %}
 
 # garage: fridge
-switch.plg_garagefridge:
+switch.plg_garage_fridge:
   friendly_name: 'Garage Fridge Plug'
 
 # kitchen: dishwasher
