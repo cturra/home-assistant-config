@@ -1125,7 +1125,7 @@ views:
               name: 'Temperature'
             - entity: sensor.indoor_mean_humidity
               name: 'Humidity'
-            - entity: sensor.snr_office_airquality_pm_2_5
+            - entity: sensor.snr_office_mean_airquality_pm_2_5
               name: 'Air Quality'
 
         ## INDOOR TEMPERATURE CARDS

@@ -1,5 +1,15 @@
 ## SENSORS / OFFICE
 
+# mean air quality (2.5pm)
+- platform: statistics
+  name: "SNR Office Mean AirQuality PM 2_5"
+  entity_id: sensor.snr_office_airquality_pm_2_5
+  state_characteristic: mean
+  max_age:
+    minutes: 5
+  sampling_size: 100
+  precision: 0
+
 # -- xiaomi mi flora --
 # dracaena trifasciata (also known as: sansevieria trifasciata)
 - platform: miflora
