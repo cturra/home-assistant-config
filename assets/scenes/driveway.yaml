@@ -1,6 +1,17 @@
 ## SCENES / DRIVEWAY
 
-- name: 'Driveway Bulbs Holiday Colour'
+# bulbs normal colour full brightness
+- name: 'Driveway Bulbs Normal Colour'
+  entities:
+    light.group_driveway_lights:
+      state: 'on'
+      brightness: 255
+      # 2100 kelvin
+      color_temp: 476
+      color_mode: color_temp
+
+# bulbs christmas colours
+- name: 'Driveway Bulbs Christmas Colours'
   entities:
     light.blb_outside_driveway1:
       state: 'on'
@@ -13,11 +24,16 @@
       # red
       rgb_color: [255,0,0]
 
-- name: 'Driveway Bulbs Normal Colour'
+# bulbs ad-hoc colours
+- name: 'Driveway Bulbs Adhoc Colours'
   entities:
-    light.group_driveway_lights:
+    light.blb_outside_driveway1:
       state: 'on'
       brightness: 255
-      # 2100 kelvin
-      color_temp: 476
-      color_mode: color_temp
+      # yellow
+      rgb_color: [255, 255, 0]
+    light.blb_outside_driveway2:
+      state: 'on'
+      brightness: 255
+      # blue
+      rgb_color: [0,0, 255]

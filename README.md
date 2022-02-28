@@ -29,7 +29,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Sensors**                                                                   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API           |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee       |
-| Climate           | Xiaomi     | WSDCGQ11LM      | 11    | Zigbee2MQTT        |
+| Climate           | Xiaomi     | WSDCGQ11LM      | 12    | Zigbee2MQTT        |
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 3     | MQTT :: BLE Bridge |
 | Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT        |
 | Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT        |

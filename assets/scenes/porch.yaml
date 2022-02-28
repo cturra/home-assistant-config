@@ -1,6 +1,6 @@
 ## SCENES / PORCH
 
-# porch bulbs normal colour dimmed
+# bulbs normal colour 10% brightness
 - name: 'Porch Bulbs Normal Colour Dimmed'
   entities:
     light.group_porch_lights:
@@ -10,7 +10,7 @@
       color_temp: 476
       color_mode: color_temp
 
-# porch bulbs normal colour (full) brightness
+# bulbs normal colour 100% brightness
 - name: 'Porch Bulbs Normal Colour Bright'
   entities:
     light.group_porch_lights:
@@ -20,8 +20,8 @@
       color_temp: 476
       color_mode: color_temp
 
-# porch bulbs holiday (christmas) colours
-- name: 'Porch Bulbs Holiday Colour'
+# bulbs christmas colours
+- name: 'Porch Bulbs Christmas Colours'
   entities:
     light.blb_outside_porch1:
       state: 'on'
@@ -33,3 +33,17 @@
       brightness: 255
       # green
       rgb_color: [0,255,0]
+
+# bulbs ad-hoc colours
+- name: 'Porch Bulbs Adhoc Colours'
+  entities:
+    light.blb_outside_porch1:
+      state: 'on'
+      brightness: 255
+      # blue
+      rgb_color: [0,0,255]
+    light.blb_outside_porch2:
+      state: 'on'
+      brightness: 255
+      # yellow
+      rgb_color: [255,255,0]
