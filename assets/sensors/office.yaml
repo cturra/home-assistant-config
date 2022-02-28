@@ -31,6 +31,7 @@
   name: 'SNR Office AirQuality PM 2_5'
   device_class: pm25
   unit_of_measurement: "μg/m³"
+  force_update: true
   state_topic: "esphome/snr-office-airquatliy/sensor/airquality_pm_25/state"
   availability_topic: "esphome/snr-office-airquatliy/availability/status"
 

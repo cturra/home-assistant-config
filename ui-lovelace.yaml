@@ -295,6 +295,8 @@ views:
               # regex matches any string that contains at a 0 (used for no warning)
               state: '/^(?!.*(0))/'
               options:
+                type: attribute
+                attribute: alert_1
                 name: 'Weather'
                 icon: 'mdi:weather-cloudy-alert'
                 secondary_info: last-changed
@@ -308,8 +310,8 @@ views:
                 secondary_info: last-changed
                 <<: *alert-style
             # always on plugs off (see: group.plugs_always_on)
-            - entity_id: '/switch.plg_(crawlspace_deepfreezer|garage_fridge|laundry_washingmachine)/'
-              state: 'off'
+            - entity_id: '/switch.(plg|sw)_(crawlspace_deepfreezer|garage_fridge|kitchen_dishwasher|laundry_washingmachine)/'
+              state: '/(off|unknown)/'
               options:
                 icon: 'mdi:power-plug-off-outline'
                 secondary_info: last-changed

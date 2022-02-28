@@ -1,8 +1,12 @@
 ## CUSTOMIZE / SWITCHES
 
 # crawlspace: deep freezer
-switch.plg_deepfreezer:
+switch.plg_crawlspace_deepfreezer:
   friendly_name: 'Crawlspace Deep Freezer Plug'
+
+# garage: fridge
+switch.plg_garage_fridge:
+  friendly_name: 'Garage Fridge Plug'
 
 # garage: vehicle door
 switch.sw_garage_vehicledoorcontact:
@@ -14,10 +18,6 @@ switch.sw_garage_vehicledoorcontact:
     {% else %}
       mdi:garage-variant
     {% endif %}
-
-# garage: fridge
-switch.plg_garage_fridge:
-  friendly_name: 'Garage Fridge Plug'
 
 # kitchen: dishwasher
 switch.sw_kitchen_dishwasher:
