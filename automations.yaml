@@ -891,62 +891,6 @@
     target:
       entity_id: switch.sw_garage_ceilingmainlights
   mode: single
-- id: '1642616936013'
-  alias: 'Laundry: Turn on dehumidifier if humidity is too high'
-  description: check laundry humidity every 10 minutes and turn on dehumidifier if
-    humidity risen above 65% RH and the window is closed.
-  trigger:
-  - platform: time_pattern
-    minutes: /10
-  condition:
-  - condition: and
-    conditions:
-    - condition: numeric_state
-      entity_id: sensor.snr_laundry_climate_humidity
-      above: '65.0'
-    - condition: state
-      entity_id: binary_sensor.snr_laundry_windowcontact_contact
-      state: 'off'
-    - condition: state
-      entity_id: switch.plg_laundry_zbrtr
-      state: 'off'
-  action:
-  - service: switch.turn_on
-    target:
-      entity_id: switch.plg_laundry_zbrtr
-  mode: single
-- id: '1642617537726'
-  alias: 'Laundry: Turn off dehumidifier if humidity returns to normal'
-  description: check laundry humidity every 10 minutes and turn off dehumidifier if
-    humidity drops below 61% RH and was running for 1 hr or window opened.
-  trigger:
-  - platform: time_pattern
-    minutes: /10
-  condition:
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: binary_sensor.snr_laundry_windowcontact_contact
-      state: 'on'
-      for:
-        hours: 0
-        minutes: 0
-        seconds: 2
-    - condition: and
-      conditions:
-      - condition: numeric_state
-        entity_id: sensor.snr_laundry_climate_humidity
-        below: '61.0'
-      - condition: state
-        entity_id: switch.plg_laundry_zbrtr
-        state: 'on'
-        for:
-          hours: 1
-          minutes: 0
-          seconds: 0
-  action:
-  - service: switch.turn_off
-  mode: single
 - id: '1642795421437'
   alias: 'House: Nofity if any always on plug turned Off'
   description: send notification to everyone, including the TV, if an always on plug
@@ -1343,4 +1287,55 @@
         entity_id:
         - scene.driveway_bulbs_normal_colour
         - scene.porch_bulbs_normal_colour_dimmed
+  mode: single
+- id: '1646521999725'
+  alias: 'Laundry: Dehumidifier controls'
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: /15
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: numeric_state
+          entity_id: sensor.snr_laundry_climate_humidity
+          above: '65.0'
+        - condition: state
+          entity_id: binary_sensor.snr_laundry_windowcontact_contact
+          state: 'off'
+        - condition: state
+          entity_id: switch.plg_laundry_zbrtr
+          state: 'off'
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.plg_laundry_zbrtr
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: binary_sensor.snr_laundry_windowcontact_contact
+          state: 'on'
+          for:
+            hours: 0
+            minutes: 0
+            seconds: 2
+        - condition: and
+          conditions:
+          - condition: numeric_state
+            entity_id: sensor.snr_laundry_climate_humidity
+            below: '61.0'
+          - condition: state
+            entity_id: switch.plg_laundry_zbrtr
+            state: 'on'
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.plg_laundry_zbrtr
+    default: []
   mode: single
