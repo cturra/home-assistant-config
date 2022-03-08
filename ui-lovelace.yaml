@@ -227,7 +227,7 @@ views:
   - title: Overview
     path: overview
     icon: 'mdi:alert-box-outline'
-    theme: google-dark-theme
+    theme: google_theme
     badges: []
     cards:
       # devices in state out of normal range
@@ -309,7 +309,7 @@ views:
                 icon: 'mdi:fire-off'
                 secondary_info: last-changed
                 <<: *alert-style
-            # always on plugs off (see: group.plugs_always_on)
+            # always on plugs off/unavailable (see: group.plugs_always_on)
             - entity_id: '/switch.(plg|sw)_(crawlspace_deepfreezer|garage_fridge|kitchen_dishwasher|laundry_washingmachine)/'
               state: '/(off|unknown)/'
               options:
@@ -411,7 +411,7 @@ views:
             - entity_id: switch.sw_garage_ceilingmainlights
               state: 'on'
               options:
-                name: 'Garage: Ceiling (Main)'
+                name: 'Garage: Ceiling, Main'
                 icon: 'mdi:lightbulb-fluorescent-tube-outline'
                 secondary_info: last-changed
             - entity_id: switch.plg_garage_dehumidifier
@@ -693,7 +693,7 @@ views:
     panel: false
     path: default_view
     icon: 'mdi:home-outline'
-    theme: google-dark-theme
+    theme: google_theme
     badges: []
     cards:
       # Family Room
@@ -1103,7 +1103,7 @@ views:
   - title: Climate
     path: climate
     icon: 'mdi:home-thermometer-outline'
-    theme: google-dark-theme
+    theme: google_theme
     badges: []
     cards:
       # HOUSE INDOOR CLIMATE CARDS
@@ -1541,7 +1541,7 @@ views:
   - title: Truck
     path: truck
     icon: 'mdi:car-info'
-    theme: google-dark-theme
+    theme: google_theme
     badges: []
     cards:
       - type: 'custom:vertical-stack-in-card'
@@ -1639,7 +1639,7 @@ views:
   - title: Battery
     path: battery
     icon: 'mdi:battery-outline'
-    theme: google-dark-theme
+    theme: google_theme
     badges: []
     cards:
       # Climate Sensors
