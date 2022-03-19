@@ -227,7 +227,6 @@ views:
   - title: Overview
     path: overview
     icon: 'mdi:alert-box-outline'
-    theme: google_theme
     badges: []
     cards:
       # devices in state out of normal range
@@ -693,7 +692,6 @@ views:
     panel: false
     path: default_view
     icon: 'mdi:home-outline'
-    theme: google_theme
     badges: []
     cards:
       # Family Room
@@ -971,9 +969,9 @@ views:
                 text: '[[[ return `Are you sure you want to toggle the Garage Door?` ]]]'
               state:
                 - value: 'open'
-                  color: 'var(--paper-item-icon-active-color)'
+                  color: 'var(state-icon-active-color)'
                 - value: 'closed'
-                  color: 'var(--paper-item-icon-color)'
+                  color: 'var(state-icon-color)'
               styles:
                 card:
                   - font-size: 1.0em
@@ -1103,7 +1101,6 @@ views:
   - title: Climate
     path: climate
     icon: 'mdi:home-thermometer-outline'
-    theme: google_theme
     badges: []
     cards:
       # HOUSE INDOOR CLIMATE CARDS
@@ -1541,7 +1538,6 @@ views:
   - title: Truck
     path: truck
     icon: 'mdi:car-info'
-    theme: google_theme
     badges: []
     cards:
       - type: 'custom:vertical-stack-in-card'
@@ -1635,11 +1631,11 @@ views:
             - value: 'off'
               label: "home"
 
+
   ## ------ BATTERY DASHBOARD ------
   - title: Battery
     path: battery
     icon: 'mdi:battery-outline'
-    theme: google_theme
     badges: []
     cards:
       # Climate Sensors
