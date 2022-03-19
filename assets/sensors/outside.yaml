@@ -112,8 +112,8 @@
   name: 'SNR Outside TacomaClimate Battery'
   device_class: battery
   unit_of_measurement: '%'
-  state_topic: "esphome/house-ble-bridge/sensor/tacoma_battery_level/state"
-  availability_topic: "esphome/house-ble-bridge/availability/status"
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_battery_level/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
 
 # humidity
 - platform: mqtt
@@ -121,8 +121,8 @@
   device_class: humidity
   unit_of_measurement: '%'
   force_update: true
-  state_topic: "esphome/house-ble-bridge/sensor/tacoma_humidity/state"
-  availability_topic: "esphome/house-ble-bridge/availability/status"
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_humidity/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
 
 # temperature
 - platform: mqtt
@@ -130,5 +130,5 @@
   device_class: temperature
   unit_of_measurement: '°C'
   force_update: true
-  state_topic: "esphome/house-ble-bridge/sensor/tacoma_temperature/state"
-  availability_topic: "esphome/house-ble-bridge/availability/status"
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_temperature/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
