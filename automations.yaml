@@ -84,35 +84,30 @@
       entity_id: switch.plg_kitchen_speaker
   mode: single
 - id: '1612292819059'
-  alias: 'House: Lights on at sunset'
-  description: turn on light over kitchen sink and family room cabinet at sunset
+  alias: 'House: Indoor Lights on at sunset'
+  description: ''
   trigger:
   - platform: sun
     event: sunset
   condition: []
   action:
-  - service: switch.turn_on
+  - service: scene.turn_on
     data: {}
     target:
-      entity_id:
-      - switch.plg_familyroom_cabinetlight
-      - switch.sw_kitchen_sinklight
+      entity_id: scene.indoor_evening_lights_on
   mode: single
 - id: '1612292887886'
-  alias: 'Kitchen Sink: Lights off for night'
-  description: turn kitchen sink light off if it was forgotten.
+  alias: 'House: Indoor Lights off for the night check'
+  description: turn off any lights that might have been left on over night.
   trigger:
   - platform: time
     at: 01:01:00
-  condition:
-  - condition: state
-    entity_id: switch.sw_kitchen_sink
-    state: 'on'
+  condition: []
   action:
-  - service: switch.turn_off
+  - service: scene.turn_on
     data: {}
     target:
-      entity_id: switch.sw_kitchen_sink
+      entity_id: scene.indoor_evening_lights_off
   mode: single
 - id: '1612295061627'
   alias: 'Driveway: Lights off at sunrise'
@@ -1001,7 +996,7 @@
           conditions:
           - condition: state
             entity_id: weather.pitt_meadows
-            state: rainy
+            state: rainy, pouring
       sequence:
       - service: switch.turn_on
         data: {}
@@ -1020,7 +1015,7 @@
             state: below_horizon
           - condition: state
             entity_id: weather.pitt_meadows
-            state: rainy
+            state: rainy, pouring
       sequence:
       - service: switch.turn_off
         data: {}

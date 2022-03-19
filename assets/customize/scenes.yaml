@@ -3,3 +3,7 @@
 # garage: vehicle door
 scene.garage_door:
   icon: 'mdi:garage-variant'
+
+# house: lights off
+scene.indoor_evening_lights_off:
+  icon: 'lightbulb-group-off-outline'
