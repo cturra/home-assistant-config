@@ -371,7 +371,7 @@
   description: send notification to everyone, including the TV, if water leak is detected.
   trigger:
   - platform: state
-    entity_id: group.leak_sensors
+    entity_id: binary_sensor.group_leak_sensors
     to: 'on'
   condition: []
   action:
@@ -597,7 +597,7 @@
     to: cooling
   condition:
   - condition: state
-    entity_id: group.windows
+    entity_id: binary_sensor.group_windows
     state: 'on'
   action:
   - service: notify.mobile_app_turraphone
@@ -801,7 +801,7 @@
   description: Announce on Sonos speakers if water leak is detected.
   trigger:
   - platform: state
-    entity_id: group.leak_sensors
+    entity_id: binary_sensor.group_leak_sensors
     to: 'on'
   variables:
     triggered_leak_sensor: "{% for entity in trigger.to_state.attributes.entity_id\
@@ -896,11 +896,11 @@
     to: 'off'
     for:
       hours: 0
-      minutes: 2
+      minutes: 5
       seconds: 0
   condition: []
   action:
-  - service: notify.grp_anne_chris_phones
+  - service: notify.mobile_app_turraphone
     data:
       title: ❗🔌 Plug Power OFF
       message: Power OFF detected at {{ triggered_plug }}.

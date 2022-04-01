@@ -1,0 +1,39 @@
+## BINARY_SENSORS / HOUSE
+
+# contact sensors on house windows
+- platform: group
+  name: 'Group Windows'
+  entities:
+    - binary_sensor.snr_bathroomup_windowcontact_contact
+    - binary_sensor.snr_ensuite_windowcontact_contact
+    - binary_sensor.snr_familyroom_frontwindowcontact_contact
+    - binary_sensor.snr_familyroom_leftsidewindowcontact_contact
+    - binary_sensor.snr_familyroom_rightsidewindowcontact_contact
+    - binary_sensor.snr_kitchen_windowcontact_contact
+    - binary_sensor.snr_laundry_windowcontact_contact
+    - binary_sensor.snr_mainbedroom_windowcontact_contact
+
+# contact sensors on house exterior doors
+- platform: group
+  name: 'Group Exterior Doors'
+  entities:
+    - binary_sensor.snr_diningroom_patiodoorcontact_contact
+    - binary_sensor.snr_familyroom_frontdoorcontact_contact
+    - binary_sensor.snr_garage_housedoorcontact_contact
+    - binary_sensor.snr_garage_sidedoorcontact_contact
+
+# leak sensors
+- platform: group
+  name: 'Group Leak Sensors'
+  entities:
+    - binary_sensor.snr_bathroomdown_toiletleak_water_leak
+    - binary_sensor.snr_bathroomup_toiletleak_water_leak
+    - binary_sensor.snr_crawlspace_espressowaterfilterleak_water_leak
+    - binary_sensor.snr_crawlspace_hotwatertankleak_water_leak
+    - binary_sensor.snr_crawlspace_roleak_water_leak
+    - binary_sensor.snr_ensuite_bathtubleak_water_leak
+    - binary_sensor.snr_ensuite_toiletleak_water_leak
+    - binary_sensor.snr_kitchen_dishwasherleak_water_leak
+    - binary_sensor.snr_kitchen_espressoleak_water_leak
+    - binary_sensor.snr_kitchen_fridgeleak_water_leak
+    - binary_sensor.snr_laundry_washingmachineleak_water_leak
