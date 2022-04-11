@@ -47,7 +47,7 @@ sensor.snr_office_climate_battery:
   friendly_name: 'Office'
 
 # outside: tacoma
-sensor.snr_outside_tacomaclimate_battery:
+sensor.snr_outside_tacomacabclimate_battery:
   friendly_name: 'Outside: Tacoma'
 
 # shed
@@ -337,6 +337,10 @@ binary_sensor.snr_outside_temperature_battery_low:
 # shed
 binary_sensor.snr_shed_temperature_battery_low:
   friendly_name: 'Shed'
+
+# tacoma box
+binary_sensor.snr_tacomabox_temperature_battery_low:
+  friendly_name: 'Tacoma: Box'
 
 ## ------ vibration sensors ------
 

@@ -994,9 +994,8 @@
           above: '0'
         - condition: not
           conditions:
-          - condition: state
-            entity_id: weather.pitt_meadows
-            state: rainy, pouring
+          - condition: template
+            value_template: "{{\n  'rainy' in states('weather.pitt_meadows')\n}}"
       sequence:
       - service: switch.turn_on
         data: {}
@@ -1013,9 +1012,8 @@
           - condition: state
             entity_id: sun.sun
             state: below_horizon
-          - condition: state
-            entity_id: weather.pitt_meadows
-            state: rainy, pouring
+          - condition: template
+            value_template: "{{\n  'rainy' in states('weather.pitt_meadows')\n}}"
       sequence:
       - service: switch.turn_off
         data: {}

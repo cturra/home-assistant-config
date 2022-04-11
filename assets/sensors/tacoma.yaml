@@ -1,0 +1,94 @@
+## SENSORS / TACOMA
+
+# -- Prologue TH (reported by: rtl_433) --
+# humidity
+- platform: mqtt
+  name: 'SNR Outside TacomaBoxClimate Humidity'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state_topic: rtl_433/sensor/Prologue-TH-14
+  json_attributes_topic: rtl_433/sensor/Prologue-TH-14
+  value_template: >
+    {{ value_json.humidity | int(default=50) }}
+
+# temperature
+- platform: mqtt
+  name: 'SNR Outside TacomaBoxClimate Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  force_update: true
+  state_topic: rtl_433/sensor/Prologue-TH-14
+  json_attributes_topic: rtl_433/sensor/Prologue-TH-14
+  value_template: >
+    {{ value_json.temperature_C | round(1, default=10.0) }}
+
+
+# -- Toyota TPMS (reported by: rtl_433) --
+# tire pressure (convert kPa to psi)
+- platform: mqtt
+  name: 'SNR Outside Tacoma TPMS1'
+  device_class: pressure
+  unit_of_measurement: psi
+  force_update: true
+  state_topic: rtl_433/sensor/Toyota-d8b4ed0a
+  json_attributes_topic: rtl_433/sensor/Toyota-d8b4ed0a
+  value_template: >
+    {{ ( value_json.pressure_kPa * 0.145038) | round(1, default=0.0) }}
+
+- platform: mqtt
+  name: 'SNR Outside Tacoma TPMS2'
+  device_class: pressure
+  unit_of_measurement: psi
+  force_update: true
+  state_topic: rtl_433/sensor/Toyota-d8b7309e
+  json_attributes_topic: rtl_433/sensor/Toyota-d8b7309e
+  value_template: >
+    {{ (value_json.pressure_kPa * 0.145038) | round(1, default=0.0) }}
+
+- platform: mqtt
+  name: 'SNR Outside Tacoma TPMS3'
+  device_class: pressure
+  unit_of_measurement: psi
+  force_update: true
+  state_topic: rtl_433/sensor/Toyota-d8b73111
+  json_attributes_topic: rtl_433/sensor/Toyota-d8b73111
+  value_template: >
+    {{ (value_json.pressure_kPa * 0.145038) | round(1, default=0.0) }}
+
+- platform: mqtt
+  name: 'SNR Outside Tacoma TPMS4'
+  device_class: pressure
+  unit_of_measurement: psi
+  force_update: true
+  state_topic: rtl_433/sensor/Toyota-d8b4f5bf
+  json_attributes_topic: rtl_433/sensor/Toyota-d8b4f5bf
+  value_template: >
+    {{ (value_json.pressure_kPa * 0.145038) | round(1, default=0.0) }}
+
+
+# -- Xiaomi Mi LYWSD03MMC (published by esphome ble bridge) --
+# battery
+- platform: mqtt
+  name: 'SNR Outside TacomaCabClimate Battery'
+  device_class: battery
+  unit_of_measurement: '%'
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_battery_level/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
+
+# humidity
+- platform: mqtt
+  name: 'SNR Outside TacomaCabClimate Humidity'
+  device_class: humidity
+  unit_of_measurement: '%'
+  force_update: true
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_humidity/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
+
+# temperature
+- platform: mqtt
+  name: 'SNR Outside TacomaCabClimate Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  force_update: true
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_temperature/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"

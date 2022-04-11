@@ -980,7 +980,6 @@ views:
                 ha-card {
                   box-shadow: none;
                 }
-              entities:
             # switches
             - type: entities
               show_header_toggle: false
@@ -1544,26 +1543,35 @@ views:
         title: 'Tacoma'
         <<: *entities-header-style
         cards:
+        # tacoma presence
+        - type: 'custom:button-card'
+          entity: binary_sensor.snr_tacoma_location
+          name: 'Location'
+          show_state: true
+          show_icon: false
+          <<: *graph-button-card-style
+
+        # cab climate
         - type: horizontal-stack
           cards:
-          # tacoma presence
+          # cab temperature
           - type: 'custom:button-card'
-            entity: binary_sensor.snr_tacoma_location
-            name: 'Location'
+            entity: sensor.snr_outside_tacomacabclimate_temperature
+            name: 'Cab Temperature'
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
-          # tacoma temperature
+          # cab humidity
           - type: 'custom:button-card'
-            entity: sensor.snr_outside_tacomaclimate_temperature
-            name: Temperature
+            entity: sensor.snr_outside_tacomacabclimate_humidity
+            name: 'Cab Humidity'
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
-          # tacoma humidity
+          # box humidity
           - type: 'custom:button-card'
-            entity: sensor.snr_outside_tacomaclimate_humidity
-            name: Humidity
+            entity: sensor.snr_outside_tacomaboxclimate_humidity
+            name: 'Box Humidity'
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
@@ -1582,19 +1590,28 @@ views:
           hours_to_show: 24
           points_per_hour: 4
           lower_bound_secondary: 25
-          upper_bound_secondary: 90
+          upper_bound_secondary: 99
           group: true
           <<: *temp-graph-color_thresholds
           entities:
             # temerature
-            - entity: sensor.snr_outside_tacomaclimate_temperature
-              name: Temperature
+            - entity: sensor.snr_outside_tacomacabclimate_temperature
+              name: 'Cab Temperature'
               show_fill: false
               show_legend: false
               state_adaptive_color: true
-            # humidity
-            - entity: sensor.snr_outside_tacomaclimate_humidity
-              name: Humidity
+            # cab humidity
+            - entity: sensor.snr_outside_tacomacabclimate_humidity
+              name: 'Cab Humidity'
+              line_width: 1
+              show_legend: false
+              show_fill: false
+              state_adaptive_color: true
+              color: '#5f9bea'
+              y_axis: secondary
+            # box humidity
+            - entity: sensor.snr_outside_tacomaboxclimate_humidity
+              name: 'Box Humidity'
               line_width: 1
               show_legend: false
               show_fill: false
@@ -1725,7 +1742,7 @@ views:
           - from: 'off'
             to: 100
           - from: 'on'
-            to: 20
+            to: 10
 
       # Vibration Sensors
       - type: 'custom:battery-state-card'

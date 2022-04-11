@@ -37,6 +37,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT        |
 | Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | HA :: Mi Flora     |
 | Temperature       | Acurite    | 592TXR          | 1     | MQTT :: rtl_433    |
+| Temperature       | inFactory  | TH              | 1     | MQTT :: rtl_433    |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433    |
 | Temperature       | La Crosse  | TX29IT          | 1     | MQTT :: rtl_433    |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT        |

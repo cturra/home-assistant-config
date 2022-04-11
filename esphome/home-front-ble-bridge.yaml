@@ -11,10 +11,7 @@ esp32:
 
 # Enable logging
 logger:
-  level: INFO
-
-# Enable Home Assistant API
-api:
+  level: INFO # DEBUG
 
 ota:
   password: !secret home_front_ble_bridge_ota_passwd
