@@ -1,9 +1,0 @@
-# ALWAYS ON plugs
-plugs_always_on:
-  name: 'Always On Plugs'
-  all: true # group state should only turn on if all grouped entities are on
-  entities:
-    - switch.plg_crawlspace_deepfreezer
-    - switch.plg_garage_fridge
-    - switch.plg_laundry_washingmachine
-    - switch.sw_kitchen_dishwasher

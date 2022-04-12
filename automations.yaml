@@ -892,7 +892,7 @@
     has been off for 1 minute
   trigger:
   - platform: state
-    entity_id: group.plugs_always_on
+    entity_id: switch.group_always_on_plugs
     to: 'off'
     for:
       hours: 0

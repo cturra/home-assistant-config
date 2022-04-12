@@ -1589,7 +1589,7 @@ views:
           line_width: 1
           hours_to_show: 24
           points_per_hour: 4
-          lower_bound_secondary: 25
+          lower_bound_secondary: 10
           upper_bound_secondary: 99
           group: true
           <<: *temp-graph-color_thresholds
