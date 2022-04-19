@@ -1,0 +1,16 @@
+## CUSTOMIZE / UPDATES
+
+## -- wled --
+# kids bedroom lamp light bulb
+update.blb_kidsbedroom_lamp_firmware:
+  friendly_name: 'Kids Bedroom: Lamp Bulb (WLED)'
+
+
+# -- ikea zigbee (2mqtt) --
+# crawlspace lab light bulb
+binary_sensor.blb_crawlspace_lab_update_available:
+  friendly_name: 'Crawlspace: Lab Bulb (Zigbee)'
+
+# shed outside motion sensor
+binary_sensor.snr_outside_shedmotion_update_available:
+  friendly_name: 'Shed: Motion Sensor (Zigbee)'

@@ -9,6 +9,16 @@ anchors:
           --secondary-text-color: #aa3300;
         }
 
+  # alerts (info)
+  alert-info-style: &alert-info-style
+    card_mod:
+      style: |
+        :host {
+          color: #0189cd;
+          --card-mod-icon-color: #0189cd;
+          --secondary-text-color: #006ea5;
+        }
+
   # alerts (plants)
   alert-plant-style: &alert-plant-style
     card_mod:
@@ -315,6 +325,13 @@ views:
                 icon: 'mdi:power-plug-off-outline'
                 secondary_info: last-changed
                 <<: *alert-style
+            # updates available (tested with: core, zigbee2mqtt & wled)
+            - entity_id: '/update.*_(firmware|update)|binary_sensor.*_update_available/'
+              state: 'on'
+              options:
+                icon: 'mdi:arrow-up-circle-outline'
+                secondary_info: last-changed
+                <<: *alert-info-style
         sort:
           method: name
 
