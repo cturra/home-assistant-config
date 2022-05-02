@@ -6,6 +6,8 @@
   # dishwasher running (via switch)
   - name: 'Kitchen Dishwasher State'
     icon: 'mdi:dishwasher'
+    delay_off:
+      minutes: 5
     # power reported in watts
     state: >
       {% if is_number(states('sensor.kitchen_dishwasher_switch_energy_power')) %}
