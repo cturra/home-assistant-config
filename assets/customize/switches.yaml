@@ -4,6 +4,11 @@
 switch.plg_crawlspace_deepfreezer:
   friendly_name: 'Crawlspace Deep Freezer Plug'
 
+# garage: dehumidifier
+switch.plg_garage_dehumidifier:
+  friendly_name: 'Garage: Dehumidifier'
+  icon: 'mdi:water-outline'
+
 # garage: fridge
 switch.plg_garage_fridge:
   friendly_name: 'Garage Fridge Plug'
@@ -22,6 +27,11 @@ switch.sw_garage_vehicledoorcontact:
 # kitchen: dishwasher
 switch.sw_kitchen_dishwasher:
   friendly_name: 'Kitchen Dishwasher Switch'
+
+# luandry: dehumidifier
+switch.plg_laundry_zbrtr:
+  friendly_name: 'Laundry: Dehumidifier'
+  icon: 'mdi:water-outline'
 
 # laundry: washing machine
 switch.plg_laundry_washingmachine:

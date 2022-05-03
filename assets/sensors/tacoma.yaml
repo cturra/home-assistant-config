@@ -1,28 +1,5 @@
 ## SENSORS / TACOMA
 
-# -- Prologue TH (reported by: rtl_433) --
-# humidity
-- platform: mqtt
-  name: 'SNR Outside TacomaBoxClimate Humidity'
-  device_class: humidity
-  unit_of_measurement: '%'
-  state_topic: rtl_433/sensor/Prologue-TH-14
-  json_attributes_topic: rtl_433/sensor/Prologue-TH-14
-  value_template: >
-    {{ value_json.humidity | int(default=50) }}
-
-# temperature
-- platform: mqtt
-  name: 'SNR Outside TacomaBoxClimate Temperature'
-  device_class: temperature
-  unit_of_measurement: '°C'
-  force_update: true
-  state_topic: rtl_433/sensor/Prologue-TH-14
-  json_attributes_topic: rtl_433/sensor/Prologue-TH-14
-  value_template: >
-    {{ value_json.temperature_C | round(1, default=10.0) }}
-
-
 # -- Toyota TPMS (reported by: rtl_433) --
 # tire pressure (convert kPa to psi)
 - platform: mqtt
@@ -67,12 +44,40 @@
 
 
 # -- Xiaomi Mi LYWSD03MMC (published by esphome ble bridge) --
+# tacoma :: box
+# battery
+- platform: mqtt
+  name: 'SNR Outside TacomaBoxClimate Battery'
+  device_class: battery
+  unit_of_measurement: '%'
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_box_battery_level/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
+
+# humidity
+- platform: mqtt
+  name: 'SNR Outside TacomaBoxClimate Humidity'
+  device_class: humidity
+  unit_of_measurement: '%'
+  force_update: true
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_box_humidity/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
+
+# temperature
+- platform: mqtt
+  name: 'SNR Outside TacomaBoxClimate Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  force_update: true
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_box_temperature/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
+
+# tacoma :: cab
 # battery
 - platform: mqtt
   name: 'SNR Outside TacomaCabClimate Battery'
   device_class: battery
   unit_of_measurement: '%'
-  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_battery_level/state"
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_cab_battery_level/state"
   availability_topic: "esphome/home-front-ble-bridge/availability/status"
 
 # humidity
@@ -81,7 +86,7 @@
   device_class: humidity
   unit_of_measurement: '%'
   force_update: true
-  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_humidity/state"
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_cab_humidity/state"
   availability_topic: "esphome/home-front-ble-bridge/availability/status"
 
 # temperature
@@ -90,5 +95,5 @@
   device_class: temperature
   unit_of_measurement: '°C'
   force_update: true
-  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_temperature/state"
+  state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_cab_temperature/state"
   availability_topic: "esphome/home-front-ble-bridge/availability/status"

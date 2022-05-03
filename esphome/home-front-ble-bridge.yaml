@@ -45,19 +45,19 @@ mqtt:
 esp32_ble_tracker:
 
 sensor:
-  # temperature :: truck
+  # temperature :: crawlspace locker
   - platform: atc_mithermometer
-    mac_address: "A4:C1:38:15:AF:5B"
+    mac_address: "A4:C1:38:5A:25:8A"
     temperature:
-      name: "Tacoma Temperature"
+      name: 'Crawlspace Locker Temperature'
     humidity:
-      name: "Tacoma Humidity"
+      name: "Crawlspace Locker Humidity"
     battery_level:
-      name: "Tacoma Battery Level"
+      name: "Crawlspace Locker Battery Level"
     battery_voltage:
-      name: "Tacoma Battery Voltage"
+      name: "Crawlspace Locker Battery Voltage"
     signal_strength:
-      name: "Tacoma Signal"
+      name: "Crawlspace Locker Signal"
 
   # temperature :: main bedroom
   - platform: atc_mithermometer
@@ -73,16 +73,30 @@ sensor:
     signal_strength:
       name: "Main Bedroom Signal"
 
-  # temperature :: crawlspace locker
+  # temperature :: tacoma :: box
   - platform: atc_mithermometer
-    mac_address: "A4:C1:38:5A:25:8A"
+    mac_address: "A4:C1:38:F9:93:1B"
     temperature:
-      name: 'Crawlspace Locker Temperature'
+      name: "Tacoma Box Temperature"
     humidity:
-      name: "Crawlspace Locker Humidity"
+      name: "Tacoma Box Humidity"
     battery_level:
-      name: "Crawlspace Locker Battery Level"
+      name: "Tacoma Box Battery Level"
     battery_voltage:
-      name: "Crawlspace Locker Battery Voltage"
+      name: "Tacoma Box Battery Voltage"
     signal_strength:
-      name: "Crawlspace Locker Signal"
+      name: "Tacoma Box Signal"
+
+  # temperature :: tacoma :: cab
+  - platform: atc_mithermometer
+    mac_address: "A4:C1:38:15:AF:5B"
+    temperature:
+      name: "Tacoma Cab Temperature"
+    humidity:
+      name: "Tacoma Cab Humidity"
+    battery_level:
+      name: "Tacoma Cab Battery Level"
+    battery_voltage:
+      name: "Tacoma Cab Battery Voltage"
+    signal_strength:
+      name: "Tacoma Cab Signal"

@@ -301,8 +301,8 @@ views:
                 <<: *alert-style
             # weather advisories
             - entity_id: sensor.pitt_meadows_warnings
-              # regex matches any string that contains at a 0 (used for no warning)
-              state: '/^(?!.*(0))/'
+              # regex matches any string that doesn't contain a 0 (used for no warning) or is unavaiable
+              state: '/^(?!.*(unavailable|0))/'
               options:
                 type: attribute
                 attribute: alert_1
@@ -351,6 +351,11 @@ views:
                 secondary_info: last-changed
             # kids & main bedroom radiators
             - entity_id: '/binary_sensor.(kids|main)_(.*)_heating_state/'
+              state: 'on'
+              options:
+                secondary_info: last-changed
+            # garage & laundry dehumidifiers
+            - entity_id: '/switch.plg_(garage_dehumidifier|laundry_zbrtr)/'
               state: 'on'
               options:
                 secondary_info: last-changed
@@ -429,12 +434,6 @@ views:
               options:
                 name: 'Garage: Ceiling, Main'
                 icon: 'mdi:lightbulb-fluorescent-tube-outline'
-                secondary_info: last-changed
-            - entity_id: switch.plg_garage_dehumidifier
-              state: 'on'
-              options:
-                name: 'Garage: Dehumidifier'
-                icon: 'mdi:water-outline'
                 secondary_info: last-changed
             - entity_id: switch.sw_outside_garagesidedoorlight
               state: 'on'
@@ -535,12 +534,6 @@ views:
                 icon: 'mdi:lamp-outline'
                 secondary_info: last-changed
             # laundry
-            - entity_id: switch.plg_laundry_zbrtr
-              state: 'on'
-              options:
-                name: 'Laundry: Dehumidifier'
-                icon: 'mdi:water-outline'
-                secondary_info: last-changed
             - entity_id: binary_sensor.laundry_washing_machine_state
               state: 'on'
               options:
