@@ -2,16 +2,6 @@
 
 # -- binary sensors --
 - binary_sensor:
-  # -- prologue (rtl) --
-  # temperature sensor battery state
-  - name: 'SNR TacomaBox Temperature Battery Low'
-    state: >
-      {# battery_ok: 1=normal, 0=low #}
-      {% if is_number(state_attr('sensor.snr_outside_tacomaboxclimate_temperature', 'battery_ok')) %}
-        {{ is_state_attr('sensor.snr_outside_tacomaboxclimate_temperature', 'battery_ok', 0) }}
-      {% endif %}
-
-  # -- toyota tpms & climate (rtl) --
   # truck location (home or away)
   - name: 'SNR Tacoma Location'
     device_class: presence
@@ -20,9 +10,5 @@
       {% set time_offset = 600 %}
       {{ 
         (utcnow() - states.sensor.snr_outside_tacomacabclimate_temperature.last_updated).total_seconds() < time_offset or
-        (utcnow() - states.sensor.snr_outside_tacomaboxclimate_temperature.last_updated).total_seconds() < time_offset or
-        (utcnow() - states.sensor.snr_outside_tacoma_tpms1.last_updated).total_seconds() < time_offset or
-        (utcnow() - states.sensor.snr_outside_tacoma_tpms2.last_updated).total_seconds() < time_offset or
-        (utcnow() - states.sensor.snr_outside_tacoma_tpms3.last_updated).total_seconds() < time_offset or
-        (utcnow() - states.sensor.snr_outside_tacoma_tpms3.last_updated).total_seconds() < time_offset
+        (utcnow() - states.sensor.snr_outside_tacomaboxclimate_temperature.last_updated).total_seconds() < time_offset
       }}
