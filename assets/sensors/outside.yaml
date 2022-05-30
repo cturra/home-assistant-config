@@ -21,21 +21,40 @@
   value_template: >
     {{ value_json.humidity | int(default=50) }}
 
-
 # -- Purple Air (rest) --
+# air quality 10.0
 - platform: rest
-  name: 'PurpleAir'
-  # purpleair sensor
-  resource: https://www.purpleair.com/json?key=YY84TD217DXUVWTF&show=80563
-  scan_interval: 120
-  # code translated from JavaScript found at:
-  #   https://docs.google.com/document/d/15ijz94dXJ-YAZLi9iZ_RaBwrZ4KtYeCy08goGBwnbCU
+  name: 'SNR Outside AirQuality PM 10_0'
+  scan_interval: 60
+  resource: !secret purple_air_json_url
+  device_class: pm10
+  unit_of_measurement: "μg/m³"
+  value_template: >
+      {{ (value_json.pm10_0_atm + value_json.pm10_0_atm_b)/2 | int(default=0) }}
+
+# air quality 2.5
+- platform: rest
+  name: 'SNR Outside AirQuality PM 2_5'
+  scan_interval: 60
+  resource: !secret purple_air_json_url
+  device_class: pm25
+  unit_of_measurement: "μg/m³"
+  value_template: >
+      {{ (value_json.pm2_5_atm + value_json.pm2_5_atm_b)/2 | int(default=0) }}
+
+# air quality index (aqi)
+- platform: rest
+  name: 'SNR Outside AirQuality AQI'
+  scan_interval: 60
+  resource: !secret purple_air_json_url
+  device_class: aqi
+  unit_of_measurement: "AQI"
   value_template: >
     {% macro calcAQI(Cp, Ih, Il, BPh, BPl) %}
       {{ (((Ih - Il)/(BPh - BPl)) * (Cp - BPl) + Il) | round(1, default=0.0) }}
     {% endmacro %}
-    {% if is_number(value_json["results"][0]["PM2_5Value"]) %}
-      {% set pm25_value =  value_json["results"][0]["PM2_5Value"] | float %}
+    {% if is_number(value_json.pm2_5_atm) and is_number(value_json.pm2_5_atm_b) %}
+      {% set pm25_value =  (value_json.pm2_5_atm + value_json.pm2_5_atm_b)/2 | float %}
       {% if pm25_value > 1000 %}
         invalid
       {% elif pm25_value > 350.5 %}
@@ -58,6 +77,3 @@
     {% else %}
       invalid
     {% endif %}
-  unit_of_measurement: "AQI"
-  json_attributes:
-    - results

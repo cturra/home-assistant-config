@@ -250,8 +250,8 @@ views:
         filter:
           include:
             # battery low: zigbee & ble sensors < 25%
-            - entity_id: 'sensor.snr_*_battery'
-              state: '< 25'
+            - entity_id: 'sensor.(plnt|snr)_*_battery'
+              state: '< 21'
               options:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
@@ -278,10 +278,10 @@ views:
                 secondary_info: last-changed
                 <<: *alert-style
             # outdoor air quality unhealthy
-            - entity_id: sensor.purpleair_aqi_description
-              state: '/(Unhealthy|Hazardous)/'
+            - entity_id: sensor.snr_outside_airquality_aqi
+              state: '> 101.0'
               options:
-                name: 'Outdoor Air Quality'
+                name: 'Outdoor: Air Quality'
                 secondary_info: last-changed
                 icon: 'mdi:chemical-weapon'
                 <<: *alert-style
@@ -358,6 +358,13 @@ views:
             - entity_id: '/switch.plg_(garage_dehumidifier|laundry_zbrtr)/'
               state: 'on'
               options:
+                secondary_info: last-changed
+            # shed ventilation
+            - entity_id: switch.sw_shed_fan
+              state: 'on'
+              options:
+                name: 'Shed: Fan'
+                icon: 'mdi:fan'
                 secondary_info: last-changed
         sort:
           method: name
@@ -555,12 +562,6 @@ views:
                 icon: 'mdi:power'
                 secondary_info: last-changed
             # shed
-            - entity_id: switch.sw_shed_fan
-              state: 'on'
-              options:
-                name: 'Shed: Fan'
-                icon: 'mdi:fan'
-                secondary_info: last-changed
             - entity_id: switch.sw_shed_floodlight
               state: 'on'
               options:
@@ -1480,7 +1481,7 @@ views:
           cards:
           # AQI
           - type: 'custom:button-card'
-            entity: sensor.purpleair
+            entity: sensor.snr_outside_airquality_aqi
             name: ' '
             show_state: true
             show_icon: false
@@ -1497,21 +1498,21 @@ views:
               }
           # pm 2.5
           - type: 'custom:button-card'
-            entity: sensor.purpleair_pm_2_5
+            entity: sensor.snr_outside_airquality_pm_2_5
             name: 'PM 2.5'
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
           # pm 10
           - type: 'custom:button-card'
-            entity: sensor.purpleair_pm_10
+            entity: sensor.snr_outside_airquality_pm_10_0
             name: 'PM 10'
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
         - type: 'custom:mini-graph-card'
           entities:
-            - sensor.purpleair
+            - sensor.snr_outside_airquality_aqi
           unit: AQI
           name: AQI
           hour24: true
