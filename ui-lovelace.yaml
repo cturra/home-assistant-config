@@ -279,7 +279,8 @@ views:
                 <<: *alert-style
             # outdoor air quality unhealthy
             - entity_id: sensor.snr_outside_airquality_aqi
-              state: '> 101.0'
+              # above 100 is considered unhealthy for sensitive groups
+              state: '> 100.0'
               options:
                 name: 'Outdoor: Air Quality'
                 secondary_info: last-changed
@@ -1486,27 +1487,10 @@ views:
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
-          # blank card to add spacing
-          - type: 'custom:button-card'
-            color_type: blank
-            styles:
-              card:
-                - width: 25px
-            style: |
-              ha-card {
-                box-shadow: none;
-              }
           # pm 2.5
           - type: 'custom:button-card'
-            entity: sensor.snr_outside_airquality_pm_2_5
+            entity: sensor.snr_outside_mean_airquality_pm_2_5
             name: 'PM 2.5'
-            show_state: true
-            show_icon: false
-            <<: *graph-button-card-style
-          # pm 10
-          - type: 'custom:button-card'
-            entity: sensor.snr_outside_airquality_pm_10_0
-            name: 'PM 10'
             show_state: true
             show_icon: false
             <<: *graph-button-card-style

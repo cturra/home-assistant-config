@@ -22,58 +22,26 @@
     {{ value_json.humidity | int(default=50) }}
 
 # -- Purple Air (rest) --
-# air quality 10.0
-- platform: rest
-  name: 'SNR Outside AirQuality PM 10_0'
-  scan_interval: 60
-  resource: !secret purple_air_json_url
-  device_class: pm10
-  unit_of_measurement: "μg/m³"
-  value_template: >
-      {{ (value_json.pm10_0_atm + value_json.pm10_0_atm_b)/2 | int(default=0) }}
-
-# air quality 2.5
+# air quality 2.5pm
 - platform: rest
   name: 'SNR Outside AirQuality PM 2_5'
-  scan_interval: 60
+  scan_interval: 120
   resource: !secret purple_air_json_url
   device_class: pm25
   unit_of_measurement: "μg/m³"
   value_template: >
-      {{ (value_json.pm2_5_atm + value_json.pm2_5_atm_b)/2 | int(default=0) }}
-
-# air quality index (aqi)
-- platform: rest
-  name: 'SNR Outside AirQuality AQI'
-  scan_interval: 60
-  resource: !secret purple_air_json_url
-  device_class: aqi
-  unit_of_measurement: "AQI"
-  value_template: >
-    {% macro calcAQI(Cp, Ih, Il, BPh, BPl) %}
-      {{ (((Ih - Il)/(BPh - BPl)) * (Cp - BPl) + Il) | round(1, default=0.0) }}
-    {% endmacro %}
-    {% if is_number(value_json.pm2_5_atm) and is_number(value_json.pm2_5_atm_b) %}
-      {% set pm25_value =  (value_json.pm2_5_atm + value_json.pm2_5_atm_b)/2 | float %}
-      {% if pm25_value > 1000 %}
-        invalid
-      {% elif pm25_value > 350.5 %}
-        {{ calcAQI(pm25_value, 500.0, 401.0, 500.0, 350.5) }}
-      {% elif pm25_value > 250.5 %}
-        {{ calcAQI(pm25_value, 400.0, 301.0, 350.4, 250.5) }}
-      {% elif pm25_value > 150.5 %}
-        {{ calcAQI(pm25_value, 300.0, 201.0, 250.4, 150.5) }}
-      {% elif pm25_value > 55.5 %}
-        {{ calcAQI(pm25_value, 200.0, 151.0, 150.4, 55.5) }}
-      {% elif pm25_value > 35.5 %}
-        {{ calcAQI(pm25_value, 150.0, 101.0, 55.4, 35.5) }}
-      {% elif pm25_value > 12.1 %}
-        {{ calcAQI(pm25_value, 100.0, 51.0, 35.4, 12.1) }}
-      {% elif pm25_value >= 0.0 %}
-        {{ calcAQI(pm25_value, 50.0, 0.0, 12.0, 0.0) }}
+      {% if is_number(value_json.pm2_5_atm) and is_number(value_json.pm2_5_atm_b) %}
+        {{ (value_json.pm2_5_atm + value_json.pm2_5_atm_b)/2 | int(default=0) }}
       {% else %}
-        invalid
+        {# return last value if sensor doesn't return a number #}
+        {{ states('sensor.snr_outside_airquality_pm_2_5') }}
       {% endif %}
-    {% else %}
-      invalid
-    {% endif %}
+
+# mean air quality 2.5pm
+- platform: statistics
+  name: "SNR Outside Mean AirQuality PM 2_5"
+  entity_id: sensor.snr_outside_airquality_pm_2_5
+  state_characteristic: mean
+  max_age:
+    minutes: 6
+  precision: 1
