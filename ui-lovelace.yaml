@@ -250,8 +250,15 @@ views:
         filter:
           include:
             # battery low: zigbee & ble sensors < 25%
-            - entity_id: 'sensor.(plnt|snr)_*_battery'
-              state: '< 21'
+            - entity_id: 'sensor.snr_*_battery'
+              state: '< 25'
+              options:
+                secondary_info: last-changed
+                icon: 'mdi:battery-alert-variant-outline'
+                <<: *alert-style
+            # battery low: moisture sensors < 11%
+            - entity_id: 'sensor.plnt_*_battery'
+              state: '< 11'
               options:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
