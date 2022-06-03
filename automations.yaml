@@ -630,8 +630,9 @@
   mode: restart
 - id: '1631040582872'
   alias: 'Garage Inside: HVAC off when vehicle door opened'
-  description: turn heating mode off on thermostat every time door is opened to ensure
-    heater doesn't turn on while vehicle door is open.
+  description: turn heating mode off on thermostat every time door is opened if outside
+    temp is lower than 11c to ensure heater doesn't turn on while vehicle door is
+    open.
   trigger:
   - platform: state
     entity_id: switch.sw_garage_vehicledoorcontact
@@ -641,12 +642,15 @@
       hours: 0
       minutes: 0
       seconds: 2
-      milliseconds: 0
-  condition: []
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.snr_outside_temperature
+    below: '11'
   action:
   - service: switch.turn_off
     target:
       entity_id: switch.sw_hvac_garage_thermostat
+    data: {}
   mode: single
 - id: '1631040781299'
   alias: 'Garage Inside: HVAC on when vehicle door closed'
@@ -661,8 +665,10 @@
       hours: 0
       minutes: 0
       seconds: 2
-      milliseconds: 0
-  condition: []
+  condition:
+  - condition: state
+    entity_id: switch.sw_hvac_garage_thermostat
+    state: 'off'
   action:
   - delay:
       hours: 0
@@ -679,6 +685,7 @@
   - service: switch.turn_on
     target:
       entity_id: switch.sw_hvac_garage_thermostat
+    data: {}
   mode: restart
 - id: '1631637344914'
   alias: 'Kids Bedroom: control lamp'
@@ -987,8 +994,8 @@
             minutes: 0
             seconds: 0
         - condition: template
-          value_template: "{{\n  (states('sensor.snr_shed_climate_humidity')|int >\
-            \ (states('sensor.snr_outside_humidity')|int+10))\n}}"
+          value_template: "{{\n  (states('sensor.snr_shed_climate_humidity')|int(default=50) >\
+            \ (states('sensor.snr_outside_humidity')|int(default=50)+10))\n}}"
         - condition: numeric_state
           entity_id: sensor.snr_outside_temperature
           above: '0'
@@ -1026,8 +1033,8 @@
           entity_id: switch.sw_shed_fan
           state: 'off'
         - condition: template
-          value_template: "{{\n  (states('sensor.shed_mean_temperature_calculation')|int\
-            \ > (states('sensor.snr_outside_temperature')|int+10)) and\n  (states('sensor.shed_mean_temperature_calculation')|int\
+          value_template: "{{\n  (states('sensor.shed_mean_temperature_calculation')|int(default=10)\
+            \ > (states('sensor.snr_outside_temperature')|int(default=10)+10)) and\n  (states('sensor.shed_mean_temperature_calculation')|int(default=10)\
             \ > 20)\n}}"
       sequence:
       - service: switch.turn_on
@@ -1067,7 +1074,7 @@
           entity_id: switch.sw_shed_fan
           state: 'off'
         - condition: template
-          value_template: '{{ now().strftime("%M")|int < 15 }}'
+          value_template: '{{ now().strftime("%M")|int(default=0) < 15 }}'
       sequence:
       - service: switch.turn_on
         data: {}
