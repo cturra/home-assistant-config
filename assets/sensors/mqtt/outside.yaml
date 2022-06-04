@@ -1,0 +1,20 @@
+## SENSORS / MQTT / OUTSIDE
+
+# -- Acurite 592TXR (published by rtl_433) --
+# temperature
+- name: 'SNR Outside Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: rtl_433/sensor/Acurite-Tower-9142
+  json_attributes_topic: rtl_433/sensor/Acurite-Tower-9142
+  value_template: >
+    {{ value_json.temperature_C | round(1, default=10.0) }}
+
+# humidity
+- name: 'SNR Outside Humidity'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state_topic: rtl_433/sensor/Acurite-Tower-9142
+  json_attributes_topic: rtl_433/sensor/Acurite-Tower-9142
+  value_template: >
+    {{ value_json.humidity | int(default=50) }}

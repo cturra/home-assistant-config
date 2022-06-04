@@ -1,0 +1,24 @@
+## SENSORS / MQTT / OFFICE
+
+# -- esphome --
+# air quality
+- name: 'SNR Office AirQuality PM 2_5'
+  device_class: pm25
+  unit_of_measurement: "μg/m³"
+  force_update: true
+  state_topic: "esphome/snr-office-airquatliy/sensor/airquality_pm_25/state"
+  availability_topic: "esphome/snr-office-airquatliy/availability/status"
+
+# humidity
+- name: 'SNR Office Humidity'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state_topic: "esphome/snr-office-airquatliy/sensor/humidity/state"
+  availability_topic: "esphome/snr-office-airquatliy/availability/status"
+
+# temperature
+- name: 'SNR Office Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: "esphome/snr-office-airquatliy/sensor/temperature/state"
+  availability_topic: "esphome/snr-office-airquatliy/availability/status"

@@ -1,8 +1,7 @@
-## SWITCHES / GARAGE
+## SWITCHES / MQTT / GARAGE
 
 # switch to control sinopé thermostat system_state
-- platform: mqtt
-  name: 'SW HVAC Garage Thermostat'
+- name: 'SW HVAC Garage Thermostat'
   availability:
     - topic: zigbee2mqtt-pi/bridge/state
   command_topic: zigbee2mqtt-pi/HVAC_Garage_Thermostat/set

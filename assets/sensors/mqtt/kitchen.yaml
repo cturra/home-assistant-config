@@ -1,20 +1,8 @@
-## SENSORS / KITCHEN
-
-# mean temperature from climate sensors:
-#  - ecobee smartsensor
-#  - xiaomi aqara
-- platform: min_max
-  name: 'Kitchen Mean Temperature Calculation'
-  type: mean
-  round_digits: 1
-  entity_ids:
-    - sensor.dining_room_temperature
-    - sensor.snr_kitchen_climate_temperature
+## SENSORS / MQTT / KITCHEN
 
 # -- LaCrosse TX141Bv3 (published by rtl_433) --
 # freezer
-- platform: mqtt
-  name: 'SNR Kitchen Freezer Temperature'
+- name: 'SNR Kitchen Freezer Temperature'
   device_class: temperature
   unit_of_measurement: '°C'
   state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-249
@@ -23,8 +11,7 @@
     {{ value_json.temperature_C | round(1, default=-15.0) }}
 
 # fridge
-- platform: mqtt
-  name: 'SNR Kitchen Fridge Temperature'
+- name: 'SNR Kitchen Fridge Temperature'
   device_class: temperature
   unit_of_measurement: '°C'
   state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-187

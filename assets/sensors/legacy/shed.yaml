@@ -1,0 +1,12 @@
+## SENSORS / LEGACY / SHED
+
+# mean temperature from climate sensors:
+#  - LaCrosse TX29IT
+#  - xiaomi aqara
+- platform: min_max
+  name: 'Shed Mean Temperature Calculation'
+  type: mean
+  round_digits: 1
+  entity_ids:
+    - sensor.snr_shed_temperature
+    - sensor.snr_shed_climate_temperature

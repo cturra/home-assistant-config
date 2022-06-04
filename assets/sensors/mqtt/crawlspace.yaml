@@ -1,20 +1,8 @@
-## SENSORS / CRAWLSPACE
-
-# mean humidity from locker climate sensors:
-#  - xiaomi aqara
-#  - xiaomi mi
-- platform: min_max
-  name: 'Crawlspace Locker Mean Humidity Calculation'
-  type: mean
-  round_digits: 0
-  entity_ids:
-    - sensor.snr_crawlspace_lockerclimate_humidity
-    - sensor.snr_crawlspace_locker_climatedisplay_humidity
+## SENSORS / MQTT / CRAWLSPACE
 
 # -- LaCrosse TX141Bv3 (published by rtl_433) --
 # deep freezer temperature
-- platform: mqtt
-  name: 'SNR Crawlspace Freezer Temperature'
+- name: 'SNR Crawlspace Freezer Temperature'
   device_class: temperature
   unit_of_measurement: '°C'
   state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-14
@@ -24,24 +12,21 @@
 
 # -- Xiaomi Mi LYWSD03MMC (published by esphome ble bridge) --
 # battery
-- platform: mqtt
-  name: 'SNR Crawlspace Locker ClimateDisplay Battery'
+- name: 'SNR Crawlspace Locker ClimateDisplay Battery'
   device_class: battery
   unit_of_measurement: '%'
   state_topic: "esphome/home-front-ble-bridge/sensor/crawlspace_locker_battery_level/state"
   availability_topic: "esphome/home-front-ble-bridge/availability/status"
 
 # humidity
-- platform: mqtt
-  name: 'SNR Crawlspace Locker ClimateDisplay Humidity'
+- name: 'SNR Crawlspace Locker ClimateDisplay Humidity'
   device_class: humidity
   unit_of_measurement: '%'
   state_topic: "esphome/home-front-ble-bridge/sensor/crawlspace_locker_humidity/state"
   availability_topic: "esphome/home-front-ble-bridge/availability/status"
 
 # temperature
-- platform: mqtt
-  name: 'SNR Crawlspace Locker ClimateDisplay Temperature'
+- name: 'SNR Crawlspace Locker ClimateDisplay Temperature'
   device_class: temperature
   unit_of_measurement: '°C'
   state_topic: "esphome/home-front-ble-bridge/sensor/crawlspace_locker_temperature/state"

@@ -1,0 +1,12 @@
+## SENSORS / LEGACY / KITCHEN
+
+# mean temperature from climate sensors:
+#  - ecobee smartsensor
+#  - xiaomi aqara
+- platform: min_max
+  name: 'Kitchen Mean Temperature Calculation'
+  type: mean
+  round_digits: 1
+  entity_ids:
+    - sensor.dining_room_temperature
+    - sensor.snr_kitchen_climate_temperature

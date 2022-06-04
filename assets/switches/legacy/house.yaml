@@ -1,4 +1,4 @@
-## SENSORS / HOUSE
+## SENSORS / LEGACY / HOUSE
 
 # ALWAYS ON plugs
 - platform: group

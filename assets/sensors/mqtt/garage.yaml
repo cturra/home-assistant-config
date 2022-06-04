@@ -1,0 +1,32 @@
+## SENSORS / MQTT / GARAGE
+
+# grab heating demand value from sinopé thermostat
+- name: 'HVAC Garage Heating Demand'
+  availability:
+    - topic: zigbee2mqtt-pi/bridge/state
+  state_topic: zigbee2mqtt-pi/HVAC_Garage_Thermostat
+  value_template: >
+    {% if is_number(value_json.pi_heating_demand) %}
+      {{ value_json.pi_heating_demand }}
+    {% else %}
+      0
+    {% endif %}
+
+# -- LaCrosse TX141Bv3 (published by rtl_433) --
+# freezer
+- name: 'SNR Garage Freezer Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-74
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-74
+  value_template: >
+    {{ value_json.temperature_C | round(1, default=-15.0) }}
+
+# fridge
+- name: 'SNR Garage Fridge Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-57
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-57
+  value_template: >
+    {{ value_json.temperature_C | round(1, default=1.0) }}

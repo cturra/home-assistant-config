@@ -1,4 +1,4 @@
-## SENSORS / HOUSE
+## SENSORS / LEGACY / HOUSE
 
 ## hvac ecobee time on today
 - platform: history_stats

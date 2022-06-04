@@ -28,7 +28,7 @@
         {{ is_state_attr('climate.amazon', 'hvac_action', 'cooling') }}
 
 
-# --- sensors ---
+# -- sensors --
 - sensor:
     # -- ecobee --
     # current_temperature from ecobee

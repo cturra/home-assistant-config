@@ -1,9 +1,8 @@
-## LIGHTS / KITCHEN
+## LIGHTS / MQTT / KITCHEN
 
 # kitchen ceiling lights
 # *needed for EVENT command_topic due to multi-replay (3 ways switch)
-- platform: mqtt
-  name: "Kitchen Ceiling"
+- name: "Kitchen Ceiling"
   state_topic: "stat/SW_Kitchen_CeilingLight/POWER1"
   command_topic: "cmnd/SW_Kitchen_CeilingLight/EVENT"
   availability_topic: "tele/SW_Kitchen_CeilingLight/LWT"

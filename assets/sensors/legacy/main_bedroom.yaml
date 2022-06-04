@@ -1,0 +1,10 @@
+## SENSORS / LEGACY / MAIN BEDROOM
+
+# mean temperature from climate sensors:
+- platform: min_max
+  name: 'Main Bedroom Mean Temperature Calculation'
+  type: mean
+  round_digits: 1
+  entity_ids:
+    - sensor.snr_mainbedroom_climate_temperature
+    - sensor.snr_mainbedroom_climatedisplay_temperature

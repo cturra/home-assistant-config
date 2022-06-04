@@ -1,18 +1,16 @@
-## SENSORS / TACOMA
+## SENSORS / MQTT / TACOMA
 
 # -- Xiaomi Mi LYWSD03MMC (published by esphome ble bridge) --
 # tacoma :: box
 # battery
-- platform: mqtt
-  name: 'SNR Outside TacomaBoxClimate Battery'
+- name: 'SNR Outside TacomaBoxClimate Battery'
   device_class: battery
   unit_of_measurement: '%'
   state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_box_battery_level/state"
   availability_topic: "esphome/home-front-ble-bridge/availability/status"
 
 # humidity
-- platform: mqtt
-  name: 'SNR Outside TacomaBoxClimate Humidity'
+- name: 'SNR Outside TacomaBoxClimate Humidity'
   device_class: humidity
   unit_of_measurement: '%'
   force_update: true
@@ -20,8 +18,7 @@
   availability_topic: "esphome/home-front-ble-bridge/availability/status"
 
 # temperature
-- platform: mqtt
-  name: 'SNR Outside TacomaBoxClimate Temperature'
+- name: 'SNR Outside TacomaBoxClimate Temperature'
   device_class: temperature
   unit_of_measurement: '°C'
   force_update: true
@@ -30,16 +27,14 @@
 
 # tacoma :: cab
 # battery
-- platform: mqtt
-  name: 'SNR Outside TacomaCabClimate Battery'
+- name: 'SNR Outside TacomaCabClimate Battery'
   device_class: battery
   unit_of_measurement: '%'
   state_topic: "esphome/home-front-ble-bridge/sensor/tacoma_cab_battery_level/state"
   availability_topic: "esphome/home-front-ble-bridge/availability/status"
 
 # humidity
-- platform: mqtt
-  name: 'SNR Outside TacomaCabClimate Humidity'
+- name: 'SNR Outside TacomaCabClimate Humidity'
   device_class: humidity
   unit_of_measurement: '%'
   force_update: true
@@ -47,8 +42,7 @@
   availability_topic: "esphome/home-front-ble-bridge/availability/status"
 
 # temperature
-- platform: mqtt
-  name: 'SNR Outside TacomaCabClimate Temperature'
+- name: 'SNR Outside TacomaCabClimate Temperature'
   device_class: temperature
   unit_of_measurement: '°C'
   force_update: true

@@ -1,0 +1,12 @@
+## SENSORS / LEGACY / CRAWLSPACE
+
+# mean humidity from locker climate sensors:
+#  - xiaomi aqara
+#  - xiaomi mi
+- platform: min_max
+  name: 'Crawlspace Locker Mean Humidity Calculation'
+  type: mean
+  round_digits: 0
+  entity_ids:
+    - sensor.snr_crawlspace_lockerclimate_humidity
+    - sensor.snr_crawlspace_locker_climatedisplay_humidity
