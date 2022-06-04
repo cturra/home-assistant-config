@@ -2,4 +2,3 @@
 - platform: google_translate
   service_name: google_say
   language: 'en'
-  base_url: !secret ha_base_url
