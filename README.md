@@ -29,7 +29,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Sensors**                                                                   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API           |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee       |
-| Climate           | Xiaomi     | WSDCGQ11LM      | 12    | Zigbee2MQTT        |
+| Climate           | Xiaomi     | WSDCGQ11LM      | 11    | Zigbee2MQTT        |
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 4     | MQTT :: BLE Bridge |
 | Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT        |
 | Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT        |
@@ -62,7 +62,7 @@ And, if you have any feedback, please feel free to reach out :smile:
  | Model           | Count | Role                                                              |
  | :---            | :--:  | :---                                                              |
  | NodeMCU ESP32   | 1     | [Bluetooth Low Energy Tracker Hub](esphome/house-ble-bridge.yaml) |
- | NooElec RTL-SDR | 1     | SDR USB Adapter w/ Antenna                                        |
+ | RTL-SDR         | 2     | SDR USB Adapters w/ Antenna                                       |
  | Odroid-N2+      | 1     | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
  | Raspberry Pi 4  | 1     | Secondary Zigbee2MQTT server *                                    |
  | Slaesh CC2652RB | 2     | [Zigbee Adapter ](https://slae.sh/projects/cc2652/)               |

@@ -2,19 +2,6 @@
 
 # --- sensors ---
 - sensor:
-  # -- xiaomi aqara --
-  # temperature
-  - name: 'Office Temperature 1 Decimal'
-    device_class: temperature
-    unit_of_measurement: '°C'
-    state: >
-      {% if is_number(state_attr('sensor.snr_office_climate_temperature', 'temperature')) %}
-        {{ state_attr('sensor.snr_office_climate_temperature', 'temperature') | round(1, default=20.0) }}
-        {% else %}
-          {# use previous value if sensor returns unknown #}
-          {{ states('sensor.office_temperature_1_decimal') }}
-        {% endif %}
-
   # -- xiaomi mi flora --
   # soil moisture
   - name: 'Plnt Dracaena Trifasciata Soil'
