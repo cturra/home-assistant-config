@@ -1,4 +1,5 @@
-# notification group
+## groups
+# phones
 - name: 'grp_anne_chris_phones'
   platform: group
   services:
@@ -6,3 +7,12 @@
     - service: mobile_app_megatron
     # chris
     - service: mobile_app_turraphone
+
+# tv's
+- name: 'grp_all_tvs'
+  platform: group
+  services:
+    # living room
+    - service: living_room_tv
+    # main bedroom
+    - service: main_bedroom_tv

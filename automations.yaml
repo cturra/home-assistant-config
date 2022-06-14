@@ -385,7 +385,7 @@
             name: default
             critical: 1
             volume: 1
-  - service: notify.living_room_tv
+  - service: notify.grp_all_tvs
     data:
       message: ALERT! Water detected at {{ triggered_leak_sensor }} sensor.
   variables:
@@ -917,7 +917,7 @@
             name: default
             critical: 1
             volume: 1
-  - service: notify.living_room_tv
+  - service: notify.grp_all_tvs
     data:
       message: ALERT! Power OFF at {{ triggered_plug }}.
   mode: single

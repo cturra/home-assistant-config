@@ -22,10 +22,11 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Bulb (A19)        | Ikea       | LED1624G9       | 1     | Zigbee2MQTT        |
 | **Entertainment**                                                             |
 | Audio             | Chromecast | Audio           | 1     | HA :: Chromecast   |
-| Speaker           | Sonos      | Play:5          | 1     | HA :: Sonos        |
 | Receiver          | Yamaha     | HTR-8063        | 1     | HA :: MediaPlayers |
+| Speaker           | Sonos      | Play:5          | 1     | HA :: Sonos        |
 | Speaker           | Sonos      | Beam            | 1     | HA :: Sonos        |
 | TV                | LG         | OLED55B8        | 1     | HA :: WebOSTV      |
+| TV                | LG         | OLED64C1        | 1     | HA :: WebOSTV      |
 | **Sensors**                                                                   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API           |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee       |

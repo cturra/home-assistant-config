@@ -271,7 +271,7 @@ views:
                 icon: 'mdi:battery-alert-variant-outline'
                 <<: *alert-style
             # zigbee device battery needs replacement
-            - entity_id: 'sensor.snr_*_climate_battery'
+            - entity_id: 'sensor.snr_*_battery'
               last_updated: '> 60' # minutes
               attributes:
                 linkquality: null
@@ -617,7 +617,7 @@ views:
                 icon: 'mdi:television'
                 secondary_info: last-changed
             # plex media players :: living room
-            - entity_id: 'media_player.plex_media_plex_htpc_for_mac_mini02_home_turra_ca'
+            - entity_id: 'media_player.plex_htpc_living_room'
               state: '/(playing|paused)/'
               options:
                 type: 'custom:mini-media-player'
@@ -660,8 +660,15 @@ views:
                   source: true
                   volume: true
                 <<: *media-player-card-style
+            # tv :: main bedroom
+            - entity_id: switch.main_bedroom_entertainment
+              state: 'on'
+              options:
+                name: 'Main Bedroom: TV'
+                icon: 'mdi:television'
+                secondary_info: last-changed
             # plex media players :: main bedroom
-            - entity_id: 'media_player.plex_media_plex_media_player_mini01'
+            - entity_id: 'media_player.plex_htpc_main_bedroom'
               state: '/(playing|paused)/'
               options:
                 type: 'custom:mini-media-player'
@@ -871,6 +878,11 @@ views:
                 - entity: light.sw_mainbedroom_ceilinglight
                   name: 'Ceiling'
                   icon: 'mdi:dome-light'
+                  state_color: true
+                # entertainment
+                - entity: switch.main_bedroom_entertainment
+                  name: 'TV'
+                  icon: 'mdi:television'
                   state_color: true
             - type: entities
               show_header_toggle: false
