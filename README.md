@@ -32,7 +32,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee       |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 11    | Zigbee2MQTT        |
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 4     | MQTT :: BLE Bridge |
-| Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT        |
+| Contact           | Xiaomi     | MCCGQ11LM       | 16    | Zigbee2MQTT        |
 | Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT        |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT        |
 | Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT        |

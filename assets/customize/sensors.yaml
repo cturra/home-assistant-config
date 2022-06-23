@@ -144,6 +144,13 @@ binary_sensor.snr_familyroom_rightsidewindowcontact_contact:
 sensor.snr_familyroom_rightsidewindowcontact_battery:
   friendly_name: 'Family Room: Right/Side Window'
 
+# kids bedroom window
+binary_sensor.snr_kidsbedroom_windowcontact_contact:
+  friendly_name: 'Kids Bedroom: Window'
+  device_class: window
+sensor.snr_kidsbedroom_windowcontact_battery:
+  friendly_name: 'Kids Bedroom: Window'
+
 # kitchen window
 binary_sensor.snr_kitchen_windowcontact_contact:
   friendly_name: 'Kitchen: Window'
