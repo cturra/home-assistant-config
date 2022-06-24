@@ -331,7 +331,8 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: sensor.snr_office_chairvibration_action
+    entity_id:
+    - sensor.snr_office_chairvibration_action
     to: tilt
   condition:
   - condition: and
@@ -994,8 +995,8 @@
             minutes: 0
             seconds: 0
         - condition: template
-          value_template: "{{\n  (states('sensor.snr_shed_climate_humidity')|int(default=50) >\
-            \ (states('sensor.snr_outside_humidity')|int(default=50)+10))\n}}"
+          value_template: "{{\n  (states('sensor.snr_shed_climate_humidity')|int(default=50)\
+            \ > (states('sensor.snr_outside_humidity')|int(default=50)+10))\n}}"
         - condition: numeric_state
           entity_id: sensor.snr_outside_temperature
           above: '0'
@@ -1034,7 +1035,8 @@
           state: 'off'
         - condition: template
           value_template: "{{\n  (states('sensor.shed_mean_temperature_calculation')|int(default=10)\
-            \ > (states('sensor.snr_outside_temperature')|int(default=10)+10)) and\n  (states('sensor.shed_mean_temperature_calculation')|int(default=10)\
+            \ > (states('sensor.snr_outside_temperature')|int(default=10)+10)) and\n\
+            \  (states('sensor.shed_mean_temperature_calculation')|int(default=10)\
             \ > 20)\n}}"
       sequence:
       - service: switch.turn_on
@@ -1339,3 +1341,47 @@
           entity_id: switch.plg_laundry_zbrtr
     default: []
   mode: single
+- id: '1656021519367'
+  alias: 'Main Bedroom: Remote controls'
+  description: control devices in main bedroom from 5 button remote
+  use_blueprint:
+    path: fich/zigbee2mqtt-ikea-5-button-remote-general-use.yaml
+    input:
+      remote: sensor.rmt_mainbedroom_remote_action
+      button_on_off:
+      - service: switch.toggle
+        data: {}
+        target:
+          entity_id: switch.main_bedroom_entertainment
+      button_brightness_up_long:
+      - service: light.turn_on
+        data: {}
+        target:
+          entity_id: light.sw_mainbedroom_ceilinglight
+      button_brightness_down_long:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.sw_mainbedroom_ceilinglight
+      button_left_short:
+      - service: media_player.volume_down
+        data: {}
+        target:
+          entity_id: media_player.main_bedroom_speaker
+      button_right_short:
+      - service: media_player.volume_up
+        data: {}
+        target:
+          entity_id: media_player.main_bedroom_speaker
+      button_brightness_down_short:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: -10
+        target:
+          entity_id: light.sw_mainbedroom_ceilinglight
+      button_brightness_up_short:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: 10
+        target:
+          entity_id: light.sw_mainbedroom_ceilinglight

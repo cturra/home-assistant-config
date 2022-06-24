@@ -1,7 +1,13 @@
 ## CUSTOMIZE / REMOTES
 
-sensor.rmt_kidsbedroom_remote_battery:
-  friendly_name: 'Kids Room'
-
+# crawlspace: lab (aqara 1 button)
 sensor.rmt_crawlspace_labremote_battery:
   friendly_name: 'Crawlspace: Lab'
+
+# main bedroom (ikea 5 button)
+sensor.rmt_mainbedroom_remote_battery:
+  friendly_name: 'Main Bedroom'
+
+# kids bedroom (ikea 5 button)
+sensor.rmt_kidsbedroom_remote_battery:
+  friendly_name: 'Kids Room'
