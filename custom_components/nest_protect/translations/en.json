@@ -1,0 +1,25 @@
+{
+    "config": {
+        "abort": {
+            "already_configured": "Account is already configured"
+        },
+        "error": {
+            "cannot_connect": "Failed to connect",
+            "invalid_auth": "Invalid authentication",
+            "unknown": "Unexpected error"
+        },
+        "step": {
+            "user": {
+                "data": {
+                    "account_type": "Account Type"
+                }
+            },
+            "account_link": {
+                "description": "To link your Google account, [authorize your account]({url}).\n\nAfter authorization, copy-paste the provided Auth Token code below.",
+                "data": {
+                    "token": "Access Token"
+                }
+            }
+        }
+    }
+}
