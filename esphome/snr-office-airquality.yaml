@@ -67,21 +67,15 @@ sensor:
     pm_1_0:
       name: "AirQuality PM 1.0"
       filters:
-        - sliding_window_moving_average:
-            window_size: 10
-            send_every: 10
+        - throttle_average: 60s
     pm_2_5:
       name: "AirQuality PM 2.5"
       filters:
-        - sliding_window_moving_average:
-            window_size: 10
-            send_every: 10
+        - throttle_average: 60s
     pm_10_0:
       name: "AirQuality PM 10.0"
       filters:
-        - sliding_window_moving_average:
-            window_size: 10
-            send_every: 10
+        - throttle_average: 60s
 
   # temperature/humidity
   - platform: dht
