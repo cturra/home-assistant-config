@@ -84,7 +84,7 @@ anchors:
     card_mod:
       style: |
         :host .card-content {
-          padding: 0px 10px 5px;
+          padding: 0px 10px 2px;
         }
         ha-card {
           box-shadow: none;
@@ -639,6 +639,8 @@ views:
             - entity_id: 'media_player.*_speaker'
               last_changed: < 2 # minutes
               state: 'paused'
+              attributes:
+                media_artist: "*"
               options:
                 type: 'custom:mini-media-player'
                 hide:
@@ -651,7 +653,9 @@ views:
                 <<: *media-player-card-style
             # speakers :: playing
             - entity_id: 'media_player.*_speaker'
-              state: 'playing'
+              state: playing
+              attributes:
+                media_artist: "*"
               options:
                 type: 'custom:mini-media-player'
                 hide:
@@ -1122,7 +1126,11 @@ views:
           # upstairs hallway
           - type: 'custom:button-card'
             entity: sensor.uptairs_hallway_temperature
-            name: 'Upstairs Hall'
+            name: > 
+              [[[
+                var occupied = states['binary_sensor.nest_protect_upstairs_occupancy'].state
+                return 'Upstairs Hall' + (occupied == 'on' ? ' ⦿': '');
+              ]]]
             show_state: true
             show_icon: false
             <<: *climate-button-style
@@ -1158,7 +1166,11 @@ views:
           # kitchen
           - type: 'custom:button-card'
             entity: sensor.kitchen_mean_temperature_calculation
-            name: 'Kitchen'
+            name: > 
+              [[[
+                var occupied = states['binary_sensor.dining_room_occupancy'].state
+                return 'Kitchen' + (occupied == 'on' ? ' ⦿': '');
+              ]]]
             show_state: true
             show_icon: false
             <<: *climate-button-style
@@ -1174,7 +1186,11 @@ views:
           # office
           - type: 'custom:button-card'
             entity: sensor.snr_office_temperature
-            name: Office
+            name: >
+              [[[
+                var occupied = states['binary_sensor.snr_office_motion_occupancy'].state
+                return 'Office' + (occupied == 'on' ? ' ⦿': '');
+              ]]]
             show_state: true
             show_icon: false
             <<: *climate-button-style
