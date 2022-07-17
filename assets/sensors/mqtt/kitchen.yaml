@@ -14,7 +14,7 @@
 - name: 'SNR Kitchen Fridge Temperature'
   device_class: temperature
   unit_of_measurement: '°C'
-  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-187
-  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-187
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-104
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-104
   value_template: >
     {{ value_json.temperature_C | round(1, default=1.0) }}
