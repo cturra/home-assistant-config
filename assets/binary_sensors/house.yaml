@@ -13,6 +13,7 @@
     - binary_sensor.snr_kitchen_windowcontact_contact
     - binary_sensor.snr_laundry_windowcontact_contact
     - binary_sensor.snr_mainbedroom_windowcontact_contact
+    - binary_sensor.snr_sparebedroom_windowcontact_contact
 
 # contact sensors on house exterior doors
 - platform: group

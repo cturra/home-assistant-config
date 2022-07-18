@@ -172,6 +172,13 @@ binary_sensor.snr_mainbedroom_windowcontact_contact:
 sensor.snr_mainbedroom_windowcontact_battery:
   friendly_name: 'Main Bedroom: Window'
 
+# spare bedroom window
+binary_sensor.snr_sparebedroom_windowcontact_contact:
+  friendly_name: 'Spare Bedroom: Window'
+  device_class: window
+sensor.snr_sparebedroom_windowcontact_battery:
+  friendly_name: 'Spare Bedroom: Window'
+
 
 ## ------ hvac binary_sensors ------
 

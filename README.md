@@ -10,53 +10,54 @@ And, if you have any feedback, please feel free to reach out :smile:
 
 ### Devices
 
-| Type              | Make       | Model           | Count | Connectivity       |
-| :---              | :---       | :---            | :--:  | :--                |
-| **HVAC**                                                                      |
-| Thermostat        | Ecobee     | Ecobee3         | 1     | HA :: Ecobee       |
-| Thermostat        | Sinopé     | TH1400ZB        | 1     | Zigbee2MQTT        |
-| **Lights**                                                                    |
-| Bulb (A25)        | Athom      | LB01-15W-E27    | 2     | Tasmota            |
-| Bulb (BR30)       | Athom      | LB03-12W-BR30   | 2     | Tasmota            |
-| Bulb (B22)        | Athom      | LB01-7W-E27     | 1     | WLED               |
-| Bulb (A19)        | Ikea       | LED1624G9       | 1     | Zigbee2MQTT        |
-| **Entertainment**                                                             |
-| Audio             | Chromecast | Audio           | 1     | HA :: Chromecast   |
-| Receiver          | Yamaha     | HTR-8063        | 1     | HA :: MediaPlayers |
-| Speaker           | Sonos      | Play:5          | 1     | HA :: Sonos        |
-| Speaker           | Sonos      | Beam            | 1     | HA :: Sonos        |
-| TV                | LG         | OLED55B8        | 1     | HA :: WebOSTV      |
-| TV                | LG         | OLED64C1        | 1     | HA :: WebOSTV      |
-| **Sensors**                                                                   |
-| Air Quality       | PurpleAir  | PA-II           | 1     | RESP API           |
-| Climate           | Ecobee     | v1              | 3     | HA :: Ecobee       |
-| Climate           | Xiaomi     | WSDCGQ11LM      | 11    | Zigbee2MQTT        |
-| Climate           | Xiaomi Mi  | LYWSD03MMC      | 4     | MQTT :: BLE Bridge |
-| Contact           | Xiaomi     | MCCGQ11LM       | 16    | Zigbee2MQTT        |
-| Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT        |
-| Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT        |
-| Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT        |
-| Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | HA :: Mi Flora     |
-| Temperature       | Acurite    | 592TXR          | 1     | MQTT :: rtl_433    |
-| Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433    |
-| Temperature       | La Crosse  | TX29IT          | 1     | MQTT :: rtl_433    |
-| Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT        |
-| **Switches**                                                                  |
-| Plug              | Gosund     | WP2             | 2     | Tasmota            |
-| Plug              | Gosund     | WP5             | 3     | Tasmota            |
-| Plug              | Sonoff     | S31             | 8     | Tasmota            |
-| Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT        |
-| Plug              | Wyze       | WLPPO1          | 1     | Tasmota            |
-| Remote            | Ikea       | E1810           | 2     | Zigbee2MQTT        |
-| Remote            | Xiaomi     | WXKG11LM        | 1     | Zigbee2MQTT        |
-| Switch            | Shelly     | 1               | 1     | Tasmota            |
-| Switch            | Shelly     | Plus 1PM        | 1     | Tasmota            |
-| Switch            | Sonoff     | Mini R1         | 2     | Tasmota            |
-| Switch            | Sonoff     | SV              | 1     | Tasmota            |
-| Switch            | Treatlife  | SS02S           | 10    | Tasmota            |
-| Switch (3 Way)    | Treatlife  | SS02            | 2     | Tasmota            |
-| Switch (Dimmer)   | Treatlife  | DS02S           | 3     | Tasmota            |
-| Switch (Dimmer)   | Treatlife  | DS01C           | 2     | Tasmota            |
+| Type              | Make       | Model           | Count | Connectivity        |
+| :---              | :---       | :---            | :--:  | :--                 |
+| **HVAC**                                                                       |
+| Thermostat        | Ecobee     | Ecobee3         | 1     | HA :: Ecobee        |
+| Thermostat        | Sinopé     | TH1400ZB        | 1     | Zigbee2MQTT         |
+| **Lights**                                                                     |
+| Bulb (A25)        | Athom      | LB01-15W-E27    | 2     | Tasmota             |
+| Bulb (BR30)       | Athom      | LB03-12W-BR30   | 2     | Tasmota             |
+| Bulb (B22)        | Athom      | LB01-7W-E27     | 1     | WLED                |
+| Bulb (A19)        | Ikea       | LED1624G9       | 1     | Zigbee2MQTT         |
+| **Entertainment**                                                              |
+| Audio             | Chromecast | Audio           | 1     | HA :: Chromecast    |
+| Receiver          | Yamaha     | HTR-8063        | 1     | HA :: MediaPlayers  |
+| Speaker           | Sonos      | Play:5          | 1     | HA :: Sonos         |
+| Speaker           | Sonos      | Beam            | 1     | HA :: Sonos         |
+| TV                | LG         | OLED55B8        | 1     | HA :: WebOSTV       |
+| TV                | LG         | OLED65C1        | 1     | HA :: WebOSTV       |
+| **Sensors**                                                                    |
+| Air Quality       | PurpleAir  | PA-II           | 1     | RESP API            |
+| Climate           | Ecobee     | v1              | 3     | HA :: Ecobee        |
+| Climate           | Xiaomi     | WSDCGQ11LM      | 11    | Zigbee2MQTT         |
+| Climate           | Xiaomi Mi  | LYWSD03MMC      | 4     | MQTT :: BLE Bridge  |
+| Contact           | Xiaomi     | MCCGQ11LM       | 17    | Zigbee2MQTT         |
+| Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT         |
+| Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT         |
+| Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT         |
+| Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | HA :: Mi Flora      |
+| Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect | 
+| Temperature       | Acurite    | 592TXR          | 1     | MQTT :: rtl_433     |
+| Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433     |
+| Temperature       | La Crosse  | TX29IT          | 1     | MQTT :: rtl_433     |
+| Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT         |
+| **Switches**                                                                   |
+| Plug              | Gosund     | WP2             | 2     | Tasmota             |
+| Plug              | Gosund     | WP5             | 3     | Tasmota             |
+| Plug              | Sonoff     | S31             | 8     | Tasmota             |
+| Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT         |
+| Plug              | Wyze       | WLPPO1          | 1     | Tasmota             |
+| Remote            | Ikea       | E1810           | 2     | Zigbee2MQTT         |
+| Remote            | Xiaomi     | WXKG11LM        | 1     | Zigbee2MQTT         |
+| Switch            | Shelly     | 1               | 1     | Tasmota             |
+| Switch            | Shelly     | Plus 1PM        | 1     | Tasmota             |
+| Switch            | Sonoff     | Mini R1         | 2     | Tasmota             |
+| Switch            | Sonoff     | SV              | 1     | Tasmota             |
+| Switch            | Treatlife  | SS02S           | 10    | Tasmota             |
+| Switch (3 Way)    | Treatlife  | SS02            | 2     | Tasmota             |
+| Switch (Dimmer)   | Treatlife  | DS02S           | 3     | Tasmota             |
+| Switch (Dimmer)   | Treatlife  | DS01C           | 2     | Tasmota             |
 
  ### Infrastructure
 
