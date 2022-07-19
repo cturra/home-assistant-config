@@ -272,9 +272,7 @@ views:
                 <<: *alert-style
             # zigbee device battery needs replacement
             - entity_id: 'sensor.snr_*_battery'
-              last_updated: '> 60' # minutes
-              attributes:
-                linkquality: null
+              last_updated: '> 720' # 12 hours
               options:
                   secondary_info: last-changed
                   icon: 'mdi:battery-alert-variant-outline'
@@ -1703,18 +1701,6 @@ views:
           include:
             - name: entity_id
               value: 'sensor.snr_*motion_battery'
-
-      # Plant Sensors
-      - type: 'custom:battery-state-card'
-        title: 'Plant Sensors'
-        <<: *battery-state-color_gradient
-        <<: *battery-state-style
-        tap_action: more-info
-        sort_by_level: 'asc'
-        filter:
-          include:
-            - name: entity_id
-              value: 'sensor.plnt_*_battery'
 
       # Remote Controls
       - type: 'custom:battery-state-card'

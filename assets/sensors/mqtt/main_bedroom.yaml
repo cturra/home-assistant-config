@@ -5,6 +5,7 @@
 - name: 'SNR MainBedroom ClimateDisplay Battery'
   device_class: battery
   unit_of_measurement: '%'
+  force_update: true
   state_topic: "esphome/home-front-ble-bridge/sensor/main_bedroom_battery_level/state"
   availability_topic: "esphome/home-front-ble-bridge/availability/status"
 
