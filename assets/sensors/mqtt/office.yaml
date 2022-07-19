@@ -22,3 +22,30 @@
   unit_of_measurement: '°C'
   state_topic: "esphome/snr-office-airquatliy/sensor/temperature/state"
   availability_topic: "esphome/snr-office-airquatliy/availability/status"
+
+# -- xiaomi mi flora --
+# plant: dracaena trifasciata conductivity
+- name: 'Plnt Office Dracaena Trifasciata Conductivity'
+  unit_of_measurement: 'µS/cm'
+  state_topic: "esphome/home-front-ble-bridge/sensor/office_dracaena_trifasciata_conductivity/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
+
+# plant: dracaena trifasciata moisture
+- name: 'Plnt Office Dracaena Trifasciata Moisture'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state_topic: "esphome/home-front-ble-bridge/sensor/office_dracaena_trifasciata_moisture/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
+
+# plant: dracaena trifasciata illuminance
+- name: 'Plnt Office Dracaena Trifasciata Illuminance'
+  device_class: illuminance
+  state_topic: "esphome/home-front-ble-bridge/sensor/office_dracaena_trifasciata_illuminance/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
+
+# plant: dracaena trifasciata temperature
+- name: 'Plnt Office Dracaena Trifasciata Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: "esphome/home-front-ble-bridge/sensor/office_dracaena_trifasciata_temperature/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"

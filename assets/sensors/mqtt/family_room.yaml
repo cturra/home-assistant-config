@@ -1,0 +1,28 @@
+## SENSORS / MQTT / FAMILY ROOM
+
+# -- xiaomi mi flora --
+# plant: parlor palm conductivity
+- name: 'Plnt Family Room Parlor Palm Conductivity'
+  unit_of_measurement: 'µS/cm'
+  state_topic: "esphome/home-front-ble-bridge/sensor/family_room_parlor_palm_conductivity/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
+
+# plant: parlor palm moisture
+- name: 'Plnt Family Room Parlor Palm Moisture'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state_topic: "esphome/home-front-ble-bridge/sensor/family_room_parlor_palm_moisture/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
+
+# plant: parlor palm illuminance
+- name: 'Plnt Family Room Parlor Palm Illuminance'
+  device_class: illuminance
+  state_topic: "esphome/home-front-ble-bridge/sensor/family_room_parlor_palm_illuminance/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"
+
+# plant: parlor palm temperature
+- name: 'Plnt Family Room Parlor Palm Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state_topic: "esphome/home-front-ble-bridge/sensor/family_room_parlor_palm_temperature/state"
+  availability_topic: "esphome/home-front-ble-bridge/availability/status"

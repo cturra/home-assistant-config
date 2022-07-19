@@ -36,7 +36,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT         |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT         |
 | Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT         |
-| Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | HA :: Mi Flora      |
+| Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | MQTT :: BLE Bridge  |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect | 
 | Temperature       | Acurite    | 592TXR          | 1     | MQTT :: rtl_433     |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433     |

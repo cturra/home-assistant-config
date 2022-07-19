@@ -279,6 +279,13 @@ views:
                   secondary_info: last-changed
                   icon: 'mdi:battery-alert-variant-outline'
                   <<: *alert-style
+            # xiaomi mi flora battery may need replacement
+            - entity_id: 'sensor.plnt_*_moisture'
+              last_updated: '> 720' # 12 hours
+              options:
+                secondary_info: last-changed
+                icon: 'mdi:battery-alert-variant-outline'
+                <<: *alert-style
             # freezer temperature too warm (> -13.9 °C)
             - entity_id: 'sensor.snr_*_freezer_temperature'
               state: '> -13.9'

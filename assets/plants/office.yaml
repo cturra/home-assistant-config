@@ -15,11 +15,10 @@
   #   "min_soil_ec": 300
   office_dracaena_trifasciata:
     sensors:
-      moisture: sensor.plnt_office_dracaena_trifasciata_moisture
-      battery: sensor.plnt_office_dracaena_trifasciata_battery
-      temperature: sensor.plnt_office_dracaena_trifasciata_temperature
+      brightness: sensor.plnt_office_dracaena_trifasciata_illuminance
       conductivity: sensor.plnt_office_dracaena_trifasciata_conductivity
-      brightness: sensor.plnt_office_dracaena_trifasciata_light_intensity
+      moisture: sensor.plnt_office_dracaena_trifasciata_moisture
+      temperature: sensor.plnt_office_dracaena_trifasciata_temperature
     min_battery: 20
     min_conductivity: 300
     max_conductivity: 1000

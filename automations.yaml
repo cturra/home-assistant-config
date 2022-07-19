@@ -796,7 +796,7 @@
           state: 'off'
         - condition: numeric_state
           entity_id: sensor.crawlspace_locker_mean_humidity_calculation
-          above: '51.0'
+          above: '52.0'
       sequence:
       - service: switch.turn_on
         data: {}
