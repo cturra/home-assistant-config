@@ -43,6 +43,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Temperature       | La Crosse  | TX29IT          | 1     | MQTT :: rtl_433     |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT         |
 | **Switches**                                                                   |
+| IR Blaster        | Uniplay    | Q1              | 1     | Tasmota             |
 | Plug              | Gosund     | WP2             | 2     | Tasmota             |
 | Plug              | Gosund     | WP5             | 3     | Tasmota             |
 | Plug              | Sonoff     | S31             | 8     | Tasmota             |
