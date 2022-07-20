@@ -45,11 +45,37 @@ mqtt:
 esp32_ble_tracker:
 
 sensor:
-  # temperature :: crawlspace locker
+  ## --- plants ---
+  # family room: parlor palm
+  - platform: xiaomi_hhccjcy01
+    mac_address: "C4:7C:8D:6C:E5:89"
+    conductivity:
+      name: "Family Room Parlor Palm Conductivity"
+    illuminance:
+      name: "Family Room Parlor Palm Illuminance"
+    moisture:
+      name: "Family Room Parlor Palm Moisture"
+    temperature:
+      name: "Family Room Parlor Palm Temperature"
+
+  # office: dracaena trifasciata
+  - platform: xiaomi_hhccjcy01
+    mac_address: "C4:7C:8D:6D:D0:E1"
+    conductivity:
+      name: "Office Dracaena Trifasciata Conductivity"
+    illuminance:
+      name: "Office Dracaena Trifasciata Illuminance"
+    moisture:
+      name: "Office Dracaena Trifasciata Moisture"
+    temperature:
+      name: "Office Dracaena Trifasciata Temperature"
+
+  ## --- temperature ---
+  # crawlspace: locker
   - platform: atc_mithermometer
     mac_address: "A4:C1:38:5A:25:8A"
     temperature:
-      name: 'Crawlspace Locker Temperature'
+      name: "Crawlspace Locker Temperature"
     humidity:
       name: "Crawlspace Locker Humidity"
     battery_level:
@@ -59,7 +85,7 @@ sensor:
     signal_strength:
       name: "Crawlspace Locker Signal"
 
-  # temperature :: main bedroom
+  # main bedroom
   - platform: atc_mithermometer
     mac_address: "A4:C1:38:B3:0C:55"
     temperature:
@@ -73,7 +99,7 @@ sensor:
     signal_strength:
       name: "Main Bedroom Signal"
 
-  # temperature :: tacoma :: box
+  # tacoma: box
   - platform: atc_mithermometer
     mac_address: "A4:C1:38:F9:93:1B"
     temperature:
@@ -87,7 +113,7 @@ sensor:
     signal_strength:
       name: "Tacoma Box Signal"
 
-  # temperature :: tacoma :: cab
+  # tacoma: cab
   - platform: atc_mithermometer
     mac_address: "A4:C1:38:15:AF:5B"
     temperature:
