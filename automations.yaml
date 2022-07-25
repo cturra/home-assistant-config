@@ -585,7 +585,7 @@
       title: 🚪 Garage Door
       message: The Garage Door has been opened.
       data:
-        entity_id: camera.amzn_cam04
+        entity_id: camera.cam_garage
   mode: single
 - id: '1625692425135'
   alias: 'HVAC: Notify Chris'' phone if window is open'
