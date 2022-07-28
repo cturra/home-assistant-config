@@ -332,6 +332,17 @@ views:
                 icon: 'mdi:weather-cloudy-alert'
                 secondary_info: last-changed
                 <<: *alert-style
+            # weather statements
+            - entity_id: sensor.pitt_meadows_statements
+              # regex matches any string that doesn't contain a 0 (used for no warning) or is unavaiable
+              state: '/^(?!.*(unavailable|0))/'
+              options:
+                type: attribute
+                attribute: alert_1
+                name: 'Weather'
+                icon: 'mdi:weather-cloudy-alert'
+                secondary_info: last-changed
+                <<: *alert-style
             # garage heater turned off
             - entity_id: sensor.hvac_garage_mode_state
               state: '/Off/'
@@ -415,12 +426,6 @@ views:
                 icon: 'mdi:lightbulb-outline'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
-            - entity_id: switch.plg_crawlspace_zbrtr
-              state: 'on'
-              options:
-                name: 'Crawlspace: Locker Dehumidifier'
-                icon: 'mdi:water-outline'
-                secondary_info: last-changed
             # driveway
             - entity_id: light.group_driveway_lights
               state: 'on'
