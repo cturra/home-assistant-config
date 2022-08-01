@@ -26,20 +26,8 @@ wifi:
     gateway: !secret network_gateway
     subnet: !secret network_subnet
 
-# Enable MQTT Client
-mqtt:
-  broker: !secret mqtt_broker
-  port: 1883
-  username: !secret mqtt_user
-  password: !secret mqtt_pass
-  discovery: false
-  topic_prefix: esphome/${device_name}
-  birth_message:
-    topic: esphome/${device_name}/availability/status
-    payload: online
-  will_message:
-    topic: esphome/${device_name}/availability/status
-    payload: offline
+# Home Assistant API
+api:
 
 # Enable Bluetooth Low Energy Tracker Hub
 esp32_ble_tracker:
@@ -50,38 +38,38 @@ sensor:
   - platform: xiaomi_hhccjcy01
     mac_address: "C4:7C:8D:6C:E5:89"
     conductivity:
-      name: "Family Room Parlor Palm Conductivity"
+      name: "SNR Family Room Parlor Palm Conductivity"
     illuminance:
-      name: "Family Room Parlor Palm Illuminance"
+      name: "SNR Family Room Parlor Palm Illuminance"
     moisture:
-      name: "Family Room Parlor Palm Moisture"
+      name: "SNR Family Room Parlor Palm Moisture"
     temperature:
-      name: "Family Room Parlor Palm Temperature"
+      name: "SNR Family Room Parlor Palm Temperature"
 
   # office: dracaena trifasciata
   - platform: xiaomi_hhccjcy01
     mac_address: "C4:7C:8D:6D:D0:E1"
     conductivity:
-      name: "Office Dracaena Trifasciata Conductivity"
+      name: "SNR Office Dracaena Trifasciata Conductivity"
     illuminance:
-      name: "Office Dracaena Trifasciata Illuminance"
+      name: "SNR Office Dracaena Trifasciata Illuminance"
     moisture:
-      name: "Office Dracaena Trifasciata Moisture"
+      name: "SNR Office Dracaena Trifasciata Moisture"
     temperature:
-      name: "Office Dracaena Trifasciata Temperature"
+      name: "SNR Office Dracaena Trifasciata Temperature"
 
   ## --- temperature ---
   # crawlspace: locker
   - platform: atc_mithermometer
     mac_address: "A4:C1:38:5A:25:8A"
     temperature:
-      name: "Crawlspace Locker Temperature"
+      name: "SNR Crawlspace Locker ClimateDisplay Temperature"
     humidity:
-      name: "Crawlspace Locker Humidity"
+      name: "SNR Crawlspace Locker ClimateDisplay Humidity"
     battery_level:
-      name: "Crawlspace Locker Battery Level"
-    battery_voltage:
-      name: "Crawlspace Locker Battery Voltage"
+      name: "SNR Crawlspace Locker ClimateDisplay Battery"
+#    battery_voltage:
+#      name: "SNR Crawlspace Locker ClimateDisplay Battery Voltage"
     signal_strength:
       name: "Crawlspace Locker Signal"
 
@@ -89,40 +77,40 @@ sensor:
   - platform: atc_mithermometer
     mac_address: "A4:C1:38:B3:0C:55"
     temperature:
-      name: 'Main Bedroom Temperature'
+      name: 'SNR MainBedroom ClimateDisplay Temperature'
     humidity:
-      name: "Main Bedroom Humidity"
+      name: "SNR MainBedroom ClimateDisplay Humidity"
     battery_level:
-      name: "Main Bedroom Battery Level"
-    battery_voltage:
-      name: "Main Bedroom Battery Voltage"
+      name: "SNR MainBedroom ClimateDisplay Battery"
+#    battery_voltage:
+#      name: "SNR MainBedroom ClimateDisplay Battery Voltage"
     signal_strength:
-      name: "Main Bedroom Signal"
+      name: "SNR MainBedroom ClimateDisplay Signal"
 
   # tacoma: box
   - platform: atc_mithermometer
     mac_address: "A4:C1:38:F9:93:1B"
     temperature:
-      name: "Tacoma Box Temperature"
+      name: "SNR Outside TacomaBoxClimate Temperature"
     humidity:
-      name: "Tacoma Box Humidity"
+      name: "SNR Outside TacomaBoxClimate Humidity"
     battery_level:
-      name: "Tacoma Box Battery Level"
-    battery_voltage:
-      name: "Tacoma Box Battery Voltage"
+      name: "SNR Outside TacomaBoxClimate Battery"
+#    battery_voltage:
+#      name: "SNR Outside TacomaBoxClimate Battery Voltage"
     signal_strength:
-      name: "Tacoma Box Signal"
+      name: "SNR Outside TacomaBoxClimate Signal"
 
   # tacoma: cab
   - platform: atc_mithermometer
     mac_address: "A4:C1:38:15:AF:5B"
     temperature:
-      name: "Tacoma Cab Temperature"
+      name: "SNR Outside TacomaCabClimate Temperature"
     humidity:
-      name: "Tacoma Cab Humidity"
+      name: "SNR Outside TacomaCabClimate Humidity"
     battery_level:
-      name: "Tacoma Cab Battery Level"
-    battery_voltage:
-      name: "Tacoma Cab Battery Voltage"
+      name: "SNR Outside TacomaCabClimate Battery"
+#    battery_voltage:
+#      name: "SNR Outside TacomaCabClimate Battery Voltage"
     signal_strength:
-      name: "Tacoma Cab Signal"
+      name: "SNR Outside TacomaCabClimate Signal"
