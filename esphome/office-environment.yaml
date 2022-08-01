@@ -1,5 +1,5 @@
 substitutions:
-  device_name: snr-office-airquatliy
+  device_name: "office-environment"
   location: "Office"
 
 esphome:
@@ -27,20 +27,8 @@ logger:
 ota:
   password: !secret snr_office_airquatliy_ota_password
 
-# Enable MQTT Client
-mqtt:
-  broker: !secret mqtt_broker
-  port: 1883
-  username: !secret mqtt_user
-  password: !secret mqtt_pass
-  discovery: false
-  topic_prefix: esphome/${device_name}
-  birth_message:
-    topic: esphome/${device_name}/availability/status
-    payload: online
-  will_message:
-    topic: esphome/${device_name}/availability/status
-    payload: offline
+# Home Assistant API
+api:
 
 uart:
   tx_pin: D6
@@ -51,7 +39,7 @@ switch:
   - platform: gpio
     pin: D3
     id: pms_set
-    name: "AirQuality Measure"
+    name: "SW Office AirQuality Measure"
 
 interval:
   - interval: 120s
@@ -65,24 +53,30 @@ sensor:
   - platform: pmsx003
     type: PMSX003
     pm_1_0:
-      name: "AirQuality PM 1.0"
+      name: "SNR Office AirQuality PM 1_0"
       filters:
-        - throttle_average: 60s
+        - sliding_window_moving_average:   
+            window_size: 10
+            send_every: 10
     pm_2_5:
-      name: "AirQuality PM 2.5"
+      name: "SNR Office AirQuality PM 2_5"
       filters:
-        - throttle_average: 60s
-    pm_10_0:
-      name: "AirQuality PM 10.0"
-      filters:
-        - throttle_average: 60s
+        - sliding_window_moving_average:   
+            window_size: 10
+            send_every: 10
+#    pm_10_0:
+#      name: "SNR Office AirQuality PM 10_0"
+#      filters:
+#        - sliding_window_moving_average:   
+#            window_size: 10
+#            send_every: 10
 
   # temperature/humidity
   - platform: dht
     model: AM2302
     pin: D4
     temperature:
-      name: "Temperature"
+      name: "SNR Office Temperature"
     humidity:
-      name: "Humidity"
+      name: "SNR Office Humidity"
     update_interval: 120s
