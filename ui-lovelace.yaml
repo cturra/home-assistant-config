@@ -271,7 +271,8 @@ views:
                 icon: 'mdi:battery-alert-variant-outline'
                 <<: *alert-style
             # zigbee device battery needs replacement
-            - entity_id: 'sensor.snr_*_battery'
+            #  note: ignore ble climate sensors (contains "display")
+            - entity_id: '/^sensor.snr_((?!display).)*_battery/'
               last_updated: '> 720' # 12 hours
               options:
                   secondary_info: last-changed
