@@ -33,31 +33,6 @@ api:
 esp32_ble_tracker:
 
 sensor:
-  ## --- plants ---
-  # family room: parlor palm
-  - platform: xiaomi_hhccjcy01
-    mac_address: "C4:7C:8D:6C:E5:89"
-    conductivity:
-      name: "SNR Family Room Parlor Palm Conductivity"
-    illuminance:
-      name: "SNR Family Room Parlor Palm Illuminance"
-    moisture:
-      name: "SNR Family Room Parlor Palm Moisture"
-    temperature:
-      name: "SNR Family Room Parlor Palm Temperature"
-
-  # office: dracaena trifasciata
-  - platform: xiaomi_hhccjcy01
-    mac_address: "C4:7C:8D:6D:D0:E1"
-    conductivity:
-      name: "SNR Office Dracaena Trifasciata Conductivity"
-    illuminance:
-      name: "SNR Office Dracaena Trifasciata Illuminance"
-    moisture:
-      name: "SNR Office Dracaena Trifasciata Moisture"
-    temperature:
-      name: "SNR Office Dracaena Trifasciata Temperature"
-
   ## --- temperature ---
   # crawlspace: locker
   - platform: atc_mithermometer
