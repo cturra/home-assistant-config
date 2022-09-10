@@ -9,6 +9,15 @@
   start: "{{ now().replace(hour=0, minute=0, second=0) }}"
   end: "{{ now() }}"
 
+# mean indoor air quality from awair sensors
+- platform: min_max
+  name: 'Indoor Mean Air Quality Calculation'
+  type: mean
+  round_digits: 0
+  entity_ids:
+    - sensor.snr_mainbedroom_airquality_pm2_5
+    - sensor.snr_office_airquality_pm2_5
+
 # mean indoor humidity from climate sensors
 - platform: min_max
   name: 'Indoor Mean Humidity Calculation'

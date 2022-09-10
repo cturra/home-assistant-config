@@ -270,14 +270,6 @@ views:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
                 <<: *alert-style
-            # zigbee device battery needs replacement
-            #  note: ignore ble climate sensors (contains "display")
-            - entity_id: '/^sensor.snr_((?!display).)*_battery/'
-              last_updated: '> 720' # 12 hours
-              options:
-                  secondary_info: last-changed
-                  icon: 'mdi:battery-alert-variant-outline'
-                  <<: *alert-style
             # xiaomi mi flora battery may need replacement
             - entity_id: 'sensor.plnt_*_moisture'
               last_updated: '> 720' # 12 hours
@@ -427,6 +419,16 @@ views:
                 icon: 'mdi:lightbulb-outline'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
+            # deck
+            - entity_id: light.sw_deck_ceilinglight
+              state: 'on'
+              options:
+                  type: 'custom:slider-entity-row'
+                  hide_state: true
+                  name: 'Deck: Ceiling'
+                  icon: 'mdi:light-recessed'
+                  secondary_info: last-changed
+                  <<: *neutral-icon-entity-style
             # driveway
             - entity_id: light.group_driveway_lights
               state: 'on'
@@ -1048,10 +1050,10 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
-                # driveway
-                - entity: light.group_driveway_lights
-                  name: Driveway
-                  icon: 'mdi:coach-lamp'
+                # deck
+                - entity: light.sw_deck_ceilinglight
+                  name: 'Deck: Ceiling'
+                  icon: 'mdi:light-recessed'
                   state_color: true
                 # front outlet
                 - entity: switch.sw_fronthouseoutlet
@@ -1062,11 +1064,17 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
-                # porch lights
+                # driveway
+                - entity: light.group_driveway_lights
+                  name: Driveway
+                  icon: 'mdi:coach-lamp'
+                  state_color: true
+                # porch light
                 - entity: light.group_porch_lights
                   name: Porch
                   icon: 'mdi:light-recessed'
                   state_color: true
+
 
       # Shed
       - type: 'custom:vertical-stack-in-card'
@@ -1127,7 +1135,7 @@ views:
               name: 'Temperature'
             - entity: sensor.indoor_mean_humidity
               name: 'Humidity'
-            - entity: sensor.snr_office_mean_airquality_pm_2_5
+            - entity: sensor.indoor_mean_air_quality_calculation
               name: 'Air Quality'
 
         ## INDOOR TEMPERATURE CARDS
@@ -1196,7 +1204,7 @@ views:
 
           # office
           - type: 'custom:button-card'
-            entity: sensor.snr_office_temperature
+            entity: sensor.snr_office_airquality_temperature
             name: >
               [[[
                 var occupied = states['binary_sensor.snr_office_motion_occupancy'].state
@@ -1707,6 +1715,18 @@ views:
           include:
             - name: entity_id
               value: 'sensor.snr_*motion_battery'
+
+      # Plant Sensors
+      - type: 'custom:battery-state-card'
+        title: 'Plant Sensors'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        sort_by_level: 'asc'
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.snr_*plant_*_battery'
 
       # Remote Controls
       - type: 'custom:battery-state-card'
