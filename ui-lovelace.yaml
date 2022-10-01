@@ -429,6 +429,13 @@ views:
                   icon: 'mdi:light-recessed'
                   secondary_info: last-changed
                   <<: *neutral-icon-entity-style
+            # downstairs bathroom
+            - entity_id: switch.sw_downstairsbathroom_ceilinglight
+              state: 'on'
+              options:
+                name: 'Down Bathroom: Ceiling'
+                icon: 'mdi:wall-sconce-flat-variant-outline'
+                secondary_info: last-changed
             # driveway
             - entity_id: light.group_driveway_lights
               state: 'on'
@@ -462,7 +469,7 @@ views:
                 type: 'custom:slider-entity-row'
                 hide_state: true
                 name: 'Family Room: Wall Sconce'
-                icon: 'mdi:wall-sconce-round-variant'
+                icon: 'mdi:wall-sconce-flat-variant-outline'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
             # garage
@@ -771,7 +778,7 @@ views:
                 # wall sconce
                 - entity: light.sw_familyroom_walllights
                   name: 'Wall Sconce'
-                  icon: 'mdi:wall-sconce-round-variant'
+                  icon: 'mdi:wall-sconce-flat-variant-outline'
             - type: entities
               show_header_toggle: false
               <<: *entities-style
