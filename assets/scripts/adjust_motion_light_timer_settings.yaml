@@ -1,0 +1,35 @@
+adjust_motion_light_timer_setting:
+  alias: Lights - Adjust motion light timer setting
+  sequence:
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: '{{ timer == "lighttime" }}'
+          sequence:
+            - service: mqtt.publish
+              data:
+                topic: 'cmnd/{{topic}}/var1'
+                payload: '{{duration}}'
+                retain: true
+        - conditions:
+            - condition: template
+              value_template: '{{ timer == "blindtime" }}'
+          sequence:
+            - service: mqtt.publish
+              data:
+                topic: 'cmnd/{{topic}}/var2'
+                payload: '{{duration}}'
+                retain: true
+      default: []
+  mode: single
+  icon: mdi:timer-edit
+  fields:
+    timer:
+      description: Which timer to adjust.  Can be either lighttime or blindtime
+      example: lighttime
+    topic:
+      description: MQTT Topic for the motion switch.  You can get this by running the command topic in the web console of TASMOTA
+      example: exampleswitch
+    duration:
+      description: number of seconds
+      example: 15

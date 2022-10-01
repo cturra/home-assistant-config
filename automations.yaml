@@ -354,13 +354,22 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.snr_office_motion_occupancy
+    entity_id:
+    - binary_sensor.snr_office_motion_occupancy
     to: 'off'
-    for: 00:10:00
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
   condition:
-  - condition: state
-    entity_id: switch.plg_office_airpurifier
-    state: 'on'
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: switch.plg_office_airpurifier
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sensor.snr_outside_airquality_aqi
+      below: 100
   action:
   - service: switch.turn_off
     data: {}
@@ -378,7 +387,7 @@
   action:
   - service: notify.grp_anne_chris_phones
     data:
-      title: ❗💧 Water Detected
+      title: "❗\U0001F4A7 Water Detected"
       message: Water detected at {{ triggered_leak_sensor }} sensor.
       data:
         push:
@@ -390,9 +399,9 @@
     data:
       message: ALERT! Water detected at {{ triggered_leak_sensor }} sensor.
   variables:
-    triggered_leak_sensor: "{% for entity in trigger.to_state.attributes.entity_id\
-      \ %}\n  {% if is_state(entity, 'on') %}\n    {{ state_attr(entity, 'friendly_name')\
-      \ }}\n  {% endif %}\n{% endfor %}\n"
+    triggered_leak_sensor: "{% for entity in trigger.to_state.attributes.entity_id
+      %}\n  {% if is_state(entity, 'on') %}\n    {{ state_attr(entity, 'friendly_name')
+      }}\n  {% endif %}\n{% endfor %}\n"
   mode: single
 - id: '1616274628046'
   alias: 'Kitchen: Espresso Machine On in the morning'
@@ -400,15 +409,19 @@
     when chris' iphone is removed from the charger for 1 minute.
   trigger:
   - platform: state
-    entity_id: sensor.turraphone_battery_state
+    entity_id:
+    - sensor.turraphone_battery_state
     to: Not Charging
-    for: 00:01:00
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
   condition:
   - condition: and
     conditions:
     - condition: state
-      entity_id: device_tracker.turraphone
       state: home
+      entity_id: device_tracker.turraphone
     - condition: time
       before: '10:00:00'
       after: 05:00:00
@@ -419,6 +432,7 @@
   - service: switch.turn_on
     target:
       entity_id: switch.plg_kitchen_espressomachine
+    data: {}
   mode: single
 - id: '1616875296550'
   alias: 'Crawlspace: Notify when locker door opened'
@@ -432,7 +446,7 @@
   action:
   - service: notify.mobile_app_turraphone
     data:
-      title: ❗🚪 Locker Door Open
+      title: "❗\U0001F6AA Locker Door Open"
       message: Locker Door has been opened
       data:
         push:
@@ -498,7 +512,7 @@
   - service: notify.mobile_app_turraphone
     data:
       message: Shed Door has been left open
-      title: ❗🚪 Shed Door Open
+      title: "❗\U0001F6AA Shed Door Open"
       data:
         push:
           sound:
@@ -582,10 +596,10 @@
   action:
   - service: notify.mobile_app_turraphone
     data:
-      title: 🚪 Garage Door
+      title: "\U0001F6AA Garage Door"
       message: The Garage Door has been opened.
       data:
-        entity_id: camera.cam_garage
+        entity_id: camera.nas01_garage
   mode: single
 - id: '1625692425135'
   alias: 'HVAC: Notify Chris'' phone if window is open'
@@ -604,7 +618,7 @@
   - service: notify.mobile_app_turraphone
     data:
       message: AC has started and an open window was detected.
-      title: ❗🪟 Window left open
+      title: "❗\U0001FA9F Window left open"
       data:
         push:
           sound:
@@ -673,14 +687,14 @@
   action:
   - delay:
       hours: 0
-      minutes: "{% set current_temp = state_attr('climate.hvac_garage_thermostat','current_temperature')\
-        \ %} {% set target_temp = state_attr('climate.hvac_garage_thermostat','temperature')\
-        \ %} {% if is_number(current_temp) and is_number(target_temp) %}\n  {% set\
-        \ temp_diff = current_temp | float - target_temp | float %}\n  {# delay if\
-        \ temp diff is lower to give room time for normalization #}\n  {% if (temp_diff\
-        \ >= 3.0) %}\n    0\n  {% elif (temp_diff < 3.0) and (temp_diff > 0.0) %}\n\
-        \    3\n  {% else %}\n    6\n  {% endif %}\n{% else %}\n  {# non-numeric number\
-        \ returned. set a longer delay to be safe #}\n  6\n{% endif %}\n"
+      minutes: "{% set current_temp = state_attr('climate.hvac_garage_thermostat','current_temperature')
+        %} {% set target_temp = state_attr('climate.hvac_garage_thermostat','temperature')
+        %} {% if is_number(current_temp) and is_number(target_temp) %}\n  {% set temp_diff
+        = current_temp | float - target_temp | float %}\n  {# delay if temp diff is
+        lower to give room time for normalization #}\n  {% if (temp_diff >= 3.0) %}\n
+        \   0\n  {% elif (temp_diff < 3.0) and (temp_diff > 0.0) %}\n    3\n  {% else
+        %}\n    6\n  {% endif %}\n{% else %}\n  {# non-numeric number returned. set
+        a longer delay to be safe #}\n  6\n{% endif %}\n"
       seconds: 0
       milliseconds: 0
   - service: switch.turn_on
@@ -757,7 +771,7 @@
   - service: notify.mobile_app_turraphone
     data:
       message: Garage Vehicle Door has been left open
-      title: ❗🚪 Garage Vehicle Door Open
+      title: "❗\U0001F6AA Garage Vehicle Door Open"
       data:
         push:
           sound:
@@ -812,9 +826,9 @@
     entity_id: binary_sensor.group_leak_sensors
     to: 'on'
   variables:
-    triggered_leak_sensor: "{% for entity in trigger.to_state.attributes.entity_id\
-      \ %}\n  {% if is_state(entity, 'on') %}\n    {{ state_attr(entity, 'friendly_name')\
-      \ }}\n  {% endif %}\n{% endfor %}\n"
+    triggered_leak_sensor: "{% for entity in trigger.to_state.attributes.entity_id
+      %}\n  {% if is_state(entity, 'on') %}\n    {{ state_attr(entity, 'friendly_name')
+      }}\n  {% endif %}\n{% endfor %}\n"
   condition: []
   action:
   - repeat:
@@ -910,7 +924,7 @@
   action:
   - service: notify.mobile_app_turraphone
     data:
-      title: ❗🔌 Plug Power OFF
+      title: "❗\U0001F50C Plug Power OFF"
       message: Power OFF detected at {{ triggered_plug }}.
       data:
         push:
@@ -923,10 +937,10 @@
       message: ALERT! Power OFF at {{ triggered_plug }}.
   mode: single
   variables:
-    triggered_plug: "{% for entity in trigger.to_state.attributes.entity_id %}\n \
-      \ {# state could be: off, unavailable and none #}\n  {% if not is_state(entity,\
-      \ 'on') %}\n    {{ state_attr(entity, 'friendly_name') }}\n  {% endif %}\n{%\
-      \ endfor %}\n"
+    triggered_plug: "{% for entity in trigger.to_state.attributes.entity_id %}\n  {#
+      state could be: off, unavailable and none #}\n  {% if not is_state(entity, 'on')
+      %}\n    {{ state_attr(entity, 'friendly_name') }}\n  {% endif %}\n{% endfor
+      %}\n"
 - id: '1642826717353'
   alias: 'Laundry: Washing Machine Off if water leak detected'
   description: turn off power to washing machine if water leak sensor is triggered
@@ -995,8 +1009,8 @@
             minutes: 0
             seconds: 0
         - condition: template
-          value_template: "{{\n  (states('sensor.snr_shed_climate_humidity')|int(default=50)\
-            \ > (states('sensor.snr_outside_humidity')|int(default=50)+10))\n}}"
+          value_template: "{{\n  (states('sensor.snr_shed_climate_humidity')|int(default=50)
+            > (states('sensor.snr_outside_humidity')|int(default=50)+10))\n}}"
         - condition: numeric_state
           entity_id: sensor.snr_outside_temperature
           above: '0'
@@ -1034,10 +1048,10 @@
           entity_id: switch.sw_shed_fan
           state: 'off'
         - condition: template
-          value_template: "{{\n  (states('sensor.shed_mean_temperature_calculation')|int(default=10)\
-            \ > (states('sensor.snr_outside_temperature')|int(default=10)+10)) and\n\
-            \  (states('sensor.shed_mean_temperature_calculation')|int(default=10)\
-            \ > 20)\n}}"
+          value_template: "{{\n  (states('sensor.shed_mean_temperature_calculation')|int(default=10)
+            > (states('sensor.snr_outside_temperature')|int(default=10)+10)) and\n
+            \ (states('sensor.shed_mean_temperature_calculation')|int(default=10)
+            > 20)\n}}"
       sequence:
       - service: switch.turn_on
         data: {}
@@ -1385,3 +1399,41 @@
           brightness_step_pct: 10
         target:
           entity_id: light.sw_mainbedroom_ceilinglight
+- id: '1664468912980'
+  alias: Downstairs Bathroom - Adjust Motion Light timer
+  description: Picks up the input helper changes and applies them back to the TASMOTA
+    switch via MQTT script
+  trigger:
+  - platform: state
+    entity_id:
+    - input_number.downstairs_bathroom_switch_blindtime
+    id: blindtime-adjusted
+  - platform: state
+    entity_id:
+    - input_number.downstairs_bathroom_switch_lighttime
+    id: lighttime-adjusted
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: blindtime-adjusted
+      sequence:
+      - service: script.adjust_motion_light_timer_setting
+        data:
+          timer: blindtime
+          topic: SW_DownstairsBathroom_CeilingLight
+          duration: '{{ states(''input_number.downstairs_bathroom_switch_blindtime'')
+            | int }}'
+    - conditions:
+      - condition: trigger
+        id: lighttime-adjusted
+      sequence:
+      - service: script.adjust_motion_light_timer_setting
+        data:
+          timer: lighttime
+          topic: SW_DownstairsBathroom_CeilingLight
+          duration: '{{ states(''input_number.downstairs_bathroom_switch_lighttime'')
+            | int * 60 }}'
+    default: []
+  mode: single
