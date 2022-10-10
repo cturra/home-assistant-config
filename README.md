@@ -20,6 +20,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Bulb (BR30)       | Athom      | LB03-12W-BR30   | 2     | Tasmota               |
 | Bulb (B22)        | Athom      | LB01-7W-E27     | 1     | WLED                  |
 | Bulb (A19)        | Ikea       | LED1624G9       | 1     | Zigbee2MQTT           |
+| Bulb (E26)        | Philips    | 929002478401    | 1     | Zigbee2MQTT           |
 | **Entertainment**                                                                |
 | Audio             | Chromecast | Audio           | 1     | HA :: Chromecast      |
 | Receiver          | Yamaha     | HTR-8063        | 1     | HA :: MediaPlayers    |
@@ -32,7 +33,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 11    | Zigbee2MQTT           |
-| Climate           | Xiaomi Mi  | LYWSD03MMC      | 4     | ESPHome :: BLE Bridge |
+| Climate           | Xiaomi Mi  | LYWSD03MMC      | 4     | ESPHome :: BL Proxy   |
 | Contact           | Xiaomi     | MCCGQ11LM       | 17    | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT           |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
@@ -59,16 +60,16 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Switch            | Shelly     | Plus 1PM        | 1     | Tasmota               |
 | Switch            | Sonoff     | Mini R1         | 2     | Tasmota               |
 | Switch            | Sonoff     | SV              | 1     | Tasmota               |
-| Switch            | Treatlife  | SS02S           | 10    | Tasmota               |
+| Switch            | Treatlife  | SS02S           | 11    | Tasmota               |
 | Switch (3 Way)    | Treatlife  | SS02            | 2     | Tasmota               |
-| Switch (Dimmer)   | Treatlife  | DS02S           | 3     | Tasmota               |
+| Switch (Dimmer)   | Treatlife  | DS02S           | 4     | Tasmota               |
 | Switch (Dimmer)   | Treatlife  | DS01C           | 2     | Tasmota               |
 
  ### Infrastructure
 
  | Model           | Count | Role                                                              |
  | :---            | :--:  | :---                                                              |
- | NodeMCU ESP32   | 1     | [Bluetooth Low Energy Tracker Hub](esphome/house-ble-bridge.yaml) |
+ | GL-S10          | 1     | [ESPHome BL Proxy](esphome/bl-proxy-front.yaml)                   |
  | RTL-SDR         | 2     | SDR USB Adapters w/ Antenna                                       |
  | Odroid-N2+      | 1     | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
  | Raspberry Pi 4  | 1     | Secondary Zigbee2MQTT server *                                    |

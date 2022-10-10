@@ -249,9 +249,9 @@ views:
           <<: *entities-overview-header-style
         filter:
           include:
-            # battery low: zigbee & ble sensors < 25%
-            - entity_id: 'sensor.snr_*_battery'
-              state: '< 25'
+            # battery low: zigbee & ble sensors < 20%
+            - entity_id: 'sensor.(rmt|snr)_*_battery'
+              state: '< 20'
               options:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
@@ -405,6 +405,13 @@ views:
           <<: *entities-overview-header-style
         filter:
           include:
+            # bathroom (down)
+            - entity_id: switch.sw_downstairsbathroom_ceilinglight
+              state: 'on'
+              options:
+                name: 'Bathroom (Down): Vanity'
+                icon: 'mdi:wall-sconce-flat-variant-outline'
+                secondary_info: last-changed
             # crawlspace
             - entity_id: switch.sw_crawlspace_entrancelight
               state: 'on'
@@ -420,6 +427,15 @@ views:
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
             # deck
+            - entity_id: light.blb_outside_deck
+              state: 'on'
+              options:
+                type: 'custom:slider-entity-row'
+                hide_state: true
+                name: 'Deck: Wall'
+                icon: 'mdi:wall-sconce-flat-outline'
+                secondary_info: last-changed
+                <<: *neutral-icon-entity-style
             - entity_id: light.sw_deck_ceilinglight
               state: 'on'
               options:
@@ -429,13 +445,6 @@ views:
                   icon: 'mdi:light-recessed'
                   secondary_info: last-changed
                   <<: *neutral-icon-entity-style
-            # downstairs bathroom
-            - entity_id: switch.sw_downstairsbathroom_ceilinglight
-              state: 'on'
-              options:
-                name: 'Down Bathroom: Ceiling'
-                icon: 'mdi:wall-sconce-flat-variant-outline'
-                secondary_info: last-changed
             # driveway
             - entity_id: light.group_driveway_lights
               state: 'on'
@@ -1057,31 +1066,30 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
-                # deck
-                - entity: light.sw_deck_ceilinglight
-                  name: 'Deck: Ceiling'
-                  icon: 'mdi:light-recessed'
-                  state_color: true
-                # front outlet
-                - entity: switch.sw_fronthouseoutlet
-                  name: 'Driveway Outlet'
-                  icon: 'mdi:power'
-                  state_color: true
-            - type: entities
-              show_header_toggle: false
-              <<: *entities-style
-              entities:
                 # driveway
                 - entity: light.group_driveway_lights
                   name: Driveway
                   icon: 'mdi:coach-lamp'
                   state_color: true
+                # deck
+                - entity: light.sw_deck_ceilinglight
+                  name: 'Deck: Ceiling'
+                  icon: 'mdi:light-recessed'
+                  state_color: true
+            - type: entities
+              show_header_toggle: false
+              <<: *entities-style
+              entities:
                 # porch light
                 - entity: light.group_porch_lights
                   name: Porch
                   icon: 'mdi:light-recessed'
                   state_color: true
-
+                # deck
+                - entity: light.blb_outside_deck
+                  name: 'Deck: Wall'
+                  icon: 'mdi:wall-sconce-flat-outline'
+                  state_color: true
 
       # Shed
       - type: 'custom:vertical-stack-in-card'
