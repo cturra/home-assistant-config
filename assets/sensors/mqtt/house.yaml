@@ -1,0 +1,19 @@
+- name: "BC Hydro Electricity Consumption"
+  icon: mdi:transmission-tower
+  state_topic: "event/metering/summation/minute"
+  unit_of_measurement: 'kWh'
+  # the Energy Bridge returns "Watt-minutes" every minute in the "value"; convert it to kilowatt-hours
+  value_template: "{{ value_json.value | float / 60000 }}"
+  # the "time" in the message is a Unix-like timestamp (in milliseconds) of the start of the last reading
+  last_reset_value_template:  "{{ now().fromtimestamp(value_json.time / 1000).replace(tzinfo=now().tzinfo) }}"
+  device_class: energy
+  state_class: total
+
+- name: "BC Hydro Instantaneous Demand"
+  icon: mdi:transmission-tower-export
+  state_topic: "event/metering/instantaneous_demand"
+  unit_of_measurement: 'kW'
+  # the Energy Bridge returns watts, convert it to kilowatts
+  value_template: "{{ value_json.demand | float / 1000 }}"
+  device_class: power
+  state_class: measurement
