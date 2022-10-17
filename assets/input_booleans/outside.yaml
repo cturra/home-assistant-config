@@ -2,7 +2,11 @@
 
 christmas_string_lights_outlet:
   name: 'Christmas String Lighting Outlet'
-  icon: 'mdi:string-lights'
+  icon: 'mdi:pine-tree'
+
+halloween_string_lights_outlet:
+  name: 'Halloween Outside Light Colours'
+  icon: 'mdi:halloween'
 
 adhoc_outside_light_colours:
   name: 'Ad-hoc Outside Light Colours'

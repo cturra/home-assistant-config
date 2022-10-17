@@ -34,14 +34,30 @@
       # green
       rgb_color: [0,255,0]
 
+# bulbs halloween colours
+- name: 'Porch Bulbs Halloween Colours'
+  entities:
+    light.blb_outside_porch1:
+      state: 'on'
+      brightness: 255
+      # purple
+      rgb_color: [90,35,255]
+    light.blb_outside_porch2:
+      state: 'on'
+      brightness: 255
+      # purple
+      rgb_color: [90,35,255]
+
 # bulbs ad-hoc colours
 - name: 'Porch Bulbs Adhoc Colours'
   entities:
+    # bulb: left (door)
     light.blb_outside_porch1:
       state: 'on'
       brightness: 255
       # blue
       rgb_color: [0,0,255]
+    # bulb: right (window)
     light.blb_outside_porch2:
       state: 'on'
       brightness: 255

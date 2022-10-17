@@ -10,6 +10,7 @@
       color_temp: 476
       color_mode: color_temp
 
+
 # bulbs christmas colours
 - name: 'Driveway Bulbs Christmas Colours'
   entities:
@@ -24,16 +25,33 @@
       # red
       rgb_color: [255,0,0]
 
-# bulbs ad-hoc colours
-- name: 'Driveway Bulbs Adhoc Colours'
+# bulbs halloween colours
+- name: 'Driveway Bulbs Halloween Colours'
   entities:
     light.blb_outside_driveway1:
       state: 'on'
       brightness: 255
+      # orange
+      rgb_color: [255,127,0]
+    light.blb_outside_driveway2:
+      state: 'on'
+      brightness: 255
+      # orange
+      rgb_color: [255,127,0]
+
+# bulbs ad-hoc colours
+- name: 'Driveway Bulbs Adhoc Colours'
+  entities:
+    # bulb: left (side of house)
+    light.blb_outside_driveway1:
+      state: 'on'
+      brightness: 255
       # yellow
-      rgb_color: [255, 255, 0]
+      rgb_color: [255,255,0]
+    # bulb: right (entrance)
     light.blb_outside_driveway2:
       state: 'on'
       brightness: 255
       # blue
-      rgb_color: [0,0, 255]
+      rgb_color: [0,0,255]
+

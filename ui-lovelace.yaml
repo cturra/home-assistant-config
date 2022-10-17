@@ -486,7 +486,7 @@ views:
               state: 'on'
               options:
                 name: 'Garage: Ceiling, Main'
-                icon: 'mdi:lightbulb-fluorescent-tube-outline'
+                icon: 'mdi:ceiling-light-multiple-outline'
                 secondary_info: last-changed
             - entity_id: switch.sw_outside_garagesidedoorlight
               state: 'on'
@@ -1010,7 +1010,7 @@ views:
                 # ceiling light
                 - entity: switch.sw_garage_ceilingmainlights
                   name: 'Ceiling'
-                  icon: 'mdi:lightbulb-fluorescent-tube-outline'
+                  icon: 'mdi:ceiling-light-multiple-outline'
                   state_color: true
                 # dehumidifier
                 - entity: switch.plg_garage_dehumidifier

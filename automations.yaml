@@ -1152,6 +1152,7 @@
               state: 'on'
             - condition: time
               before: '22:29:00'
+              after: 00:00:00
           sequence:
           - service: scene.turn_on
             data:
@@ -1161,11 +1162,17 @@
         - conditions:
           - condition: and
             conditions:
-            - condition: state
-              entity_id: input_boolean.christmas_string_lights_outlet
-              state: 'on'
+            - condition: or
+              conditions:
+              - condition: state
+                entity_id: input_boolean.christmas_string_lights_outlet
+                state: 'on'
+              - condition: state
+                entity_id: input_boolean.halloween_string_lights_outlet
+                state: 'on'
             - condition: time
               before: '22:29:00'
+              after: 00:00:00
           sequence:
           - service: scene.turn_on
             data:
@@ -1225,6 +1232,9 @@
     - condition: state
       entity_id: input_boolean.christmas_string_lights_outlet
       state: 'on'
+    - condition: state
+      entity_id: input_boolean.halloween_string_lights_outlet
+      state: 'on'
   action:
   - choose:
     - conditions:
@@ -1240,9 +1250,14 @@
           - scene.driveway_bulbs_normal_colour
           - scene.porch_bulbs_normal_colour_dimmed
     - conditions:
-      - condition: state
-        entity_id: input_boolean.christmas_string_lights_outlet
-        state: 'on'
+      - condition: or
+        conditions:
+        - condition: state
+          entity_id: input_boolean.christmas_string_lights_outlet
+          state: 'on'
+        - condition: state
+          entity_id: input_boolean.halloween_string_lights_outlet
+          state: 'on'
       sequence:
       - service: switch.turn_off
         data: {}
@@ -1291,6 +1306,22 @@
           entity_id:
           - scene.driveway_bulbs_christmas_colours
           - scene.porch_bulbs_christmas_colours
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.sw_fronthouseoutlet
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.halloween_string_lights_outlet
+        state: 'on'
+      sequence:
+      - service: scene.turn_on
+        data:
+          transition: 2
+        target:
+          entity_id:
+          - scene.driveway_bulbs_halloween_colours
+          - scene.porch_bulbs_halloween_colours
       - service: switch.turn_on
         data: {}
         target:
@@ -1400,7 +1431,7 @@
         target:
           entity_id: light.sw_mainbedroom_ceilinglight
 - id: '1664468912980'
-  alias: Downstairs Bathroom - Adjust Motion Light timer
+  alias: Downstairs Bathroom Adjust Motion Light timer
   description: Picks up the input helper changes and applies them back to the TASMOTA
     switch via MQTT script
   trigger:
@@ -1436,4 +1467,36 @@
           duration: '{{ states(''input_number.downstairs_bathroom_switch_lighttime'')
             | int * 60 }}'
     default: []
+  mode: single
+- id: '1665779633285'
+  alias: 'Downstairs Bathroom: toggle Light Time out time'
+  description: Extend light timeout when showering.
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.rmt_bathroomdown_remote_click
+    to: single
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_number.downstairs_bathroom_switch_lighttime
+        state: '2.0'
+      sequence:
+      - service: input_number.set_value
+        data:
+          value: 20
+        target:
+          entity_id: input_number.downstairs_bathroom_switch_lighttime
+    - conditions:
+      - condition: state
+        entity_id: input_number.downstairs_bathroom_switch_lighttime
+        state: '20.0'
+      sequence:
+      - service: input_number.set_value
+        data:
+          value: 2
+        target:
+          entity_id: input_number.downstairs_bathroom_switch_lighttime
   mode: single

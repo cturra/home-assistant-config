@@ -54,7 +54,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT           |
 | Plug              | Wyze       | WLPPO1          | 1     | Tasmota               |
 | Remote            | Ikea       | E1810           | 2     | Zigbee2MQTT           |
-| Remote            | Xiaomi     | WXKG11LM        | 1     | Zigbee2MQTT           |
+| Remote            | Xiaomi     | WXKG11LM        | 2     | Zigbee2MQTT           |
 | Switch (Motion)   | CloudFree  | SWM1            | 1     | Tasmota               |
 | Switch            | Shelly     | 1               | 1     | Tasmota               |
 | Switch            | Shelly     | Plus 1PM        | 1     | Tasmota               |
