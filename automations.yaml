@@ -1162,14 +1162,9 @@
         - conditions:
           - condition: and
             conditions:
-            - condition: or
-              conditions:
-              - condition: state
-                entity_id: input_boolean.christmas_string_lights_outlet
-                state: 'on'
-              - condition: state
-                entity_id: input_boolean.halloween_string_lights_outlet
-                state: 'on'
+            - condition: state
+              entity_id: input_boolean.christmas_string_lights_outlet
+              state: 'on'
             - condition: time
               before: '22:29:00'
               after: 00:00:00
@@ -1179,6 +1174,21 @@
               transition: 2
             target:
               entity_id: scene.porch_bulbs_christmas_colours
+        - conditions:
+          - condition: and
+            conditions:
+            - condition: state
+              entity_id: input_boolean.halloween_string_lights_outlet
+              state: 'on'
+            - condition: time
+              before: '22:29:00'
+              after: 00:00:00
+          sequence:
+          - service: scene.turn_on
+            data:
+              transition: 2
+            target:
+              entity_id: scene.porch_bulbs_halloween_colours
         default:
         - service: scene.turn_on
           data:

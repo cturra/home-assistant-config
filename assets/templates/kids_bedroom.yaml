@@ -11,18 +11,3 @@
         {% if is_number(states('sensor.kids_room_heater_plug_energy_power')) %}
           {{ (states('sensor.kids_room_heater_plug_energy_power') | int(default=0)) > 10 }}
         {% endif %}
-
-# -- sensors --
-- sensor:
-    # -- xiaomi aqara --
-    # temperature
-    - name: 'Kids Bedroom Temperature 1 Decimal'
-      device_class: temperature
-      unit_of_measurement: '°C'
-      state: >
-        {% if is_number(state_attr('sensor.snr_kidsbedroom_climate_temperature', 'temperature')) %}
-          {{ state_attr('sensor.snr_kidsbedroom_climate_temperature', 'temperature') | round(1, default=20.0) }}
-        {% else %}
-          {# use previous value if sensor returns unknown #}
-          {{ states('sensor.kids_bedroom_temperature_1_decimal') }}
-        {% endif %}

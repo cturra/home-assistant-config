@@ -32,8 +32,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Quality       | Awair      | Element         | 2     | HA :: Awair (Local)   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
-| Climate           | Xiaomi     | WSDCGQ11LM      | 11    | Zigbee2MQTT           |
-| Climate           | Xiaomi Mi  | LYWSD03MMC      | 4     | ESPHome :: BL Proxy   |
+| Climate           | Xiaomi     | WSDCGQ11LM      | 9     | Zigbee2MQTT           |
+| Climate           | Xiaomi Mi  | LYWSD03MMC      | 5     | ESPHome :: BL Proxy   |
 | Contact           | Xiaomi     | MCCGQ11LM       | 17    | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT           |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |

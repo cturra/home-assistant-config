@@ -1179,7 +1179,7 @@ views:
 
           # kids room
           - type: 'custom:button-card'
-            entity: sensor.kids_bedroom_temperature_1_decimal
+            entity: sensor.kids_bedroom_mean_temperature_calculation
             name: 'Kids Bedroom'
             show_state: true
             show_icon: false
