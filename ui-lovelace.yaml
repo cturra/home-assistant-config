@@ -358,6 +358,13 @@ views:
                 icon: 'mdi:arrow-up-circle-outline'
                 secondary_info: last-changed
                 <<: *alert-info-style
+            # backups stale
+            - entity_id: 'binary_sensor.backups_stale'
+              state: 'on'
+              options:
+                icon: 'mdi:alert-box-outline'
+                secondary_info: last-changed
+                <<: *alert-info-style
         sort:
           method: name
 
