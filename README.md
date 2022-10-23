@@ -47,7 +47,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Surveillance**                                                                 |
 | Camera            | Wyze       | Cam v3          | 1     | RTSP                  |
 | **Switches**                                                                     |
-| IR Blaster        | Uniplay    | Q1              | 1     | Tasmota               |
+| IR Blaster        | Uniplay    | Q1              | 2     | Tasmota               |
 | Plug              | Gosund     | WP2             | 2     | Tasmota               |
 | Plug              | Gosund     | WP5             | 3     | Tasmota               |
 | Plug              | Sonoff     | S31             | 8     | Tasmota               |

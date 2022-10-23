@@ -11,13 +11,18 @@
           is_state('media_player.living_room_tv', 'on')
         }}
       turn_on:
-        # turn devices on
-        - service: wake_on_lan.send_magic_packet
+        # send IR signal to toggle power on tv
+        - service: mqtt.publish
           data:
-            mac: !secret living_room_tv_mac
-        - service: media_player.turn_on
-          target:
-            entity_id: media_player.living_room_receiver_main_zone
+            topic: cmnd/IRB_LivingRoom/IRSend
+            payload: >
+              {"Protocol":"NEC","Bits":32,"Data":"0x20DF10EF","Repeat":0}
+        # send IR signal to toggle power on receiver
+        - service: mqtt.publish
+          data:
+            topic: cmnd/IRB_LivingRoom/IRSend
+            payload: >
+              {"Protocol":"NEC","Bits":32,"Data":"0x7E8154AB","Repeat":0}
         # ensure the correct sources are selected for htpc
         - delay: '00:00:02' # give devices a chance to start
         - service: media_player.select_source
@@ -29,9 +34,14 @@
             entity_id: media_player.living_room_receiver_main_zone
             source: "AV2"
       turn_off:
-        - service: media_player.turn_off
-          target:
-            entity_id: media_player.living_room_tv
-        - service: media_player.turn_off
-          target:
-            entity_id: media_player.living_room_receiver_main_zone
+        - service: mqtt.publish
+          data:
+            topic: cmnd/IRB_LivingRoom/IRSend
+            payload: >
+              {"Protocol":"NEC","Bits":32,"Data":"0x20DF10EF","Repeat":0}
+        # send IR signal to toggle power on receiver
+        - service: mqtt.publish
+          data:
+            topic: cmnd/IRB_LivingRoom/IRSend
+            payload: >
+              {"Protocol":"NEC","Bits":32,"Data":"0x7E8154AB","Repeat":0}
