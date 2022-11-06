@@ -1,0 +1,14 @@
+## SENSORS / TEMPLATES / SHED
+
+# -- xiaomi aqara --
+# humidity
+- name: 'Shed Humidity Rounded'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state: > 
+    {% if is_number(state_attr('sensor.snr_shed_climate_humidity', 'humidity')) %}
+      {{ state_attr('sensor.snr_shed_climate_humidity', 'humidity') | int }}
+    {% else %}
+      {# use previous value if sensor returns unknown #}
+      {{ states('sensor.shed_humidity_rounded') }}
+    {% endif %}

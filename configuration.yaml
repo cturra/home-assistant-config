@@ -13,7 +13,7 @@ lovelace: !include assets/core/lovelace.yaml
 
 
 automation: !include automations.yaml
-binary_sensor: !include_dir_merge_list assets/binary_sensors
+binary_sensor: !include_dir_merge_list assets/binary_sensors/groups
 camera: !include_dir_merge_list assets/cameras
 cover: !include_dir_merge_list assets/covers
 group: !include groups.yaml
@@ -30,6 +30,9 @@ scene: !include_dir_merge_list assets/scenes
 script: !include_dir_merge_named assets/scripts
 sensor: !include_dir_merge_list assets/sensors/legacy
 switch: !include_dir_merge_list assets/switches/legacy
-template: !include_dir_merge_list assets/templates
+#template: !include_dir_merge_list assets/templates
+template:
+  binary_sensor: !include_dir_merge_list assets/binary_sensors/templates
+  sensor: !include_dir_merge_list assets/sensors/templates
 tts: !include assets/core/tts.yaml
 wake_on_lan:

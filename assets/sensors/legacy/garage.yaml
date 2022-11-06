@@ -18,7 +18,7 @@
   round_digits: 0
   entity_ids:
     - sensor.snr_garage_climate_humidity
-    - sensor.garage_door_opener_am2301_humidity
+    - sensor.garage_vehicle_door_opener_am2301_humidity
 
 # mean temperature from climate sensors:
 #  - xiaomi aqara

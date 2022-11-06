@@ -1,4 +1,4 @@
-## BINARY_SENSORS / HOUSE
+## BINARY SENSORS / GROUPS / HOUSE
 
 # contact sensors on house windows
 - platform: group

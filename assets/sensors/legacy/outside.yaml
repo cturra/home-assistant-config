@@ -21,6 +21,4 @@
   name: "SNR Outside Mean AirQuality PM 2_5"
   entity_id: sensor.snr_outside_airquality_pm_2_5
   state_characteristic: mean
-  max_age:
-    minutes: 6
   precision: 1

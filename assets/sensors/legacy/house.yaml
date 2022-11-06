@@ -29,5 +29,5 @@
     - sensor.snr_kitchen_climate_humidity
     - sensor.snr_office_humidity
     - sensor.snr_mainbedroom_climate_humidity
-    - sensor.snr_kidsbedroom_climate_humidity
+    - sensor.snr_kidsbedroom_climatedisplay_humidity
     - sensor.snr_sparebedroom_climate_humidity

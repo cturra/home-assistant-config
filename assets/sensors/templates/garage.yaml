@@ -1,0 +1,37 @@
+## SENSORS / TEMPLATES / GARAGE
+
+# -- xiaomi aqara --
+# room humidity
+- name: 'Garage Climate Humidity Rounded'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state: > 
+    {% if is_number(states('sensor.garage_mean_humidity_calculation')) %}
+      {{ states('sensor.garage_mean_humidity_calculation') | int }}
+    {% else %}
+      {# use previous value if sensor returns unknown #}
+      {{ states('sensor.garage_climate_humidity_rounded') }}
+    {% endif %}
+
+# -- sinopé --
+# room temperature
+- name: 'HVAC Garage Thermostat Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state: >
+    {% if is_number(state_attr('climate.hvac_garage_thermostat', 'current_temperature')) %}
+      {{ state_attr('climate.hvac_garage_thermostat', 'current_temperature') }}
+    {% endif %}
+
+# heater mode state if garage door is closed
+# (used for alerts dashboard in case thermostat is off longer than expected)
+- name: 'HVAC Garage Mode State'
+  state: >
+    {# thermostat mode state if garage door is closed #}
+    {% if is_state('climate.hvac_garage_thermostat', 'off') and
+          is_state('switch.sw_garage_vehicledoorcontact', 'off')
+    %}
+      Off ({{ states('sensor.garage_mean_temperature_calculation') }}°C)
+    {% else %}
+      {{ states('climate.hvac_garage_thermostat') }}
+    {% endif %}

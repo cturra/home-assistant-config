@@ -1,0 +1,23 @@
+## SENORS / TEMPLATES / TACOMA
+
+# -- xiaomi mi --
+# Box: humidity
+- name: 'Tacoma Box Humidity Rounded'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state: >
+    {{ states('sensor.snr_outside_tacomaboxclimate_humidity') | int }}
+
+# Cab: humidity
+- name: 'Tacoma Cab Humidity Rounded'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state: >
+    {{ states('sensor.snr_outside_tacomacabclimate_humidity') | int }}
+
+# Cab: temperature
+- name: 'Tacoma Cab Temperature 1 Decimal'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state: >
+    {{ states('sensor.snr_outside_tacomacabclimate_temperature') | round(1, default=20.0) }}

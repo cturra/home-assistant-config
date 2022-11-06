@@ -1,0 +1,26 @@
+## BINARY SENSORS / TEMPLATS / HOUSE
+
+# -- ecobee --
+# HVAC any equipment running
+- name: 'HVAC Ecobee State'
+  state: >
+    {{
+      state_attr('climate.amazon', 'fan')                       or
+      is_state_attr('climate.amazon', 'hvac_action', 'heating') or
+      is_state_attr('climate.amazon', 'hvac_action', 'cooling')
+    }}
+
+# HVAC fan on/off (when heating/cooling NOT running)
+- name: 'HVAC Ecobee Fan State'
+  state: >
+    {{ is_state_attr('climate.amazon', 'hvac_action', 'fan') }}
+
+# HVAC heating on/off
+- name: 'HVAC Ecobee Heating State'
+  state: >
+    {{ is_state_attr('climate.amazon', 'hvac_action', 'heating') }}
+
+# HVAC cooling on/off
+- name: 'HVAC Ecobee Cooling State'
+  state: >
+    {{ is_state_attr('climate.amazon', 'hvac_action', 'cooling') }}

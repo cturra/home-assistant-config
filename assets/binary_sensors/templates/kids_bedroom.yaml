@@ -1,0 +1,11 @@
+## BINARY SENSORS / TEMPLATES / KIDS BEDROOM
+
+# -- sonoff --
+# heater running (via plug)
+- name: 'Kids Bedroom Heating State'
+  icon: 'mdi:radiator'
+  # power reported in watts
+  state: >
+    {% if is_number(states('sensor.kids_room_heater_plug_energy_power')) %}
+      {{ (states('sensor.kids_room_heater_plug_energy_power') | int(default=0)) > 10 }}
+    {% endif %}

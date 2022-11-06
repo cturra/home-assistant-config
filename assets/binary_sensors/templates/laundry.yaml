@@ -1,0 +1,13 @@
+## BINARY SENSORS / TEMPLATES / LAUNDRY
+
+# -- sonoff --
+# washing machine running (via plug)
+- name: 'Laundry Washing Machine State'
+  icon: 'mdi:washing-machine'
+  delay_off:
+    minutes: 5
+  # power reported in watts
+  state: >
+    {% if is_number(states('sensor.laundry_washing_machine_plug_energy_power')) %}
+      {{ (states('sensor.laundry_washing_machine_plug_energy_power') | int(default=0)) > 2 }}
+    {% endif %}

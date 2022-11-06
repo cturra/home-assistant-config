@@ -1,0 +1,41 @@
+## BINARY SENSORS / TEMPLATES / GARAGE
+
+# -- la crosse (rtl) --
+# freezer temperature battery state
+- name: 'SNR Garage Freezer Temperature Battery Low'
+  state: >
+    {# battery_ok: 1=normal, 0=low #}
+    {% if is_number(state_attr('sensor.snr_garage_freezer_temperature', 'battery_ok')) %}
+      {{ is_state_attr('sensor.snr_garage_freezer_temperature', 'battery_ok', 0) }}
+    {% endif %}
+
+# fridge temperature battery state
+- name: 'SNR Garage Fridge Temperature Battery Low'
+  state: >
+    {# battery_ok: 1=normal, 0=low #}
+    {% if is_number(state_attr('sensor.snr_garage_fridge_temperature', 'battery_ok')) %}
+      {{ is_state_attr('sensor.snr_garage_fridge_temperature', 'battery_ok', 0) }}
+    {% endif %}
+
+# -- sinopé --
+# heating on/off
+- name: 'HVAC Garage Heating State'
+  state: >
+    {% if is_number(states('sensor.hvac_garage_heating_demand')) %}
+      {{ states('sensor.hvac_garage_heating_demand') | int(default=0) > 0 }}
+    {% endif %}
+
+# -- sonoff --
+# dehumidifier running (via plug)
+- name: 'Garage Dehumidifier State'
+  # power reported in watts
+  state: >
+    {% if is_number(states('sensor.garage_dehumidifier_plug_energy_power')) %}
+      {{ (states('sensor.garage_dehumidifier_plug_energy_power') | int(default=0)) > 10 }}
+    {% endif %}
+
+# vehicle door open/closed
+- name: 'Garage Vehicle Door Contact State'
+  device_class: garage_door
+  state: >
+    {{ is_state('switch.sw_garage_vehicledoorcontact', 'on') }}

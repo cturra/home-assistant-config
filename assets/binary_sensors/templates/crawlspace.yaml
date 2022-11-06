@@ -1,0 +1,10 @@
+## BINARY SENSORS / TEMPLATES / CRAWLSPACE
+
+# -- la crosse (rtl) --
+# freezer temperature battery state
+- name: 'SNR Crawlspace Freezer Temperature Battery Low'
+  state: >
+    {# battery_ok: 1=normal, 0=low #}
+    {% if is_number(state_attr('sensor.snr_crawlspace_freezer_temperature', 'battery_ok')) %}
+      {{ is_state_attr('sensor.snr_crawlspace_freezer_temperature', 'battery_ok', 0) }}
+    {% endif %}

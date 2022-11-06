@@ -1,0 +1,34 @@
+## SENSORS / TEMPLATES / HOUSE
+
+# -- ecobee --
+# current_temperature from ecobee
+- name: 'HVAC Ecobee Indoor Average Temperature'
+  device_class: temperature
+  unit_of_measurement: '°C'
+  state: >
+    {% if is_number(state_attr('climate.amazon', 'current_temperature')) %}
+      {{ state_attr('climate.amazon', 'current_temperature') }}
+    {% endif %}
+
+# humidity from ecobee
+- name: 'HVAC Ecobee Indoor Average Humidity'
+  device_class: humidity
+  unit_of_measurement: '%'
+  state: >
+    {% if is_number(state_attr('climate.amazon', 'current_humidity')) %}
+      {{ state_attr('climate.amazon', 'current_humidity') | float(2) }}
+    {% endif %}
+
+# current mean humidity from min_max calculation
+- name: 'Indoor Mean Humidity'
+  device_class: humidity
+  unit_of_measurement: '%'
+  # return last value if we get 'unknown' state attribute from device. this
+  # happens for zigbee devices after home assistant restart.
+  state: >
+    {% if is_number(states('sensor.indoor_mean_humidity_calculation')) %}
+      {{ states('sensor.indoor_mean_humidity_calculation') | int }}
+    {% else %}
+      {# use previous value if sensor returns unknown #}
+      {{ states('sensor.indoor_mean_humidity') }}
+    {% endif %}

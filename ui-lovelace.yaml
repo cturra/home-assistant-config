@@ -1186,7 +1186,7 @@ views:
 
           # kids room
           - type: 'custom:button-card'
-            entity: sensor.kids_bedroom_mean_temperature_calculation
+            entity: sensor.kids_bedroom_temperature_1_decimal
             name: 'Kids Bedroom'
             show_state: true
             show_icon: false
@@ -1591,21 +1591,21 @@ views:
           cards:
           # cab temperature
           - type: 'custom:button-card'
-            entity: sensor.snr_outside_tacomacabclimate_temperature
+            entity: sensor.tacoma_cab_temperature_1_decimal
             name: 'Cab Temperature'
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
           # cab humidity
           - type: 'custom:button-card'
-            entity: sensor.snr_outside_tacomacabclimate_humidity
+            entity: sensor.tacoma_cab_humidity_rounded
             name: 'Cab Humidity'
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
           # box humidity
           - type: 'custom:button-card'
-            entity: sensor.snr_outside_tacomaboxclimate_humidity
+            entity: sensor.tacoma_box_humidity_rounded
             name: 'Box Humidity'
             show_state: true
             show_icon: false
