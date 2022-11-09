@@ -601,31 +601,6 @@
       data:
         entity_id: camera.nas01_garage
   mode: single
-- id: '1625692425135'
-  alias: 'HVAC: Notify Chris'' phone if window is open'
-  description: notify chris' phone if hvac starts cooling the house and a window is
-    left open.
-  trigger:
-  - platform: state
-    entity_id: climate.amazon
-    attribute: hvac_action
-    to: cooling
-  condition:
-  - condition: state
-    entity_id: binary_sensor.group_windows
-    state: 'on'
-  action:
-  - service: notify.mobile_app_turraphone
-    data:
-      message: AC has started and an open window was detected.
-      title: "❗\U0001FA9F Window left open"
-      data:
-        push:
-          sound:
-            name: default
-            critical: 1
-            volume: 1
-  mode: single
 - id: '1630907999593'
   alias: 'Garage Inside: HVAC update outside temperature'
   description: publish outdoor temperature and time to thermostat mqtt topic

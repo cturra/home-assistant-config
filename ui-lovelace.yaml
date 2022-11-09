@@ -88,6 +88,7 @@ anchors:
         }
         ha-card {
           box-shadow: none;
+          border: 0px;
         }
 
   # thermostat
@@ -95,10 +96,19 @@ anchors:
     card_mod:
       style: |
         ha-card {
+          border: 0px;
           --st-font-size-xl: 60px;
           --st-font-size-m: 20px;
           --st-font-size-sensors: 14px;
           --st-spacing: 2px;
+        }
+
+  # mini-graph
+  mini-graph-style: &mini-graph-style
+    card_mod:
+      style: |
+        ha-card {
+          border: 0px;
         }
 
   # climate button
@@ -107,6 +117,7 @@ anchors:
       style: |
         ha-card {
           box-shadow: none;
+          border: 0px;
           height: 50px;
         }
     styles:
@@ -162,6 +173,7 @@ anchors:
     style: |
       ha-card {
         box-shadow: none;
+        border: 0px;
       }
     styles:
       card:
@@ -183,6 +195,7 @@ anchors:
         }
         ha-card {
           box-shadow: none;
+          border: 0px;
         }
 
   # battery state color_gradient
@@ -374,6 +387,7 @@ views:
         card:
           type: entities
           title: 'HVAC'
+          show_header_toggle: false
           <<: *entities-overview-header-style
         filter:
           include:
@@ -488,6 +502,12 @@ views:
                 icon: 'mdi:wall-sconce-flat-variant-outline'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
+            - entity_id: switch.sw_familyroom_christmastree
+              state: 'on'
+              options:
+                name: 'Family Room: Christmas Tree'
+                icon: 'mdi:pine-tree'
+                secondary_info: last-changed
             # garage
             - entity_id: switch.sw_garage_ceilingmainlights
               state: 'on'
@@ -791,10 +811,11 @@ views:
                   name: Corner
                   icon: 'mdi:light-recessed'
                   state_color: true
-                # wall sconce
-                - entity: light.sw_familyroom_walllights
-                  name: 'Wall Sconce'
-                  icon: 'mdi:wall-sconce-flat-variant-outline'
+                # tree
+                - entity: switch.sw_familyroom_christmastree
+                  name: Tree
+                  icon: 'mdi:pine-tree'
+                  state_color: true
             - type: entities
               show_header_toggle: false
               <<: *entities-style
@@ -809,7 +830,10 @@ views:
                   name: Stairwell
                   icon: 'mdi:chandelier'
                   state_color: true
-
+                # wall sconce
+                - entity: light.sw_familyroom_walllights
+                  name: 'Wall Sconce'
+                  icon: 'mdi:wall-sconce-flat-variant-outline'
 
       # Kitchen
       - type: 'custom:vertical-stack-in-card'
@@ -1008,6 +1032,7 @@ views:
               style: |
                 ha-card {
                   box-shadow: none;
+                  border: 0px;
                 }
             # switches
             - type: entities
@@ -1262,6 +1287,7 @@ views:
           lower_bound_secondary: 35
           upper_bound_secondary: 70
           font_size: 85
+          <<: *mini-graph-style
           entities:
             # indoor average temperature
             - entity: sensor.hvac_ecobee_indoor_average_temperature
@@ -1311,6 +1337,7 @@ views:
           hours_to_show: 24
           points_per_hour: 60
           group: true
+          <<: *mini-graph-style
           entities:
             # cooling on/off
             - entity: binary_sensor.hvac_ecobee_cooling_state
@@ -1375,6 +1402,7 @@ views:
           lower_bound_secondary: 30
           upper_bound_secondary: 75
           group: true
+          <<: *mini-graph-style
           <<: *temp-graph-color_thresholds
           entities:
             # temerature
@@ -1408,6 +1436,7 @@ views:
           hours_to_show: 24
           points_per_hour: 60
           group: true
+          <<: *mini-graph-style
           entities:
             # garage car door opened/closed
             - entity: binary_sensor.garage_vehicle_door_contact_state
@@ -1472,6 +1501,7 @@ views:
           lower_bound_secondary: 25
           upper_bound_secondary: 90
           group: true
+          <<: *mini-graph-style
           <<: *temp-graph-color_thresholds
           entities:
             # temerature
@@ -1516,6 +1546,9 @@ views:
               ha-card.type-custom-simple-weather-card {
                 padding: 10px 10px 5px 5px;
               }
+              :host ha-card {
+                border: 0px;
+              }
 
         # AIR QUALITY (FROM PURPLEAIR DEVICE)
         - type: horizontal-stack
@@ -1553,6 +1586,7 @@ views:
           points_per_hour: 6
           hours_to_show: 24
           color_thresholds_transition: hard
+          <<: *mini-graph-style
           color_thresholds:
               - value: 0
                 color: '#24b300'
@@ -1627,6 +1661,7 @@ views:
           lower_bound_secondary: 10
           upper_bound_secondary: 99
           group: true
+          <<: *mini-graph-style
           <<: *temp-graph-color_thresholds
           entities:
             # temerature
@@ -1669,6 +1704,7 @@ views:
           hours_to_show: 24
           points_per_hour: 60
           group: true
+          <<: *mini-graph-style
           entities:
             # tacoma is home/away
             - entity: binary_sensor.snr_tacoma_location

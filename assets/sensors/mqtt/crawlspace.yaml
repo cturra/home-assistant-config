@@ -5,7 +5,7 @@
 - name: 'SNR Crawlspace Freezer Temperature'
   device_class: temperature
   unit_of_measurement: '°C'
-  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-96
-  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-96
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-8
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-8
   value_template: >
     {{ value_json.temperature_C | round(1, default=-15.0) }}

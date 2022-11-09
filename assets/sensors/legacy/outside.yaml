@@ -22,3 +22,4 @@
   entity_id: sensor.snr_outside_airquality_pm_2_5
   state_characteristic: mean
   precision: 1
+  sampling_size: 20
