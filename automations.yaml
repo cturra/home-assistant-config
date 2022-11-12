@@ -800,23 +800,26 @@
   - platform: state
     entity_id: binary_sensor.group_leak_sensors
     to: 'on'
-  variables:
-    triggered_leak_sensor: "{% for entity in trigger.to_state.attributes.entity_id
-      %}\n  {% if is_state(entity, 'on') %}\n    {{ state_attr(entity, 'friendly_name')
-      }}\n  {% endif %}\n{% endfor %}\n"
   condition: []
   action:
   - repeat:
       count: '3'
       sequence:
-      - service: script.sonos_say
+      - service: script.text_to_speech_on_sonos
         data:
-          sonos_entity:
-          - media_player.family_room_speaker
-          - media_player.main_bedroom_speaker
-          volume: 0.8
+          entity_id: media_player.group_sonos_speakers
+          volume_level: 0.8
+          min_wait: 1
           message: ALERT. Water detected at {{ triggered_leak_sensor }} sensor.
-          delay: 00:00:07
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 3
+          milliseconds: 0
+  variables:
+    triggered_leak_sensor: "{% for entity in trigger.to_state.attributes.entity_id
+      %}\n  {% if is_state(entity, 'on') %}\n    {{ state_attr(entity, 'friendly_name')
+      }}\n  {% endif %}\n{% endfor %}\n"
   mode: single
 - id: '1634327400385'
   alias: 'Porch: Lights Off at midnight'

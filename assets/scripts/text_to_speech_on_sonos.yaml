@@ -1,0 +1,6 @@
+text_to_speech_on_sonos:
+  alias: Text-to-Speech on Sonos
+  use_blueprint:
+    path: Talvish/sonos_say.yaml
+  icon: mdi:bullhorn-outline
+  mode: parallel
