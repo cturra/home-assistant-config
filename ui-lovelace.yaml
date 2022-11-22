@@ -88,7 +88,7 @@ anchors:
         }
         ha-card {
           box-shadow: none;
-          border: 0px;
+          border: none;
         }
 
   # thermostat
@@ -96,7 +96,7 @@ anchors:
     card_mod:
       style: |
         ha-card {
-          border: 0px;
+          border: none;
           --st-font-size-xl: 60px;
           --st-font-size-m: 20px;
           --st-font-size-sensors: 14px;
@@ -108,7 +108,7 @@ anchors:
     card_mod:
       style: |
         ha-card {
-          border: 0px;
+          border: none;
         }
 
   # climate button
@@ -117,7 +117,7 @@ anchors:
       style: |
         ha-card {
           box-shadow: none;
-          border: 0px;
+          border: none;
           height: 50px;
         }
     styles:
@@ -173,7 +173,7 @@ anchors:
     style: |
       ha-card {
         box-shadow: none;
-        border: 0px;
+        border: none;
       }
     styles:
       card:
@@ -195,7 +195,7 @@ anchors:
         }
         ha-card {
           box-shadow: none;
-          border: 0px;
+          border: none;
         }
 
   # battery state color_gradient
@@ -1032,7 +1032,7 @@ views:
               style: |
                 ha-card {
                   box-shadow: none;
-                  border: 0px;
+                  border: none;
                 }
             # switches
             - type: entities
@@ -1547,7 +1547,7 @@ views:
                 padding: 10px 10px 5px 5px;
               }
               :host ha-card {
-                border: 0px;
+                border: none;
               }
 
         # AIR QUALITY (FROM PURPLEAIR DEVICE)
