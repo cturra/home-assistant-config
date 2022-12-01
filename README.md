@@ -32,15 +32,16 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Quality       | Awair      | Element         | 2     | HA :: Awair (Local)   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
-| Climate           | Xiaomi     | WSDCGQ11LM      | 8     | Zigbee2MQTT           |
-| Climate           | Xiaomi Mi  | LYWSD03MMC      | 5     | ESPHome :: BL Proxy   |
+| Climate           | Xiaomi     | WSDCGQ11LM      | 6     | Zigbee2MQTT           |
+| Climate           | Xiaomi Mi  | LYWSD03MMC      | 6     | ESPHome :: BL Proxy   |
 | Contact           | Xiaomi     | MCCGQ11LM       | 17    | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT           |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
 | Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT           |
+| Motion            | Xiaomi     | RTCGQ14LM       | 1     | Zigbee2MQTT           |
 | Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | HA:: Xiami BLE        |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
-| Temperature       | Acurite    | 592TXR          | 1     | MQTT :: rtl_433       |
+| Temperature       | Acurite    | 592TXR          | 2     | MQTT :: rtl_433       |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433       |
 | Temperature       | La Crosse  | TX29IT          | 1     | MQTT :: rtl_433       |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT           |

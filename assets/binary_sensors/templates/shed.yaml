@@ -1,6 +1,6 @@
 ## BINARY SENSORS / TEMPLATES / SHED
 
-# -- la crosse (rtl) --
+# -- acurite (rtl) --
 # temperature battery state
 - name: 'SNR Shed Temperature Battery Low'
   state: >

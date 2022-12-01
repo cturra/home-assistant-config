@@ -1472,14 +1472,14 @@ views:
           cards:
           # shed temperature
           - type: 'custom:button-card'
-            entity: sensor.shed_mean_temperature_calculation
+            entity: sensor.snr_shed_temperature
             name: Temperature
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
           # shed humidity
           - type: 'custom:button-card'
-            entity: sensor.shed_humidity_rounded
+            entity: sensor.snr_shed_humidity
             name: Humidity
             show_state: true
             show_icon: false
@@ -1505,13 +1505,13 @@ views:
           <<: *temp-graph-color_thresholds
           entities:
             # temerature
-            - entity: sensor.shed_mean_temperature_calculation
+            - entity: sensor.snr_shed_temperature
               name: Temperature
               show_fill: false
               show_legend: false
               state_adaptive_color: true
             # humidity
-            - entity: sensor.shed_humidity_rounded
+            - entity: sensor.snr_shed_humidity
               name: Humidity
               line_width: 1
               show_legend: false

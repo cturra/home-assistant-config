@@ -370,6 +370,9 @@
     - condition: numeric_state
       entity_id: sensor.snr_outside_airquality_aqi
       below: 100
+    - condition: numeric_state
+      entity_id: sensor.indoor_mean_air_quality_calculation
+      below: 10
   action:
   - service: switch.turn_off
     data: {}
@@ -987,7 +990,7 @@
             minutes: 0
             seconds: 0
         - condition: template
-          value_template: "{{\n  (states('sensor.snr_shed_climate_humidity')|int(default=50)
+          value_template: "{{\n  (states('sensor.snr_shed_humidity')|int(default=50)
             > (states('sensor.snr_outside_humidity')|int(default=50)+10))\n}}"
         - condition: numeric_state
           entity_id: sensor.snr_outside_temperature
@@ -1026,9 +1029,9 @@
           entity_id: switch.sw_shed_fan
           state: 'off'
         - condition: template
-          value_template: "{{\n  (states('sensor.shed_mean_temperature_calculation')|int(default=10)
+          value_template: "{{\n  (states('sensor.snr_shed_temperature')|int(default=10)
             > (states('sensor.snr_outside_temperature')|int(default=10)+10)) and\n
-            \ (states('sensor.shed_mean_temperature_calculation')|int(default=10)
+            \ (states('sensor.snr_shed_temperature')|int(default=10)
             > 20)\n}}"
       sequence:
       - service: switch.turn_on
@@ -1487,4 +1490,22 @@
           value: 2
         target:
           entity_id: input_number.downstairs_bathroom_switch_lighttime
+  mode: single
+- id: '1668805084012'
+  alias: 'Downstairs Bathroom: Light on with Motion'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.snr_bathroomdown_motion_occupancy
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: switch.sw_downstairsbathroom_ceilinglight
+    state: 'off'
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.sw_downstairsbathroom_ceilinglight
   mode: single

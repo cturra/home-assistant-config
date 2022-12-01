@@ -18,10 +18,6 @@ sensor.snr_crawlspace_locker_climatedisplay_battery:
 sensor.snr_ensuite_climate_battery:
   friendly_name: 'Ensuite'
 
-# garage
-sensor.snr_garage_climate_battery:
-  friendly_name: 'Garage'
-
 # kitchen
 sensor.snr_kitchen_climate_battery:
   friendly_name: 'Kitchen'
@@ -45,10 +41,6 @@ sensor.snr_outside_tacomaboxclimate_battery:
 # outside: tacoma cab
 sensor.snr_outside_tacomacabclimate_battery:
   friendly_name: 'Outside: Tacoma Cab'
-
-# shed
-sensor.snr_shed_climate_battery:
-  friendly_name: 'Shed'
 
 # spare bedroom
 sensor.snr_sparebedroom_climate_battery:
