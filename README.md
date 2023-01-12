@@ -44,7 +44,6 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
 | Temperature       | Acurite    | 592TXR          | 3     | MQTT :: rtl_433       |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433       |
-| Temperature       | La Crosse  | TX29IT          | 1     | MQTT :: rtl_433       |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT           |
 | **Surveillance**                                                                 |
 | Camera            | Wyze       | Cam v3          | 1     | RTSP                  |

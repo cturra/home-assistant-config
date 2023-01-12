@@ -307,6 +307,12 @@ sensor.snr_crawlspace_freezer_temperature:
 binary_sensor.snr_crawlspace_freezer_temperature_battery_low:
   friendly_name: 'Crawlspace: Deep Freezer'
 
+# garage
+sensor.snr_garage_temperature:
+  friendly_name: 'Garage'
+binary_sensor.snr_garage_temperature_battery_low:
+  friendly_name: 'Garage'
+
 # garage freezer
 sensor.snr_garage_freezer_temperature:
   friendly_name: 'Garage: Freezer'

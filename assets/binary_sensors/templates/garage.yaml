@@ -1,5 +1,14 @@
 ## BINARY SENSORS / TEMPLATES / GARAGE
 
+# -- acurite (rtl) --
+# temperature sensor battery state
+- name: 'SNR Garage Temperature Battery Low'
+  state: >
+    {# battery_ok: 1=normal, 0=low #}
+    {% if is_number(state_attr('sensor.snr_garage_temperature', 'battery_ok')) %}
+      {{ is_state_attr('sensor.snr_garage_temperature', 'battery_ok', 0) }}
+    {% endif %}
+
 # -- la crosse (rtl) --
 # freezer temperature battery state
 - name: 'SNR Garage Freezer Temperature Battery Low'
