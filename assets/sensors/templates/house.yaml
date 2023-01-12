@@ -1,5 +1,17 @@
 ## SENSORS / TEMPLATES / HOUSE
 
+# house co2
+- name: 'Indoor Mean Co2 Rounded'
+  device_class: carbon_dioxide
+  unit_of_measurement: 'ppm'
+  state: >
+    {% if is_number(states('sensor.indoor_mean_co2_calculation')) %}
+      {{ states('sensor.indoor_mean_co2_calculation') | int }}
+    {% else %}
+      {# use previous value if sensor returns unknown #}
+      {{ states('sensor.indoor_mean_co2_rounded') }}
+    {% endif %}
+
 # -- ecobee --
 # current_temperature from ecobee
 - name: 'HVAC Ecobee Indoor Average Temperature'

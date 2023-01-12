@@ -32,27 +32,28 @@ anchors:
   # entity header formatting (not used for overivew dashboard)
   entities-header-style: &entities-header-style
     card_mod:
-      style: |
-        :host .card-header {
-          padding: 5px 20px 0px 20px;
-          font-size: 1.2em;
-          font-weight: bold;
-          line-height: 20px;
-          display: flex;
-          flex-direction: row;
-        }
-        :host .card-header:before, .card-header:after {
-          content: "";
-          flex: 1 1;
-          border-bottom: 1px solid #505050;
-          margin: auto;
-        }
-        :host .card-header:before {
-          margin-right: 10px;
-        }
-        :host .card-header:after {
-          margin-left: 10px;
-        }
+      style:
+        $: | 
+          :host .card-header {
+            padding: 5px 20px 0px 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            line-height: 20px;
+            display: flex;
+            flex-direction: row;
+          }
+          .card-header:before, .card-header:after {
+            content: "";
+            flex: 1 1;
+            border-bottom: 1px solid #505050;
+            margin: auto;
+          }
+          .card-header:before {
+            margin-right: 10px;
+          }
+          .card-header:after {
+            margin-left: 10px;
+          }
 
   entities-overview-header-style: &entities-overview-header-style
     card_mod:
@@ -124,7 +125,7 @@ anchors:
       name:
         - font-size: 11px
       state:
-        - font-size: 20px
+        - font-size: 18px
 
   # battery state
   battery-state-style: &battery-state-style
@@ -165,7 +166,8 @@ anchors:
     card_mod:
       style: |
         :host {
-          --card-mod-icon-color: var(--secondary-text-color)
+          --card-mod-icon-dim: none;
+          --card-mod-icon-color: var(--secondary-text-color);
         }
 
   # graph button-card style
@@ -177,14 +179,30 @@ anchors:
       }
     styles:
       card:
-        - margin: -3px
         - height: 60px
       name:
         - margin: 10px
         - font-size: 11px
       state:
         - margin: -10px
-        - font-size: 20px
+        - font-size: 18px
+
+  # graph button-card style
+  graph-header-button-card-style: &graph-header-button-card-style
+    style: |
+      ha-card {
+        box-shadow: none;
+        border: none;
+      }
+    styles:
+      card:
+        - height: 60px
+      name:
+        - margin: 10px
+        - font-size: 14px
+      state:
+        - margin: -10px
+        - font-size: 24px
 
   # media player card style
   media-player-card-style: &media-player-card-style
@@ -262,16 +280,9 @@ views:
           <<: *entities-overview-header-style
         filter:
           include:
-            # battery low: zigbee & ble sensors < 20%
+            # battery low: zigbee & ble sensors < 15%
             - entity_id: 'sensor.(rmt|snr)_*_battery'
-              state: '< 20'
-              options:
-                secondary_info: last-changed
-                icon: 'mdi:battery-alert-variant-outline'
-                <<: *alert-style
-            # battery low: moisture sensors < 11%
-            - entity_id: 'sensor.plnt_*_battery'
-              state: '< 11'
+              state: '< 15'
               options:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
@@ -502,12 +513,6 @@ views:
                 icon: 'mdi:wall-sconce-flat-variant-outline'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
-            - entity_id: switch.sw_familyroom_christmastree
-              state: 'on'
-              options:
-                name: 'Family Room: Christmas Tree'
-                icon: 'mdi:pine-tree'
-                secondary_info: last-changed
             # garage
             - entity_id: switch.sw_garage_ceilingmainlights
               state: 'on'
@@ -624,15 +629,15 @@ views:
             - entity_id: light.group_porch_lights
               state: 'on'
               options:
-                name: 'Porch'
+                name: 'Outside: Porch'
                 icon: 'mdi:light-recessed'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
             - entity_id: switch.sw_fronthouseoutlet
               state: 'on'
               options:
-                name: 'Front: Outlet'
-                icon: 'mdi:power'
+                name: 'Outside: Holiday Lights'
+                icon: 'mdi:string-lights'
                 secondary_info: last-changed
             # shed
             - entity_id: switch.sw_shed_floodlight
@@ -791,7 +796,8 @@ views:
     badges: []
     cards:
       # Family Room
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
+        mode: vertical
         title: 'Family Room'
         <<: *entities-header-style
         cards:
@@ -811,11 +817,10 @@ views:
                   name: Corner
                   icon: 'mdi:light-recessed'
                   state_color: true
-                # tree
-                - entity: switch.sw_familyroom_christmastree
-                  name: Tree
-                  icon: 'mdi:pine-tree'
-                  state_color: true
+                # wall sconce
+                - entity: light.sw_familyroom_walllights
+                  name: 'Wall Sconce'
+                  icon: 'mdi:wall-sconce-flat-variant-outline'
             - type: entities
               show_header_toggle: false
               <<: *entities-style
@@ -830,13 +835,9 @@ views:
                   name: Stairwell
                   icon: 'mdi:chandelier'
                   state_color: true
-                # wall sconce
-                - entity: light.sw_familyroom_walllights
-                  name: 'Wall Sconce'
-                  icon: 'mdi:wall-sconce-flat-variant-outline'
 
       # Kitchen
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Kitchen'
         <<: *entities-header-style
         cards:
@@ -881,7 +882,7 @@ views:
                   icon: 'mdi:ceiling-light-outline'
 
       # Living Room
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Living Room'
         <<: *entities-header-style
         cards:
@@ -905,7 +906,7 @@ views:
                 state_color: true
 
       # Office
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Office'
         <<: *entities-header-style
         cards:
@@ -929,7 +930,7 @@ views:
                 state_color: true
 
       # Main Bedroom
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Main Bedroom'
         <<: *entities-header-style
         cards:
@@ -960,7 +961,7 @@ views:
                   state_color: true
 
       # Kids Bedroom
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Kids Bedroom'
         <<: *entities-header-style
         cards:
@@ -986,7 +987,7 @@ views:
                   state_color: true
 
       # Laundry
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Laundry'
         <<: *entities-header-style
         cards:
@@ -1006,7 +1007,7 @@ views:
               color_type: blank
 
       # Garage
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Garage'
         <<: *entities-header-style
         cards:
@@ -1056,7 +1057,7 @@ views:
                   state_color: true
 
       # Crawlspace
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Crawlspace'
         <<: *entities-header-style
         cards:
@@ -1088,7 +1089,7 @@ views:
 
 
       # Outdoor (Front)
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Outside'
         <<: *entities-header-style
         cards:
@@ -1124,7 +1125,7 @@ views:
                   state_color: true
 
       # Shed
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Shed'
         <<: *entities-header-style
         cards:
@@ -1162,28 +1163,49 @@ views:
     badges: []
     cards:
       # HOUSE INDOOR CLIMATE CARDS
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'House'
         <<: *entities-header-style
         cards:
-        ## HOUSE THERMOSTAT 
-        - type: 'custom:simple-thermostat'
-          entity: climate.amazon
-          <<: *thermostat-style
-          layout:
-            step: row
-          header: false
-          control: false
-          hide:
-            state: true
-            temperature: true
-          sensors:
-            - entity: sensor.hvac_ecobee_indoor_average_temperature
-              name: 'Temperature'
-            - entity: sensor.indoor_mean_humidity
-              name: 'Humidity'
-            - entity: sensor.indoor_mean_air_quality_calculation
-              name: 'Air Quality'
+        ## HOUSE AVERAGE'S CLIMATE CARDS
+        - type: 'custom:stack-in-card'
+          title: ''
+          <<: *entities-header-style
+          cards:
+          - type: horizontal-stack
+            cards:
+            # house avg temperature
+            - type: 'custom:button-card'
+              entity: sensor.hvac_ecobee_indoor_average_temperature
+              name: Temperature
+              show_units: false
+              show_state: true
+              show_icon: false
+              <<: *graph-header-button-card-style
+            # house avg humidity
+            - type: 'custom:button-card'
+              entity: sensor.indoor_mean_humidity
+              name: Humidity
+              show_units: false
+              show_state: true
+              show_icon: false
+              <<: *graph-header-button-card-style
+            # house avg air quality: fine particles
+            - type: 'custom:button-card'
+              entity: sensor.indoor_mean_air_quality_calculation
+              name: 'PM 2.5'
+              show_units: false
+              show_state: true
+              show_icon: false
+              <<: *graph-header-button-card-style
+            # house avg air quality: carbon dioxide
+            - type: 'custom:button-card'
+              entity: sensor.indoor_mean_co2_rounded
+              name: 'Co2'
+              show_units: false
+              show_state: true
+              show_icon: false
+              <<: *graph-header-button-card-style
 
         ## INDOOR TEMPERATURE CARDS
         # row 1
@@ -1365,26 +1387,33 @@ views:
             - value: 'on'
 
       ## GARAGE CLIMATE CARDS
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Garage'
         <<: *entities-header-style
         cards:
-        ## GARAGE THERMOSTAT 
-        - type: 'custom:simple-thermostat'
-          entity: climate.hvac_garage_thermostat
-          <<: *thermostat-style
-          layout:
-            step: row
-          header: false
-          control: false
-          hide:
-            state: true
-            temperature: true
-          sensors:
-            - entity: sensor.garage_mean_temperature_calculation
-              name: 'Temperature'
-            - entity: sensor.garage_climate_humidity_rounded
-              name: 'Humidity'
+        - type: horizontal-stack
+          cards:
+          # garage temperature
+          - type: 'custom:button-card'
+            entity: sensor.garage_mean_temperature_calculation
+            name: Temperature
+            show_state: true
+            show_icon: false
+            <<: *graph-button-card-style
+          # garage humidity
+          - type: 'custom:button-card'
+            entity: sensor.garage_climate_humidity_rounded
+            name: Humidity
+            show_state: true
+            show_icon: false
+            <<: *graph-button-card-style
+          # garage door
+          - type: 'custom:button-card'
+            entity: cover.garage_vehicledoor
+            name: Door
+            show_state: true
+            show_icon: false
+            <<: *graph-button-card-style
 
         # GARAGE TEMPERATURE GRAPHS
         - type: 'custom:mini-graph-card'
@@ -1464,7 +1493,7 @@ views:
             - value: 'on'
 
       ## SHED CLIMATE CARDS
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Shed'
         <<: *entities-header-style
         cards:
@@ -1481,6 +1510,13 @@ views:
           - type: 'custom:button-card'
             entity: sensor.snr_shed_humidity
             name: Humidity
+            show_state: true
+            show_icon: false
+            <<: *graph-button-card-style
+          # shed door
+          - type: 'custom:button-card'
+            entity: binary_sensor.snr_shed_doorcontact_contact
+            name: Door
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
@@ -1521,7 +1557,7 @@ views:
               y_axis: secondary
 
       ## OUTDSIDE CLIMATE CARDS
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Outside'
         <<: *entities-header-style
         cards:
@@ -1608,7 +1644,7 @@ views:
     icon: 'mdi:car-info'
     badges: []
     cards:
-      - type: 'custom:vertical-stack-in-card'
+      - type: 'custom:stack-in-card'
         title: 'Tacoma'
         <<: *entities-header-style
         cards:
@@ -1726,6 +1762,18 @@ views:
     icon: 'mdi:battery-outline'
     badges: []
     cards:
+      # Air Quality Sensors
+      - type: 'custom:battery-state-card'
+        title: 'Air Quality Sensors'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        sort_by_level: 'asc'
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.snr_*airquality_battery'
+
       # Climate Sensors
       - type: 'custom:battery-state-card'
         title: 'Climate Sensors'

@@ -29,7 +29,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | TV                | LG         | OLED55B8        | 1     | HA :: WebOSTV         |
 | TV                | LG         | OLED65C1        | 1     | HA :: WebOSTV         |
 | **Sensors**                                                                      |
-| Air Quality       | Awair      | Element         | 2     | HA :: Awair (Local)   |
+| Air Quality       | Awair      | Element         | 2     | HA :: Awair Local API |
+| Air Quality       | Airthings  | Wave+           | 1     | HA :: Airthings BLE   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 6     | Zigbee2MQTT           |
@@ -41,7 +42,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Motion            | Xiaomi     | RTCGQ14LM       | 1     | Zigbee2MQTT           |
 | Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | HA:: Xiami BLE        |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
-| Temperature       | Acurite    | 592TXR          | 2     | MQTT :: rtl_433       |
+| Temperature       | Acurite    | 592TXR          | 3     | MQTT :: rtl_433       |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433       |
 | Temperature       | La Crosse  | TX29IT          | 1     | MQTT :: rtl_433       |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT           |

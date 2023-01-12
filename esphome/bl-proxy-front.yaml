@@ -53,6 +53,7 @@ esp32_ble_tracker:
       - output.turn_off: bluetooth_led
 
 bluetooth_proxy:
+  active: true
 
 button:
 - platform: safe_mode

@@ -95,6 +95,12 @@
     data: {}
     target:
       entity_id: scene.indoor_evening_lights_on
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id:
+      - switch.plg_holidaylights2
+      - switch.sw_familyroom_christmastree
   mode: single
 - id: '1612292887886'
   alias: 'House: Indoor Lights off for the night check'
@@ -532,9 +538,14 @@
     from: 'off'
     to: 'on'
   condition:
-  - condition: state
-    entity_id: switch.sw_shed_fan
-    state: 'off'
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: switch.sw_shed_fan
+      state: 'off'
+    - condition: numeric_state
+      entity_id: sensor.snr_outside_temperature
+      above: 0
   action:
   - service: switch.turn_on
     data: {}
@@ -1031,8 +1042,7 @@
         - condition: template
           value_template: "{{\n  (states('sensor.snr_shed_temperature')|int(default=10)
             > (states('sensor.snr_outside_temperature')|int(default=10)+10)) and\n
-            \ (states('sensor.snr_shed_temperature')|int(default=10)
-            > 20)\n}}"
+            \ (states('sensor.snr_shed_temperature')|int(default=10) > 20)\n}}"
       sequence:
       - service: switch.turn_on
         data: {}
@@ -1459,38 +1469,6 @@
             | int * 60 }}'
     default: []
   mode: single
-- id: '1665779633285'
-  alias: 'Downstairs Bathroom: toggle Light Time out time'
-  description: Extend light timeout when showering.
-  trigger:
-  - platform: state
-    entity_id:
-    - sensor.rmt_bathroomdown_remote_click
-    to: single
-  condition: []
-  action:
-  - choose:
-    - conditions:
-      - condition: state
-        entity_id: input_number.downstairs_bathroom_switch_lighttime
-        state: '2.0'
-      sequence:
-      - service: input_number.set_value
-        data:
-          value: 20
-        target:
-          entity_id: input_number.downstairs_bathroom_switch_lighttime
-    - conditions:
-      - condition: state
-        entity_id: input_number.downstairs_bathroom_switch_lighttime
-        state: '20.0'
-      sequence:
-      - service: input_number.set_value
-        data:
-          value: 2
-        target:
-          entity_id: input_number.downstairs_bathroom_switch_lighttime
-  mode: single
 - id: '1668805084012'
   alias: 'Downstairs Bathroom: Light on with Motion'
   description: ''
@@ -1508,4 +1486,24 @@
     data: {}
     target:
       entity_id: switch.sw_downstairsbathroom_ceilinglight
+  mode: single
+- id: '1673384404017'
+  alias: 'House: Notify on high radon levels'
+  description: when radon level 1 day average is above 99 Bq/m³
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.snr_crawspace_airquality_radon_1_day_average
+    above: 99
+  condition: []
+  action:
+  - service: notify.mobile_app_turraphone
+    data:
+      title: ❗☣️ High Radon Levels
+      message: High radon levels detected
+      data:
+        push:
+          sound:
+            name: default
+            critical: 1
+            volume: 1
   mode: single
