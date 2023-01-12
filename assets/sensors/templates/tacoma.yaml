@@ -20,4 +20,9 @@
   device_class: temperature
   unit_of_measurement: '°C'
   state: >
-    {{ states('sensor.snr_outside_tacomacabclimate_temperature') | round(1, default=20.0) }}
+    {% if is_number(states('sensor.snr_outside_tacomacabclimate_temperature')) %}
+      {{ states('sensor.snr_outside_tacomacabclimate_temperature') | round(1, default=20.0) }}
+    {% else %}
+      {# set value to unavailable because tacoma is not home #}
+      unavailable
+    {% endif %}
