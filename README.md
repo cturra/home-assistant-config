@@ -34,7 +34,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 6     | Zigbee2MQTT           |
-| Climate           | Xiaomi Mi  | LYWSD03MMC      | 6     | ESPHome :: BL Proxy   |
+| Climate           | Xiaomi Mi  | LYWSD03MMC      | 6     | HA :: BTHome          |
 | Contact           | Xiaomi     | MCCGQ11LM       | 17    | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT           |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
@@ -46,6 +46,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433       |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT           |
 | **Surveillance**                                                                 |
+| Camera            | ACTi       | B87             | 1     | RTSP                  |
+| Camera            | Meraki     | MV72            | 1     | RTSP                  |
 | Camera            | Wyze       | Cam v3          | 1     | RTSP                  |
 | **Switches**                                                                     |
 | IR Blaster        | Uniplay    | Q1              | 2     | Tasmota               |
