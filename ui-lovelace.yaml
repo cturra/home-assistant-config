@@ -782,6 +782,8 @@ views:
                   service: cover.toggle
                   service_data:
                     entity_id: cover.garage_vehicledoor
+                  confirmation:
+                    text: 'Are you sure you want to toggle the Garage Door?'
             # windows: zigbee (aqara)
             - entity_id: 'binary_sensor.snr_*window*_contact'
               state: 'on'
@@ -1654,7 +1656,7 @@ views:
         # tacoma presence
         - type: 'custom:button-card'
           entity: binary_sensor.snr_tacoma_location
-          name: 'Location'
+          show_name: false
           show_state: true
           show_icon: false
           <<: *graph-button-card-style
