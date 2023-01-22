@@ -385,6 +385,14 @@ views:
                 icon: 'mdi:arrow-up-circle-outline'
                 secondary_info: last-changed
                 <<: *alert-info-style
+            # updates available: hacs
+            - entity_id: 'sensor.hacs'
+              state: '> 0'
+              options:
+                name: 'Home Assistant Community Store'
+                icon: 'mdi:arrow-up-circle-outline'
+                secondary_info: last-changed
+                <<: *alert-info-style
             # backups stale
             - entity_id: 'binary_sensor.backups_stale'
               state: 'on'
