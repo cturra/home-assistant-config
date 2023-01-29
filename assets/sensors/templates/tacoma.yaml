@@ -6,14 +6,24 @@
   device_class: humidity
   unit_of_measurement: '%'
   state: >
-    {{ states('sensor.snr_outside_tacomaboxclimate_humidity') | int }}
+    {% if is_number(states('sensor.snr_outside_tacomaboxclimate_humidity')) %}
+      {{ states('sensor.snr_outside_tacomaboxclimate_humidity') | int }}
+    {% else %}
+      {# set value to unavailable because tacoma is not home #}
+      unavailable
+    {% endif %}
 
 # Cab: humidity
 - name: 'Tacoma Cab Humidity Rounded'
   device_class: humidity
   unit_of_measurement: '%'
   state: >
-    {{ states('sensor.snr_outside_tacomacabclimate_humidity') | int }}
+    {% if is_number(states('sensor.snr_outside_tacomacabclimate_humidity')) %}
+      {{ states('sensor.snr_outside_tacomacabclimate_humidity') | int }}
+    {% else %}
+      {# set value to unavailable because tacoma is not home #}
+      unavailable
+    {% endif %}
 
 # Cab: temperature
 - name: 'Tacoma Cab Temperature 1 Decimal'

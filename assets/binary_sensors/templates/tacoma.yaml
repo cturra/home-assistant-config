@@ -4,8 +4,8 @@
 - name: 'SNR Tacoma Location'
   device_class: presence
   state: >
-    {# sensor has updated in the last 10 minutes #}
-    {% set time_offset = 600 %}
+    {# sensor has updated in the last 5 minutes #}
+    {% set time_offset = 300 %}
     {{ 
       (utcnow() - states.sensor.snr_outside_tacomacabclimate_temperature.last_updated).total_seconds() < time_offset or
       (utcnow() - states.sensor.snr_outside_tacomaboxclimate_temperature.last_updated).total_seconds() < time_offset
