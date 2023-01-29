@@ -1257,7 +1257,7 @@
       - service: switch.turn_off
         data: {}
         target:
-          entity_id: switch.rcl_outsideporchsoffit
+          entity_id: switch.rcl_outside_porchsoffit
       - service: scene.turn_on
         data:
           transition: 2
@@ -1304,7 +1304,7 @@
       - service: switch.turn_on
         data: {}
         target:
-          entity_id: switch.rcl_outsideporchsoffit
+          entity_id: switch.rcl_outside_porchsoffit
     - conditions:
       - condition: state
         entity_id: input_boolean.halloween_string_lights_outlet
@@ -1320,7 +1320,7 @@
       - service: switch.turn_on
         data: {}
         target:
-          entity_id: switch.rcl_outsideporchsoffit
+          entity_id: switch.rcl_outside_porchsoffit
     default:
     - service: scene.turn_on
       data:

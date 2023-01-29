@@ -644,7 +644,7 @@ views:
                 icon: 'mdi:light-recessed'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
-            - entity_id: switch.rcl_outsideporchsoffit
+            - entity_id: switch.rcl_outside_porchsoffit
               state: 'on'
               options:
                 name: 'Outside: Holiday Lights'
