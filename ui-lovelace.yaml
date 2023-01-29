@@ -644,7 +644,7 @@ views:
                 icon: 'mdi:light-recessed'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
-            - entity_id: switch.sw_fronthouseoutlet
+            - entity_id: switch.rcl_outsideporchsoffit
               state: 'on'
               options:
                 name: 'Outside: Holiday Lights'
@@ -1605,7 +1605,7 @@ views:
           # AQI
           - type: 'custom:button-card'
             entity: sensor.snr_outside_airquality_aqi
-            name: ' '
+            name: 'AQI'
             show_state: true
             show_icon: false
             <<: *graph-button-card-style

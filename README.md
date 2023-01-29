@@ -36,7 +36,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Climate           | Xiaomi     | WSDCGQ11LM      | 6     | Zigbee2MQTT           |
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 6     | HA :: BTHome          |
 | Contact           | Xiaomi     | MCCGQ11LM       | 17    | Zigbee2MQTT           |
-| Leak              | Xiaomi     | SJCGQ11LM       | 11    | Zigbee2MQTT           |
+| Leak              | Xiaomi     | SJCGQ11LM       | 14    | Zigbee2MQTT           |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
 | Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT           |
 | Motion            | Xiaomi     | RTCGQ14LM       | 1     | Zigbee2MQTT           |
@@ -56,6 +56,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Plug              | Sonoff     | S31             | 8     | Tasmota               |
 | Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT           |
 | Plug              | Wyze       | WLPPO1          | 1     | Tasmota               |
+| Receptacle        | TopGreener | TGWF15RM        | 1     | Tasmota               |
 | Remote            | Ikea       | E1810           | 2     | Zigbee2MQTT           |
 | Remote            | Xiaomi     | WXKG11LM        | 2     | Zigbee2MQTT           |
 | Switch (Motion)   | CloudFree  | SWM1            | 1     | Tasmota               |
@@ -78,7 +79,7 @@ And, if you have any feedback, please feel free to reach out :smile:
  | Odroid-N2+      | 1     | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
  | Raspberry Pi 4  | 1     | Secondary Zigbee2MQTT server *                                    |
  | Slaesh CC2652RB | 2     | [Zigbee Adapter ](https://slae.sh/projects/cc2652/)               |
- | TP-Link UB400   | 1     | Bluetooth USB Adapter                                             |
+ | ASUS BT500      | 1     | Bluetooth USB Adapter                                             |
 
  \* *I was having some issues with Zigbee mesh stability when running the Sinopé thermostat
  alongside the Xiaomi devices. From my understanding this is because Xiaomi doesn't completely

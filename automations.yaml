@@ -95,12 +95,6 @@
     data: {}
     target:
       entity_id: scene.indoor_evening_lights_on
-  - service: switch.turn_on
-    data: {}
-    target:
-      entity_id:
-      - switch.plg_holidaylights2
-      - switch.sw_familyroom_christmastree
   mode: single
 - id: '1612292887886'
   alias: 'House: Indoor Lights off for the night check'
@@ -1263,7 +1257,7 @@
       - service: switch.turn_off
         data: {}
         target:
-          entity_id: switch.sw_fronthouseoutlet
+          entity_id: switch.rcl_outsideporchsoffit
       - service: scene.turn_on
         data:
           transition: 2
@@ -1310,7 +1304,7 @@
       - service: switch.turn_on
         data: {}
         target:
-          entity_id: switch.sw_fronthouseoutlet
+          entity_id: switch.rcl_outsideporchsoffit
     - conditions:
       - condition: state
         entity_id: input_boolean.halloween_string_lights_outlet
@@ -1326,7 +1320,7 @@
       - service: switch.turn_on
         data: {}
         target:
-          entity_id: switch.sw_fronthouseoutlet
+          entity_id: switch.rcl_outsideporchsoffit
     default:
     - service: scene.turn_on
       data:
