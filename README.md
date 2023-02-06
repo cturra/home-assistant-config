@@ -69,6 +69,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Switch (3 Way)    | Treatlife  | SS02            | 2     | Tasmota               |
 | Switch (Dimmer)   | Treatlife  | DS02S           | 4     | Tasmota               |
 | Switch (Dimmer)   | Treatlife  | DS01C           | 2     | Tasmota               |
+| **Other**                                                                        |
+| Toothbrush        | Oral-B     | Smart 4000      | 2     | HA :: Oral-B          |
 
  ### Infrastructure
 

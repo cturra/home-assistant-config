@@ -1,0 +1,31 @@
+## SENSORS / TEMPLATES / ENSUITE
+
+# anne's toothbrush battery
+- name: 'Toothbrush Anne Battery Persistent'
+  device_class: battery
+  unit_of_measurement: '%'
+  # toothbrush attributes states are only available when the
+  # device is in use. grab those values and keep battery around
+  # for use in dashboard.
+  state: >
+    {% if is_number(states('sensor.toothbrush_anne_battery')) %}
+      {{ states('sensor.toothbrush_anne_battery') }}
+    {% else %}
+      {# use previous value if sensor returns unavailable #}
+      {{ states('sensor.toothbrush_anne_battery_persistent') }}
+    {% endif %}
+
+# chris' toothbrush battery
+- name: 'Toothbrush Chris Battery Persistent'
+  device_class: battery
+  unit_of_measurement: '%'
+  # toothbrush attributes states are only available when the
+  # device is in use. grab those values and keep battery around
+  # for use in dashboard.
+  state: >
+    {% if is_number(states('sensor.toothbrush_chris_battery')) %}
+      {{ states('sensor.toothbrush_chris_battery') }}
+    {% else %}
+      {# use previous value if sensor returns unavailable #}
+      {{ states('sensor.toothbrush_chris_battery_persistent') }}
+    {% endif %}

@@ -278,6 +278,15 @@ binary_sensor.snr_shed_temperature_battery_low:
   friendly_name: 'Shed'
 
 
+## ------ toothbrushes ------
+
+sensor.toothbrush_anne_battery_persistent:
+  friendly_name: 'Anne'
+
+sensor.toothbrush_chris_battery_persistent:
+  friendly_name: 'Chris'
+
+
 ## ------ vibration sensors ------
 
 # office chair

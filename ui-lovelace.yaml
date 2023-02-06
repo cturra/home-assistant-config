@@ -297,6 +297,13 @@ views:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
                 <<: *alert-style
+            # battery low: toothbrushes < 15%
+            - entity_id: 'sensor.toothbrush_*_battery_persistent'
+              state: '< 15'
+              options:
+                secondary_info: last-changed
+                icon: 'mdi:toothbrush'
+                <<: *alert-style
             # xiaomi mi flora battery may need replacement
             - entity_id: 'sensor.plnt_*_moisture'
               last_updated: '> 720' # 12 hours
@@ -1616,6 +1623,9 @@ views:
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
+          - type: 'custom:button-card'
+            <<: *entities-style
+            color_type: blank
         - type: 'custom:mini-graph-card'
           entities:
             - sensor.snr_outside_airquality_aqi
@@ -1706,7 +1716,7 @@ views:
           height: 60
           line_width: 1
           hours_to_show: 24
-          points_per_hour: 4
+          points_per_hour: 6
           lower_bound_secondary: 10
           upper_bound_secondary: 99
           group: true
@@ -1875,6 +1885,18 @@ views:
             to: 100
           - from: 'on'
             to: 10
+
+      # Toothbrushes
+      - type: 'custom:battery-state-card'
+        title: 'Toothbrushes'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        sort_by_level: 'asc'
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.toothbrush_*_battery_persistent'
 
       # Vibration Sensors
       - type: 'custom:battery-state-card'
