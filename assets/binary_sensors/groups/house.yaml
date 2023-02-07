@@ -36,9 +36,11 @@
     - binary_sensor.snr_crawlspace_hotwatertankleak_water_leak
     - binary_sensor.snr_crawlspace_roleak_water_leak
     - binary_sensor.snr_ensuite_bathtubleak_water_leak
+    - binary_sensor.snr_ensuite_sinkleak_water_leak
     - binary_sensor.snr_ensuite_toiletleak_water_leak
     - binary_sensor.snr_kitchen_dishwasherleak_water_leak
     - binary_sensor.snr_kitchen_espressoleak_water_leak
     - binary_sensor.snr_kitchen_fridgeleak_water_leak
     - binary_sensor.snr_kitchen_sinkleak_water_leak
+    - binary_sensor.snr_laundry_sinkleak_water_leak
     - binary_sensor.snr_laundry_washingmachineleak_water_leak
