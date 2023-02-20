@@ -1343,7 +1343,7 @@
       - condition: and
         conditions:
         - condition: numeric_state
-          entity_id: sensor.snr_laundry_climate_humidity
+          entity_id: sensor.snr_laundry_climatedisplay_humidity
           above: '65.0'
         - condition: state
           entity_id: binary_sensor.snr_laundry_windowcontact_contact
@@ -1369,7 +1369,7 @@
         - condition: and
           conditions:
           - condition: numeric_state
-            entity_id: sensor.snr_laundry_climate_humidity
+            entity_id: sensor.snr_laundry_climatedisplay_humidity
             below: '61.0'
           - condition: state
             entity_id: switch.plg_laundry_zbrtr
@@ -1500,4 +1500,18 @@
             name: default
             critical: 1
             volume: 1
+  mode: single
+- id: '1675732388359'
+  alias: 'Ensuite: Toothbrush charge notify'
+  description: notify chris before toothbrush runs out of battery.
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.toothbrush_chris_battery_persistent
+    below: 15
+  condition: []
+  action:
+  - service: notify.mobile_app_turraphone
+    data:
+      title: "\U0001FAA5\U0001FAAB Toothbrush Battery Low"
+      message: Time to charge your toothbrush.
   mode: single
