@@ -385,6 +385,14 @@ views:
                 icon: 'mdi:power-plug-off-outline'
                 secondary_info: last-changed
                 <<: *alert-style
+            # bbq propane tank needs refilling
+            - entity_id: 'sensor.snr_shed_bbq_propane_tank_level_percent'
+              state: '< 25'
+              options:
+                name: 'BBQ Tank'
+                icon: 'mdi:propane-tank-outline'
+                secondary_info: last-changed
+                <<: *alert-style
             # updates available (tested with: core, zigbee2mqtt & wled)
             - entity_id: '/update.*_(firmware|update)|binary_sensor.*_update_available/'
               state: 'on'
@@ -407,6 +415,7 @@ views:
                 icon: 'mdi:alert-box-outline'
                 secondary_info: last-changed
                 <<: *alert-info-style
+
         sort:
           method: name
 
@@ -647,14 +656,14 @@ views:
             - entity_id: light.group_porch_lights
               state: 'on'
               options:
-                name: 'Outside: Porch'
+                name: 'Porch'
                 icon: 'mdi:light-recessed'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
             - entity_id: switch.rcl_outside_porchsoffit
               state: 'on'
               options:
-                name: 'Outside: Holiday Lights'
+                name: 'Holiday Lights'
                 icon: 'mdi:string-lights'
                 secondary_info: last-changed
             # shed
@@ -1533,6 +1542,13 @@ views:
             show_state: true
             show_icon: false
             <<: *graph-button-card-style
+          # propane tank
+          - type: 'custom:button-card'
+            entity: sensor.snr_shed_bbq_propane_tank_level_percent
+            name: 'BBQ Tank'
+            show_state: true
+            show_icon: false
+            <<: *graph-button-card-style
           # shed door
           - type: 'custom:button-card'
             entity: binary_sensor.snr_shed_doorcontact_contact
@@ -1856,6 +1872,18 @@ views:
           include:
             - name: entity_id
               value: 'sensor.snr_*plant_*_battery'
+
+      # Plant Sensors
+      - type: 'custom:battery-state-card'
+        title: 'Propane Sensors'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        sort_by_level: 'asc'
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.snr_*_propane_battery'
 
       # Remote Controls
       - type: 'custom:battery-state-card'

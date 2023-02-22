@@ -33,8 +33,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Quality       | Airthings  | Wave+           | 1     | HA :: Airthings BLE   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
-| Climate           | Xiaomi     | WSDCGQ11LM      | 6     | Zigbee2MQTT           |
-| Climate           | Xiaomi Mi  | LYWSD03MMC      | 6     | HA :: BTHome          |
+| Climate           | Xiaomi     | WSDCGQ11LM      | 4     | Zigbee2MQTT           |
+| Climate           | Xiaomi Mi  | LYWSD03MMC      | 7     | HA :: BTHome          |
 | Contact           | Xiaomi     | MCCGQ11LM       | 17    | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 16    | Zigbee2MQTT           |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
@@ -70,6 +70,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Switch (Dimmer)   | Treatlife  | DS02S           | 4     | Tasmota               |
 | Switch (Dimmer)   | Treatlife  | DS01C           | 2     | Tasmota               |
 | **Other**                                                                        |
+| Propane Tank      | Mopeka     | Pro Check M1017 | 1     | HA :: Mopeka          |
 | Toothbrush        | Oral-B     | Smart 4000      | 2     | HA :: Oral-B          |
 
  ### Infrastructure
