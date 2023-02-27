@@ -429,6 +429,12 @@ views:
           <<: *entities-overview-header-style
         filter:
           include:
+            # bathroom (up) fan
+            - entity_id: 'switch.sw_upstairsbathroom_fan'
+              state: 'on'
+              options:
+                name: 'Bathroom (Up): Vanity'
+                secondary_info: last-changed
             # house (ecobee) & garage (sinope)
             - entity_id: '/binary_sensor.hvac_(ecobee|garage)_(cooling|heating)_state/'
               state: 'on'
@@ -470,6 +476,12 @@ views:
               options:
                 name: 'Bathroom (Down): Vanity'
                 icon: 'mdi:wall-sconce-flat-variant-outline'
+                secondary_info: last-changed
+            # bathroom (up)
+            - entity_id: switch.sw_upstairsbathroom_light
+              state: 'on'
+              options:
+                name: 'Bathroom (Up): Vanity'
                 secondary_info: last-changed
             # crawlspace
             - entity_id: switch.sw_crawlspace_entrancelight
@@ -824,6 +836,30 @@ views:
     icon: 'mdi:home-outline'
     badges: []
     cards:
+      # Bathroom (Upstairs)
+      - type: 'custom:stack-in-card'
+        title: 'Bathroom Upstairs'
+        <<: *entities-header-style
+        cards:
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              show_header_toggle: false
+              <<: *entities-style
+              entities:
+                # fan
+                - entity: switch.sw_upstairsbathroom_fan
+                  name: 'Fan'
+                  state_color: true
+            - type: entities
+              show_header_toggle: false
+              <<: *entities-style
+              entities:
+                # fan
+                - entity: switch.sw_upstairsbathroom_light
+                  name: 'Vanity'
+                  state_color: true
+
       # Family Room
       - type: 'custom:stack-in-card'
         mode: vertical
@@ -1014,26 +1050,6 @@ views:
                   name: 'Lamp'
                   icon: 'mdi:lamp-outline'
                   state_color: true
-
-      # Laundry
-      - type: 'custom:stack-in-card'
-        title: 'Laundry'
-        <<: *entities-header-style
-        cards:
-        - type: horizontal-stack
-          cards:
-            - type: entities
-              show_header_toggle: false
-              <<: *entities-style
-              entities:
-                # dehumidifier
-                - entity: switch.plg_laundry_zbrtr
-                  name: 'Dehumidifier'
-                  icon: 'mdi:water-outline'
-                  state_color: true
-            - type: 'custom:button-card'
-              <<: *entities-style
-              color_type: blank
 
       # Garage
       - type: 'custom:stack-in-card'
@@ -1873,7 +1889,7 @@ views:
             - name: entity_id
               value: 'sensor.snr_*plant_*_battery'
 
-      # Plant Sensors
+      # Propane Tank Sensors
       - type: 'custom:battery-state-card'
         title: 'Propane Sensors'
         <<: *battery-state-color_gradient
@@ -1937,3 +1953,16 @@ views:
           include:
             - name: entity_id
               value: 'sensor.snr_*vibration_battery'
+
+      # Water Valve 
+      - type: 'custom:battery-state-card'
+        title: 'Water Valves'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        sort_by_level: 'asc'
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.vlv_*_battery'
+
