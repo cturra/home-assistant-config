@@ -11,13 +11,14 @@ http: !include assets/core/http.yaml
 # lovelace
 lovelace: !include assets/core/lovelace.yaml
 
-
+amcrest: !include_dir_merge_list assets/cameras/amcrest
 automation: !include automations.yaml
 binary_sensor: !include_dir_merge_list assets/binary_sensors/groups
-camera: !include_dir_merge_list assets/cameras
+camera: !include_dir_merge_list assets/cameras/generic
 cover: !include_dir_merge_list assets/covers
 group: !include groups.yaml
 input_boolean: !include_dir_merge_named assets/input_booleans
+input_datetime: !include_dir_merge_named assets/input_datetime
 light: !include_dir_merge_list assets/lights/legacy
 media_player: !include_dir_merge_list assets/media_players
 mqtt: 

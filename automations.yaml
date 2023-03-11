@@ -815,7 +815,7 @@
       sequence:
       - service: script.text_to_speech_on_sonos
         data:
-          entity_id: media_player.group_sonos_speakers
+          entity_id: media_player.main_bedroom_speaker, media_player.family_room_speaker
           volume_level: 0.8
           min_wait: 1
           message: ALERT. Water detected at {{ triggered_leak_sensor }} sensor.
@@ -1098,7 +1098,9 @@
     to desired state
   trigger:
   - platform: state
-    entity_id: binary_sensor.snr_outside_frontporchmotion_occupancy
+    entity_id:
+    - binary_sensor.snr_outside_frontporchmotion_occupancy
+    - binary_sensor.cam_front_doorbell_motion_detected
     to: 'on'
   condition: []
   action:
@@ -1514,4 +1516,49 @@
     data:
       title: "\U0001FAA5\U0001FAAB Toothbrush Battery Low"
       message: Time to charge your toothbrush.
+  mode: single
+- id: '1678299719527'
+  alias: 'House: Reset maintenance reminders'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.laundry_washing_machine_cleaning_reset
+    to: 'on'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.laundry_washing_machine_cleaning_reset
+        state: 'on'
+      sequence:
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.laundry_washing_machine_last_cleaned
+        data:
+          timestamp: '{{ now().timestamp() }}'
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.laundry_washing_machine_cleaning_reset
+  mode: single
+- id: '1678563729726'
+  alias: 'Porch: Notify front doorbell ring'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: amcrest
+    event_data:
+      event: CallNoAnswered
+      payload:
+        action: Start
+  condition: []
+  action:
+  - service: notify.mobile_app_turraphone
+    data:
+      message: Someone is at the door
+      title: "\U0001F514 Front Doorbell"
+      data:
+        entity_id: camera.cam_front_doorbell
   mode: single

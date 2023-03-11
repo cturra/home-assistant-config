@@ -415,6 +415,29 @@ views:
                 icon: 'mdi:alert-box-outline'
                 secondary_info: last-changed
                 <<: *alert-info-style
+            # washing machine cleaning cycle
+            - entity_id: 'sensor.laundry_washing_machine_cleaned_interval'
+              state: '> 30'
+              options:
+                name: 'Washing Machine Cleaning'
+                secondary_info: last-changed
+                tap_action:
+                  action: call-service
+                  service: input_boolean.turn_on
+                  service_data:
+                    entity_id: input_boolean.laundry_washing_machine_cleaning_reset
+                  confirmation:
+                    text: 'Washing Machine cleaned?'
+                <<: *alert-info-style
+            # amcrest doorbell offline
+            - entity_id: 'binary_sensor.cam_front_doorbell_online'
+              state: 'off'
+              last_changed: '> 2' # allow for short disconnects
+              options:
+                name: 'Front Doorbell Camera'
+                icon: 'mdi:camera-off-outline'
+                secondary_info: last-changed
+                <<: *alert-style
 
         sort:
           method: name

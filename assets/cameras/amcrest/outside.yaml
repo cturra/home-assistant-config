@@ -1,0 +1,11 @@
+## CAMERAS / AMCREST / OUTSIDE
+
+# front doorbell (AD410)
+- host: !secret cam_frontdoor_ip
+  username: !secret cam_frontdoor_user
+  password: !secret cam_frontdoor_pass
+  name: 'cam_front_doorbell'
+  stream_source: rtsp
+  binary_sensors:
+    - motion_detected
+    - online
