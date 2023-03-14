@@ -429,16 +429,6 @@ views:
                   confirmation:
                     text: 'Washing Machine cleaned?'
                 <<: *alert-info-style
-            # amcrest doorbell offline
-            - entity_id: 'binary_sensor.cam_front_doorbell_online'
-              state: 'off'
-              last_changed: '> 2' # allow for short disconnects
-              options:
-                name: 'Front Doorbell Camera'
-                icon: 'mdi:camera-off-outline'
-                secondary_info: last-changed
-                <<: *alert-style
-
         sort:
           method: name
 

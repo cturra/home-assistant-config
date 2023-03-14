@@ -110,22 +110,23 @@
       entity_id: scene.indoor_evening_lights_off
   mode: single
 - id: '1612295061627'
-  alias: 'Driveway: Lights off at sunrise'
-  description: turn off driveway lights shortly before sunrise.
+  alias: 'Outside: Lights Off at sunrise'
+  description: turn off outdoor lights shortly before sunrise.
   trigger:
   - platform: sun
     event: sunrise
     offset: -00:15:00
-  condition:
-  - condition: state
-    entity_id: light.group_driveway_lights
-    state: 'on'
+  condition: []
   action:
   - service: light.turn_off
     target:
       entity_id: light.group_driveway_lights
     data:
       transition: 2
+  - service: light.turn_off
+    data: {}
+    target:
+      entity_id: light.front_door_ring_light
   mode: single
 - id: '1612298561421'
   alias: 'Main Bedroom: Climate controls'
@@ -1100,7 +1101,6 @@
   - platform: state
     entity_id:
     - binary_sensor.snr_outside_frontporchmotion_occupancy
-    - binary_sensor.cam_front_doorbell_motion_detected
     to: 'on'
   condition: []
   action:
@@ -1270,8 +1270,8 @@
     default: []
   mode: single
 - id: '1645862394431'
-  alias: 'Outside: Front lights On at sunset'
-  description: turn on driveway and porch lights shortly after sunset
+  alias: 'Outside: Lights On at sunset'
+  description: turn on outdoor lights shortly after sunset
   trigger:
   - platform: sun
     event: sunset
@@ -1331,6 +1331,10 @@
         entity_id:
         - scene.driveway_bulbs_normal_colour
         - scene.porch_bulbs_normal_colour_dimmed
+  - service: light.turn_on
+    data: {}
+    target:
+      entity_id: light.front_door_ring_light
   mode: single
 - id: '1646521999725'
   alias: 'Laundry: Dehumidifier controls'
@@ -1547,12 +1551,10 @@
   alias: 'Porch: Notify front doorbell ring'
   description: ''
   trigger:
-  - platform: event
-    event_type: amcrest
-    event_data:
-      event: CallNoAnswered
-      payload:
-        action: Start
+  - platform: state
+    entity_id:
+    - binary_sensor.front_door_button_pressed
+    to: 'on'
   condition: []
   action:
   - service: notify.mobile_app_turraphone
@@ -1560,5 +1562,5 @@
       message: Someone is at the door
       title: "\U0001F514 Front Doorbell"
       data:
-        entity_id: camera.cam_front_doorbell
+        entity_id: camera.front_door_sub
   mode: single

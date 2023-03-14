@@ -11,7 +11,6 @@ http: !include assets/core/http.yaml
 # lovelace
 lovelace: !include assets/core/lovelace.yaml
 
-amcrest: !include_dir_merge_list assets/cameras/amcrest
 automation: !include automations.yaml
 binary_sensor: !include_dir_merge_list assets/binary_sensors/groups
 camera: !include_dir_merge_list assets/cameras/generic

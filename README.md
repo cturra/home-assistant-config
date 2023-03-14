@@ -47,7 +47,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT           |
 | **Surveillance**                                                                 |
 | Camera            | ACTi       | B87             | 1     | RTSP                  |
-| Camera Doorbell   | Amcrest    | AD410           | 1     | HA :: Amcrest         |
+| Camera Doorbell   | Amcrest    | AD410           | 1     | HACS :: Dahua         |
 | Camera            | Meraki     | MV72            | 1     | RTSP                  |
 | Camera            | Wyze       | Cam v3          | 1     | RTSP                  |
 | **Switches**                                                                     |
