@@ -1,0 +1,7 @@
+## INPUT_DATETIME / LAUNDRY
+
+laundry_washing_machine_last_cleaned:
+  name: 'Laundry Washing Machine Last Cleaned'
+  has_date: true
+  has_time: false
+  icon: 'mdi:refresh-circle'

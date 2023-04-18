@@ -1,0 +1,9 @@
+## SENSORS / TEMPLATES / LAUNDRY
+
+- name: 'Laundry Washing Machine Cleaned Interval'
+  unit_of_measurement: 'days'
+  icon: 'mdi:washing-machine-alert'
+  # calculate days since the washing machine was last cleaned
+  #  -- convert seconds to days
+  state: >
+    {{ ((as_timestamp(now()) - state_attr('input_datetime.laundry_washing_machine_last_cleaned','timestamp')) | int / 60/1440) | round(0) }}

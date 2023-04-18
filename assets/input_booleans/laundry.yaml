@@ -1,0 +1,5 @@
+## INPUT_BOOLEAN / LAUNDRY
+
+laundry_washing_machine_cleaning_reset:
+  name: 'Laundry Washing Machine Cleaning Reset'
+  icon: 'mdi:sync-circle'
