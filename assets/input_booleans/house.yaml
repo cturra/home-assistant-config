@@ -1,0 +1,5 @@
+## INPUT_BOOLEAN / LAUNDRY
+
+hvac_filter_change_reset:
+  name: 'HVAC Filter Change Reset'
+  icon: 'mdi:sync-circle'

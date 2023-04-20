@@ -415,6 +415,20 @@ views:
                 icon: 'mdi:alert-box-outline'
                 secondary_info: last-changed
                 <<: *alert-info-style
+            # hvac filter change cycle (every ~ 3 months)
+            - entity_id: 'sensor.hvac_filter_change_interval'
+              state: '> 90'
+              options:
+                name: 'HVAC Air Filter Change'
+                secondary_info: last-changed
+                tap_action:
+                  action: call-service
+                  service: input_boolean.turn_on
+                  service_data:
+                    entity_id: input_boolean.hvac_filter_change_reset
+                  confirmation:
+                    text: 'HVAC air filter changed?'
+                <<: *alert-info-style
             # washing machine cleaning cycle
             - entity_id: 'sensor.laundry_washing_machine_cleaned_interval'
               state: '> 30'

@@ -1528,6 +1528,7 @@
   - platform: state
     entity_id:
     - input_boolean.laundry_washing_machine_cleaning_reset
+    - input_boolean.hvac_filter_change_reset
     to: 'on'
   condition: []
   action:
@@ -1546,6 +1547,20 @@
         data: {}
         target:
           entity_id: input_boolean.laundry_washing_machine_cleaning_reset
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.hvac_filter_change_reset
+        state: 'on'
+      sequence:
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.hvac_filter_last_changed
+        data:
+          timestamp: '{{ now().timestamp() }}'
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.hvac_filter_change_reset
   mode: single
 - id: '1678563729726'
   alias: 'Porch: Notify front doorbell ring'

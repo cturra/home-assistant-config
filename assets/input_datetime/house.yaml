@@ -1,0 +1,7 @@
+## INPUT_DATETIME / HOUSE
+
+hvac_filter_last_changed:
+  name: 'HVAC Filter Last Changed'
+  has_date: true
+  has_time: false
+  icon: 'mdi:refresh-circle'
