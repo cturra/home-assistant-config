@@ -393,6 +393,13 @@ views:
                 icon: 'mdi:propane-tank-outline'
                 secondary_info: last-changed
                 <<: *alert-style
+            # updates available for philips hue bulbs through zigbee2mqtt
+            - entity_id: '/update.blb_*/'
+              state: 'on'
+              options:
+                icon: 'mdi:arrow-up-circle-outline'
+                secondary_info: last-changed
+                <<: *alert-info-style
             # updates available (tested with: core, zigbee2mqtt & wled)
             - entity_id: '/update.*_(firmware|update)|binary_sensor.*_update_available/'
               state: 'on'
@@ -429,7 +436,7 @@ views:
                   confirmation:
                     text: 'HVAC air filter changed?'
                 <<: *alert-info-style
-            # washing machine cleaning cycle
+            # washing machine cleaning cycle (every month)
             - entity_id: 'sensor.laundry_washing_machine_cleaned_interval'
               state: '> 30'
               options:

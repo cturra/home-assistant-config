@@ -6,20 +6,18 @@
     light.group_driveway_lights:
       state: 'on'
       brightness: 255
-      # 2100 kelvin
-      color_temp: 476
-      color_mode: color_temp
-
+      # 3500 kelvin
+      xy_color: [0.4036,0.3899]
 
 # bulbs christmas colours
 - name: 'Driveway Bulbs Christmas Colours'
   entities:
-    light.blb_outside_driveway1:
+    light.blb_outside_driveway_left:
       state: 'on'
       brightness: 255
       # green
       rgb_color: [0,255,0]
-    light.blb_outside_driveway2:
+    light.blb_outside_driveway_right:
       state: 'on'
       brightness: 255
       # red
@@ -28,12 +26,12 @@
 # bulbs halloween colours
 - name: 'Driveway Bulbs Halloween Colours'
   entities:
-    light.blb_outside_driveway1:
+    light.blb_outside_driveway_left:
       state: 'on'
       brightness: 255
       # orange
       rgb_color: [255,127,0]
-    light.blb_outside_driveway2:
+    light.blb_outside_driveway_right:
       state: 'on'
       brightness: 255
       # orange
@@ -42,16 +40,16 @@
 # bulbs ad-hoc colours
 - name: 'Driveway Bulbs Adhoc Colours'
   entities:
-    # bulb: left (side of house)
-    light.blb_outside_driveway1:
-      state: 'on'
-      brightness: 255
-      # yellow
-      rgb_color: [255,255,0]
-    # bulb: right (entrance)
-    light.blb_outside_driveway2:
+    # bulb: closest to entrance
+    light.blb_outside_driveway_right:
       state: 'on'
       brightness: 255
       # blue
       rgb_color: [0,0,255]
+    # bulb: side of house
+    light.blb_outside_driveway_left:
+      state: 'on'
+      brightness: 255
+      # yellow
+      rgb_color: [255,255,0]
 
