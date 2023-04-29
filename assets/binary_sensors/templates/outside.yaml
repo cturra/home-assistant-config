@@ -3,8 +3,7 @@
 # -- acurite (rtl) --
 # temperature sensor battery state
 - name: 'SNR Outside Temperature Battery Low'
+  unique_id: 'snr_outside_temperature_battery_low'
   state: >
-    {# battery_ok: 1=normal, 0=low #}
-    {% if is_number(state_attr('sensor.snr_outside_temperature', 'battery_ok')) %}
-      {{ is_state_attr('sensor.snr_outside_temperature', 'battery_ok', 0) }}
-    {% endif %}
+    {% from 'battery_state.jinja' import is_battery_low %}
+    {{ is_battery_low('sensor.snr_outside_temperature') }}

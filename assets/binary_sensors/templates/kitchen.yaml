@@ -13,18 +13,16 @@
     {% endif %}
 
 # -- la crosse (rtl) --
-# freezer temperature battery state
-- name: 'SNR Kitchen Fridge Temperature Battery Low'
-  state: >
-    {# battery_ok: 1=normal, 0=low #}
-    {% if is_number(state_attr('sensor.snr_kitchen_fridge_temperature', 'battery_ok')) %}
-      {{ is_state_attr('sensor.snr_kitchen_fridge_temperature', 'battery_ok', 0) }}
-    {% endif %}
-
 # fridge temperature battery state
-- name: 'SNR Kitchen Freezer Temperature Battery Low'
+- name: 'SNR Kitchen Fridge Temperature Battery Low'
+  unique_id: 'snr_kitchen_fridge_temperature_battery_low'
   state: >
-    {# battery_ok: 1=normal, 0=low #}
-    {% if is_number(state_attr('sensor.snr_kitchen_freezer_temperature', 'battery_ok')) %}
-      {{ is_state_attr('sensor.snr_kitchen_freezer_temperature', 'battery_ok', 0) }}
-    {% endif %}
+    {% from 'battery_state.jinja' import is_battery_low %}
+    {{ is_battery_low('sensor.snr_kitchen_fridge_temperature') }}
+
+# freezer temperature battery state
+- name: 'SNR Kitchen Freezer Temperature Battery Low'
+  unique_id: 'snr_kitchen_freezer_temperature_battery_low'
+  state: >
+    {% from 'battery_state.jinja' import is_battery_low %}
+    {{ is_battery_low('sensor.snr_kitchen_freezer_temperature') }}
