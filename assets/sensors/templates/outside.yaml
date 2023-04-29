@@ -3,7 +3,6 @@
 # air quality index (aqi)
 - name: 'SNR Outside AirQuality AQI'
   device_class: aqi
-  unit_of_measurement: "AQI"
   state: >
     {% macro calcAQI(Cp, Ih, Il, BPh, BPl) %}
       {{ (((Ih - Il)/(BPh - BPl)) * (Cp - BPl) + Il) | round(1, default=0.0) }}

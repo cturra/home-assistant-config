@@ -17,12 +17,12 @@
 - name: 'SNR Kitchen Fridge Temperature Battery Low'
   unique_id: 'snr_kitchen_fridge_temperature_battery_low'
   state: >
-    {% from 'battery_state.jinja' import is_battery_low %}
+    {% from 'battery.jinja' import is_battery_low %}
     {{ is_battery_low('sensor.snr_kitchen_fridge_temperature') }}
 
 # freezer temperature battery state
 - name: 'SNR Kitchen Freezer Temperature Battery Low'
   unique_id: 'snr_kitchen_freezer_temperature_battery_low'
   state: >
-    {% from 'battery_state.jinja' import is_battery_low %}
+    {% from 'battery.jinja' import is_battery_low %}
     {{ is_battery_low('sensor.snr_kitchen_freezer_temperature') }}

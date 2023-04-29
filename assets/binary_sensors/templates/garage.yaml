@@ -3,8 +3,9 @@
 # -- acurite (rtl) --
 # temperature sensor battery state
 - name: 'SNR Garage Temperature Battery Low'
+  unique_id: 'snr_garage_temperature_battery_low'
   state: >
-    {% from 'battery_state.jinja' import is_battery_low %}
+    {% from 'battery.jinja' import is_battery_low %}
     {{ is_battery_low('sensor.snr_garage_temperature') }}
 
 # -- la crosse (rtl) --
@@ -12,14 +13,14 @@
 - name: 'SNR Garage Freezer Temperature Battery Low'
   unique_id: 'snr_garage_freezer_temperature_battery_low'
   state: >
-    {% from 'battery_state.jinja' import is_battery_low %}
+    {% from 'battery.jinja' import is_battery_low %}
     {{ is_battery_low('sensor.snr_garage_freezer_temperature') }}
 
 # fridge temperature battery state
 - name: 'SNR Garage Fridge Temperature Battery Low'
   unique_id: 'snr_garage_fridge_temperature_battery_low'
   state: >
-    {% from 'battery_state.jinja' import is_battery_low %}
+    {% from 'battery.jinja' import is_battery_low %}
     {{ is_battery_low('sensor.snr_garage_fridge_temperature') }}
 
 # -- sinopé --

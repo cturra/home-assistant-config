@@ -12,6 +12,15 @@
       {{ states('sensor.indoor_mean_co2_rounded') }}
     {% endif %}
 
+# hvac filter change interval
+- name: 'HVAC Filter Change Interval'
+  unit_of_measurement: 'days'
+  icon: 'mdi:air-filter'
+  # calculate days since the air filter was last changed
+  #  -- convert seconds to days
+  state: >
+    {{ ((as_timestamp(now()) - state_attr('input_datetime.hvac_filter_last_changed','timestamp')) | int / 60/1440) | round(0) }}
+
 # -- ecobee --
 # current_temperature from ecobee
 - name: 'HVAC Ecobee Indoor Average Temperature'
