@@ -393,6 +393,14 @@ views:
                 icon: 'mdi:propane-tank-outline'
                 secondary_info: last-changed
                 <<: *alert-style
+            # bc hydro bridge has not report in 10 minutes
+            - entity_id: 'sensor.bc_hydro_instantaneous_demand'
+              last_updated: "> 10m ago"
+              options:
+                name: 'BC Hydro Bridge Offline'
+                icon: 'mdi:transmission-tower-off'
+                secondary_info: last-changed
+                <<: *alert-style
             # updates available for philips hue bulbs through zigbee2mqtt
             - entity_id: '/update.blb_*/'
               state: 'on'
