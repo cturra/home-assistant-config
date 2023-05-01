@@ -687,7 +687,7 @@
     data: {}
   mode: restart
 - id: '1631637344914'
-  alias: 'Kids Bedroom: control lamp'
+  alias: 'Kids Bedroom: Remote controls'
   description: control Ikea bulb in kids room from 5 button remote
   use_blueprint:
     path: fich/zigbee2mqtt-ikea-5-button-remote-general-use.yaml
@@ -697,6 +697,7 @@
       - service: light.toggle
         target:
           entity_id: light.blb_kidsbedroom_lamp
+        data: {}
       button_brightness_up_short:
       - service: light.turn_on
         data:
@@ -1578,4 +1579,60 @@
       title: "\U0001F514 Front Doorbell"
       data:
         entity_id: camera.front_door_sub
+  mode: single
+- id: '1682884121773'
+  alias: 'Living Room: Remote controls'
+  description: control devices in living room from ikea/symfonisk remote
+  trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt/RMT_LivingRoom_Remote/action
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == ''play_pause'' }}'
+      sequence:
+      - service: switch.toggle
+        data: {}
+        target:
+          entity_id: switch.living_room_entertainment
+    - conditions:
+      - condition: template
+        value_template: "{{\n  trigger.payload == 'volume_up' or\n  trigger.payload
+          == 'volume_up_hold' \n}}"
+      sequence:
+      - service: media_player.volume_set
+        data:
+          volume_level: '{% set volume = state_attr(''media_player.living_room_receiver_main_zone'',
+            "volume_level") + 0.005 %} {{ 1.0 if volume > 1.0 else volume }}'
+        entity_id: media_player.living_room_receiver_main_zone
+    - conditions:
+      - condition: template
+        value_template: "{{\n  trigger.payload == 'volume_down' or\n  trigger.payload
+          == 'volume_down_hold'\n}}"
+      sequence:
+      - service: media_player.volume_set
+        data:
+          volume_level: '{% set volume = state_attr(''media_player.living_room_receiver_main_zone'',
+            "volume_level") - 0.005 %} {{ 0.0 if volume < 0.0 else volume }}'
+        entity_id: media_player.living_room_receiver_main_zone
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == ''track_previous'' }}'
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: 10
+        target:
+          entity_id: light.sw_livingroom_ceilinglight
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == ''dots_1_initial_press'' }}'
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: -10
+        target:
+          entity_id: light.sw_livingroom_ceilinglight
   mode: single

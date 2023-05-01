@@ -402,7 +402,7 @@ views:
                 secondary_info: last-changed
                 <<: *alert-style
             # updates available for philips hue bulbs through zigbee2mqtt
-            - entity_id: '/update.blb_*/'
+            - entity_id: '/update.(blb|rmt)_*/'
               state: 'on'
               options:
                 icon: 'mdi:arrow-up-circle-outline'
