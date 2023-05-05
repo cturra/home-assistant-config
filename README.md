@@ -58,8 +58,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT           |
 | Plug              | Wyze       | WLPPO1          | 1     | Tasmota               |
 | Receptacle        | TopGreener | TGWF15RM        | 1     | Tasmota               |
-| Remote            | Ikea       | E1810           | 2     | Zigbee2MQTT           |
-| Remote            | Ikea       | E2123           | 1     | Zigbee2MQTT           |
+| Remote            | Ikea       | E1810           | 1     | Zigbee2MQTT           |
+| Remote            | Ikea       | E2123           | 2     | Zigbee2MQTT           |
 | Remote            | Xiaomi     | WXKG11LM        | 2     | Zigbee2MQTT           |
 | Switch (Motion)   | CloudFree  | SWM1            | 1     | Tasmota               |
 | Switch (Motion)   | Milfra     | MFA06           | 1     | Tasmota               |

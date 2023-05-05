@@ -1388,50 +1388,6 @@
           entity_id: switch.plg_laundry_zbrtr
     default: []
   mode: single
-- id: '1656021519367'
-  alias: 'Main Bedroom: Remote controls'
-  description: control devices in main bedroom from 5 button remote
-  use_blueprint:
-    path: fich/zigbee2mqtt-ikea-5-button-remote-general-use.yaml
-    input:
-      remote: sensor.rmt_mainbedroom_remote_action
-      button_on_off:
-      - service: switch.toggle
-        data: {}
-        target:
-          entity_id: switch.main_bedroom_entertainment
-      button_brightness_up_long:
-      - service: light.turn_on
-        data: {}
-        target:
-          entity_id: light.sw_mainbedroom_ceilinglight
-      button_brightness_down_long:
-      - service: light.turn_off
-        data: {}
-        target:
-          entity_id: light.sw_mainbedroom_ceilinglight
-      button_left_short:
-      - service: media_player.volume_down
-        data: {}
-        target:
-          entity_id: media_player.main_bedroom_speaker
-      button_right_short:
-      - service: media_player.volume_up
-        data: {}
-        target:
-          entity_id: media_player.main_bedroom_speaker
-      button_brightness_down_short:
-      - service: light.turn_on
-        data:
-          brightness_step_pct: -10
-        target:
-          entity_id: light.sw_mainbedroom_ceilinglight
-      button_brightness_up_short:
-      - service: light.turn_on
-        data:
-          brightness_step_pct: 10
-        target:
-          entity_id: light.sw_mainbedroom_ceilinglight
 - id: '1664468912980'
   alias: Downstairs Bathroom Adjust Motion Light timer
   description: Picks up the input helper changes and applies them back to the TASMOTA
@@ -1591,7 +1547,7 @@
   - choose:
     - conditions:
       - condition: template
-        value_template: '{{ trigger.payload == ''play_pause'' }}'
+        value_template: '{{ trigger.payload == ''toggle'' }}'
       sequence:
       - service: switch.toggle
         data: {}
@@ -1645,4 +1601,68 @@
           brightness_step_pct: -10
         target:
           entity_id: light.sw_livingroom_ceilinglight
+  mode: single
+- id: '1683261355629'
+  alias: 'Main Bedroom: Remote controls'
+  description: control devices in main bedroom from ikea/symfonisk remote
+  trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt/RMT_MainBedroom_Remote/action
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == ''toggle'' }}'
+      sequence:
+      - service: switch.toggle
+        data: {}
+        target:
+          entity_id: switch.main_bedroom_entertainment
+    - conditions:
+      - condition: template
+        value_template: "{{\n  trigger.payload == 'volume_up' or\n  trigger.payload
+          == 'volume_up_hold' \n}}"
+      sequence:
+      - service: media_player.volume_up
+        data: {}
+        target:
+          entity_id: media_player.main_bedroom_speaker
+    - conditions:
+      - condition: template
+        value_template: "{{\n  trigger.payload == 'volume_down' or\n  trigger.payload
+          == 'volume_down_hold'\n}}"
+      sequence:
+      - service: media_player.volume_down
+        data: {}
+        target:
+          entity_id: media_player.main_bedroom_speaker
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == ''dots_1_initial_press'' }}'
+      sequence:
+      - service: light.toggle
+        data: {}
+        target:
+          entity_id: light.sw_mainbedroom_ceilinglight
+    - conditions:
+      - condition: template
+        value_template: "{% if is_state('light.sw_mainbedroom_ceilinglight','on')
+          %}\n  {{ trigger.payload == 'track_next' }}\n{% endif %}"
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: 10
+        target:
+          entity_id: light.sw_mainbedroom_ceilinglight
+    - conditions:
+      - condition: template
+        value_template: "{% if is_state('light.sw_mainbedroom_ceilinglight','on')
+          %}\n  {{ trigger.payload == 'track_previous' }}\n{% endif %}"
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: -10
+        target:
+          entity_id: light.sw_mainbedroom_ceilinglight
   mode: single
