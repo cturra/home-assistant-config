@@ -29,7 +29,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | TV                | LG         | OLED55B8        | 1     | HA :: WebOSTV         |
 | TV                | LG         | OLED65C1        | 1     | HA :: WebOSTV         |
 | **Sensors**                                                                      |
-| Air Quality       | Awair      | Element         | 2     | HA :: Awair Local API |
+| Air Quality       | Awair      | Element         | 3     | HA :: Awair Local API |
 | Air Quality       | Airthings  | Wave+           | 1     | HA :: Airthings BLE   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |

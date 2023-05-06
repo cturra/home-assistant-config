@@ -1288,7 +1288,7 @@ views:
             # house avg air quality: carbon dioxide
             - type: 'custom:button-card'
               entity: sensor.indoor_mean_co2_rounded
-              name: 'Co2'
+              name: 'CO2'
               show_units: false
               show_state: true
               show_icon: false
@@ -1320,7 +1320,7 @@ views:
 
           # kids room
           - type: 'custom:button-card'
-            entity: sensor.kids_bedroom_temperature_1_decimal
+            entity: sensor.kids_bedroom_mean_temperature_calculation
             name: 'Kids Bedroom'
             show_state: true
             show_icon: false
@@ -1941,7 +1941,7 @@ views:
         filter:
           include:
             - name: entity_id
-              value: 'sensor.snr_*_propane_battery'
+              value: 'sensor.snr_*_propane_battery_persist'
 
       # Remote Controls
       - type: 'custom:battery-state-card'
