@@ -24,9 +24,10 @@
   type: mean
   round_digits: 0
   entity_ids:
-    - sensor.snr_crawspace_airquality_co2
-    - sensor.snr_mainbedroom_airquality_carbon_dioxide
-    - sensor.snr_office_airquality_carbon_dioxide
+    - sensor.snr_crawlspace_airquality_co2
+    - sensor.snr_kidsbedroom_airquality_co2
+    - sensor.snr_mainbedroom_airquality_co2
+    - sensor.snr_office_airquality_cao2
 
 # mean indoor humidity from climate sensors
 - platform: min_max
@@ -37,7 +38,7 @@
     - sensor.hvac_ecobee_indoor_average_humidity
     - sensor.snr_crawlspace_climate_humidity
     - sensor.snr_kitchen_climate_humidity
-    - sensor.snr_office_humidity
-    - sensor.snr_mainbedroom_climate_humidity
-    - sensor.snr_kidsbedroom_climatedisplay_humidity
+    - sensor.snr_office_airquality_humidity
+    - sensor.snr_mainbedroom_airquality_humidity
+    - sensor.snr_kidsbedroom_airquality_humidity
     - sensor.snr_sparebedroom_climate_humidity
