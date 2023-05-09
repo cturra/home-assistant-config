@@ -21,6 +21,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Bulb (A19)        | Ikea       | LED1624G9       | 1     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 929002478401    | 1     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 9290024717      | 2     | Zigbee2MQTT           |
+| **Locks**                                                                        |
+| Door Lock         | August     | ASL-03          | 1     | HA :: Yale Access BLE |
 | **Entertainment**                                                                |
 | Audio             | Chromecast | Audio           | 1     | HA :: Chromecast      |
 | Receiver          | Yamaha     | HTR-8063        | 1     | HA :: MediaPlayers    |
@@ -33,7 +35,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Quality       | Airthings  | Wave+           | 1     | HA :: Airthings BLE   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
-| Climate           | Xiaomi     | WSDCGQ11LM      | 4     | Zigbee2MQTT           |
+| Climate           | Inkbird    | IBS-TH2         | 2     | HA :: Inkbird BLE     |
+| Climate           | Xiaomi     | WSDCGQ11LM      | 1     | Zigbee2MQTT           |
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 7     | HA :: BTHome          |
 | Contact           | Xiaomi     | MCCGQ11LM       | 17    | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 16    | Zigbee2MQTT           |

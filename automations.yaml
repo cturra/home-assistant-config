@@ -780,7 +780,7 @@
           entity_id: switch.plg_crawlspace_zbrtr
           state: 'on'
         - condition: numeric_state
-          entity_id: sensor.crawlspace_locker_mean_humidity_calculation
+          entity_id: sensor.snr_crawlspace_locker_climatedisplay_humidity
           below: '49.0'
       sequence:
       - service: switch.turn_off
@@ -794,7 +794,7 @@
           entity_id: switch.plg_crawlspace_zbrtr
           state: 'off'
         - condition: numeric_state
-          entity_id: sensor.crawlspace_locker_mean_humidity_calculation
+          entity_id: sensor.snr_crawlspace_locker_climatedisplay_humidity
           above: '52.0'
       sequence:
       - service: switch.turn_on
@@ -1547,7 +1547,8 @@
   - choose:
     - conditions:
       - condition: template
-        value_template: '{{ trigger.payload == ''toggle'' }}'
+        value_template: "{{\n  trigger.payload == 'play_pause' or\n  trigger.payload
+          == 'toggle'\n}}"
       sequence:
       - service: switch.toggle
         data: {}
@@ -1613,7 +1614,8 @@
   - choose:
     - conditions:
       - condition: template
-        value_template: '{{ trigger.payload == ''toggle'' }}'
+        value_template: "{{\n  trigger.payload == 'play_pause' or\n  trigger.payload
+          == 'toggle'\n}}"
       sequence:
       - service: switch.toggle
         data: {}
@@ -1665,4 +1667,51 @@
           brightness_step_pct: -10
         target:
           entity_id: light.sw_mainbedroom_ceilinglight
+  mode: single
+- id: '1683396475246'
+  alias: 'Kids Bedroom: Morning Wake Up Light'
+  description: transition lamp light to yellow when it's time to wake up
+  trigger:
+  - platform: time
+    at: 07:15:00
+  condition: []
+  action:
+  - service: light.turn_on
+    data:
+      transition: 10
+      rgb_color:
+      - 254
+      - 251
+      - 0
+      brightness_pct: 20
+    target:
+      entity_id: light.blb_kidsbedroom_lamp
+  mode: single
+- id: '1683494235541'
+  alias: 'Garage Inside: House door lock controls'
+  description: (un)lock door from nfc tag
+  trigger:
+  - platform: tag
+    tag_id: 0248e71d-2da6-44a5-97ee-636c87cd4469
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: lock.lck_garage_house_door
+        state: unlocked
+      sequence:
+      - service: lock.lock
+        data: {}
+        target:
+          entity_id: lock.lck_garage_house_door
+    - conditions:
+      - condition: state
+        entity_id: lock.lck_garage_house_door
+        state: locked
+      sequence:
+      - service: lock.unlock
+        data: {}
+        target:
+          entity_id: lock.lck_garage_house_door
   mode: single

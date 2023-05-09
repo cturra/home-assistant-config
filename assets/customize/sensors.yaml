@@ -2,14 +2,6 @@
 
 ## ------ climate sensors ------
 
-# crawlspace
-sensor.snr_crawlspace_climate_battery:
-  friendly_name: 'Crawlspace'
-
-# crawlspace: locker (xiaomi aqara)
-sensor.snr_crawlspace_lockerclimate_battery:
-  friendly_name: 'Locker'
-
 # crawlspace: locker (xiaomi mi)
 sensor.snr_crawlspace_locker_climatedisplay_battery:
   friendly_name: 'Locker: Display'
@@ -29,10 +21,6 @@ sensor.snr_outside_tacomaboxclimate_battery:
 # outside: tacoma cab
 sensor.snr_outside_tacomacabclimate_battery:
   friendly_name: 'Outside: Tacoma Cab'
-
-# spare bedroom
-sensor.snr_sparebedroom_climate_battery:
-  friendly_name: 'Spare Bedroom'
 
 
 ## ------ contact sensors ------
@@ -243,19 +231,6 @@ sensor.snr_kitchen_freezer_temperature:
   friendly_name: 'Kitchen: Freezer'
 binary_sensor.snr_kitchen_freezer_temperature_battery_low:
   friendly_name: 'Kitchen: Freezer'
-
-## fridges
-# garage fridge
-sensor.snr_garage_fridge_temperature:
-  friendly_name: 'Garage: Fridge'
-binary_sensor.snr_garage_fridge_temperature_battery_low:
-  friendly_name: 'Garage: Fridge'
-
-# kitchen fridge
-sensor.snr_kitchen_fridge_temperature:
-  friendly_name: 'Kitchen: Fridge'
-binary_sensor.snr_kitchen_fridge_temperature_battery_low:
-  friendly_name: 'Kitchen: Fridge'
 
 # outside
 binary_sensor.snr_outside_temperature_battery_low:
