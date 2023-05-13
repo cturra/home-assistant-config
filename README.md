@@ -54,7 +54,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Camera            | Meraki     | MV72            | 1     | RTSP                  |
 | Camera            | Wyze       | Cam v3          | 1     | RTSP                  |
 | **Switches**                                                                     |
-| IR Blaster        | Uniplay    | Q1              | 2     | Tasmota               |
+| IR Blaster        | Uniplay    | Q1              | 3     | Tasmota               |
 | Plug              | Gosund     | WP2             | 2     | Tasmota               |
 | Plug              | Gosund     | WP5             | 3     | Tasmota               |
 | Plug              | Sonoff     | S31             | 8     | Tasmota               |
