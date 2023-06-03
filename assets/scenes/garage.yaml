@@ -2,7 +2,15 @@
 
 # simple ios integration to open/close the garage door
 - name: 'Garage Door'
+  icon: 'mdi:garage_variant'
   entities:
     switch.sw_garage_vehicledooropener:
       state: 'on'
-      icon: 'mdi:garage-variant'
+
+# lock garage house door lock toggle
+- name: 'Garage Door Lock'
+  icon: 'mdi:lock-open-outline'
+  entities:
+    input_boolean.garage_house_door_lock_toggled:
+      state: 'on'
+

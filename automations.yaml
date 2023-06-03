@@ -686,56 +686,6 @@
       entity_id: switch.sw_hvac_garage_thermostat
     data: {}
   mode: restart
-- id: '1631637344914'
-  alias: 'Kids Bedroom: Remote controls'
-  description: control Ikea bulb in kids room from 5 button remote
-  use_blueprint:
-    path: fich/zigbee2mqtt-ikea-5-button-remote-general-use.yaml
-    input:
-      remote: sensor.rmt_kidsbedroom_remote_action
-      button_on_off:
-      - service: light.toggle
-        target:
-          entity_id: light.blb_kidsbedroom_lamp
-        data: {}
-      button_brightness_up_short:
-      - service: light.turn_on
-        data:
-          transition: 1
-          brightness_step_pct: 20
-        target:
-          entity_id: light.blb_kidsbedroom_lamp
-      button_brightness_down_short:
-      - service: light.turn_on
-        data:
-          transition: 1
-          brightness_step_pct: -20
-        target:
-          entity_id: light.blb_kidsbedroom_lamp
-      button_right_short:
-      - service: light.turn_on
-        data:
-          hs_color:
-          - '{{ range(360) | random }}'
-          - '{{ range(80,101) | random }}'
-          effect: Solid
-          transition: 1
-        entity_id: light.blb_kidsbedroom_lamp
-      button_left_short:
-      - service: light.turn_on
-        data:
-          transition: 1
-          effect: Rainbow Runner
-        target:
-          entity_id: light.blb_kidsbedroom_lamp
-      button_right_long:
-      - service: light.turn_on
-        target:
-          entity_id: light.blb_kidsbedroom_lamp
-        data:
-          transition: 1
-          kelvin: 3300
-          effect: Solid
 - id: '1631739108301'
   alias: 'Garage Indoor: Notify when vehicle door left open at night'
   description: notify chris' phone if the vehicle door is left open for 5 minutes
@@ -1541,7 +1491,7 @@
   description: control devices in living room from ikea/symfonisk remote
   trigger:
   - platform: mqtt
-    topic: zigbee2mqtt/RMT_LivingRoom_Remote/action
+    topic: zigbee2mqtt-pi/RMT_LivingRoom_Remote/action
   condition: []
   action:
   - choose:
@@ -1608,7 +1558,7 @@
   description: control devices in main bedroom from ikea/symfonisk remote
   trigger:
   - platform: mqtt
-    topic: zigbee2mqtt/RMT_MainBedroom_Remote/action
+    topic: zigbee2mqtt-pi/RMT_MainBedroom_Remote/action
   condition: []
   action:
   - choose:
@@ -1689,10 +1639,14 @@
   mode: single
 - id: '1683494235541'
   alias: 'Garage Inside: House door lock controls'
-  description: (un)lock door from nfc tag
+  description: (un)lock door
   trigger:
   - platform: tag
     tag_id: 0248e71d-2da6-44a5-97ee-636c87cd4469
+  - platform: state
+    entity_id:
+    - input_boolean.garage_house_door_lock_toggled
+    to: 'on'
   condition: []
   action:
   - choose:
@@ -1714,32 +1668,237 @@
         data: {}
         target:
           entity_id: lock.lck_garage_house_door
+  - if:
+    - condition: state
+      entity_id: input_boolean.garage_house_door_lock_toggled
+      state: 'on'
+    then:
+    - service: input_boolean.turn_off
+      data: {}
+      target:
+        entity_id: input_boolean.garage_house_door_lock_toggled
   mode: single
 - id: '1684011953306'
   alias: 'Deck: Remote Controls'
-  description: control multi-media from ikea/5-button remote
-  use_blueprint:
-    path: fich/zigbee2mqtt-ikea-5-button-remote-general-use.yaml
-    input:
-      remote: sensor.rmt_deck_remote_action
-      button_on_off:
+  description: control multi-media from ikea/symfonisk remote
+  trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt-pi/RMT_Deck_Remote/action
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: "{{\n  trigger.payload == 'play_pause' or\n  trigger.payload
+          == 'toggle'\n}}"
+      sequence:
       - service: mqtt.publish
         data:
           topic: cmnd/IRB_Shed/IRSend
           payload: '{"Protocol":"PANASONIC","Bits":48,"Data":"0x40040538BC81","DataLSB":"0x220A01C3D81","Repeat":0}
 
             '
-      button_brightness_up_short:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == ''volume_up'' }}'
+      sequence:
       - service: mqtt.publish
         data:
           topic: cmnd/IRB_Shed/IRSend
           payload: '{"Protocol":"PANASONIC","Bits":48,"Data":"0x400405000401","DataLSB":"0x220A0002080","Repeat":0}
 
             '
-      button_brightness_down_short:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == ''volume_down'' }}'
+      sequence:
       - service: mqtt.publish
         data:
           topic: cmnd/IRB_Shed/IRSend
           payload: '{"Protocol":"PANASONIC","Bits":48,"Data":"0x400405008481","DataLSB":"0x220A0002181","Repeat":0}
 
             '
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == ''dots_1_initial_press'' }}'
+      sequence:
+      - service: light.toggle
+        data: {}
+        target:
+          entity_id: light.sw_deck_ceilinglight
+    - conditions:
+      - condition: template
+        value_template: "{% if is_state('light.sw_deck_ceilinglight','on') %}\n  {{
+          trigger.payload == 'track_next' }}\n{% endif %}"
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: 10
+        target:
+          entity_id: light.sw_deck_ceilinglight
+    - conditions:
+      - condition: template
+        value_template: "{% if is_state('light.sw_deck_ceilinglight','on') %}\n  {{
+          trigger.payload == 'track_previous' }}\n{% endif %}"
+      sequence:
+      - service: light.turn_on
+        data:
+          brightness_step_pct: -10
+        target:
+          entity_id: light.sw_deck_ceilinglight
+- id: '1684823367096'
+  alias: 'Kids Bedroom: Remote controls'
+  description: control Ikea bulb in kids room from 5 button remote
+  trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt-pi/RMT_KidsBedroom_Remote/action
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == ''toggle'' }}'
+      sequence:
+      - service: light.toggle
+        target:
+          entity_id: light.blb_kidsbedroom_lamp
+        data: {}
+    - conditions:
+      - condition: template
+        value_template: '{{  trigger.payload == ''brightness_up_click'' }}'
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 1
+          brightness_step_pct: 10
+        target:
+          entity_id: light.blb_kidsbedroom_lamp
+    - conditions:
+      - condition: template
+        value_template: '{{  trigger.payload == ''brightness_down_click'' }}'
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 1
+          brightness_step_pct: -10
+        target:
+          entity_id: light.blb_kidsbedroom_lamp
+    - conditions:
+      - condition: template
+        value_template: '{{  trigger.payload == ''arrow_right_click'' }}'
+      sequence:
+      - service: light.turn_on
+        data:
+          hs_color:
+          - '{{ range(360) | random }}'
+          - '{{ range(80,101) | random }}'
+          effect: Solid
+          transition: 1
+        target:
+          entity_id: light.blb_kidsbedroom_lamp
+    - conditions:
+      - condition: template
+        value_template: '{{  trigger.payload == ''arrow_left_click'' }}'
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 1
+          effect: Rainbow Runner
+        target:
+          entity_id: light.blb_kidsbedroom_lamp
+    - conditions:
+      - condition: template
+        value_template: '{{  trigger.payload == ''arrow_right_hold'' }}'
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 1
+          kelvin: 3300
+          effect: Solid
+        target:
+          entity_id: light.blb_kidsbedroom_lamp
+  mode: single
+- id: '1684988902593'
+  alias: 'Sparebedroom: Remote controls'
+  description: control spare bedroom lights from ikea/5-button remote
+  trigger:
+  - platform: mqtt
+    topic: zigbee2mqtt-pi/RMT_SpareBedroom_Remote/action
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.payload == ''toggle'' }}'
+      sequence:
+      - service: light.toggle
+        target:
+          entity_id: light.sw_sparebedroom_ceilinglight
+        data: {}
+    - conditions:
+      - condition: template
+        value_template: '{{  trigger.payload == ''brightness_up_click'' }}'
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 1
+          brightness_step_pct: 10
+        target:
+          entity_id: light.sw_sparebedroom_ceilinglight
+    - conditions:
+      - condition: template
+        value_template: '{{  trigger.payload == ''brightness_down_click'' }}'
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 1
+          brightness_step_pct: -10
+        target:
+          entity_id: light.sw_sparebedroom_ceilinglight
+    - conditions:
+      - condition: template
+        value_template: '{{  trigger.payload == ''arrow_right_click'' }}'
+      sequence:
+      - service: switch.toggle
+        data: {}
+        target:
+          entity_id: switch.plg_sparebedroom_lamp
+  mode: single
+- id: '1685252893005'
+  alias: 'Outside: Front Yard Sprinkler Controls'
+  description: ''
+  trigger:
+  - platform: time
+    at: 04:30:00
+  condition: []
+  action:
+  - repeat:
+      count: '3'
+      sequence:
+      - service: switch.turn_on
+        data: {}
+        target:
+          entity_id: switch.vlv_front_sprinkler_state
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 15
+          milliseconds: 0
+  - delay:
+      hours: 0
+      minutes: 45
+      seconds: 0
+      milliseconds: 0
+  - repeat:
+      count: '3'
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.vlv_front_sprinkler_state
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 15
+          milliseconds: 0
+  mode: single

@@ -645,8 +645,8 @@ views:
             - entity_id: switch.plg_kitchen_outlet1
               state: 'on'
               options:
-                name: 'Kitchen: Baby Monitor'
-                icon: 'mdi:speaker'
+                name: 'Kitchen: Fish Tank'
+                icon: 'mdi:fishbowl-outline'
                 secondary_info: last-changed
             # living room
             - entity_id: light.sw_livingroom_ceilinglight
@@ -956,8 +956,8 @@ views:
               entities:
                 # baby monitor
                 - entity: switch.plg_kitchen_outlet1
-                  name: 'Baby Monitor'
-                  icon: 'mdi:speaker'
+                  name: 'Fish Tank'
+                  icon: 'mdi:fishbowl-outline'
                   state_color: true
                 # espresso machine
                 - entity: switch.plg_kitchen_espressomachine
@@ -1906,6 +1906,18 @@ views:
           include:
             - name: entity_id
               value: 'sensor.snr_*leak_battery'
+
+      # Lock
+      - type: 'custom:battery-state-card'
+        title: 'Locks'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        sort_by_level: 'asc'
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.lck_*_battery_*'
 
       # Motion Sensors
       - type: 'custom:battery-state-card'

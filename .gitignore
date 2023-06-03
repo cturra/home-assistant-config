@@ -19,3 +19,4 @@ aircast.xml
 secrets.yaml
 .HA_VERSION
 webostv.conf
+*.august.conf

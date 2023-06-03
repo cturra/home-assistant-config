@@ -1,4 +1,4 @@
-## INPUT_BOOLEAN / LAUNDRY
+## INPUT_BOOLEAN / HOUSE
 
 hvac_filter_change_reset:
   name: 'HVAC Filter Change Reset'

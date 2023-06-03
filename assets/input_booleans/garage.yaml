@@ -1,0 +1,5 @@
+## INPUT_BOOLEAN / GARAGE
+
+garage_house_door_lock_toggled:
+  name: 'Garage House Door Lock Toggled'
+  icon: 'mdi:lock-outline'
