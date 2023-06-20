@@ -311,6 +311,12 @@ views:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
                 <<: *alert-style
+            # battery low: sonos roam
+            - entity_id: 'sensor.media_*_battery_state'
+              state: '< 20'
+              options:
+                  secondary_info: last-changed
+                  <<: *alert-style
             # freezer temperature too warm (> -13.9 °C)
             - entity_id: 'sensor.snr_*_freezer_temperature'
               state: '> -13.9'
@@ -594,6 +600,13 @@ views:
                 icon: 'mdi:wall-sconce-flat-variant-outline'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
+            # front yard
+            - entity_id: switch.vlv_front_sprinkler_state
+              state: 'on'
+              options:
+                name: 'Front: Sprinkler'
+                icon: 'mdi:watering-can-outline'
+                secondary_info: last-changed
             # garage
             - entity_id: switch.sw_garage_ceilingmainlights
               state: 'on'
@@ -805,7 +818,6 @@ views:
                   power: true
                   progress: true
                   source: true
-                  volume: true
                 <<: *media-player-card-style
             # tv :: main bedroom
             - entity_id: switch.main_bedroom_entertainment
@@ -1195,6 +1207,11 @@ views:
                 - entity: light.sw_deck_ceilinglight
                   name: 'Deck: Ceiling'
                   icon: 'mdi:light-recessed'
+                  state_color: true
+                # front yard sprinkler
+                - entity: switch.vlv_front_sprinkler_state
+                  name: 'Sprinkler'
+                  icon: 'mdi:watering-can-outline'
                   state_color: true
             - type: entities
               show_header_toggle: false
@@ -1918,6 +1935,18 @@ views:
           include:
             - name: entity_id
               value: 'sensor.lck_*_battery_*'
+
+      # Media Players
+      - type: 'custom:battery-state-card'
+        title: 'Media Players'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        sort_by_level: 'asc'
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.media_*_battery_state'
 
       # Motion Sensors
       - type: 'custom:battery-state-card'
