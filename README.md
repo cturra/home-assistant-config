@@ -16,9 +16,9 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Thermostat        | Ecobee     | Ecobee3         | 1     | HA :: Ecobee          |
 | Thermostat        | Sinopé     | TH1400ZB        | 1     | Zigbee2MQTT           |
 | **Lights**                                                                       |
+| Bulb (A25)        | Athom      | LB01-15W-E27    | 1     | Tasmota               |
 | Bulb (BR30)       | Athom      | LB03-12W-BR30   | 2     | Tasmota               |
 | Bulb (B22)        | Athom      | LB01-7W-E27     | 1     | WLED                  |
-| Bulb (A19)        | Ikea       | LED1624G9       | 1     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 929002478401    | 1     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 9290024717      | 2     | Zigbee2MQTT           |
 | **Locks**                                                                        |
@@ -26,13 +26,15 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Entertainment**                                                                |
 | Audio             | Chromecast | Audio           | 1     | HA :: Chromecast      |
 | Receiver          | Yamaha     | HTR-8063        | 1     | HA :: MediaPlayers    |
-| Speaker           | Sonos      | Play:5          | 1     | HA :: Sonos           |
 | Speaker           | Sonos      | Beam            | 1     | HA :: Sonos           |
+| Speaker           | Sonos      | Play:5          | 1     | HA :: Sonos           |
+| Speaker           | Sonos      | Roam SL         | 1     | HA :: Sonos           |
 | TV                | LG         | OLED55B8        | 1     | HA :: WebOSTV         |
 | TV                | LG         | OLED65C1        | 1     | HA :: WebOSTV         |
 | **Sensors**                                                                      |
 | Air Quality       | Awair      | Element         | 3     | HA :: Awair Local API |
 | Air Quality       | Airthings  | Wave+           | 1     | HA :: Airthings BLE   |
+| Air Quality       | Ikea       | E2112           | 1     | Zigbee2MQTT           |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
 | Climate           | Inkbird    | IBS-TH2         | 2     | HA :: Inkbird BLE     |
@@ -57,13 +59,13 @@ And, if you have any feedback, please feel free to reach out :smile:
 | IR Blaster        | Uniplay    | Q1              | 3     | Tasmota               |
 | Plug              | Gosund     | WP2             | 2     | Tasmota               |
 | Plug              | Gosund     | WP5             | 3     | Tasmota               |
-| Plug              | Sonoff     | S31             | 8     | Tasmota               |
+| Plug              | Sonoff     | S31             | 9     | Tasmota               |
 | Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT           |
 | Plug              | Wyze       | WLPPO1          | 1     | Tasmota               |
 | Receptacle        | TopGreener | TGWF15RM        | 1     | Tasmota               |
-| Remote            | Ikea       | E1810           | 1     | Zigbee2MQTT           |
-| Remote            | Ikea       | E2123           | 2     | Zigbee2MQTT           |
-| Remote            | Xiaomi     | WXKG11LM        | 2     | Zigbee2MQTT           |
+| Remote            | Ikea       | E1810           | 2     | Zigbee2MQTT           |
+| Remote            | Ikea       | E2123           | 3     | Zigbee2MQTT           |
+| Remote            | Xiaomi     | WXKG11LM        | 1     | Zigbee2MQTT           |
 | Switch (Motion)   | CloudFree  | SWM1            | 1     | Tasmota               |
 | Switch (Motion)   | Milfra     | MFA06           | 1     | Tasmota               |
 | Switch            | Shelly     | 1               | 1     | Tasmota               |
@@ -74,7 +76,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Switch            | Treatlife  | SS02S           | 11    | Tasmota               |
 | Switch (3 Way)    | Treatlife  | SS02            | 2     | Tasmota               |
 | Switch (Dimmer)   | Treatlife  | DS02S           | 4     | Tasmota               |
-| Switch (Dimmer)   | Treatlife  | DS01C           | 2     | Tasmota               |
+| Switch (Dimmer)   | Treatlife  | DS01C           | 3     | Tasmota               |
 | **Other**                                                                        |
 | Propane Tank      | Mopeka     | Pro Check M1017 | 1     | HA :: Mopeka          |
 | Toothbrush        | Oral-B     | Smart 4000      | 2     | HA :: Oral-B          |

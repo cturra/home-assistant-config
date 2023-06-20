@@ -53,3 +53,28 @@
       {# use previous value if sensor returns unknown #}
       {{ states('sensor.indoor_mean_humidity') }}
     {% endif %}
+
+# battery state of sonos roam
+- name: 'Media Roam Battery State'
+  unique_id: media_roam_battery_state
+  device_class: battery
+  unit_of_measurement: '%'
+  icon: >
+    {% if is_state('binary_sensor.media_roam_power','on') %}
+      mdi:battery-charging
+    {% elif states('sensor.media_roam_battery') | int < 25 %}
+      mdi:battery-low
+    {% elif states('sensor.media_roam_battery') | int < 75 %}
+      mdi:battery-medium
+    {% else %}
+      mdi:battery-full
+    {% endif %}
+  attributes:
+    Power: >
+      {% if is_state('binary_sensor.media_room_power','on') %}
+        Charging
+      {% else %}
+        Battery
+      {% endif %}
+  state: >
+    {{ states('sensor.media_roam_battery') }}
