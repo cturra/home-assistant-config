@@ -1271,45 +1271,40 @@ views:
         title: 'House'
         <<: *entities-header-style
         cards:
-        ## HOUSE AVERAGE'S CLIMATE CARDS
-        - type: 'custom:stack-in-card'
-          title: ''
-          <<: *entities-header-style
+        - type: horizontal-stack
           cards:
-          - type: horizontal-stack
-            cards:
-            # house avg temperature
-            - type: 'custom:button-card'
-              entity: sensor.hvac_ecobee_indoor_average_temperature
-              name: Temperature
-              show_units: false
-              show_state: true
-              show_icon: false
-              <<: *graph-header-button-card-style
-            # house avg humidity
-            - type: 'custom:button-card'
-              entity: sensor.indoor_mean_humidity
-              name: Humidity
-              show_units: false
-              show_state: true
-              show_icon: false
-              <<: *graph-header-button-card-style
-            # house avg air quality: fine particles
-            - type: 'custom:button-card'
-              entity: sensor.indoor_mean_air_quality_calculation
-              name: 'PM 2.5'
-              show_units: false
-              show_state: true
-              show_icon: false
-              <<: *graph-header-button-card-style
-            # house avg air quality: carbon dioxide
-            - type: 'custom:button-card'
-              entity: sensor.indoor_mean_co2_rounded
-              name: 'CO2'
-              show_units: false
-              show_state: true
-              show_icon: false
-              <<: *graph-header-button-card-style
+          # house avg temperature
+          - type: 'custom:button-card'
+            entity: sensor.hvac_ecobee_indoor_average_temperature
+            name: Temperature
+            show_units: false
+            show_state: true
+            show_icon: false
+            <<: *graph-header-button-card-style
+          # house avg humidity
+          - type: 'custom:button-card'
+            entity: sensor.indoor_mean_humidity
+            name: Humidity
+            show_units: false
+            show_state: true
+            show_icon: false
+            <<: *graph-header-button-card-style
+          # house avg air quality: fine particles
+          - type: 'custom:button-card'
+            entity: sensor.indoor_mean_air_quality_calculation
+            name: 'PM 2.5'
+            show_units: false
+            show_state: true
+            show_icon: false
+            <<: *graph-header-button-card-style
+          # house avg air quality: carbon dioxide
+          - type: 'custom:button-card'
+            entity: sensor.indoor_mean_co2_rounded
+            name: 'CO2'
+            show_units: false
+            show_state: true
+            show_icon: false
+            <<: *graph-header-button-card-style
 
         ## INDOOR TEMPERATURE CARDS
         # row 1
