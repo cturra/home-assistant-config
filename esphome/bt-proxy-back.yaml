@@ -1,7 +1,7 @@
 # Instructions on opening and wiring for flashing on https://blakadder.com/gl-s10
 
 substitutions:
-  name: bt-proxy-front
+  name: bt-proxy-back
 
 esphome:
   name: ${name}
@@ -19,21 +19,22 @@ esp32:
   framework:
     type: arduino
 
-# VERSION 1.0
+# VERSION 2.1
 ethernet:
-  type: LAN8720
+  type: IP101
   mdc_pin: GPIO23
   mdio_pin: GPIO18
-  clk_mode: GPIO17_OUT
+  clk_mode: GPIO0_IN
   phy_addr: 1
+  power_pin: GPIO5
   manual_ip:
-    static_ip: !secret bt_proxy_front_ip
+    static_ip: !secret bt_proxy_back_ip
     gateway: !secret network_gateway
     subnet: !secret network_subnet
 
 api:
   encryption:
-    key: !secret bt_proxy_front_key
+    key: !secret bt_proxy_back_key
 
 logger:
   level: INFO # DEBUG for sensor readings
@@ -50,7 +51,6 @@ esp32_ble_tracker:
     active: true
 
 bluetooth_proxy:
-  active: true
 
 button:
 - platform: safe_mode

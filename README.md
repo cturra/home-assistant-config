@@ -85,7 +85,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 
  | Model           | Count | Role                                                              |
  | :---            | :--:  | :---                                                              |
- | GL-S10          | 1     | [ESPHome BL Proxy](esphome/bl-proxy-front.yaml)                   |
+ | GL-S10          | 2     | [ESPHome BL Proxy](esphome/bl-proxy-front.yaml)                   |
  | RTL-SDR         | 2     | SDR USB Adapters w/ Antenna                                       |
  | Odroid-N2+      | 1     | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
  | Raspberry Pi 4  | 1     | Secondary Zigbee2MQTT server *                                    |
@@ -94,6 +94,6 @@ And, if you have any feedback, please feel free to reach out :smile:
 
  \* *I was having some issues with Zigbee mesh stability when running the Sinopé thermostat
  alongside the Xiaomi devices. From my understanding this is because Xiaomi doesn't completely
- comply with the Zigbee standards. I've decided to seperate them onto different Zigbee2MQTT
- servers and this seems to have addressed the issue with my lager mesh. Important note, I
+ comply with the Zigbee standards. I've decided to seperate them onto different Zigbee networks
+ and this seems to have addressed the issue with my larger mesh. Important note, I
  am carefully running these networks on channels far away from one another.*
