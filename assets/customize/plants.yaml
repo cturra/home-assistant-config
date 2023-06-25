@@ -4,12 +4,10 @@
 plant.familyroom_parlor_palm:
   icon: 'mdi:sprout-outline'
 
-sensor.plnt_familyroom_parlor_palm_battery:
-  friendly_name: 'Family Room: Parlor Palm'
-
 # office snake plant
 plant.office_dracaena_trifasciata:
   icon: 'mdi:sprout-outline'
 
-sensor.plnt_office_dracaena_trifasciata_battery:
-  friendly_name: 'Office: Dracaena Trifasciata'
+# main bedroom: zamioculcas zamiifolia (zz plant)
+sensor.plnt_zamioculcas_zamiifolia_soil:
+  icon: 'mdi:sprout-outline'

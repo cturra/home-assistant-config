@@ -18,6 +18,7 @@
 # -- xiaomi mi flora --
 # plant soil moisture
 - name: 'Plnt Parlor Palm Soil'
+  unique_id: plnt_parlor_palm_soil
   state: >
     {% if state_attr('plant.familyroom_parlor_palm', 'problem') | regex_search('moisture low', ignorecase=True) %}
       {# report the moisture unit difference - #}

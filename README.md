@@ -45,7 +45,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
 | Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT           |
 | Motion            | Xiaomi     | RTCGQ14LM       | 1     | Zigbee2MQTT           |
-| Plant             | Xiaomi     | Mi Flora (HHCC) | 2     | HA:: Xiami BLE        |
+| Plant             | Xiaomi     | Mi Flora (HHCC) | 3     | HA:: Xiami BLE        |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
 | Temperature       | Acurite    | 592TXR          | 3     | MQTT :: rtl_433       |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433       |
