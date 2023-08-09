@@ -415,7 +415,7 @@ views:
                 secondary_info: last-changed
                 <<: *alert-info-style
             # updates available (tested with: core, zigbee2mqtt & wled)
-            - entity_id: '/update.*_(firmware|update)|binary_sensor.*_update_available/'
+            - entity_id: '/update.*(!blb)_(firmware|update)|binary_sensor.*_update_available/'
               state: 'on'
               options:
                 icon: 'mdi:arrow-up-circle-outline'
@@ -426,6 +426,13 @@ views:
               state: '> 0'
               options:
                 name: 'Home Assistant Community Store'
+                icon: 'mdi:arrow-up-circle-outline'
+                secondary_info: last-changed
+                <<: *alert-info-style
+            # updates available: core & add-ons
+            - entity_id: 'update.*_update'
+              state: 'on'
+              options:
                 icon: 'mdi:arrow-up-circle-outline'
                 secondary_info: last-changed
                 <<: *alert-info-style
@@ -856,6 +863,19 @@ views:
           <<: *entities-overview-header-style
         filter:
           include:
+            # door: locks (ble)
+            - entity_id: 'lock.lck_*garage*_door'
+              state: 'unlocked'
+              options:
+                icon: 'mdi:lock-open-outline'
+                secondary_info: last-changed
+                tap_action:
+                  action: call-service
+                  service: input_boolean.turn_on
+                  service_data:
+                    entity_id: input_boolean.garage_house_door_lock_toggled
+                  confirmation:
+                    text: 'Are you sure you want to lock the Garage House Door?'
             # doors: zigbee (aqara)
             - entity_id: 'binary_sensor.snr_*door*_contact'
               state: 'on'
@@ -1511,6 +1531,11 @@ views:
             entity: cover.garage_vehicledoor
             name: Door
             show_state: true
+            state_display: |
+              [[[
+                if (entity.state == 'open') return 'Open';
+                else return 'Closed';
+              ]]]
             show_icon: false
             <<: *graph-button-card-style
 
@@ -1624,6 +1649,11 @@ views:
             entity: binary_sensor.snr_shed_doorcontact_contact
             name: Door
             show_state: true
+            state_display: |
+              [[[
+                if (entity.state == 'on') return 'Open';
+                else return 'Closed'
+              ]]]
             show_icon: false
             <<: *graph-button-card-style
 
@@ -1762,6 +1792,11 @@ views:
           entity: binary_sensor.snr_tacoma_location
           show_name: false
           show_state: true
+          state_display: |
+            [[[
+              if (entity.state == 'on') return 'Home';
+              else return 'Away';
+            ]]]
           show_icon: false
           <<: *graph-button-card-style
 
