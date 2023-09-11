@@ -285,7 +285,7 @@ views:
           include:
             # battery low: zigbee & ble sensors < 15%
             - entity_id: 'sensor.(rmt|snr)_*_battery'
-              state: '< 15'
+              state: '< 10'
               options:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
@@ -302,7 +302,7 @@ views:
               state: '< 15'
               options:
                 secondary_info: last-changed
-                icon: 'mdi:toothbrush'
+                icon: 'mdi:battery-low'
                 <<: *alert-style
             # xiaomi mi flora battery may need replacement
             - entity_id: 'sensor.plnt_*_moisture'
@@ -317,6 +317,13 @@ views:
               options:
                   secondary_info: last-changed
                   <<: *alert-style
+            # battery low: door locks
+            - entity_id: 'sensor.lck_*_battery_level'
+              state: '< 15'
+              options:
+                secondary_info: last-changed
+                icon: 'mdi:battery-low'
+                <<: *alert-style
             # freezer temperature too warm (> -13.9 °C)
             - entity_id: 'sensor.snr_*_freezer_temperature'
               state: '> -13.9'
@@ -607,13 +614,6 @@ views:
                 icon: 'mdi:wall-sconce-flat-variant-outline'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
-            # front yard
-            - entity_id: switch.vlv_front_sprinkler_state
-              state: 'on'
-              options:
-                name: 'Front: Sprinkler'
-                icon: 'mdi:watering-can-outline'
-                secondary_info: last-changed
             # garage
             - entity_id: switch.sw_garage_ceilingmainlights
               state: 'on'
@@ -701,6 +701,12 @@ views:
                 icon: 'mdi:dome-light'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
+            - entity_id: switch.sw_main_bedroom_airpurifier
+              state: 'on'
+              options:
+                name: 'Main Bedroom: Air Purifier'
+                icon: 'mdi:air-purifier'
+                secondary_info: last-changed
             # kids bedroom
             - entity_id: light.sw_kidsbedroom_ceilinglight
               state: 'on'
@@ -827,7 +833,7 @@ views:
                   source: true
                 <<: *media-player-card-style
             # tv :: main bedroom
-            - entity_id: switch.main_bedroom_entertainment
+            - entity_id: switch.sw_main_bedroom_entertainment
               state: 'on'
               options:
                 name: 'Main Bedroom: TV'
@@ -1079,24 +1085,29 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
+                # air purifier
+                - entity: switch.sw_main_bedroom_airpurifier
+                  name: 'Air Purifier'
+                  icon: 'mdi:air-purifier'
+                  state_color: true
+                # heater
+                - entity: switch.plg_mainbedroom_heater
+                  name: 'Heater'
+                  icon: 'mdi:radiator'
+                  state_color: true
+            - type: entities
+              show_header_toggle: false
+              <<: *entities-style
+              entities:
                 # ceiling light
                 - entity: light.sw_mainbedroom_ceilinglight
                   name: 'Ceiling'
                   icon: 'mdi:dome-light'
                   state_color: true
                 # entertainment
-                - entity: switch.main_bedroom_entertainment
+                - entity: switch.sw_main_bedroom_entertainment
                   name: 'TV'
                   icon: 'mdi:television'
-                  state_color: true
-            - type: entities
-              show_header_toggle: false
-              <<: *entities-style
-              entities:
-                # heater
-                - entity: switch.plg_mainbedroom_heater
-                  name: 'Heater'
-                  icon: 'mdi:radiator'
                   state_color: true
 
       # Kids Bedroom
@@ -1227,11 +1238,6 @@ views:
                 - entity: light.sw_deck_ceilinglight
                   name: 'Deck: Ceiling'
                   icon: 'mdi:light-recessed'
-                  state_color: true
-                # front yard sprinkler
-                - entity: switch.vlv_front_sprinkler_state
-                  name: 'Sprinkler'
-                  icon: 'mdi:watering-can-outline'
                   state_color: true
             - type: entities
               show_header_toggle: false
@@ -2066,16 +2072,4 @@ views:
           include:
             - name: entity_id
               value: 'sensor.snr_*vibration_battery'
-
-      # Water Valve 
-      - type: 'custom:battery-state-card'
-        title: 'Water Valves'
-        <<: *battery-state-color_gradient
-        <<: *battery-state-style
-        tap_action: more-info
-        sort_by_level: 'asc'
-        filter:
-          include:
-            - name: entity_id
-              value: 'sensor.vlv_*_battery'
 

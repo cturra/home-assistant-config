@@ -59,7 +59,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | IR Blaster        | Uniplay    | Q1              | 3     | Tasmota               |
 | Plug              | Gosund     | WP2             | 2     | Tasmota               |
 | Plug              | Gosund     | WP5             | 3     | Tasmota               |
-| Plug              | Sonoff     | S31             | 9     | Tasmota               |
+| Plug              | Sonoff     | S31             | 10    | Tasmota               |
 | Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT           |
 | Plug              | Wyze       | WLPPO1          | 1     | Tasmota               |
 | Receptacle        | TopGreener | TGWF15RM        | 1     | Tasmota               |
@@ -78,6 +78,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Switch (Dimmer)   | Treatlife  | DS02S           | 4     | Tasmota               |
 | Switch (Dimmer)   | Treatlife  | DS01C           | 3     | Tasmota               |
 | **Other**                                                                        |
+| Air Purifier      | Dyson      | Pure Cool Me    | 2     | Infrared              |
 | Propane Tank      | Mopeka     | Pro Check M1017 | 1     | HA :: Mopeka          |
 | Toothbrush        | Oral-B     | Smart 4000      | 2     | HA :: Oral-B          |
 

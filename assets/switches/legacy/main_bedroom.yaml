@@ -3,12 +3,33 @@
 # tv on/off
 - platform: template
   switches:
-    main_bedroom_entertainment:
+    # dyson air purifier toggle
+    sw_main_bedroom_airpurifier:
+      unique_id: sw_main_bedroom_airpurifier
+      # confirm active power is more than 0W
+      value_template: >
+        {{ states('sensor.main_bedroom_air_purifier_plug_energy_power') | int > 0 }}
+      turn_on:
+        - service: mqtt.publish
+          data:
+            topic: cmnd/IRB_MainBedroom/IRSend
+            payload: >-
+              0,2245-710+760-740C-715+770-705+765-1425EcDcD-735+775-700K-1415B-785KlKl+750-725O-730EcHbHj+745-1450CbHsKgE
+      turn_off:
+        - service: mqtt.publish
+          data:
+            topic: cmnd/IRB_MainBedroom/IRSend
+            payload: >-
+              0,2245-710+760-740C-715+770-705+765-1425EcDcD-735+775-700K-1415B-785KlKl+750-725O-730EcHbHj+745-1450CbHsKgE
+
+    # tv/sound bar toggle
+    sw_main_bedroom_entertainment:
+      unique_id: sw_main_bedroom_entertainment
       # confirm tv is on
       value_template: >
         {{ is_state('media_player.main_bedroom_tv', 'on') }}
       turn_on:
-        # turn devices on
+        # send IR signal to toggle tv power
         - service: mqtt.publish
           data:
             topic: cmnd/IRB_MainBedroom/IRSend
@@ -24,7 +45,14 @@
           data:
             entity_id: media_player.main_bedroom_speaker
             source: "TV"
+        # set volume on soundbar
+        - service: media_player.volume_set
+          data:
+            volume_level: 0.13 # 13%
+          target:
+            entity_id: media_player.main_bedroom_speaker
       turn_off:
+        # send IR signal to toggle tv power
         - service: mqtt.publish
           data:
             topic: cmnd/IRB_MainBedroom/IRSend
