@@ -587,6 +587,13 @@ views:
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
             # family room
+            - entity_id: fan.family_room_airpurifier
+              state: 'on'
+              options:
+                type: 'custom:slider-entity-row'
+                name: 'Family Room: Air Purifier'
+                icon: 'mdi:air-purifier'
+                secondary_info: last-changed
             - entity_id: switch.sw_familyroom_ceilinglight
               state: 'on'
               options:
@@ -952,15 +959,15 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
-                # display cabinet
-                - entity: switch.plg_familyroom_cabinetlight
-                  name: Cabinet
-                  icon: 'mdi:light-recessed'
+                # dyson air purifier
+                - entity: fan.family_room_airpurifier
+                  name: 'Air Purifier'
+                  icon: 'mdi:air-purifier'
                   state_color: true
-                # display corner
-                - entity: switch.sw_familyroom_cornerlight
-                  name: Corner
-                  icon: 'mdi:light-recessed'
+                # ceiling light
+                - entity: switch.sw_familyroom_ceilinglight
+                  name: Ceiling
+                  icon: 'mdi:ceiling-light-outline'
                   state_color: true
                 # wall sconce
                 - entity: light.sw_familyroom_walllights
@@ -970,10 +977,15 @@ views:
               show_header_toggle: false
               <<: *entities-style
               entities:
-                # ceiling light
-                - entity: switch.sw_familyroom_ceilinglight
-                  name: Ceiling
-                  icon: 'mdi:ceiling-light-outline'
+                # display cabinet
+                - entity: switch.plg_familyroom_cabinetlight
+                  name: Cabinet
+                  icon: 'mdi:light-recessed'
+                  state_color: true
+                # display corner
+                - entity: switch.sw_familyroom_cornerlight
+                  name: Corner
+                  icon: 'mdi:light-recessed'
                   state_color: true
                 # stairwell chandelier
                 - entity: light.stairwell_ceiling

@@ -95,6 +95,10 @@
     data: {}
     target:
       entity_id: scene.indoor_evening_lights_on
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.fan_family_room_airpurifier_night_mode
   mode: single
 - id: '1612292887886'
   alias: 'House: Indoor Lights off for the night check'
@@ -1832,41 +1836,16 @@
         target:
           entity_id: switch.plg_sparebedroom_lamp
   mode: single
-- id: '1685252893005'
-  alias: 'Outside: Front Yard Sprinkler Controls'
-  description: ''
+- id: '1694408321293'
+  alias: 'House: Indoor Lights off at sunrise'
+  description: turn off indoor lights at sunrise.
   trigger:
-  - platform: time
-    at: 02:45:00
+  - platform: sun
+    event: sunrise
   condition: []
   action:
-  - repeat:
-      count: '3'
-      sequence:
-      - service: switch.turn_on
-        data: {}
-        target:
-          entity_id: switch.vlv_front_sprinkler_state
-      - delay:
-          hours: 0
-          minutes: 0
-          seconds: 15
-          milliseconds: 0
-  - delay:
-      hours: 1
-      minutes: 30
-      seconds: 0
-      milliseconds: 0
-  - repeat:
-      count: '3'
-      sequence:
-      - service: switch.turn_off
-        data: {}
-        target:
-          entity_id: switch.vlv_front_sprinkler_state
-      - delay:
-          hours: 0
-          minutes: 0
-          seconds: 15
-          milliseconds: 0
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.fan_family_room_airpurifier_night_mode
   mode: single

@@ -78,7 +78,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Switch (Dimmer)   | Treatlife  | DS02S           | 4     | Tasmota               |
 | Switch (Dimmer)   | Treatlife  | DS01C           | 3     | Tasmota               |
 | **Other**                                                                        |
-| Air Purifier      | Dyson      | Pure Cool Me    | 2     | Infrared              |
+| Air Purifier      | Dyson      | Pure Cool Link  | 1     | HACS :: Dyson         |
+| Air Purifier      | Dyson      | Pure Cool Me    | 2     | infrared              |
 | Propane Tank      | Mopeka     | Pro Check M1017 | 1     | HA :: Mopeka          |
 | Toothbrush        | Oral-B     | Smart 4000      | 2     | HA :: Oral-B          |
 
