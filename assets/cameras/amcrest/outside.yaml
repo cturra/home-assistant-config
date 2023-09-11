@@ -5,7 +5,8 @@
   username: !secret cam_frontdoor_user
   password: !secret cam_frontdoor_pass
   name: 'cam_front_doorbell'
-  stream_source: rtsp
+  stream_source: snapshot
+  scan_interval: 20 # default 10 seconds
   binary_sensors:
     - motion_detected
     - online
