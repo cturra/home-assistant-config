@@ -1146,7 +1146,7 @@
           target:
             entity_id: scene.porch_bulbs_normal_colour_dimmed
     - conditions:
-      - condition: and
+      - condition: or
         conditions:
         - condition: state
           entity_id: sun.sun
@@ -1395,12 +1395,27 @@
   trigger:
   - platform: state
     entity_id:
+    - input_boolean.kitchen_dishwasher_cleaning_reset
     - input_boolean.laundry_washing_machine_cleaning_reset
     - input_boolean.hvac_filter_change_reset
     to: 'on'
   condition: []
   action:
   - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.kitchen_dishwasher_cleaning_reset
+        state: 'on'
+      sequence:
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.kitchen_dishwasher_last_cleaned
+        data:
+          timestamp: '{{ now().timestamp() }}'
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.kitchen_dishwasher_cleaning_reset
     - conditions:
       - condition: state
         entity_id: input_boolean.laundry_washing_machine_cleaning_reset

@@ -1,0 +1,5 @@
+## INPUT_BOOLEAN / KITCHEN
+
+kitchen_dishwasher_cleaning_reset:
+  name: 'Kitchen Dishwasher Cleaning Reset'
+  icon: 'mdi:sync-circle'

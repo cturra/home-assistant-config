@@ -1,0 +1,7 @@
+## INPUT_DATETIME / KITCHEN
+
+kitchen_dishwasher_last_cleaned:
+  name: 'Kitchen Dishwasher Last Cleaned'
+  has_date: true
+  has_time: false
+  icon: 'mdi:refresh-circle'

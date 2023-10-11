@@ -478,6 +478,20 @@ views:
                   confirmation:
                     text: 'Washing Machine cleaned?'
                 <<: *alert-info-style
+            # dishwasher cleaning cycle (every month)
+            - entity_id: 'sensor.kitchen_dishwasher_cleaned_interval'
+              state: '> 30'
+              options:
+                name: 'Dishwasher Cleaning'
+                secondary_info: last-changed
+                tap_action:
+                  action: call-service
+                  service: input_boolean.turn_on
+                  service_data:
+                    entity_id: input_boolean.kitchen_dishwasher_cleaning_reset
+                  confirmation:
+                    text: 'Dishwasher cleaned?'
+                <<: *alert-info-style
         sort:
           method: name
 

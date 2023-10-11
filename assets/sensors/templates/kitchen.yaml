@@ -1,0 +1,9 @@
+## SENSORS / TEMPLATES / KITCHEN
+
+- name: 'Kitchen Dishwasher Cleaned Interval'
+  unit_of_measurement: 'days'
+  icon: 'mdi:dishwasher-alert'
+  # calculate days since the dishwasher was last cleaned
+  #  -- convert seconds to days
+  state: >
+    {{ ((as_timestamp(now()) - state_attr('input_datetime.kitchen_dishwasher_last_cleaned','timestamp')) | int / 60/1440) | round(0) }}
