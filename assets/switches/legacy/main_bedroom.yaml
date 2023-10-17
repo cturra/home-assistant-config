@@ -1,26 +1,73 @@
 ## SWITCHES / LEGACY / MAIN BEDROOM
 
-# tv on/off
 - platform: template
   switches:
     # dyson air purifier toggle
     sw_main_bedroom_airpurifier:
       unique_id: sw_main_bedroom_airpurifier
-      # confirm active power is more than 0W
       value_template: >
-        {{ states('sensor.main_bedroom_air_purifier_plug_energy_power') | int > 0 }}
+        {{
+           is_state('climate.main_bedroom', 'cool') and
+           is_state('fan.main_bedroom', 'on')
+        }}
       turn_on:
-        - service: mqtt.publish
+        # set hvac mode to heat
+        - service: climate.set_hvac_mode
           data:
-            topic: cmnd/IRB_MainBedroom/IRSend
-            payload: >-
-              0,2245-710+760-740C-715+770-705+765-1425EcDcD-735+775-700K-1415B-785KlKl+750-725O-730EcHbHj+745-1450CbHsKgE
+            hvac_mode: cool
+          target:
+            entity_id: climate.main_bedroom
+        # set fan speed to 20%
+        - service: fan.set_percentage
+          data:
+            percentage: 20
+          target:
+            entity_id: fan.main_bedroom
       turn_off:
-        - service: mqtt.publish
+        # set hvac mode to cool
+        - service: climate.set_hvac_mode
           data:
-            topic: cmnd/IRB_MainBedroom/IRSend
-            payload: >-
-              0,2245-710+760-740C-715+770-705+765-1425EcDcD-735+775-700K-1415B-785KlKl+750-725O-730EcHbHj+745-1450CbHsKgE
+            hvac_mode: cool
+          target:
+            entity_id: climate.main_bedroom
+        # turn off fan
+        - service: fan.turn_off
+          target:
+            entity_id: fan.main_bedroom
+
+    # dyson heater toggle
+    sw_main_bedroom_heater:
+      unique_id: sw_main_bedroom_heater
+      value_template: >
+        {{
+           is_state('climate.main_bedroom', 'heat') and
+           is_state('fan.main_bedroom', 'on')
+        }}
+      turn_on:
+        # set hvac mode to heat
+        - service: climate.set_temperature
+          data:
+            hvac_mode: heat
+            temperature: 21
+          target:
+            entity_id: climate.main_bedroom
+        # ensure fan gets turned on
+        - service: fan.turn_on
+          target:
+            entity_id: fan.main_bedroom
+      turn_off:
+        # set hvac mode to cool
+        - service: climate.set_hvac_mode
+          data:
+            hvac_mode: cool
+          target:
+            entity_id: climate.main_bedroom
+        # run the fan for a bit to use the heat
+        - delay: '00:00:10'
+        # turn off fan
+        - service: fan.turn_off
+          target:
+            entity_id: fan.main_bedroom
 
     # tv/sound bar toggle
     sw_main_bedroom_entertainment:

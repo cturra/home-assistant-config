@@ -42,8 +42,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 7     | HA :: BTHome          |
 | Contact           | Xiaomi     | MCCGQ11LM       | 17    | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 16    | Zigbee2MQTT           |
-| Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
-| Motion            | Xiaomi     | RTCGQ11LM       | 3     | Zigbee2MQTT           |
+| Motion            | Ikea       | E1745           | 2     | Zigbee2MQTT           |
+| Motion            | Xiaomi     | RTCGQ11LM       | 2     | Zigbee2MQTT           |
 | Motion            | Xiaomi     | RTCGQ14LM       | 1     | Zigbee2MQTT           |
 | Plant             | Xiaomi     | Mi Flora (HHCC) | 3     | HA:: Xiami BLE        |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
@@ -59,7 +59,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | IR Blaster        | Uniplay    | Q1              | 3     | Tasmota               |
 | Plug              | Gosund     | WP2             | 2     | Tasmota               |
 | Plug              | Gosund     | WP5             | 3     | Tasmota               |
-| Plug              | Sonoff     | S31             | 10    | Tasmota               |
+| Plug              | Sonoff     | S31             | 8     | Tasmota               |
 | Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT           |
 | Plug              | Wyze       | WLPPO1          | 1     | Tasmota               |
 | Receptacle        | TopGreener | TGWF15RM        | 1     | Tasmota               |
@@ -78,8 +78,9 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Switch (Dimmer)   | Treatlife  | DS02S           | 4     | Tasmota               |
 | Switch (Dimmer)   | Treatlife  | DS01C           | 3     | Tasmota               |
 | **Other**                                                                        |
-| Air Purifier      | Dyson      | Pure Cool Link  | 1     | HACS :: Dyson         |
-| Air Purifier      | Dyson      | Pure Cool Me    | 2     | infrared              |
+| Air Purifier      | Dyson      | TP02            | 1     | HACS :: Dyson         |
+| Air Purifier      | Dyson      | BP01            | 2     | infrared              |
+| Air Purifier      | Dyson      | HP07            | 1     | HACS :: Dyson         |
 | Propane Tank      | Mopeka     | Pro Check M1017 | 1     | HA :: Mopeka          |
 | Toothbrush        | Oral-B     | Smart 4000      | 2     | HA :: Oral-B          |
 

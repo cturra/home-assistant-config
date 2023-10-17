@@ -450,6 +450,13 @@ views:
                 icon: 'mdi:alert-box-outline'
                 secondary_info: last-changed
                 <<: *alert-info-style
+            # main bedroom: air purifier filter change
+            - entity_id: 'sensor.fan_main_bedroom_airpurifier_filter_life'
+              state: '< 3'
+              options:
+                icon: 'mdi:air-filter'
+                secondary_info: last-changed
+                <<: *alert-info-style
             # hvac filter change cycle (every ~ 3 months)
             - entity_id: 'sensor.hvac_filter_change_interval'
               state: '> 90'
@@ -516,10 +523,47 @@ views:
               state: 'on'
               options:
                 secondary_info: last-changed
-            # kids & main bedroom radiators
-            - entity_id: '/binary_sensor.(kids|main)_(.*)_heating_state/'
+            # family room air purifier
+            - entity_id: fan.family_room_airpurifier
               state: 'on'
               options:
+                type: 'custom:slider-entity-row'
+                name: 'Family Room: Air Purifier'
+                icon: 'mdi:air-purifier'
+                secondary_info: last-changed
+            # kids radiator
+            - entity_id: 'binary_sensor.kids_bedroom_heating_state'
+              state: 'on'
+              options:
+                secondary_info: last-changed
+            # main bedroom fan
+            - entity_id: fan.main_bedroom
+              state: 'on'
+              options:
+                type: 'custom:slider-entity-row'
+                name: 'Main Bedroom: Fan'
+                icon: 'mdi:fan'
+                secondary_info: last-changed
+            # main bedroom air purifier
+            - entity_id: switch.sw_main_bedroom_airpurifier
+              state: 'on'
+              options:
+                name: 'Main Bedroom: Air Purifier'
+                icon: 'mdi:air-purifier'
+                secondary_info: last-changed
+            # main bedroom heater
+            - entity_id: switch.sw_main_bedroom_heater
+              state: 'on'
+              options:
+                name: 'Main Bedroom: heater'
+                icon: 'mdi:radiator'
+                secondary_info: last-changed
+            # office air purifier
+            - entity_id: switch.plg_office_airpurifier
+              state: 'on'
+              options:
+                name: 'Office: Air Purifier'
+                icon: 'mdi:air-purifier'
                 secondary_info: last-changed
             # garage & laundry dehumidifiers
             - entity_id: '/switch.plg_(garage_dehumidifier|laundry_zbrtr)/'
@@ -601,13 +645,6 @@ views:
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
             # family room
-            - entity_id: fan.family_room_airpurifier
-              state: 'on'
-              options:
-                type: 'custom:slider-entity-row'
-                name: 'Family Room: Air Purifier'
-                icon: 'mdi:air-purifier'
-                secondary_info: last-changed
             - entity_id: switch.sw_familyroom_ceilinglight
               state: 'on'
               options:
@@ -686,8 +723,8 @@ views:
             - entity_id: switch.plg_kitchen_outlet1
               state: 'on'
               options:
-                name: 'Kitchen: Fish Tank'
-                icon: 'mdi:fishbowl-outline'
+                name: 'Kitchen: Kids Room Monitor'
+                icon: 'mdi:speaker-wireless'
                 secondary_info: last-changed
             # living room
             - entity_id: light.sw_livingroom_ceilinglight
@@ -706,12 +743,6 @@ views:
                 name: "Office: Ceiling"
                 icon: 'mdi:track-light'
                 secondary_info: last-changed
-            - entity_id: switch.plg_office_airpurifier
-              state: 'on'
-              options:
-                name: 'Office: Air Purifier'
-                icon: 'mdi:air-purifier'
-                secondary_info: last-changed
             # main bedroom
             - entity_id: light.sw_mainbedroom_ceilinglight
               state: 'on'
@@ -722,12 +753,6 @@ views:
                 icon: 'mdi:dome-light'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
-            - entity_id: switch.sw_main_bedroom_airpurifier
-              state: 'on'
-              options:
-                name: 'Main Bedroom: Air Purifier'
-                icon: 'mdi:air-purifier'
-                secondary_info: last-changed
             # kids bedroom
             - entity_id: light.sw_kidsbedroom_ceilinglight
               state: 'on'
@@ -1020,8 +1045,8 @@ views:
               entities:
                 # baby monitor
                 - entity: switch.plg_kitchen_outlet1
-                  name: 'Fish Tank'
-                  icon: 'mdi:fishbowl-outline'
+                  name: 'Kids Monitor'
+                  icon: 'mdi:speaker-wireless'
                   state_color: true
                 # espresso machine
                 - entity: switch.plg_kitchen_espressomachine
@@ -1117,7 +1142,7 @@ views:
                   icon: 'mdi:air-purifier'
                   state_color: true
                 # heater
-                - entity: switch.plg_mainbedroom_heater
+                - entity: switch.sw_main_bedroom_heater
                   name: 'Heater'
                   icon: 'mdi:radiator'
                   state_color: true

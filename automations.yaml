@@ -98,7 +98,9 @@
   - service: switch.turn_on
     data: {}
     target:
-      entity_id: switch.fan_family_room_airpurifier_night_mode
+      entity_id:
+      - switch.fan_family_room_airpurifier_night_mode
+      - switch.fan_main_bedroom_airpurifier_night_mode
   mode: single
 - id: '1612292887886'
   alias: 'House: Indoor Lights off for the night check'
@@ -1862,5 +1864,7 @@
   - service: switch.turn_off
     data: {}
     target:
-      entity_id: switch.fan_family_room_airpurifier_night_mode
+      entity_id:
+      - switch.fan_family_room_airpurifier_night_mode
+      - switch.fan_main_bedroom_airpurifier_night_mode
   mode: single
