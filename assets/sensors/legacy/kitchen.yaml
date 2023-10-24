@@ -9,4 +9,4 @@
   round_digits: 1
   entity_ids:
     - sensor.dining_room_temperature
-    - sensor.snr_kitchen_climate_temperature
+    - sensor.snr_kitchen_airquality_temperature

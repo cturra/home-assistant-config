@@ -6,10 +6,6 @@
 sensor.snr_crawlspace_locker_climatedisplay_battery:
   friendly_name: 'Locker: Display'
 
-# kitchen
-sensor.snr_kitchen_climate_battery:
-  friendly_name: 'Kitchen'
-
 # main bedroom (xiaomi mi)
 sensor.snr_mainbedroom_climatedisplay_battery:
   friendly_name: 'Main Bedroom: Display'
@@ -214,12 +210,6 @@ sensor.snr_crawlspace_freezer_temperature:
 binary_sensor.snr_crawlspace_freezer_temperature_battery_low:
   friendly_name: 'Crawlspace: Deep Freezer'
 
-# garage
-sensor.snr_garage_temperature:
-  friendly_name: 'Garage'
-binary_sensor.snr_garage_temperature_battery_low:
-  friendly_name: 'Garage'
-
 # garage freezer
 sensor.snr_garage_freezer_temperature:
   friendly_name: 'Garage: Freezer'
@@ -244,10 +234,10 @@ binary_sensor.snr_shed_temperature_battery_low:
 ## ------ toothbrushes ------
 
 sensor.toothbrush_anne_battery_persistent:
-  friendly_name: 'Anne'
+  friendly_name: 'Toothbrush: Anne'
 
 sensor.toothbrush_chris_battery_persistent:
-  friendly_name: 'Chris'
+  friendly_name: 'Toothbrush: Chris'
 
 
 ## ------ vibration sensors ------
@@ -255,3 +245,9 @@ sensor.toothbrush_chris_battery_persistent:
 # office chair
 sensor.snr_office_chairvibration_battery:
   friendly_name: 'Office: Chair'
+
+## ------ water sensors ------
+sensor.vlv_Front_Sprinkler_water_consumed:
+  device_class: water
+  unit_of_measurement: L
+  state_class: total_increasing

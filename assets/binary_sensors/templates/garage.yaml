@@ -1,13 +1,5 @@
 ## BINARY SENSORS / TEMPLATES / GARAGE
 
-# -- acurite (rtl) --
-# temperature sensor battery state
-- name: 'SNR Garage Temperature Battery Low'
-  unique_id: 'snr_garage_temperature_battery_low'
-  state: >
-    {% from 'battery.jinja' import is_battery_low %}
-    {{ is_battery_low('sensor.snr_garage_temperature') }}
-
 # -- la crosse (rtl) --
 # freezer temperature battery state
 - name: 'SNR Garage Freezer Temperature Battery Low'
