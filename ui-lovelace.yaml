@@ -552,12 +552,17 @@ views:
                 icon: 'mdi:air-purifier'
                 secondary_info: last-changed
             # main bedroom heater
-            - entity_id: switch.sw_main_bedroom_heater
+            - entity_id: binary_sensor.main_bedroom_heating_state
               state: 'on'
               options:
-                name: 'Main Bedroom: heater'
+                name: 'Main Bedroom: Heater'
                 icon: 'mdi:radiator'
                 secondary_info: last-changed
+                tap_action:
+                  action: call-service
+                  service: switch.turn_off
+                  service_data:
+                    entity_id: switch.sw_main_bedroom_heater
             # office air purifier
             - entity_id: switch.plg_office_airpurifier
               state: 'on'
