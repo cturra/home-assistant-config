@@ -1457,7 +1457,7 @@ views:
             entity: sensor.snr_office_airquality_temperature
             name: >
               [[[
-                var occupied = states['binary_sensor.snr_office_motion_occupancy'].state
+                var occupied = states['binary_sensor.snr_office_presence'].state
                 return 'Office' + (occupied == 'on' ? ' ⦿': '');
               ]]]
             show_state: true
@@ -2026,7 +2026,7 @@ views:
         filter:
           include:
             - name: entity_id
-              value: 'sensor.lck_*_battery_*'
+              value: 'sensor.lck_*_battery'
 
       # Media Players
       - type: 'custom:battery-state-card'
