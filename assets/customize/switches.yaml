@@ -24,15 +24,6 @@ switch.sw_garage_vehicledoorcontact:
       mdi:garage-variant
     {% endif %}
 
-# kitchen: dishwasher
-switch.sw_kitchen_dishwasher:
-  friendly_name: 'Kitchen Dishwasher Switch'
-
-# luandry: dehumidifier
-switch.plg_laundry_zbrtr:
-  friendly_name: 'Laundry: Dehumidifier'
-  icon: 'mdi:water-outline'
-
 # laundry: washing machine
 switch.plg_laundry_washingmachine:
   friendly_name: 'Laundry Washing Machine Plug'
