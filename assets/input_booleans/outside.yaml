@@ -1,8 +1,8 @@
 ## INPUT BOOLEANS / OUTSIDE
 
-christmas_string_lights_outlet:
-  name: 'Christmas String Lighting Outlet'
-  icon: 'mdi:pine-tree'
+christmas_lights_outdoors:
+  name: 'Outdoor Christmas Lights'
+  icon: 'mdi:pine-tree-variant-outline'
 
 halloween_string_lights_outlet:
   name: 'Halloween Outside Light Colours'

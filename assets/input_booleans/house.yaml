@@ -1,5 +1,9 @@
 ## INPUT_BOOLEAN / HOUSE
 
+christmas_lights_indoors:
+  name: 'Indoor Christmas Lights'
+  icon: 'mdi:pine-tree-variant-outline'
+
 hvac_filter_change_reset:
   name: 'HVAC Filter Change Reset'
   icon: 'mdi:sync-circle'

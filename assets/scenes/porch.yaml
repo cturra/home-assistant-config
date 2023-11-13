@@ -7,7 +7,7 @@
       state: 'on'
       brightness: 25
       # 2100 kelvin
-      color_temp: 476
+      color_temp: 369
       color_mode: color_temp
 
 # bulbs normal colour 100% brightness
@@ -17,7 +17,7 @@
       state: 'on'
       brightness: 255
       # 2100 kelvin
-      color_temp: 476
+      color_temp: 369
       color_mode: color_temp
 
 # bulbs christmas colours
@@ -26,13 +26,13 @@
     light.blb_outside_porch1:
       state: 'on'
       brightness: 255
-      # red
-      rgb_color: [255,0,0]
+      # green
+      rgb_color: [0,255,0]
     light.blb_outside_porch2:
       state: 'on'
       brightness: 255
-      # green
-      rgb_color: [0,255,0]
+      # red
+      rgb_color: [255,0,0]
 
 # bulbs halloween colours
 - name: 'Porch Bulbs Halloween Colours'

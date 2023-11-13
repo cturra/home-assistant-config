@@ -101,6 +101,17 @@
       entity_id:
       - switch.fan_family_room_airpurifier_night_mode
       - switch.fan_main_bedroom_airpurifier_night_mode
+  - if:
+    - condition: state
+      entity_id: input_boolean.christmas_lights_indoors
+      state: 'on'
+    then:
+    - service: switch.turn_on
+      data: {}
+      target:
+        entity_id:
+        - switch.plg_familyroom_christmasgarland
+        - switch.sw_familyroom_christmastree
   mode: single
 - id: '1612292887886'
   alias: 'House: Indoor Lights off for the night check'
@@ -114,6 +125,17 @@
     data: {}
     target:
       entity_id: scene.indoor_evening_lights_off
+  - if:
+    - condition: state
+      entity_id: input_boolean.christmas_lights_indoors
+      state: 'on'
+    then:
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id:
+        - switch.plg_familyroom_christmasgarland
+        - switch.sw_familyroom_christmastree
   mode: single
 - id: '1612295061627'
   alias: 'Outside: Lights Off at sunrise'
@@ -1100,7 +1122,7 @@
           - condition: and
             conditions:
             - condition: state
-              entity_id: input_boolean.christmas_string_lights_outlet
+              entity_id: input_boolean.christmas_lights_outdoors
               state: 'on'
             - condition: time
               before: '22:29:00'
@@ -1177,7 +1199,7 @@
       entity_id: input_boolean.adhoc_outside_light_colours
       state: 'on'
     - condition: state
-      entity_id: input_boolean.christmas_string_lights_outlet
+      entity_id: input_boolean.christmas_lights_outdoors
       state: 'on'
     - condition: state
       entity_id: input_boolean.halloween_string_lights_outlet
@@ -1200,7 +1222,7 @@
       - condition: or
         conditions:
         - condition: state
-          entity_id: input_boolean.christmas_string_lights_outlet
+          entity_id: input_boolean.christmas_lights_outdoors
           state: 'on'
         - condition: state
           entity_id: input_boolean.halloween_string_lights_outlet
@@ -1243,7 +1265,7 @@
           - scene.porch_bulbs_adhoc_colours
     - conditions:
       - condition: state
-        entity_id: input_boolean.christmas_string_lights_outlet
+        entity_id: input_boolean.christmas_lights_outdoors
         state: 'on'
       sequence:
       - service: scene.turn_on
@@ -1854,7 +1876,7 @@
       - switch.fan_main_bedroom_airpurifier_night_mode
   mode: single
 - id: '1699301457348'
-  alias: 'Main Bedroom: Presence'
+  alias: 'Office: Human Presence'
   description: ''
   use_blueprint:
     path: tasmota/discovery_zy-m100.yaml

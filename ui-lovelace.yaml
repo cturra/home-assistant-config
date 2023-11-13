@@ -669,6 +669,18 @@ views:
                 name: 'Family Room: Cabinet'
                 icon: 'mdi:light-recessed'
                 secondary_info: last-changed
+            - entity_id: switch.plg_familyroom_christmasgarland
+              state: 'on'
+              options:
+                name: 'Family Room: Garland'
+                icon: 'mdi:string-lights'
+                secondary_info: last-changed
+            - entity_id: switch.sw_familyroom_christmastree
+              state: 'on'
+              options:
+                name: 'Family Room: Tree'
+                icon: 'mdi:pine-tree-variant-outline'
+                secondary_info: last-changed
             - entity_id: switch.sw_familyroom_cornerlight
               state: 'on'
               options:
@@ -1009,6 +1021,11 @@ views:
                   name: 'Air Purifier'
                   icon: 'mdi:air-purifier'
                   state_color: true
+                # christmas garland
+                - entity: switch.plg_familyroom_christmasgarland
+                  name: Garland
+                  icon: 'mdi:string-lights'
+                  state_color: true
                 # ceiling light
                 - entity: switch.sw_familyroom_ceilinglight
                   name: Ceiling
@@ -1026,6 +1043,11 @@ views:
                 - entity: switch.plg_familyroom_cabinetlight
                   name: Cabinet
                   icon: 'mdi:light-recessed'
+                  state_color: true
+                # christmas tree
+                - entity: switch.sw_familyroom_christmastree
+                  name: Tree
+                  icon: 'mdi:pine-tree-variant-outline'
                   state_color: true
                 # display corner
                 - entity: switch.sw_familyroom_cornerlight
