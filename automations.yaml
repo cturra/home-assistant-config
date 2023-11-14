@@ -1799,7 +1799,7 @@
       - service: light.turn_on
         data:
           transition: 1
-          effect: Rainbow Runner
+          effect: colorloop
         target:
           entity_id: light.blb_kidsbedroom_lamp
     - conditions:

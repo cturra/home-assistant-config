@@ -1,11 +1,5 @@
 ## CUSTOMIZE / UPDATES
 
-## -- wled --
-# kids bedroom lamp light bulb
-update.blb_kidsbedroom_lamp_firmware:
-  friendly_name: 'Kids Bedroom: Lamp Bulb (WLED)'
-
-
 # -- ikea zigbee (2mqtt) --
 # crawlspace lab light bulb
 binary_sensor.blb_crawlspace_lab_update_available:

@@ -18,7 +18,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Lights**                                                                       |
 | Bulb (A25)        | Athom      | LB01-15W-E27    | 1     | Tasmota               |
 | Bulb (BR30)       | Athom      | LB03-12W-BR30   | 2     | Tasmota               |
-| Bulb (B22)        | Athom      | LB01-7W-E27     | 1     | WLED                  |
+| Bulb (E26)        | Philips    | 9290024687      | 1     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 929002478401    | 1     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 9290024717      | 2     | Zigbee2MQTT           |
 | **Locks**                                                                        |
@@ -37,7 +37,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Quality       | Ikea       | E2112           | 1     | Zigbee2MQTT           |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
-| Climate           | Inkbird    | IBS-TH2         | 2     | HA :: Inkbird BLE     |
+| Climate           | Inkbird    | IBS-TH2         | 3     | HA :: Inkbird BLE     |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 1     | Zigbee2MQTT           |
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 7     | HA :: BTHome          |
 | Contact           | Xiaomi     | MCCGQ11LM       | 17    | Zigbee2MQTT           |
