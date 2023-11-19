@@ -3,7 +3,3 @@
 dry_garlic:
   name: 'Time of year to dry garlic'
   icon: 'mdi:sprout-outline'
-
-shed_plant_lighting:
-  name: 'Shed Indoor Plant Lighting'
-  icon: 'mdi:ceiling-light-outline'

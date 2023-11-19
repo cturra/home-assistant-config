@@ -18,30 +18,37 @@
     event: sunrise
   condition:
   - condition: state
-    entity_id: input_boolean.shed_plant_lighting
+    entity_id: input_boolean.shed_indoor_plant_light
     state: 'on'
   action:
   - service: switch.turn_on
     data: {}
     target:
-      entity_id: switch.plg_utility
+      entity_id: switch.plg_shed_utility
+  - service: timer.start
+    data:
+      duration: 08:00:00
+    target:
+      entity_id: timer.shed_indoor_plant_light
   mode: single
 - id: '1612291484467'
-  alias: 'Shed: Plant Light Off after 8 hours'
+  alias: 'Shed: Plant Light Off when timer expires'
   description: used when Rosemary plant is brought indoors during the winter.
   trigger:
-  - platform: sun
-    event: sunrise
-    offset: 08:00:00
+  - platform: state
+    entity_id:
+    - timer.shed_indoor_plant_light
+    from: active
+    to: idle
   condition:
   - condition: state
-    entity_id: input_boolean.shed_plant_lighting
+    entity_id: input_boolean.shed_indoor_plant_light
     state: 'on'
   action:
   - service: switch.turn_off
     data: {}
     target:
-      entity_id: switch.plg_utility
+      entity_id: switch.plg_shed_utility
   mode: single
 - id: '1612292614712'
   alias: 'Kitchen Speakers: ON when music starts playing'
