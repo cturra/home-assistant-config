@@ -23,3 +23,28 @@
     {% else %}
       Normal
     {% endif %}
+
+# battery state of sonos roam
+- name: 'Media Office Roam Battery State'
+  unique_id: media_office_roam_battery_state
+  device_class: battery
+  unit_of_measurement: '%'
+  icon: >
+    {% if is_state('binary_sensor.media_office_roam_power','on') %}
+      mdi:battery-charging
+    {% elif states('sensor.media_office_roam_battery') | int(0) < 25 %}
+      mdi:battery-low
+    {% elif states('sensor.media_office_roam_battery') | int(0) < 75 %}
+      mdi:battery-medium
+    {% else %}
+      mdi:battery-full
+    {% endif %}
+  attributes:
+    Power: >
+      {% if is_state('binary_sensor.media_office_room_power','on') %}
+        Charging
+      {% else %}
+        Battery
+      {% endif %}
+  state: >
+    {{ states('sensor.media_office_roam_battery') }}
