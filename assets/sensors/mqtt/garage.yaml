@@ -2,6 +2,7 @@
 
 # grab heating demand value from sinopé thermostat
 - name: 'HVAC Garage Heating Demand'
+  unique_id: 'hvac_garage_heating_demand'
   availability:
     - topic: zigbee2mqtt-pi/bridge/state
   state_topic: zigbee2mqtt-pi/HVAC_Garage_Thermostat

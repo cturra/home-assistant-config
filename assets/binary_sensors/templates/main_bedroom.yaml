@@ -2,8 +2,7 @@
 
 # -- dyson hp07 --
 - name: 'Main Bedroom Heating State'
-  unique_id: main_bedroom_heating_state
+  unique_id: 'main_bedroom_heating_state'
   icon: 'mdi:radiator'
-  # power reported in watts
   state: >
     {{ is_state_attr('climate.main_bedroom', 'hvac_action', 'heating') }}

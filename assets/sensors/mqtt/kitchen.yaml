@@ -3,18 +3,20 @@
 # -- LaCrosse TX141Bv3 (published by rtl_433) --
 # freezer
 - name: 'SNR Kitchen Freezer Temperature'
+  unique_id: 'snr_kitchen_freezer_temperature'
   device_class: temperature
   unit_of_measurement: '°C'
-  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-19
-  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-19
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-20
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-20
   value_template: >
     {{ value_json.temperature_C | round(1, default=-15.0) }}
 
 # fridge
 - name: 'SNR Kitchen Fridge Temperature'
+  unique_id: 'snr_kitchen_fridge_temperature'
   device_class: temperature
   unit_of_measurement: '°C'
-  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-52
-  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-52
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-1
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-1
   value_template: >
     {{ value_json.temperature_C | round(1, default=1.0) }}

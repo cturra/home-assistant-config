@@ -33,14 +33,3 @@
       {# non-numeric value, return previous reading for now #}
       {{ states('sensor.snr_outside_airquality_aqi') }}
     {% endif %}
-
-# front yard sprinkler water consumption
-- name: 'VLV Outside Front Sprinkler Water Consumed'
-  unique_id: vlv_outside_front_sprinkler_water_consumed
-  state_class: total_increasing
-  device_class: water
-  unit_of_measurement: L
-  state: >
-    {% if is_number(states('sensor.vlv_front_sprinkler_water_consumed')) %}
-      {{ states('sensor.vlv_front_sprinkler_water_consumed') }}
-    {% endif %}

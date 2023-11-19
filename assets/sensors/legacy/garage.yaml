@@ -10,7 +10,7 @@
   end: "{{ now() }}"
 
 # mean humidity from climate sensors:
-#  - acurite 592TXR
+#  - inkbird IBS-TH
 #  - am2302 (wired dht22)
 - platform: min_max
   name: 'Garage Mean Humidity Calculation'
@@ -21,7 +21,7 @@
     - sensor.garage_vehicle_door_opener_am2301_humidity
 
 # mean temperature from climate sensors:
-#  - acurite 592TXR
+#  - inkbird IBS-TH
 #  - sinopé TH1400ZB
 - platform: min_max
   name: 'Garage Mean Temperature Calculation'

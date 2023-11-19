@@ -3,7 +3,6 @@
 # -- xiaomi mi flora --
 # soil moisture
 - name: 'Plnt Dracaena Trifasciata Soil'
-  unique_id: plnt_dracaena_trifasciata_soil
   state: >
     {% if state_attr('plant.office_dracaena_trifasciata', 'problem') | regex_search('moisture low', ignorecase=True) %}
       {# report the moisture unit difference - #}

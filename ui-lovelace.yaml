@@ -2097,7 +2097,7 @@ views:
         filter:
           include:
             - name: entity_id
-              value: 'sensor.snr_*_propane_battery_persist'
+              value: 'sensor.snr_*_propane_battery_persistent'
 
       # Remote Controls
       - type: 'custom:battery-state-card'

@@ -1,8 +1,0 @@
-## MEDIA PLAYERS / HOUSE
-
-# sonos speakers
-- platform: group
-  name: 'Group Sonos Speakers'
-  entities:
-    - media_player.main_bedroom_speaker
-    - media_player.family_room_speaker

@@ -12,3 +12,11 @@
       {# non-numeric value, return previous reading for now #}
       {{ states('sensor.snr_shed_bbq_propane_tank_level_percent') }}
     {% endif %}
+
+- name: 'SNR Shed BBQ Propane Battery Persistent'
+  unique_id: 'snr_shed_bbq_propane_battery_persistent'
+  device_class: battery
+  unit_of_measurement: '%'
+  state: >
+    {% from 'battery.jinja' import persist_value %}
+    {{ persist_value('sensor.snr_shed_bbq_propane_battery', 'sensor.snr_shed_bbq_propane_battery_persistent') }}

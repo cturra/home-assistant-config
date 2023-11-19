@@ -15,6 +15,7 @@
   type: mean
   round_digits: 0
   entity_ids:
+    - sensor.snr_familyroom_airquality_pm2_5
     - sensor.snr_mainbedroom_airquality_pm2_5
     - sensor.snr_office_airquality_pm2_5
 
@@ -37,8 +38,8 @@
   entity_ids:
     - sensor.hvac_ecobee_indoor_average_humidity
     - sensor.snr_crawlspace_climate_humidity
-    - sensor.snr_kitchen_climate_humidity
     - sensor.snr_office_airquality_humidity
+    - sensor.snr_kitchen_airquality_humidity
     - sensor.snr_mainbedroom_airquality_humidity
     - sensor.snr_kidsbedroom_airquality_humidity
     - sensor.snr_sparebedroom_climate_humidity

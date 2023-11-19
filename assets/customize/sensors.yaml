@@ -173,17 +173,9 @@ binary_sensor.main_bedroom_heating_state:
 
 ## ------ motion sensors ------
 
-# office
-sensor.snr_office_motion_battery:
-  friendly_name: 'Office'
-
 # outside: front porch
 sensor.snr_outside_frontporchmotion_battery:
   friendly_name: 'Outside: Front Porch'
-
-# outside: garage (side)
-sensor.snr_outside_garagesidemotion_battery:
-  friendly_name: 'Outside: Garage'
 
 # outside: shed
 sensor.snr_outside_shedmotion_battery:
@@ -245,9 +237,3 @@ sensor.toothbrush_chris_battery_persistent:
 # office chair
 sensor.snr_office_chairvibration_battery:
   friendly_name: 'Office: Chair'
-
-## ------ water sensors ------
-sensor.vlv_Front_Sprinkler_water_consumed:
-  device_class: water
-  unit_of_measurement: L
-  state_class: total_increasing

@@ -4,10 +4,13 @@
 # air quality 2.5pm
 - platform: rest
   name: 'SNR Outside AirQuality PM 2_5'
-  scan_interval: 120
-  resource: !secret purple_air_json_url
+  unique_id: snr_outside_airquality_pm25
+  state_class: measurement
   device_class: pm25
-  unit_of_measurement: "μg/m³"
+  unit_of_measurement: µg/m³
+  scan_interval: 180
+  timeout: 60
+  resource: !secret purple_air_json_url
   value_template: >
       {% if is_number(value_json.pm2_5_atm) and is_number(value_json.pm2_5_atm_b) %}
         {{ (value_json.pm2_5_atm + value_json.pm2_5_atm_b)/2 | int(default=0) }}
@@ -19,6 +22,7 @@
 # mean air quality 2.5pm
 - platform: statistics
   name: "SNR Outside Mean AirQuality PM 2_5"
+  unique_id: snr_outside_mean_airquality_pm25
   entity_id: sensor.snr_outside_airquality_pm_2_5
   state_characteristic: mean
   precision: 1

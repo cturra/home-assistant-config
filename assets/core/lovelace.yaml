@@ -17,13 +17,13 @@ resources:
   type: module
   # mini media player
 - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
-  type: module              
+  type: module
   # slider-entity-row
 - url: /hacsfiles/lovelace-slider-entity-row/slider-entity-row.js
   type: module
   # simple-weather-card
 - url: /hacsfiles/simple-weather-card/simple-weather-card-bundle.js
-  type: module              
+  type: module
   # stack-in-card
 - url: /hacsfiles/stack-in-card/stack-in-card.js
   type: module

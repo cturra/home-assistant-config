@@ -7,7 +7,7 @@
 
 {% macro persist_value(entity_id, persist_entity_id) %}
   {% if is_number(states(entity_id)) %}
-    {{ states(entity_id) }}
+    {{ states(entity_id) | int }}
   {% else %}
     {# use previous value if sensor returns unavailable #}
     {{ states(persist_entity_id) }}
