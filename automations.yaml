@@ -117,9 +117,17 @@
       data: {}
       target:
         entity_id:
-        - switch.plg_familyroom_christmasgarland
         - switch.sw_familyroom_christmastree
         - switch.sw_familyroom_cornerlight
+    - service: light.turn_on
+      data: {}
+      target:
+        entity_id: light.blb_familyroom_garland
+    - service: select.select_option
+      data:
+        option: Xmas
+      target:
+        entity_id: select.blb_familyroom_garland_preset
   mode: single
 - id: '1612292887886'
   alias: 'House: Indoor Lights off for the night check'
@@ -1626,7 +1634,7 @@
       - 254
       - 251
       - 0
-      brightness_pct: 20
+      brightness_pct: 30
     target:
       entity_id: light.blb_kidsbedroom_lamp
   mode: single
@@ -1923,7 +1931,10 @@
       data: {}
       target:
         entity_id:
-        - switch.plg_familyroom_christmasgarland
         - switch.sw_familyroom_christmastree
         - switch.sw_familyroom_cornerlight
+    - service: light.turn_off
+      data: {}
+      target:
+        entity_id: light.blb_familyroom_garland
   mode: single

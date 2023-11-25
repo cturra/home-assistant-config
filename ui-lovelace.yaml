@@ -669,7 +669,7 @@ views:
                 name: 'Family Room: Cabinet'
                 icon: 'mdi:light-recessed'
                 secondary_info: last-changed
-            - entity_id: switch.plg_familyroom_christmasgarland
+            - entity_id: light.blb_familyroom_garland
               state: 'on'
               options:
                 name: 'Family Room: Garland'
@@ -817,7 +817,7 @@ views:
                 name: 'Shed: Flood'
                 icon: 'mdi:light-flood-down'
                 secondary_info: last-changed
-            - entity_id: switch.plg_utility
+            - entity_id: switch.plg_shed_utility
               state: 'on'
               options:
                 name: 'Shed: Grow Light'
@@ -1022,7 +1022,7 @@ views:
                   icon: 'mdi:air-purifier'
                   state_color: true
                 # christmas garland
-                - entity: switch.plg_familyroom_christmasgarland
+                - entity: light.blb_familyroom_garland
                   name: Garland
                   icon: 'mdi:string-lights'
                   state_color: true
@@ -1350,7 +1350,7 @@ views:
                   icon: 'mdi:fan'
                   state_color: true
                 # grow light
-                - entity: switch.plg_utility
+                - entity: switch.plg_shed_utility
                   name: 'Grow Light'
                   icon: 'mdi:ceiling-light-outline'
                   state_color: true
