@@ -141,6 +141,10 @@
     data: {}
     target:
       entity_id: scene.indoor_evening_lights_off
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.garage_house_door_lock
   mode: single
 - id: '1612295061627'
   alias: 'Outside: Lights Off at sunrise'
