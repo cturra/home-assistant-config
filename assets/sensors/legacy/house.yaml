@@ -15,7 +15,7 @@
   type: mean
   round_digits: 0
   entity_ids:
-    - sensor.snr_familyroom_airquality_pm2_5
+    - sensor.snr_kidsbedroom_airquality_pm2_5
     - sensor.snr_mainbedroom_airquality_pm2_5
     - sensor.snr_office_airquality_pm2_5
 

@@ -34,7 +34,6 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Sensors**                                                                      |
 | Air Quality       | Awair      | Element         | 3     | HA :: Awair Local API |
 | Air Quality       | Airthings  | Wave+           | 1     | HA :: Airthings BLE   |
-| Air Quality       | Ikea       | E2112           | 1     | Zigbee2MQTT           |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
 | Climate           | Inkbird    | IBS-TH2         | 3     | HA :: Inkbird BLE     |
