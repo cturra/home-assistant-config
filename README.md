@@ -89,7 +89,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 
  | Model           | Count | Role                                                              |
  | :---            | :--:  | :---                                                              |
- | GL-S10          | 2     | [ESPHome BL Proxy](esphome/bl-proxy-front.yaml)                   |
+ | GL-S10          | 2     | [ESPHome BL Proxy](esphome/bt-proxy-front.yaml)                   |
  | RTL-SDR         | 2     | SDR USB Adapters w/ Antenna                                       |
  | Odroid-N2+      | 1     | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
  | Raspberry Pi 4  | 1     | Secondary Zigbee2MQTT server *                                    |

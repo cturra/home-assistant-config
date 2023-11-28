@@ -29,7 +29,6 @@ api:
     key: !secret snr_mainbedroom_presence_key
 
 ota:
-  password: "1af51b4bb38f863aa1da39beab5454fc"
 
 wifi:
   ssid: !secret wifi_ssid

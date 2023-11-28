@@ -1,14 +1,19 @@
 # Instructions on opening and wiring for flashing on https://blakadder.com/gl-s10
 
 substitutions:
-  name: bt-proxy-back
+  device_name: bt-proxy-back
+  device_description: "GL-iNet GL-S10"
+  main_device_id: "bt_proxy_back" # Put the name that you want to see in Home Assistant.
+  project_name: "esphome.bluetooth-proxy"
+  project_version: "1.0"
 
 esphome:
-  name: ${name}
+  name: ${device_name}
+  comment: ${device_description}
   name_add_mac_suffix: true
   project:
-    name: esphome.bluetooth-proxy
-    version: "1.0"
+    name: ${project_name}
+    version: ${project_version}
   # turn on Power LED when esphome boots
   on_boot:
     then:
@@ -73,7 +78,7 @@ binary_sensor:
     name: "Reset Button"
 # Bluetooth LED on when connected to Home Assistant
   - platform: status
-    name: "${name} Status"
+    name: "${device_name} Status"
     internal: true
     on_press:
       - output.turn_on: bluetooth_led
