@@ -1,0 +1,19 @@
+## TEMPLATES
+
+# -- binary sensors --
+- binary_sensor: !include_dir_merge_list binary_sensors/templates
+
+# -- sensors --
+- sensor: !include_dir_merge_list sensors/templates
+
+# -- triggers --
+# timeout value for presence sensor in main bedroom
+- trigger:
+  - platform: state
+    entity_id: binary_sensor.main_bedroom_presence_sensor_presence
+    to: 'on'
+  binary_sensor:
+    name: 'Main Bedroom Presence Sensor Timeout'
+    state: "on"
+    auto_off:
+      minutes: 10

@@ -45,7 +45,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Motion            | Philips    | 9290030674      | 1     | Zigbee2MQTT           |
 | Motion            | Xiaomi     | RTCGQ11LM       | 1     | Zigbee2MQTT           |
 | Motion            | Xiaomi     | RTCGQ14LM       | 1     | Zigbee2MQTT           |
-| Presence          | Tuya       | ZY-M100         | 1     | Tasmota               |
+| Presence          | Tuya       | ZY-M100         | 2     | ESPHome               |
 | Plant             | Xiaomi     | Mi Flora (HHCC) | 3     | HA:: Xiami BLE        |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
 | Temperature       | Acurite    | 592TXR          | 2     | MQTT :: rtl_433       |

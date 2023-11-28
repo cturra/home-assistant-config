@@ -30,8 +30,6 @@ scene: !include_dir_merge_list assets/scenes
 script: !include_dir_merge_named assets/scripts
 sensor: !include_dir_merge_list assets/sensors/legacy
 switch: !include_dir_merge_list assets/switches/legacy
-template:
-  binary_sensor: !include_dir_merge_list assets/binary_sensors/templates
-  sensor: !include_dir_merge_list assets/sensors/templates
+template: !include assets/templates.yaml
 timer:
 tts: !include assets/core/tts.yaml

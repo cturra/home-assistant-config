@@ -170,7 +170,7 @@
   description: ''
   trigger:
   - platform: time_pattern
-    minutes: /15
+    minutes: /10
   condition:
   - condition: state
     entity_id: input_boolean.main_bedroom_heater
@@ -183,6 +183,9 @@
         - condition: numeric_state
           below: '21.1'
           entity_id: sensor.main_bedroom_mean_temperature_calculation
+        - condition: state
+          entity_id: binary_sensor.main_bedroom_presence_sensor_timeout
+          state: 'on'
         - condition: time
           after: '21:00:00'
           before: 05:29:00
@@ -1378,7 +1381,7 @@
   description: when radon level 1 day average is above 99 Bq/m³
   trigger:
   - platform: numeric_state
-    entity_id: sensor.snr_crawspace_airquality_radon_1_day_average
+    entity_id: sensor.snr_crawlspace_airquality_radon_1_day_average
     above: 99
   condition: []
   action:
