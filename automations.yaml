@@ -379,7 +379,7 @@
   - condition: and
     conditions:
     - condition: state
-      entity_id: binary_sensor.snr_office_presence
+      entity_id: binary_sensor.office_presence_sensor_timeout
       state: 'on'
     - condition: state
       entity_id: switch.plg_office_airpurifier
@@ -396,11 +396,11 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.snr_office_presence
+    - binary_sensor.office_presence_sensor_timeout
     to: 'off'
     for:
       hours: 0
-      minutes: 10
+      minutes: 5
       seconds: 0
   condition:
   - condition: and
@@ -1887,14 +1887,6 @@
       - switch.fan_family_room_airpurifier_night_mode
       - switch.fan_main_bedroom_airpurifier_night_mode
   mode: single
-- id: '1699301457348'
-  alias: 'Office: Human Presence'
-  description: ''
-  use_blueprint:
-    path: tasmota/discovery_zy-m100.yaml
-    input:
-      tasmota_device: ed0a73d70bf4ee528f56ef76ee21eb79
-      topic: SNR_Office_Presence
 - id: '1700159738395'
   alias: 'Porch: Nofity front door motion'
   description: notify when person detected at front door.

@@ -1,8 +1,8 @@
 substitutions:
-  device_name: snr-mainbedroom-presence
+  device_name: snr-office-presence
   device_description: "Tuya ZY-M100 Human Presence Sensor"
-  friendly_name: "Main Bedroom Presence Sensor"
-  main_device_id: "snr_mainbedroom_presence" # Put the name that you want to see in Home Assistant.
+  friendly_name: "Office Presence Sensor"
+  main_device_id: "snr_office_presence" # Put the name that you want to see in Home Assistant.
   project_name: "tuya.zy-m100-wifi-esp-idf"
   project_version: "1.0"
 
@@ -26,17 +26,17 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: !secret snr_mainbedroom_presence_key
+    key: !secret snr_office_presence_key
 
 ota:
-  password: !secret snr_mainbedroom_presence_ota
+  password: !secret snr_office_presence_ota
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
   manual_ip:
-    static_ip: !secret snr_mainbedroom_presence_ip
+    static_ip: !secret snr_office_presence_ip
     gateway: !secret network_gateway
     subnet: !secret network_subnet
 
