@@ -130,8 +130,8 @@
         entity_id: select.blb_familyroom_garland_preset
   mode: single
 - id: '1612292887886'
-  alias: 'House: Indoor Lights off for the night check'
-  description: turn off any lights that might have been left on over night.
+  alias: 'House: Indoor Devices off for the night check'
+  description: turn off any devices that might have been left on over night.
   trigger:
   - platform: time
     at: 01:01:00
@@ -144,7 +144,9 @@
   - service: switch.turn_on
     data: {}
     target:
-      entity_id: switch.garage_house_door_lock
+      entity_id:
+      - switch.garage_house_door_lock
+      - switch.house_front_door_lock
   mode: single
 - id: '1612295061627'
   alias: 'Outside: Lights Off at sunrise'
@@ -187,7 +189,7 @@
           entity_id: binary_sensor.main_bedroom_presence_sensor_timeout
           state: 'on'
         - condition: time
-          after: '21:00:00'
+          after: '22:00:00'
           before: 05:29:00
         - condition: state
           entity_id: switch.sw_main_bedroom_heater
@@ -202,7 +204,7 @@
         conditions:
         - condition: time
           after: 05:30:00
-          before: '20:59:00'
+          before: '21:59:00'
         - condition: state
           entity_id: switch.sw_main_bedroom_heater
           state: 'on'
@@ -1936,4 +1938,42 @@
       data: {}
       target:
         entity_id: light.blb_familyroom_garland
+  mode: single
+- id: '1701370969365'
+  alias: 'House: Front door lock controls'
+  description: (un)lock door
+  trigger:
+  - platform: state
+    entity_id: input_boolean.house_front_door_lock_toggled
+    to: 'on'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: lock.lck_house_front_door
+        state: unlocked
+      sequence:
+      - service: lock.lock
+        data: {}
+        target:
+          entity_id: lock.lck_house_front_door
+    - conditions:
+      - condition: state
+        entity_id: lock.lck_house_front_door
+        state: locked
+      sequence:
+      - service: lock.unlock
+        data: {}
+        target:
+          entity_id: lock.lck_house_front_door
+  - if:
+    - condition: state
+      entity_id: input_boolean.house_front_door_lock_toggled
+      state: 'on'
+    then:
+    - service: input_boolean.turn_off
+      data: {}
+      target:
+        entity_id: input_boolean.house_front_door_lock_toggled
   mode: single

@@ -7,7 +7,7 @@
     switch.sw_garage_vehicledooropener:
       state: 'on'
 
-# lock garage house door lock toggle
+# house door lock toggle
 - name: 'Garage Door Lock'
   icon: 'mdi:lock-open-outline'
   entities:

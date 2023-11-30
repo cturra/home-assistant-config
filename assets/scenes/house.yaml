@@ -15,3 +15,10 @@
       state: 'off'
     switch.plg_familyroom_cabinetlight:
       state: 'off'
+
+# front door lock toggle
+- name: 'Front Door Lock'
+  icon: 'mdi:lock-open-outline'
+  entities:
+    input_boolean.house_front_door_lock_toggled:
+      state: 'on'

@@ -22,7 +22,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Bulb (E26)        | Philips    | 929002478401    | 1     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 9290024717      | 2     | Zigbee2MQTT           |
 | **Locks**                                                                        |
-| Door Lock         | August     | ASL-03          | 1     | HA :: Yale Access BLE |
+| Door Lock         | August     | ASL-03          | 2     | HA :: Yale Access BLE |
 | **Entertainment**                                                                |
 | Audio             | Chromecast | Audio           | 1     | HA :: Chromecast      |
 | Receiver          | Yamaha     | HTR-8063        | 1     | HA :: MediaPlayers    |

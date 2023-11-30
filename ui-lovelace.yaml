@@ -318,8 +318,8 @@ views:
                   secondary_info: last-changed
                   <<: *alert-style
             # battery low: door locks
-            - entity_id: 'sensor.lck_*_battery_level'
-              state: '< 15'
+            - entity_id: 'sensor.lck_*_battery'
+              state: '< 10'
               options:
                 secondary_info: last-changed
                 icon: 'mdi:battery-low'
@@ -934,7 +934,7 @@ views:
         filter:
           include:
             # door: locks (ble)
-            - entity_id: 'lock.lck_*garage*_door'
+            - entity_id: 'lock.lck_garage_house_door'
               state: 'unlocked'
               options:
                 icon: 'mdi:lock-open-outline'
@@ -946,6 +946,18 @@ views:
                     entity_id: input_boolean.garage_house_door_lock_toggled
                   confirmation:
                     text: 'Are you sure you want to lock the Garage House Door?'
+            - entity_id: 'lock.lck_house_front_door'
+              state: 'unlocked'
+              options:
+                icon: 'mdi:lock-open-outline'
+                secondary_info: last-changed
+                tap_action:
+                  action: call-service
+                  service: input_boolean.turn_on
+                  service_data:
+                    entity_id: input_boolean.house_front_door_lock_toggled
+                  confirmation:
+                    text: 'Are you sure you want to lock the Front Door?'
             # doors: zigbee (aqara)
             - entity_id: 'binary_sensor.snr_*door*_contact'
               state: 'on'
@@ -1430,7 +1442,11 @@ views:
           # main bedroom
           - type: 'custom:button-card'
             entity: sensor.main_bedroom_mean_temperature_calculation
-            name: 'Main Bedroom'
+            name: >
+              [[[
+                var occupied = states['binary_sensor.main_bedroom_presence_sensor_timeout'].state
+                return 'Main Bedroom' + (occupied == 'on' ? ' ⦿': '');
+              ]]]
             show_state: true
             show_icon: false
             <<: *climate-button-style
@@ -1480,7 +1496,7 @@ views:
             entity: sensor.snr_office_airquality_temperature
             name: >
               [[[
-                var occupied = states['binary_sensor.snr_office_presence'].state
+                var occupied = states['binary_sensor.office_presence_sensor_timeout'].state
                 return 'Office' + (occupied == 'on' ? ' ⦿': '');
               ]]]
             show_state: true
