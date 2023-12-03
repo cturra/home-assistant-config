@@ -7,7 +7,7 @@
       friendly_name: 'Garage House Door Lock'
       # confirm door is locked
       value_template: >
-        {{ is_state('lock.lck_garage_house_door', 'on') }}
+        {{ is_state('lock.lck_garage_house_door', 'locked') }}
       turn_on:
         - service: lock.lock
           data: {}

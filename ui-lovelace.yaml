@@ -675,6 +675,7 @@ views:
                 name: 'Family Room: Garland'
                 icon: 'mdi:string-lights'
                 secondary_info: last-changed
+                <<: *neutral-icon-entity-style
             - entity_id: switch.sw_familyroom_christmastree
               state: 'on'
               options:

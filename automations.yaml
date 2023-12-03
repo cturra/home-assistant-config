@@ -398,11 +398,11 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.office_presence_sensor_timeout
+    - binary_sensor.office_presence_sensor_presence
     to: 'off'
     for:
       hours: 0
-      minutes: 5
+      minutes: 10
       seconds: 0
   condition:
   - condition: and
