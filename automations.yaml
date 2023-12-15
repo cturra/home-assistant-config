@@ -1525,7 +1525,8 @@
         entity_id: media_player.living_room_receiver_main_zone
     - conditions:
       - condition: template
-        value_template: '{{ trigger.payload == ''dots_1_initial_press'' }}'
+        value_template: "{{\n  trigger.payload == 'dots_1_initial_press' or\n  trigger.payload
+          == 'dots_1_double_press'\n}}"
       sequence:
       - service: light.toggle
         target:
@@ -1976,4 +1977,45 @@
       data: {}
       target:
         entity_id: input_boolean.house_front_door_lock_toggled
+  mode: single
+- id: '1701748470522'
+  alias: 'House: Front Door lock controls'
+  description: (un)lock front door
+  trigger:
+  - platform: tag
+    tag_id: b1075945-02ae-44ae-ba3f-b44aa1f71824
+  - platform: state
+    entity_id:
+    - input_boolean.house_front_door_lock_toggled
+    to: 'on'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: lock.lck_house_front_door
+        state: unlocked
+      sequence:
+      - service: lock.lock
+        data: {}
+        target:
+          entity_id: lock.lck_house_front_door
+    - conditions:
+      - condition: state
+        entity_id: lock.lck_house_front_door
+        state: locked
+      sequence:
+      - service: lock.unlock
+        data: {}
+        target:
+          entity_id: lock.lck_house_front_door
+  - if:
+    - condition: state
+      entity_id: input_boolean.house_front_door_lock_toggled
+      state: 'on'
+    then:
+    - service: input_boolean.turn_off
+      data: {}
+      target:
+        entity_id: input_boolean.garage_house_door_lock_toggled
   mode: single

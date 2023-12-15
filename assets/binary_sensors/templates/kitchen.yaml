@@ -8,9 +8,25 @@
     {% from 'battery.jinja' import is_battery_low %}
     {{ is_battery_low('sensor.snr_kitchen_fridge_temperature') }}
 
+# fridge temperature stale updates
+# ... no state change in more than 1 hour
+- name: 'SNR Kitchen Fridge Stale Updates'
+  unique_id: 'snr_kitchen_fridge_stale_updates'
+  state: >
+    {% from 'state.jinja' import is_stale %}
+    {{ is_stale(states.sensor.snr_kitchen_fridge_temperature.last_changed, 3600) }}
+
 # freezer temperature battery state
 - name: 'SNR Kitchen Freezer Temperature Battery Low'
   unique_id: 'snr_kitchen_freezer_temperature_battery_low'
   state: >
     {% from 'battery.jinja' import is_battery_low %}
     {{ is_battery_low('sensor.snr_kitchen_freezer_temperature') }}
+
+# freezer temperature stale updates
+# ... no state change in more than 1 hour
+- name: 'SNR Kitchen Freezer Stale Updates'
+  unique_id: 'snr_kitchen_freezer_stale_updates'
+  state: >
+    {% from 'state.jinja' import is_stale %}
+    {{ is_stale(states.sensor.snr_kitchen_freezer_temperature.last_changed, 3600) }}

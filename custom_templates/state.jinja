@@ -1,0 +1,5 @@
+{# compare entity last chaged or updated timestamp to now #}
+{# ... evalute if it's longer than the amount of seconds (time) provided #}
+{% macro is_stale(state, time) %}
+  {{ (as_timestamp(now()) - as_timestamp(state)) / time > 1 }}
+{% endmacro %}
