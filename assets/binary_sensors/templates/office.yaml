@@ -1,0 +1,10 @@
+## BINARY SENSORS / TEMPLATES / OFFICE
+
+# -- xiaomi mi flora --
+# dracaena trifasciata: soil moisture
+- name: 'Plant Dracaena Trifasciata Soil Moisture Normal'
+  unique_id: 'plnt_dracaena_trifasciata_soil_moisture_normal'
+  device_class: moisture
+  state: >
+    {% from 'plant.jinja' import is_normal_moisture %}
+    {{ is_normal_moisture('plant.office_dracaena_trifasciata', 3) }}

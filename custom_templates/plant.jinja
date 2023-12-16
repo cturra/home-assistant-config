@@ -1,0 +1,4 @@
+{# compare current plant moisture level to target #}
+{% macro is_normal_moisture(entity_id, target) %}
+  {{ (state_attr(entity_id,'moisture') - target) > 0 }}
+{% endmacro %}

@@ -348,8 +348,8 @@ views:
                 icon: 'mdi:chemical-weapon'
                 <<: *alert-style
             # plant needs water
-            - entity_id: 'sensor.plnt_*_soil'
-              state: '/(Moisture)/'
+            - entity_id: 'binary_sensor.plant_*_soil_moisture_normal'
+              state: 'off'
               options:
                 icon: 'mdi:sprout-outline'
                 secondary_info: last-changed

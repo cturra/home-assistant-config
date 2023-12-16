@@ -1,29 +1,5 @@
 ## SENSORS / TEMPLATES / OFFICE
 
-# -- xiaomi mi flora --
-# soil moisture
-- name: 'Plnt Dracaena Trifasciata Soil'
-  state: >
-    {% if state_attr('plant.office_dracaena_trifasciata', 'problem') | regex_search('moisture low', ignorecase=True) %}
-      {# report the moisture unit difference - #}
-      {% if is_number(state_attr('plant.office_dracaena_trifasciata', 'moisture') | int) %}
-        {% set offset = "%-g" | format(((state_attr('plant.office_dracaena_trifasciata', 'moisture') - 5 | int))) %}
-        Soil Moisture Low ({{ offset }})
-      {% else %}
-        Soil Moisture Low
-      {% endif %}
-    {% elif state_attr('plant.office_dracaena_trifasciata', 'problem') | regex_search('moisture high', ignorecase=True) %}
-      {# report the moisture unit difference + #}
-      {% if is_number(state_attr('plant.office_dracaena_trifasciata', 'moisture') | int) %}
-        {% set offset = "%+g" | format(((state_attr('plant.office_dracaena_trifasciata', 'moisture') | int) - 50)) %}
-        Soil Moisture High ({{ offset }})
-      {% else %}
-        Soil Moisture High
-      {% endif %}
-    {% else %}
-      Normal
-    {% endif %}
-
 # battery state of sonos roam
 - name: 'Media Office Roam Battery State'
   unique_id: media_office_roam_battery_state

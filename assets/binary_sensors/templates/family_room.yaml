@@ -1,0 +1,18 @@
+## BINARY SENSORS / TEMPLATES / OFFICE
+
+# -- xiaomi mi flora --
+# parlor palm: soil moisture
+- name: 'Plant Parlor Palm Soil Moisture Normal'
+  unique_id: 'plnt_parlor_palm_soil_moisture_normal'
+  device_class: moisture
+  state: >
+    {% from 'plant.jinja' import is_normal_moisture %}
+    {{ is_normal_moisture('plant.familyroom_parlor_palm', 15) }}
+
+# zz: soil moisture
+- name: 'Plant Zamioculcas Zamiifolia Soil Moisture Normal'
+  unique_id: 'plnt_zamioculcas_zamiifolia_soil_moisture_normal'
+  device_class: moisture
+  state: >
+    {% from 'plant.jinja' import is_normal_moisture %}
+    {{ is_normal_moisture('plant.family_room_zamioculcas_zamiifolia', 13) }}
