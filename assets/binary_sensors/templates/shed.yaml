@@ -1,9 +1,0 @@
-## BINARY SENSORS / TEMPLATES / SHED
-
-# -- acurite (rtl) --
-# temperature battery state
-- name: 'SNR Shed Temperature Battery Low'
-  unique_id: 'snr_shed_temperature_battery_low'
-  state: >
-    {% from 'battery.jinja' import is_battery_low %}
-    {{ is_battery_low('sensor.snr_shed_temperature') }}

@@ -1,13 +1,6 @@
 ## BINARY SENSORS / TEMPLATES / GARAGE
 
 # -- la crosse (rtl) --
-# freezer temperature battery state
-- name: 'SNR Garage Freezer Temperature Battery Low'
-  unique_id: 'snr_garage_freezer_temperature_battery_low'
-  state: >
-    {% from 'battery.jinja' import is_battery_low %}
-    {{ is_battery_low('sensor.snr_garage_freezer_temperature') }}
-
 # freezer temperature stale updates
 # ... no state change in more than 1 hour
 - name: 'SNR Garage Freezer Stale Updates'
@@ -15,13 +8,6 @@
   state: >
     {% from 'state.jinja' import is_stale %}
     {{ is_stale(states.sensor.snr_garage_freezer_temperature.last_changed, 3600) }}
-
-# fridge temperature battery state
-- name: 'SNR Garage Fridge Temperature Battery Low'
-  unique_id: 'snr_garage_fridge_temperature_battery_low'
-  state: >
-    {% from 'battery.jinja' import is_battery_low %}
-    {{ is_battery_low('sensor.snr_garage_fridge_temperature') }}
 
 # fridge temperature stale updates
 # ... no state change in more than 1 hour

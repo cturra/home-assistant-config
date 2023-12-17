@@ -1,13 +1,5 @@
 ## BINARY SENSORS / TEMPLATES / CRAWLSPACE
 
-# -- la crosse (rtl) --
-# freezer temperature battery state
-- name: 'SNR Crawlspace Freezer Temperature Battery Low'
-  unique_id: 'snr_crawlspace_freezer_temperature_battery_low'
-  state: >
-    {% from 'battery.jinja' import is_battery_low %}
-    {{ is_battery_low('sensor.snr_crawlspace_freezer_temperature') }}
-
 # freezer temperature stale updates
 # ... no state change in more than 1 hour
 - name: 'SNR Crawlspace Freezer Stale Updates'

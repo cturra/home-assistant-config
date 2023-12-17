@@ -1,9 +1,0 @@
-## BINARY SENSORS / TEMPLATES / OUTSIDE
-
-# -- acurite (rtl) --
-# temperature sensor battery state
-- name: 'SNR Outside Temperature Battery Low'
-  unique_id: 'snr_outside_temperature_battery_low'
-  state: >
-    {% from 'battery.jinja' import is_battery_low %}
-    {{ is_battery_low('sensor.snr_outside_temperature') }}

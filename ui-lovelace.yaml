@@ -290,13 +290,6 @@ views:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
                 <<: *alert-style
-            # battery low: rtl_433 sensors == on
-            - entity_id: 'binary_sensor.snr_*temperature_battery_low'
-              state: 'on'
-              options:
-                secondary_info: last-changed
-                icon: 'mdi:battery-alert-variant-outline'
-                <<: *alert-style
             # battery low: toothbrushes < 15%
             - entity_id: 'sensor.toothbrush_*_battery_persistent'
               state: '< 15'
@@ -2138,23 +2131,6 @@ views:
           include:
             - name: entity_id
               value: 'sensor.rmt_*remote_battery'
-
-      # Temperature Sensors
-      - type: 'custom:battery-state-card'
-        title: 'Temperature Sensors'
-        <<: *battery-state-color_gradient
-        <<: *battery-state-style
-        tap_action: more-info
-        sort_by_level: 'asc'
-        filter:
-          include:
-            - name: entity_id
-              value: 'binary_sensor.snr_*_temperature_battery_low'
-        state_map:
-          - from: 'off'
-            to: 100
-          - from: 'on'
-            to: 10
 
       # Toothbrushes
       - type: 'custom:battery-state-card'

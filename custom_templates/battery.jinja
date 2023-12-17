@@ -1,10 +1,3 @@
-{% macro is_battery_low(entity_id) %}
-  {# battery_ok: 1=normal, 0=low #}
-  {% if is_number(state_attr(entity_id, 'battery_ok')) %}
-    {{ is_state_attr(entity_id, 'battery_ok', 0) }}
-  {% endif %}
-{% endmacro %}
-
 {% macro persist_value(entity_id, persist_entity_id) %}
   {% if is_number(states(entity_id)) %}
     {{ states(entity_id) | int }}
