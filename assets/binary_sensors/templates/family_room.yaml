@@ -8,6 +8,9 @@
   state: >
     {% from 'plant.jinja' import is_normal_moisture %}
     {{ is_normal_moisture('plant.familyroom_parlor_palm', 15) }}
+  attributes:
+    moisture: >
+      {{ state_attr('plant.familyroom_parlor_palm','moisture') }}%
 
 # zz: soil moisture
 - name: 'Plant Zamioculcas Zamiifolia Soil Moisture Normal'
@@ -16,3 +19,6 @@
   state: >
     {% from 'plant.jinja' import is_normal_moisture %}
     {{ is_normal_moisture('plant.family_room_zamioculcas_zamiifolia', 13) }}
+  attributes:
+    moisture: >
+      {{ state_attr('plant.family_room_zamioculcas_zamiifolia','moisture') }}%

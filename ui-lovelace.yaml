@@ -351,6 +351,8 @@ views:
             - entity_id: 'binary_sensor.plant_*_soil_moisture_normal'
               state: 'off'
               options:
+                type: attribute
+                attribute: moisture
                 icon: 'mdi:sprout-outline'
                 secondary_info: last-changed
                 <<: *alert-plant-style
@@ -387,6 +389,8 @@ views:
             - entity_id: sensor.hvac_garage_mode_state
               state: '/Off/'
               options:
+                type: attribute
+                attribute: temperature
                 name: 'Garage: Heater'
                 icon: 'mdi:fire-off'
                 secondary_info: last-changed

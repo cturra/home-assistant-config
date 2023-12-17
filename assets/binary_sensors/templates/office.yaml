@@ -8,3 +8,6 @@
   state: >
     {% from 'plant.jinja' import is_normal_moisture %}
     {{ is_normal_moisture('plant.office_dracaena_trifasciata', 3) }}
+  attributes:
+    moisture: >
+      {{ state_attr('plant.office_dracaena_trifasciata','moisture') }}%

@@ -26,12 +26,16 @@
 # heater mode state if garage door is closed
 # (used for alerts dashboard in case thermostat is off longer than expected)
 - name: 'HVAC Garage Mode State'
+  unique_id: 'hvac_garage_mode_state'
   state: >
     {# thermostat mode state if garage door is closed #}
     {% if is_state('climate.hvac_garage_thermostat', 'off') and
           is_state('switch.sw_garage_vehicledoorcontact', 'off')
     %}
-      Off ({{ states('sensor.garage_mean_temperature_calculation') }}°C)
+      Off
     {% else %}
       {{ states('climate.hvac_garage_thermostat') }}
     {% endif %}
+  attributes:
+    temperature: >
+      {{ states('sensor.garage_mean_temperature_calculation') }}
