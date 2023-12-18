@@ -7,7 +7,7 @@
   unique_id: snr_outside_airquality_pm25
   state_class: measurement
   device_class: pm25
-  unit_of_measurement: µg/m³
+  unit_of_measurement: 'µg/m³'
   scan_interval: 180
   timeout: 60
   resource: !secret purple_air_json_url

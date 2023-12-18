@@ -9,8 +9,8 @@
     {% if is_number(states('sensor.snr_outside_tacomaboxclimate_humidity')) %}
       {{ states('sensor.snr_outside_tacomaboxclimate_humidity') | int }}
     {% else %}
-      {# set value to unavailable because tacoma is not home #}
-      unavailable
+      {# set value to none because tacoma is not home #}
+      None
     {% endif %}
 
 # Cab: humidity
@@ -21,8 +21,8 @@
     {% if is_number(states('sensor.snr_outside_tacomacabclimate_humidity')) %}
       {{ states('sensor.snr_outside_tacomacabclimate_humidity') | int }}
     {% else %}
-      {# set value to unavailable because tacoma is not home #}
-      unavailable
+      {# set value to none because tacoma is not home #}
+      None
     {% endif %}
 
 # Cab: temperature
@@ -33,6 +33,6 @@
     {% if is_number(states('sensor.snr_outside_tacomacabclimate_temperature')) %}
       {{ states('sensor.snr_outside_tacomacabclimate_temperature') | round(1, default=20.0) }}
     {% else %}
-      {# set value to unavailable because tacoma is not home #}
-      unavailable
+      {# set value to none because tacoma is not home #}
+      None
     {% endif %}
