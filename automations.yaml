@@ -11,44 +11,45 @@
     service: hassio.addon_restart
   mode: single
 - id: '1612291452533'
-  alias: 'Shed: Plant Light On at Sunrise'
+  alias: 'Shed: Plant Light Controls'
   description: used when Rosemary plant is brought indoors during the winter.
   trigger:
   - platform: sun
     event: sunrise
+    id: shed_plant_light_on
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.shed_indoor_plant_light_on
+    id: shed_plant_light_off
   condition:
   - condition: state
-    entity_id: input_boolean.shed_indoor_plant_light
+    entity_id: input_boolean.dry_garlic
     state: 'on'
   action:
-  - service: switch.turn_on
-    data: {}
-    target:
-      entity_id: switch.plg_shed_utility
-  - service: timer.start
-    data:
-      duration: 08:00:00
-    target:
-      entity_id: timer.shed_indoor_plant_light
-  mode: single
-- id: '1612291484467'
-  alias: 'Shed: Plant Light Off when timer expires'
-  description: used when Rosemary plant is brought indoors during the winter.
-  trigger:
-  - platform: state
-    entity_id:
-    - timer.shed_indoor_plant_light
-    from: active
-    to: idle
-  condition:
-  - condition: state
-    entity_id: input_boolean.shed_indoor_plant_light
-    state: 'on'
-  action:
-  - service: switch.turn_off
-    data: {}
-    target:
-      entity_id: switch.plg_shed_utility
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - shed_plant_light_on
+      sequence:
+      - service: timer.start
+        data: {}
+        target:
+          entity_id: timer.shed_indoor_plant_light_on
+      - service: switch.turn_on
+        target:
+          entity_id: switch.plg_shed_utility
+        data: {}
+    - conditions:
+      - condition: trigger
+        id:
+        - shed_plant_light_off
+      sequence:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.plg_shed_utility
+        data: {}
   mode: single
 - id: '1612292614712'
   alias: 'Kitchen Speakers: ON when music starts playing'
@@ -251,29 +252,40 @@
     entity_id: binary_sensor.snr_outside_garagesidemotion_occupancy
     from: 'off'
     to: 'on'
+    id: outside_garage_motion_on
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.outside_garage_side_door_light_on
+    id: outside_garage_motion_off
   condition:
   - condition: state
     entity_id: sun.sun
     state: below_horizon
   action:
-  - service: switch.turn_on
-    data: {}
-    target:
-      entity_id: switch.sw_outside_garagesidedoorlight
-  - wait_for_trigger:
-    - platform: state
-      entity_id: binary_sensor.snr_outside_garagesidemotion_occupancy
-      from: 'on'
-      to: 'off'
-  - delay:
-      hours: 0
-      minutes: 2
-      seconds: 0
-      milliseconds: 0
-  - service: switch.turn_off
-    data: {}
-    target:
-      entity_id: switch.sw_outside_garagesidedoorlight
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - outside_garage_motion_on
+      sequence:
+      - service: timer.start
+        target:
+          entity_id: timer.outside_garage_side_door_light_on
+        data: {}
+      - service: switch.turn_on
+        target:
+          entity_id: switch.sw_outside_garagesidedoorlight
+        data: {}
+    - conditions:
+      - condition: trigger
+        id:
+        - outside_garage_motion_off
+      sequence:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.sw_outside_garagesidedoorlight
+        data: {}
   mode: restart
 - id: '1612462343806'
   alias: 'Garage Inside: Dehumidifier off when vehicle door opened'
@@ -517,34 +529,41 @@
   - platform: state
     to: 'on'
     entity_id: binary_sensor.snr_outside_shedmotion_occupancy
+    id: outside_shed_floodlight_on
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.outside_shed_flood_light_on
+    id: outside_shed_floodlight_off
   condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: sun.sun
-      state: below_horizon
-      for: 00:15:00
-    - condition: state
-      entity_id: switch.sw_shed_floodlight
-      state: 'off'
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+    for: 00:15:00
   action:
-  - service: switch.turn_on
-    target:
-      entity_id: switch.sw_shed_floodlight
-  - wait_for_trigger:
-    - platform: state
-      from: 'on'
-      to: 'off'
-      entity_id: binary_sensor.snr_outside_shedmotion_occupancy
-  - delay:
-      hours: 0
-      minutes: 5
-      seconds: 0
-      milliseconds: 0
-  - service: switch.turn_off
-    data: {}
-    target:
-      entity_id: switch.sw_shed_floodlight
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - outside_shed_floodlight_on
+      sequence:
+      - service: timer.start
+        target:
+          entity_id: timer.outside_shed_flood_light_on
+        data: {}
+      - service: switch.turn_on
+        target:
+          entity_id: switch.sw_shed_floodlight
+        data: {}
+    - conditions:
+      - condition: trigger
+        id:
+        - outside_shed_floodlight_off
+      sequence:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.sw_shed_floodlight
+        data: {}
   mode: restart
 - id: '1619640982634'
   alias: 'Shed: Notify when door left open at night'
