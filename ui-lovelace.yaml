@@ -175,11 +175,12 @@ anchors:
 
   # graph button-card style
   graph-button-card-style: &graph-button-card-style
-    style: |
-      ha-card {
-        box-shadow: none;
-        border: none;
-      }
+    card_mod:
+      style: |
+        ha-card {
+          box-shadow: none;
+          border: none;
+        }
     styles:
       card:
         - height: 60px
@@ -192,11 +193,12 @@ anchors:
 
   # graph button-card style
   graph-header-button-card-style: &graph-header-button-card-style
-    style: |
-      ha-card {
-        box-shadow: none;
-        border: none;
-      }
+    card_mod:
+      style: |
+        ha-card {
+          box-shadow: none;
+          border: none;
+        }
     styles:
       card:
         - height: 60px
@@ -416,7 +418,7 @@ views:
               state: 'on'
               options:
                 icon: 'mdi:alert-circle-outline'
-                secondary_information: last-changed
+                secondary_info: last-changed
                 <<: *alert-style
             # updates available for philips hue bulbs through zigbee2mqtt
             - entity_id: '/update.(blb|rmt)_*/'
@@ -442,6 +444,13 @@ views:
                 <<: *alert-info-style
             # updates available: core & add-ons
             - entity_id: 'update.*_update'
+              state: 'on'
+              options:
+                icon: 'mdi:arrow-up-circle-outline'
+                secondary_info: last-changed
+                <<: *alert-info-style
+            # updates available: esphone
+            - entity_id: 'update.*_firmware'
               state: 'on'
               options:
                 icon: 'mdi:arrow-up-circle-outline'
@@ -673,13 +682,6 @@ views:
                 name: 'Family Room: Cabinet'
                 icon: 'mdi:light-recessed'
                 secondary_info: last-changed
-            - entity_id: light.blb_familyroom_garland
-              state: 'on'
-              options:
-                name: 'Family Room: Garland'
-                icon: 'mdi:string-lights'
-                secondary_info: last-changed
-                <<: *neutral-icon-entity-style
             - entity_id: switch.sw_familyroom_christmastree
               state: 'on'
               options:
@@ -848,7 +850,7 @@ views:
         filter:
           include:
             # tvs :: living room
-            - entity_id: switch.living_room_entertainment
+            - entity_id: switch.living_room_entertainment_htpc
               state: 'on'
               options:
                 name: 'Living Room: TV'
@@ -1038,11 +1040,6 @@ views:
                   name: 'Air Purifier'
                   icon: 'mdi:air-purifier'
                   state_color: true
-                # christmas garland
-                - entity: light.blb_familyroom_garland
-                  name: Garland
-                  icon: 'mdi:string-lights'
-                  state_color: true
                 # ceiling light
                 - entity: switch.sw_familyroom_ceilinglight
                   name: Ceiling
@@ -1060,11 +1057,6 @@ views:
                 - entity: switch.plg_familyroom_cabinetlight
                   name: Cabinet
                   icon: 'mdi:light-recessed'
-                  state_color: true
-                # christmas tree
-                - entity: switch.sw_familyroom_christmastree
-                  name: Tree
-                  icon: 'mdi:pine-tree-variant-outline'
                   state_color: true
                 # display corner
                 - entity: switch.sw_familyroom_cornerlight
@@ -1141,7 +1133,7 @@ views:
             <<: *entities-style
             entities:
               # entertainment
-              - entity: switch.living_room_entertainment
+              - entity: switch.living_room_entertainment_htpc
                 name: 'TV'
                 icon: 'mdi:television'
                 state_color: true

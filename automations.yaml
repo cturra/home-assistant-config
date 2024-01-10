@@ -120,15 +120,6 @@
         entity_id:
         - switch.sw_familyroom_christmastree
         - switch.sw_familyroom_cornerlight
-    - service: light.turn_on
-      data: {}
-      target:
-        entity_id: light.blb_familyroom_garland
-    - service: select.select_option
-      data:
-        option: Xmas
-      target:
-        entity_id: select.blb_familyroom_garland_preset
   mode: single
 - id: '1612292887886'
   alias: 'House: Indoor Devices off for the night check'
@@ -1518,10 +1509,31 @@
         value_template: "{{\n  trigger.payload == 'play_pause' or\n  trigger.payload
           == 'toggle'\n}}"
       sequence:
-      - service: switch.toggle
-        data: {}
-        target:
-          entity_id: switch.living_room_entertainment
+      - if:
+        - condition: state
+          entity_id: media_player.living_room_tv
+          state: 'on'
+        - condition: state
+          entity_id: media_player.living_room_receiver_main_zone
+          state: 'on'
+        - condition: not
+          conditions:
+          - condition: template
+            value_template: "{{\nstate_attr('media_player.living_room_receiver_main_zone',\n'source')
+              == 'AV2' \n}}"
+        then:
+        - service: media_player.select_source
+          metadata: {}
+          data:
+            source: AV2
+          target:
+            entity_id: media_player.living_room_receiver_main_zone
+        else:
+        - service: switch.toggle
+          metadata: {}
+          data: {}
+          target:
+            entity_id: switch.living_room_entertainment_htpc
     - conditions:
       - condition: template
         value_template: "{{\n  trigger.payload == 'volume_up' or\n  trigger.payload
@@ -1544,12 +1556,19 @@
         entity_id: media_player.living_room_receiver_main_zone
     - conditions:
       - condition: template
-        value_template: "{{\n  trigger.payload == 'dots_1_initial_press' or\n  trigger.payload
-          == 'dots_1_double_press'\n}}"
+        value_template: "{{\n  trigger.payload == 'dots_1_initial_press' \n}}"
       sequence:
       - service: light.toggle
         target:
           entity_id: light.sw_livingroom_ceilinglight
+        data: {}
+    - conditions:
+      - condition: template
+        value_template: "{{\n  trigger.payload == 'dots_2_initial_press'\n}}"
+      sequence:
+      - service: switch.toggle
+        target:
+          entity_id: switch.living_room_entertainment_nintendo
         data: {}
     - conditions:
       - condition: template
