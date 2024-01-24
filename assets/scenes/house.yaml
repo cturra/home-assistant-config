@@ -17,7 +17,7 @@
       state: 'off'
 
 # front door lock toggle
-- name: 'Front Door Lock'
+- name: 'Lock: Front Door'
   icon: 'mdi:lock-open-outline'
   entities:
     input_boolean.house_front_door_lock_toggled:

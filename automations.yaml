@@ -24,7 +24,7 @@
     id: shed_plant_light_off
   condition:
   - condition: state
-    entity_id: input_boolean.dry_garlic
+    entity_id: input_boolean.shed_indoor_plant_light
     state: 'on'
   action:
   - choose:
@@ -249,16 +249,16 @@
     event_data:
       entity_id: timer.outside_garage_side_door_light_on
     id: outside_garage_motion_off
-  condition:
-  - condition: state
-    entity_id: sun.sun
-    state: below_horizon
+  condition: []
   action:
   - choose:
     - conditions:
       - condition: trigger
         id:
         - outside_garage_motion_on
+      - condition: state
+        entity_id: sun.sun
+        state: below_horizon
       sequence:
       - service: timer.start
         target:
@@ -1566,10 +1566,31 @@
       - condition: template
         value_template: "{{\n  trigger.payload == 'dots_2_initial_press'\n}}"
       sequence:
-      - service: switch.toggle
-        target:
-          entity_id: switch.living_room_entertainment_nintendo
-        data: {}
+      - if:
+        - condition: state
+          entity_id: media_player.living_room_tv
+          state: 'on'
+        - condition: state
+          entity_id: media_player.living_room_receiver_main_zone
+          state: 'on'
+        - condition: not
+          conditions:
+          - condition: template
+            value_template: "{{\nstate_attr('media_player.living_room_receiver_main_zone',\n'source')
+              == 'AV3' \n}}"
+        then:
+        - service: media_player.select_source
+          metadata: {}
+          data:
+            source: AV3
+          target:
+            entity_id: media_player.living_room_receiver_main_zone
+        else:
+        - service: switch.toggle
+          metadata: {}
+          data: {}
+          target:
+            entity_id: switch.living_room_entertainment_nintendo
     - conditions:
       - condition: template
         value_template: "{% if is_state('light.sw_livingroom_ceilinglight','on') %}\n
