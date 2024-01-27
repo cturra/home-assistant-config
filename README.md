@@ -73,7 +73,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Switch            | Sonoff     | Basic           | 1     | Tasmota               |
 | Switch            | Sonoff     | Mini R1         | 2     | Tasmota               |
 | Switch            | Sonoff     | SV              | 1     | Tasmota               |
-| Switch            | Treatlife  | SS02S           | 11    | Tasmota               |
+| Switch            | Treatlife  | SS02S           | 12    | Tasmota               |
 | Switch (3 Way)    | Treatlife  | SS02            | 2     | Tasmota               |
 | Switch (Dimmer)   | Treatlife  | DS02S           | 4     | Tasmota               |
 | Switch (Dimmer)   | Treatlife  | DS01C           | 3     | Tasmota               |

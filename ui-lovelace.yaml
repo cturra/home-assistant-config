@@ -525,11 +525,17 @@ views:
           <<: *entities-overview-header-style
         filter:
           include:
+            # bathroom (down) fan
+            - entity_id: 'switch.sw_downstairsbathroom_fan'
+              state: 'on'
+              options:
+                name: 'Bathroom, Down: Fan'
+                secondary_info: last-changed
             # bathroom (up) fan
             - entity_id: 'switch.sw_upstairsbathroom_fan'
               state: 'on'
               options:
-                name: 'Bathroom (Up): Vanity'
+                name: 'Bathroom, Up: Fan'
                 secondary_info: last-changed
             # house (ecobee) & garage (sinope)
             - entity_id: '/binary_sensor.hvac_(ecobee|garage)_(cooling|heating)_state/'
@@ -619,14 +625,14 @@ views:
             - entity_id: switch.sw_downstairsbathroom_ceilinglight
               state: 'on'
               options:
-                name: 'Bathroom (Down): Vanity'
+                name: 'Bathroom, Down: Vanity'
                 icon: 'mdi:wall-sconce-flat-variant-outline'
                 secondary_info: last-changed
             # bathroom (up)
             - entity_id: switch.sw_upstairsbathroom_light
               state: 'on'
               options:
-                name: 'Bathroom (Up): Vanity'
+                name: 'Bathroom, Up: Vanity'
                 secondary_info: last-changed
             # crawlspace
             - entity_id: switch.sw_crawlspace_entrancelight
@@ -999,6 +1005,30 @@ views:
     icon: 'mdi:home-outline'
     badges: []
     cards:
+      # Bathroom (Downstairs)
+      - type: 'custom:stack-in-card'
+        title: 'Bathroom Downstairs'
+        <<: *entities-header-style
+        cards:
+        - type: horizontal-stack
+          cards:
+            - type: entities
+              show_header_toggle: false
+              <<: *entities-style
+              entities:
+                # fan
+                - entity: switch.sw_downstairsbathroom_fan 
+                  name: 'Fan'
+                  state_color: true
+            - type: entities
+              show_header_toggle: false
+              <<: *entities-style
+              entities:
+                # fan
+                - entity: switch.sw_downstairsbathroom_ceilinglight
+                  name: 'Vanity'
+                  state_color: true
+
       # Bathroom (Upstairs)
       - type: 'custom:stack-in-card'
         title: 'Bathroom Upstairs'
