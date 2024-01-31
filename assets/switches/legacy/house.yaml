@@ -8,7 +8,6 @@
     - switch.plg_crawlspace_deepfreezer
     - switch.plg_garage_fridge
     - switch.plg_laundry_washingmachine
-    - switch.sw_livingroom_fireplace_fan
 
 # front door lock
 - platform: template

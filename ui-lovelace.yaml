@@ -391,7 +391,7 @@ views:
                 secondary_info: last-changed
                 <<: *alert-style
             # always on plugs off/unavailable (see: group.plugs_always_on)
-            - entity_id: '/switch.(plg|sw)_(crawlspace_deepfreezer|garage_fridge|livingroom_fireplace_fan|laundry_washingmachine)/'
+            - entity_id: '/switch.(plg|sw)_(crawlspace_deepfreezer|garage_fridge|laundry_washingmachine)/'
               state: '/(off|unknown)/'
               options:
                 icon: 'mdi:power-plug-off-outline'
@@ -554,13 +554,6 @@ views:
             - entity_id: 'binary_sensor.kids_bedroom_heating_state'
               state: 'on'
               options:
-                secondary_info: last-changed
-            # living room fireplace (fan)
-            - entity_id: 'binary_sensor.living_room_fireplace_fan_state'
-              state: 'on'
-              options:
-                name: 'Living Room: Fireplace'
-                icon: 'mdi:fireplace'
                 secondary_info: last-changed
             # main bedroom fan
             - entity_id: fan.main_bedroom

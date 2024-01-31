@@ -69,7 +69,6 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Switch (Motion)   | CloudFree  | SWM1            | 1     | Tasmota               |
 | Switch (Motion)   | Milfra     | MFA06           | 1     | Tasmota               |
 | Switch            | Shelly     | 1               | 1     | Tasmota               |
-| Switch            | Shelly     | Plus 1PM        | 1     | Tasmota               |
 | Switch            | Sonoff     | Basic           | 1     | Tasmota               |
 | Switch            | Sonoff     | Mini R1         | 2     | Tasmota               |
 | Switch            | Sonoff     | SV              | 1     | Tasmota               |
