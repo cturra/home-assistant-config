@@ -1089,127 +1089,6 @@
           entity_id: switch.sw_shed_fan
     default: []
   mode: single
-- id: '1645836091671'
-  alias: 'Porch: Lights ON with motion'
-  description: turn on porch lights when motion is detected after sunset and return
-    to desired state
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.snr_outside_frontporchmotion_occupancy
-    to: 'on'
-  condition: []
-  action:
-  - choose:
-    - conditions:
-      - condition: and
-        conditions:
-        - condition: state
-          entity_id: sun.sun
-          state: below_horizon
-        - condition: time
-          after: '16:30:00'
-          before: '23:59:00'
-      sequence:
-      - service: scene.turn_on
-        data:
-          transition: 2
-        target:
-          entity_id: scene.porch_bulbs_normal_colour_bright
-      - wait_for_trigger:
-        - platform: state
-          entity_id: binary_sensor.snr_outside_frontporchmotion_occupancy
-          from: 'on'
-          to: 'off'
-      - delay:
-          hours: 0
-          minutes: 2
-          seconds: 0
-          milliseconds: 0
-      - choose:
-        - conditions:
-          - condition: and
-            conditions:
-            - condition: state
-              entity_id: input_boolean.adhoc_outside_light_colours
-              state: 'on'
-            - condition: time
-              before: '22:29:00'
-              after: 00:00:00
-          sequence:
-          - service: scene.turn_on
-            data:
-              transition: 2
-            target:
-              entity_id: scene.porch_bulbs_adhoc_colours
-        - conditions:
-          - condition: and
-            conditions:
-            - condition: state
-              entity_id: input_boolean.christmas_lights_outdoors
-              state: 'on'
-            - condition: time
-              before: '22:29:00'
-              after: 00:00:00
-          sequence:
-          - service: scene.turn_on
-            data:
-              transition: 2
-            target:
-              entity_id: scene.porch_bulbs_christmas_colours
-        - conditions:
-          - condition: and
-            conditions:
-            - condition: state
-              entity_id: input_boolean.halloween_string_lights_outlet
-              state: 'on'
-            - condition: time
-              before: '22:29:00'
-              after: 00:00:00
-          sequence:
-          - service: scene.turn_on
-            data:
-              transition: 2
-            target:
-              entity_id: scene.porch_bulbs_halloween_colours
-        default:
-        - service: scene.turn_on
-          data:
-            transition: 2
-          target:
-            entity_id: scene.porch_bulbs_normal_colour_dimmed
-    - conditions:
-      - condition: or
-        conditions:
-        - condition: state
-          entity_id: sun.sun
-          state: below_horizon
-        - condition: time
-          after: 00:00:00
-          before: 06:00:00
-      sequence:
-      - service: scene.turn_on
-        data:
-          transition: 2
-        target:
-          entity_id: scene.porch_bulbs_normal_colour_bright
-      - wait_for_trigger:
-        - platform: state
-          entity_id: binary_sensor.snr_outside_frontporchmotion_occupancy
-          from: 'on'
-          to: 'off'
-      - delay:
-          hours: 0
-          minutes: 2
-          seconds: 0
-          milliseconds: 0
-      - service: light.turn_off
-        data:
-          transition: 2
-        target:
-          entity_id: light.group_porch_lights
-    default: []
-  mode: single
 - id: '1645861752199'
   alias: 'Outside: Front lights transition to security mode check'
   description: transition lights from colours to white for security lighting
@@ -1382,6 +1261,10 @@
   - condition: state
     entity_id: switch.sw_downstairsbathroom_ceilinglight
     state: 'off'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
   action:
   - service: switch.turn_on
     data: {}
@@ -1999,44 +1882,6 @@
       target:
         entity_id: light.blb_familyroom_garland
   mode: single
-- id: '1701370969365'
-  alias: 'House: Front door lock controls'
-  description: (un)lock door
-  trigger:
-  - platform: state
-    entity_id: input_boolean.house_front_door_lock_toggled
-    to: 'on'
-  condition: []
-  action:
-  - choose:
-    - conditions:
-      - condition: state
-        entity_id: lock.lck_house_front_door
-        state: unlocked
-      sequence:
-      - service: lock.lock
-        data: {}
-        target:
-          entity_id: lock.lck_house_front_door
-    - conditions:
-      - condition: state
-        entity_id: lock.lck_house_front_door
-        state: locked
-      sequence:
-      - service: lock.unlock
-        data: {}
-        target:
-          entity_id: lock.lck_house_front_door
-  - if:
-    - condition: state
-      entity_id: input_boolean.house_front_door_lock_toggled
-      state: 'on'
-    then:
-    - service: input_boolean.turn_off
-      data: {}
-      target:
-        entity_id: input_boolean.house_front_door_lock_toggled
-  mode: single
 - id: '1701748470522'
   alias: 'House: Front Door lock controls'
   description: (un)lock front door
@@ -2076,5 +1921,143 @@
     - service: input_boolean.turn_off
       data: {}
       target:
-        entity_id: input_boolean.garage_house_door_lock_toggled
+        entity_id: input_boolean.house_front_door_lock_toggled
   mode: single
+- id: '1706247071335'
+  alias: 'Porch: Lights ON with motion'
+  description: turn on porch lights when motion is detected after sunset and return
+    to desired state
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.snr_outside_frontporchmotion_occupancy
+    to: 'on'
+    id: outside_porch_lights_on
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.outside_porch_lights_on
+    id: outside_porch_lights_off
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - outside_porch_lights_on
+      sequence:
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: sun.sun
+            state: below_horizon
+          - condition: time
+            after: '16:30:00'
+            before: '23:59:00'
+          sequence:
+          - service: timer.start
+            target:
+              entity_id: timer.outside_porch_lights_on
+            data: {}
+          - service: scene.turn_on
+            target:
+              entity_id: scene.porch_bulbs_normal_colour_bright
+            data:
+              transition: 2
+        - conditions:
+          - condition: state
+            entity_id: sun.sun
+            state: below_horizon
+          - condition: time
+            after: 00:00:00
+            before: 06:00:00
+          sequence:
+          - service: timer.start
+            metadata: {}
+            data: {}
+            target:
+              entity_id: timer.outside_porch_lights_on
+          - service: scene.turn_on
+            target:
+              entity_id: scene.porch_bulbs_normal_colour_bright
+            data:
+              transition: 2
+    - conditions:
+      - condition: trigger
+        id:
+        - outside_porch_lights_off
+      sequence:
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: input_boolean.adhoc_outside_light_colours
+            state: 'on'
+          - condition: time
+            after: '16:30:00'
+            before: '22:29:00'
+          sequence:
+          - service: scene.turn_on
+            target:
+              entity_id: scene.porch_bulbs_adhoc_colours
+            data:
+              transition: 2
+        - conditions:
+          - condition: state
+            entity_id: input_boolean.christmas_lights_outdoors
+            state: 'on'
+          - condition: time
+            after: '16:30:00'
+            before: '22:29:00'
+          sequence:
+          - service: scene.turn_on
+            target:
+              entity_id: scene.porch_bulbs_christmas_colours
+            data:
+              transition: 2
+        - conditions:
+          - condition: state
+            entity_id: input_boolean.halloween_string_lights_outlet
+            state: 'on'
+          - condition: time
+            after: '16:30:00'
+            before: '22:29:00'
+          sequence:
+          - service: scene.turn_on
+            target:
+              entity_id: scene.porch_bulbs_halloween_colours
+            data:
+              transition: 2
+        - conditions:
+          - condition: state
+            entity_id:
+            - input_boolean.adhoc_outside_light_colours
+            - input_boolean.christmas_lights_indoors
+            - input_boolean.halloween_string_lights_outlet
+            state: 'off'
+          - condition: time
+            after: '16:30:00'
+            before: '22:29:00'
+          sequence:
+          - service: scene.turn_on
+            target:
+              entity_id: scene.porch_bulbs_normal_colour_dimmed
+            data:
+              transition: 2
+        - conditions:
+          - condition: time
+            after: 00:00:00
+            before: 06:00:00
+          sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.group_porch_lights
+            data:
+              transition: 2
+        default:
+        - service: scene.turn_on
+          target:
+            entity_id: scene.porch_bulbs_normal_colour_dimmed
+          data:
+            transition: 2
+    default: []
+  mode: restart

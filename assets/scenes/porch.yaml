@@ -6,9 +6,8 @@
     light.group_porch_lights:
       state: 'on'
       brightness: 25
-      # 2100 kelvin
-      color_temp: 369
-      color_mode: color_temp
+      # 3500 kelvin
+      xy_color: [0.4036,0.3899]
 
 # bulbs normal colour 100% brightness
 - name: 'Porch Bulbs Normal Colour Bright'
@@ -16,19 +15,18 @@
     light.group_porch_lights:
       state: 'on'
       brightness: 255
-      # 2100 kelvin
-      color_temp: 369
-      color_mode: color_temp
+      # 3500 kelvin
+      xy_color: [0.4036,0.3899]
 
 # bulbs christmas colours
 - name: 'Porch Bulbs Christmas Colours'
   entities:
-    light.blb_outside_porch1:
+    light.blb_outside_frontporch_left:
       state: 'on'
       brightness: 255
       # green
       rgb_color: [0,255,0]
-    light.blb_outside_porch2:
+    light.blb_outside_frontporch_right:
       state: 'on'
       brightness: 255
       # red
@@ -37,12 +35,12 @@
 # bulbs halloween colours
 - name: 'Porch Bulbs Halloween Colours'
   entities:
-    light.blb_outside_porch1:
+    light.blb_outside_frontporch_left:
       state: 'on'
       brightness: 255
       # purple
       rgb_color: [90,35,255]
-    light.blb_outside_porch2:
+    light.blb_outside_frontporch_right:
       state: 'on'
       brightness: 255
       # purple
@@ -52,13 +50,13 @@
 - name: 'Porch Bulbs Adhoc Colours'
   entities:
     # bulb: left (door)
-    light.blb_outside_porch1:
+    light.blb_outside_frontporch_left:
       state: 'on'
       brightness: 255
       # yellow
       rgb_color: [255,255,0]
     # bulb: right (window)
-    light.blb_outside_porch2:
+    light.blb_outside_frontporch_right:
       state: 'on'
       brightness: 255
       # blue

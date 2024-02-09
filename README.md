@@ -17,7 +17,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Thermostat        | Sinopé     | TH1400ZB        | 1     | Zigbee2MQTT           |
 | **Lights**                                                                       |
 | Bulb (A25)        | Athom      | LB01-15W-E27    | 1     | Tasmota               |
-| Bulb (BR30)       | Athom      | LB03-12W-BR30   | 2     | Tasmota               |
+| Bulb (BR30)       | Philips    | 046677577957    | 2     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 9290024687      | 1     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 929002478401    | 1     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 9290024717      | 2     | Zigbee2MQTT           |

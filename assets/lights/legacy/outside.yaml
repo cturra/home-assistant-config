@@ -11,5 +11,5 @@
 - platform: group
   name: 'Group Porch Lights'
   entities:
-    - light.blb_outside_porch1
-    - light.blb_outside_porch2
+    - light.blb_outside_frontporch_left
+    - light.blb_outside_frontporch_right
