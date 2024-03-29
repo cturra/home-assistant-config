@@ -1507,7 +1507,11 @@ views:
           # family room
           - type: 'custom:button-card'
             entity: sensor.familyroom_temperature_1_decimal
-            name: 'Family Room'
+            name: >
+              [[[
+                var occupied = states['binary_sensor.snr_familyroom_motion_occupancy'].state
+                return 'Family Room' + (occupied == 'on' ? ' ⦿': '');
+              ]]]
             show_state: true
             show_icon: false
             <<: *climate-button-style

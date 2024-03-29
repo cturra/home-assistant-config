@@ -39,9 +39,11 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Climate           | Inkbird    | IBS-TH2         | 3     | HA :: Inkbird BLE     |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 1     | Zigbee2MQTT           |
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 7     | HA :: BTHome          |
-| Contact           | Xiaomi     | MCCGQ11LM       | 17    | Zigbee2MQTT           |
+| Contact           | Ikea       | E2013           | 1     | Zigbee2MQTT           |
+| Contact           | Xiaomi     | MCCGQ11LM       | 16    | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 16    | Zigbee2MQTT           |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
+| Motion            | Ikea       | E2134           | 1     | Zigbee2MQTT           |
 | Motion            | Philips    | 9290030674      | 2     | Zigbee2MQTT           |
 | Motion            | Xiaomi     | RTCGQ14LM       | 1     | Zigbee2MQTT           |
 | Presence          | Tuya       | ZY-M100         | 2     | ESPHome               |
