@@ -2034,7 +2034,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name"
         filter:
           include:
             - name: entity_id
@@ -2046,7 +2048,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name"
         filter:
           include:
             - name: entity_id
@@ -2058,7 +2062,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name"
         filter:
           include:
             - name: entity_id
@@ -2070,7 +2076,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name" 
         filter:
           include:
             - name: entity_id
@@ -2082,7 +2090,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name"
         filter:
           include:
             - name: entity_id
@@ -2094,7 +2104,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name"
         filter:
           include:
             - name: entity_id
@@ -2106,7 +2118,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name"
         filter:
           include:
             - name: entity_id
@@ -2118,7 +2132,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name"
         filter:
           include:
             - name: entity_id
@@ -2130,7 +2146,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name"
         filter:
           include:
             - name: entity_id
@@ -2142,7 +2160,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name"
         filter:
           include:
             - name: entity_id
@@ -2154,7 +2174,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name"
         filter:
           include:
             - name: entity_id
@@ -2166,7 +2188,9 @@ views:
         <<: *battery-state-color_gradient
         <<: *battery-state-style
         tap_action: more-info
-        sort_by_level: 'asc'
+        sort:
+          - "state"
+          - "name"
         filter:
           include:
             - name: entity_id
