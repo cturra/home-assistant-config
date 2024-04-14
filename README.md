@@ -39,8 +39,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Climate           | Inkbird    | IBS-TH2         | 3     | HA :: Inkbird BLE     |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 1     | Zigbee2MQTT           |
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 7     | HA :: BTHome          |
-| Contact           | Ikea       | E2013           | 1     | Zigbee2MQTT           |
-| Contact           | Xiaomi     | MCCGQ11LM       | 16    | Zigbee2MQTT           |
+| Contact           | Ikea       | E2013           | 2     | Zigbee2MQTT           |
+| Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 16    | Zigbee2MQTT           |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
 | Motion            | Ikea       | E2134           | 1     | Zigbee2MQTT           |
@@ -55,6 +55,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | **Surveillance**                                                                 |
 | Camera            | ACTi       | B87             | 1     | RTSP                  |
 | Camera Doorbell   | Amcrest    | AD410           | 1     | HACS :: Dahua         |
+| Camera            | Reolink    | E1 Pro          | 1     | RTSP                  |
 | Camera            | Meraki     | MV72            | 1     | RTSP                  |
 | Camera            | Wyze       | Cam v3          | 1     | RTSP                  |
 | **Switches**                                                                     |
