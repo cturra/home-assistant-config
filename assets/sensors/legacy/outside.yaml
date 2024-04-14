@@ -27,3 +27,30 @@
   state_characteristic: mean
   precision: 1
   sampling_size: 20
+
+# air quality 10.0pm
+- platform: rest
+  name: 'SNR Outside AirQuality PM 10_0'
+  unique_id: snr_outside_airquality_pm10_0
+  state_class: measurement
+  device_class: pm10
+  unit_of_measurement: 'µg/m³'
+  scan_interval: 180
+  timeout: 60
+  resource: !secret purple_air_json_url
+  value_template: >
+      {% if is_number(value_json.pm10_0_atm) and is_number(value_json.pm10_0_atm_b) %}
+        {{ (value_json.pm10_0_atm + value_json.pm10_0_atm_b)/2 | int(default=0) }}
+      {% else %}
+        {# return last value if sensor doesn't return a number #}
+        {{ states('sensor.snr_outside_airquality_pm_10_0') }}
+      {% endif %}
+
+# mean air quality 10.0pm
+- platform: statistics
+  name: "SNR Outside Mean AirQuality PM 10_0"
+  unique_id: snr_outside_mean_airquality_pm10_0
+  entity_id: sensor.snr_outside_airquality_pm_10_0
+  state_characteristic: mean
+  precision: 1
+  sampling_size: 20
