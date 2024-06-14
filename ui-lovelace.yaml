@@ -421,7 +421,7 @@ views:
                 secondary_info: last-changed
                 <<: *alert-style
             # updates available for philips hue bulbs through zigbee2mqtt
-            - entity_id: '/update.(blb|rmt)_*/'
+            - entity_id: '/update.(blb|rmt|snr)_*/'
               state: 'on'
               options:
                 icon: 'mdi:arrow-up-circle-outline'
@@ -463,9 +463,9 @@ views:
                 icon: 'mdi:alert-box-outline'
                 secondary_info: last-changed
                 <<: *alert-info-style
-            # main bedroom: air purifier filter change
-            - entity_id: 'sensor.fan_main_bedroom_airpurifier_filter_life'
-              state: '< 3'
+            # family room/main bedroom: air purifier filter change
+            - entity_id: 'sensor.fan_(family_room|main_bedroom)_airpurifier_filter_life'
+              state: '< 2'
               options:
                 icon: 'mdi:air-filter'
                 secondary_info: last-changed

@@ -39,7 +39,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Climate           | Inkbird    | IBS-TH2         | 3     | HA :: Inkbird BLE     |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 1     | Zigbee2MQTT           |
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 7     | HA :: BTHome          |
-| Contact           | Ikea       | E2013           | 2     | Zigbee2MQTT           |
+| Contact           | Ikea       | E2013           | 3     | Zigbee2MQTT           |
 | Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 16    | Zigbee2MQTT           |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
@@ -49,7 +49,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Presence          | Tuya       | ZY-M100         | 2     | ESPHome               |
 | Plant             | Xiaomi     | Mi Flora (HHCC) | 3     | HA:: Xiami BLE        |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
-| Temperature       | Acurite    | 592TXR          | 2     | MQTT :: rtl_433       |
+| Temperature       | Acurite    | 592TXR          | 3     | MQTT :: rtl_433       |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433       |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT           |
 | **Surveillance**                                                                 |

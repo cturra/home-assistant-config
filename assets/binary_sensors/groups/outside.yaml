@@ -1,0 +1,8 @@
+## BINARY SENSORS / GROUPS / OUTSIDE
+
+# contact sensors on house exterior doors
+- platform: group
+  name: 'Group Shed Doors'
+  entities:
+    - binary_sensor.snr_shed_doorcontact_contact
+    - binary_sensor.snr_toyshed_doorcontact_contact

@@ -21,6 +21,7 @@ input_datetime: !include_dir_merge_named assets/input_datetime
 light: !include_dir_merge_list assets/lights/legacy
 media_player: !include_dir_merge_list assets/media_players
 mqtt: 
+  binary_sensor: !include_dir_merge_list assets/binary_sensors/mqtt
   light: !include_dir_merge_list assets/lights/mqtt
   sensor: !include_dir_merge_list assets/sensors/mqtt
   switch: !include_dir_merge_list assets/switches/mqtt

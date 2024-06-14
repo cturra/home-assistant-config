@@ -558,8 +558,8 @@
   mode: restart
 - id: '1619640982634'
   alias: 'Shed: Notify when door left open at night'
-  description: notify chris' phone if the shed door is left open for 5 minutes when
-    the time is after 22:30.
+  description: notify chris' phone if either shed door is left open for 5 minutes
+    when the time is after 22:30.
   trigger:
   - platform: time_pattern
     minutes: /10
@@ -567,15 +567,18 @@
   - condition: and
     conditions:
     - condition: state
-      entity_id: binary_sensor.snr_shed_doorcontact_contact
+      entity_id: binary_sensor.group_shed_doors
       state: 'on'
-      for: 00:05:00
+      for:
+        hours: 0
+        minutes: 5
+        seconds: 0
     - condition: time
       after: '22:30:00'
   action:
   - service: notify.mobile_app_turraphone
     data:
-      message: Shed Door has been left open
+      message: '{{ triggered_door_sensor }} has been left open'
       title: "❗\U0001F6AA Shed Door Open"
       data:
         push:
@@ -583,6 +586,10 @@
             name: default
             critical: 1
             volume: 1
+  variables:
+    triggered_door_sensor: "{% for entity in states.binary_sensor.group_shed_doors.attributes.entity_id
+      %}\n  {% if is_state(entity,'on') %}\n    {{ state_attr(entity, 'friendly_name')
+      }}\n  {% endif %}\n{% endfor %}\n"
   mode: single
 - id: '1619814582936'
   alias: 'Shed: Fan on when door is opened'
@@ -668,7 +675,7 @@
       title: "\U0001F6AA Garage Door"
       message: The Garage Door has been opened.
       data:
-        entity_id: camera.nas01_garage
+        entity_id: camera.cam_garage
   mode: single
 - id: '1630907999593'
   alias: 'Garage Inside: HVAC update outside temperature'
@@ -1402,7 +1409,7 @@
         - condition: not
           conditions:
           - condition: template
-            value_template: "{{\nstate_attr('media_player.living_room_receiver_main_zone',\n'source')
+            value_template: "{# receiver is not set to nintendo input #}\n{{\nstate_attr('media_player.living_room_receiver_main_zone',\n'source')
               == 'AV2' \n}}"
         then:
         - service: media_player.select_source
@@ -1459,7 +1466,7 @@
         - condition: not
           conditions:
           - condition: template
-            value_template: "{{\nstate_attr('media_player.living_room_receiver_main_zone',\n'source')
+            value_template: "{# receiver is not set to htcp input #}\n{{\nstate_attr('media_player.living_room_receiver_main_zone',\n'source')
               == 'AV3' \n}}"
         then:
         - service: media_player.select_source
@@ -1745,7 +1752,6 @@
           hs_color:
           - '{{ range(360) | random }}'
           - '{{ range(80,101) | random }}'
-          effect: Solid
           transition: 1
         target:
           entity_id: light.blb_kidsbedroom_lamp
@@ -1767,7 +1773,6 @@
         data:
           transition: 1
           kelvin: 3300
-          effect: Solid
         target:
           entity_id: light.blb_kidsbedroom_lamp
   mode: single
