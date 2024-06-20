@@ -44,7 +44,8 @@ logger:
   level: INFO # DEBUG for sensor readings
 
 ota:
-  password: !secret bt_proxy_front_ota
+  - platform: esphome
+    password: !secret bt_proxy_front_ota
 
 dashboard_import:
   package_import_url: github://esphome/bluetooth-proxies/gl-s10.yaml@main

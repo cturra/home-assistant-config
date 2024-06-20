@@ -10,6 +10,7 @@ __pycache__
 
 # directories
 .storage/
+esphome/trash/
 tts/
 
 # add-ons

@@ -427,13 +427,6 @@ views:
                 icon: 'mdi:arrow-up-circle-outline'
                 secondary_info: last-changed
                 <<: *alert-info-style
-            # updates available (tested with: core, zigbee2mqtt & wled)
-            - entity_id: '/update.*(!blb)_(firmware|update)|binary_sensor.*_update_available/'
-              state: 'on'
-              options:
-                icon: 'mdi:arrow-up-circle-outline'
-                secondary_info: last-changed
-                <<: *alert-info-style
             # updates available: hacs
             - entity_id: 'sensor.hacs'
               state: '> 0'
@@ -449,8 +442,8 @@ views:
                 icon: 'mdi:arrow-up-circle-outline'
                 secondary_info: last-changed
                 <<: *alert-info-style
-            # updates available: esphone
-            - entity_id: 'update.*_firmware'
+            # updates available (tested with: core, zigbee2mqtt & wled)
+            - entity_id: '/update.*(!blb)_(firmware|update)|binary_sensor.*_update_available/'
               state: 'on'
               options:
                 icon: 'mdi:arrow-up-circle-outline'

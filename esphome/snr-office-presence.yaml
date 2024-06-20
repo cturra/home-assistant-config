@@ -29,7 +29,8 @@ api:
     key: !secret snr_office_presence_key
 
 ota:
-  password: !secret snr_office_presence_ota
+  - platform: esphome
+    password: !secret snr_office_presence_ota
 
 wifi:
   ssid: !secret wifi_ssid
