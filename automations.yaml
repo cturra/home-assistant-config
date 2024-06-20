@@ -1852,6 +1852,11 @@
       - condition: state
         entity_id: device_tracker.turraphone
         state: not_home
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: timer.outside_porch_motion_snooze
+          state: active
       sequence:
       - service: notify.mobile_app_turraphone
         data:
@@ -1859,6 +1864,20 @@
           title: "\U0001F3C3\U0001F3FBPerson Detected"
           data:
             entity_id: camera.front_door_sub
+            actions:
+            - action: SNOOZE
+              title: Snooze
+      - wait_for_trigger:
+        - platform: event
+          event_type: mobile_app_notification_action
+          event_data:
+            action: SNOOZE
+        timeout: 00:00:30
+        continue_on_timeout: false
+      - service: timer.start
+        target:
+          entity_id: timer.outside_porch_motion_snooze
+        data: {}
   - service: notify.grp_all_tvs
     data:
       message: Person Detected at front door
