@@ -7,3 +7,13 @@
   state: >
     {% from 'state.jinja' import is_stale %}
     {{ is_stale(states.sensor.snr_crawlspace_freezer_temperature.last_changed, 3600) }}
+
+# ... battery reporting at low
+- name: 'SNR Crawlspace Freezer Battery Low'
+  unique_id: 'snr_crawlspace_freezer_temperature_battery_low'
+  state: >
+    {% from 'battery.jinja' import is_battery_low %}
+    {{ is_battery_low('sensor.snr_crawlspace_freezer_temperature') }}
+  attributes:
+    last_check_in: >
+      {{ state_attr('sensor.snr_crawlspace_freezer_temperature','time') }}

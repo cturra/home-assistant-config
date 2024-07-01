@@ -193,36 +193,6 @@ sensor.plnt_parlor_palm_soil:
   friendly_name: 'Family Room: Parlor Palm'
 
 
-## ------ temperature sensors ------
-
-## freezers
-# crawlspace freezer
-sensor.snr_crawlspace_freezer_temperature:
-  friendly_name: 'Crawlspace: Deep Freezer'
-binary_sensor.snr_crawlspace_freezer_temperature_battery_low:
-  friendly_name: 'Crawlspace: Deep Freezer'
-
-# garage freezer
-sensor.snr_garage_freezer_temperature:
-  friendly_name: 'Garage: Freezer'
-binary_sensor.snr_garage_freezer_temperature_battery_low:
-  friendly_name: 'Garage: Freezer'
-
-# kitchen freezer
-sensor.snr_kitchen_freezer_temperature:
-  friendly_name: 'Kitchen: Freezer'
-binary_sensor.snr_kitchen_freezer_temperature_battery_low:
-  friendly_name: 'Kitchen: Freezer'
-
-# outside
-binary_sensor.snr_outside_temperature_battery_low:
-  friendly_name: 'Outside'
-
-# shed
-binary_sensor.snr_shed_temperature_battery_low:
-  friendly_name: 'Shed'
-
-
 ## ------ toothbrushes ------
 
 sensor.toothbrush_anne_battery_persistent:

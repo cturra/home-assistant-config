@@ -9,6 +9,16 @@
     {% from 'state.jinja' import is_stale %}
     {{ is_stale(states.sensor.snr_garage_freezer_temperature.last_changed, 3600) }}
 
+# ... battery reporting at low
+- name: 'SNR Garage Freezer Battery Low'
+  unique_id: 'snr_garage_freezer_temperature_battery_low'
+  state: >
+    {% from 'battery.jinja' import is_battery_low %}
+    {{ is_battery_low('sensor.snr_garage_freezer_temperature') }}
+  attributes:
+    last_check_in: >
+      {{ state_attr('sensor.snr_garage_freezer_temperature','time') }}
+
 # fridge temperature stale updates
 # ... no state change in more than 1 hour
 - name: 'SNR Garage Fridge Stale Updates'
@@ -16,6 +26,16 @@
   state: >
     i{% from 'state.jinja' import is_stale %}
     {{ is_stale(states.sensor.snr_garage_fridge_temperature.last_changed, 3600) }}
+
+# ... battery reporting at low
+- name: 'SNR Garage Fridge Battery Low'
+  unique_id: 'snr_garage_fridge_temperature_battery_low'
+  state: >
+    {% from 'battery.jinja' import is_battery_low %}
+    {{ is_battery_low('sensor.snr_garage_fridge_temperature') }}
+  attributes:
+    last_check_in: >
+      {{ state_attr('sensor.snr_garage_freezer_temperature','time') }}
 
 # -- sinopé --
 # heating on/off

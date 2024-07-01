@@ -312,6 +312,13 @@ views:
               options:
                   secondary_info: last-changed
                   <<: *alert-style
+            # battery low: rtl_433
+            - entity_id: 'binary_sensor.snr_*temperature_battery_low'
+              state: 'on'
+              options:
+                secondary_info: last-changed
+                icon: 'mdi:battery-alert-variant-outline'
+                <<: *alert-style
             # battery low: door locks
             - entity_id: 'sensor.lck_*_battery'
               state: '< 10'
