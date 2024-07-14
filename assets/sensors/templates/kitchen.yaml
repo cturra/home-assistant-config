@@ -7,3 +7,11 @@
   #  -- convert seconds to days
   state: >
     {{ ((as_timestamp(now()) - state_attr('input_datetime.kitchen_dishwasher_last_cleaned','timestamp')) | int / 60/1440) | round(0) }}
+
+- name: 'Kitchen Espresso Machine Cleaned Interval'
+  unit_of_measurement: 'days'
+  icon: 'mdi:coffee-maker-outline'
+  # calculate days since the espresso machine was last cleaned
+  #  -- convert seconds to days
+  state: >
+    {{ ((as_timestamp(now()) - state_attr('input_datetime.kitchen_espresso_machine_last_cleaned','timestamp')) | int / 60/1440) | round(0) }}

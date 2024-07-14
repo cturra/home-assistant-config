@@ -313,7 +313,7 @@ views:
                   secondary_info: last-changed
                   <<: *alert-style
             # battery low: rtl_433
-            - entity_id: 'binary_sensor.snr_*temperature_battery_low'
+            - entity_id: 'binary_sensor.snr_*_battery_low'
               state: 'on'
               options:
                 secondary_info: last-changed
@@ -512,6 +512,20 @@ views:
                   confirmation:
                     text: 'Dishwasher cleaned?'
                 <<: *alert-info-style
+            # espresso machine cleaning cycle (every month)
+            - entity_id: 'sensor.kitchen_espresso_machine_cleaned_interval'
+              state: '> 30'
+              options:
+                name: 'Espresso Machine Cleaning'
+                secondary_info: last-changed
+                tap_action:
+                  action: call-service
+                  service: input_boolean.turn_on
+                  service_data:
+                    entity_id: input_boolean.kitchen_espresso_machine_cleaning_reset
+                  confirmation:
+                    text: 'Espresso Machine cleaned?'
+                <<: *alert-info-style
         sort:
           method: name
 
@@ -538,7 +552,7 @@ views:
                 name: 'Bathroom, Up: Fan'
                 secondary_info: last-changed
             # house (ecobee) & garage (sinope)
-            - entity_id: '/binary_sensor.hvac_(ecobee|garage)_(cooling|heating)_state/'
+            - entity_id: '/binary_sensor.hvac_(ecobee|garage|house)_(cooling|heating)_state/'
               state: 'on'
               options:
                 secondary_info: last-changed
@@ -1607,7 +1621,7 @@ views:
           <<: *mini-graph-style
           entities:
             # cooling on/off
-            - entity: binary_sensor.hvac_ecobee_cooling_state
+            - entity: binary_sensor.hvac_house_cooling_state
               name: Cooling
               color: '#71b7f4'
               show_legend: false
@@ -1621,7 +1635,7 @@ views:
               show_line: false
               show_points: false
             # hvac fan on/off
-            - entity: binary_sensor.hvac_ecobee_fan_state
+            - entity: binary_sensor.hvac_house_fan_state
               name: Fan
               color: '#ffffff'
               show_legend: true

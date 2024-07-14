@@ -1319,6 +1319,7 @@
   - platform: state
     entity_id:
     - input_boolean.kitchen_dishwasher_cleaning_reset
+    - input_boolean.kitchen_espresso_machine_cleaning_reset
     - input_boolean.laundry_washing_machine_cleaning_reset
     - input_boolean.hvac_filter_change_reset
     to: 'on'
@@ -1339,6 +1340,20 @@
         data: {}
         target:
           entity_id: input_boolean.kitchen_dishwasher_cleaning_reset
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.kitchen_espresso_machine_cleaning_reset
+        state: 'on'
+      sequence:
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.kitchen_espresso_machine_last_cleaned
+        data:
+          timestamp: '{{ now().timestamp() }}'
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.kitchen_espresso_machine_cleaning_reset
     - conditions:
       - condition: state
         entity_id: input_boolean.laundry_washing_machine_cleaning_reset
@@ -1867,6 +1882,8 @@
             actions:
             - action: SNOOZE
               title: Snooze
+            - action: DISMISS
+              title: Dismiss
       - wait_for_trigger:
         - platform: event
           event_type: mobile_app_notification_action
