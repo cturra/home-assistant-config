@@ -488,7 +488,7 @@ views:
             - entity_id: 'sensor.laundry_washing_machine_cleaned_interval'
               state: '> 30'
               options:
-                name: 'Washing Machine Cleaning'
+                name: 'Laundry: Washing machine cleaning'
                 secondary_info: last-changed
                 tap_action:
                   action: call-service
@@ -502,7 +502,7 @@ views:
             - entity_id: 'sensor.kitchen_dishwasher_cleaned_interval'
               state: '> 30'
               options:
-                name: 'Dishwasher Cleaning'
+                name: 'Kitchen: Dishwasher cleaning'
                 secondary_info: last-changed
                 tap_action:
                   action: call-service
@@ -516,7 +516,7 @@ views:
             - entity_id: 'sensor.kitchen_espresso_machine_cleaned_interval'
               state: '> 30'
               options:
-                name: 'Espresso Machine Cleaning'
+                name: 'Kitchen: Espresso machine cleaning'
                 secondary_info: last-changed
                 tap_action:
                   action: call-service
@@ -525,6 +525,19 @@ views:
                     entity_id: input_boolean.kitchen_espresso_machine_cleaning_reset
                   confirmation:
                     text: 'Espresso Machine cleaned?'
+            # crawlspace locker dehumidifier drying cycle (every month)
+            - entity_id: 'sensor.crawlspace_locker_dehumidifier_last_dried_interval'
+              state: '> 30'
+              options:
+                name: 'Crawlspace: Locker Dehumidifier'
+                secondary_info: last-changed
+                tap_action:
+                  action: call-service
+                  service: input_boolean.turn_on
+                  service_data:
+                    entity_id: input_boolean.crawlspace_locker_dehumidifier_reset
+                  confirmation:
+                    text: 'Locker Dehumidifier Dried?'
                 <<: *alert-info-style
         sort:
           method: name

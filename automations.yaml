@@ -1318,6 +1318,7 @@
   trigger:
   - platform: state
     entity_id:
+    - input_boolean.crawlspace_locker_dehumidifier_reset
     - input_boolean.kitchen_dishwasher_cleaning_reset
     - input_boolean.kitchen_espresso_machine_cleaning_reset
     - input_boolean.laundry_washing_machine_cleaning_reset
@@ -1326,6 +1327,20 @@
   condition: []
   action:
   - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.crawlspace_locker_dehumidifier_reset
+        state: 'on'
+      sequence:
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: input_datetime.crawlspace_locker_dehumidifier_last_dried
+        data:
+          timestamp: '{{ now().timestamp() }}'
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.crawlspace_locker_dehumidifier_reset
     - conditions:
       - condition: state
         entity_id: input_boolean.kitchen_dishwasher_cleaning_reset

@@ -35,4 +35,4 @@
     {{ is_battery_low('sensor.snr_kitchen_freezer_temperature') }}
   attributes:
     last_check_in: >
-      {{ state_attr('sensor.snr_garage_freezer_temperature','time') }}
+      {{ state_attr('sensor.snr_kitchen_freezer_temperature','time') }}

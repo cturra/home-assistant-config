@@ -1,5 +1,14 @@
 ## SENSORS / TEMPLATES / CRAWLSPACE
 
+# locker locker dehumidifier drying interval
+- name: 'Crawlspace Locker Dehumidifier Last Dried Interval'
+  unit_of_measurement: 'days'
+  icon: 'mdi:locker'
+  # calculate days since the dehumidifier was last dried
+  #  -- convert seconds to days
+  state: >
+    {{ ((as_timestamp(now()) - state_attr('input_datetime.crawlspace_locker_dehumidifier_last_dried','timestamp')) | int / 60/1440) | round(0) }}
+
 # -- inkbird ibs-th2 --
 # temperature
 - name: 'Crawlspace Temperature 1 Decimal'
