@@ -10,21 +10,36 @@
       is_state_attr('climate.amazon', 'hvac_action', 'cooling')
     }}
 
-# HVAC fan on/off (when heating/cooling NOT running)
-- name: 'HVAC Ecobee Fan State'
-  state: >
-    {{ is_state_attr('climate.amazon', 'hvac_action', 'fan') }}
 
 # HVAC heating on/off
 - name: 'HVAC Ecobee Heating State'
   state: >
     {{ is_state_attr('climate.amazon', 'hvac_action', 'heating') }}
 
+# -- shelly em --
 # HVAC cooling on/off
-- name: 'HVAC Ecobee Cooling State'
+- name: 'HVAC House Cooling State'
+  unique_id: 'hvac_house_cooling_state'
   state: >
-    {{ is_state_attr('climate.amazon', 'hvac_action', 'cooling') }}
+  # power reported in watts (w)
+  state: >
+    {% if is_number(states('sensor.em_crawlspace_hvac_power_1')) %}
+      {{ (states('sensor.em_crawlspace_hvac_power_1') | int(default=0)) > 475 }}
+    {% endif %}
 
+# HVAC fan on/off (when heating/cooling NOT running)
+- name: 'HVAC House Fan State'
+  unique_id: 'hvac_house_fan_state'
+  # power reported in watts (w)
+  state: >
+    {% if is_number(states('sensor.em_crawlspace_hvac_power_1')) %}
+      {{ 
+        (states('sensor.em_crawlspace_hvac_power_1') | int(default=0)) > 40 and
+        (states('sensor.em_crawlspace_hvac_power_1') | int(default=0)) < 160
+      }}
+    {% endif %}
+
+# -- hydrohome hub --
 # bc hydro energy bridge stale updates 
 # ... no state change in more than 10 minutes
 - name: 'BC Hydryo Energy Bridge Stale Updates'

@@ -147,16 +147,6 @@ binary_sensor.hvac_garage_heating_state:
   friendly_name: 'Garage: Heating'
   icon: 'mdi:fire'
 
-# house cooling
-binary_sensor.hvac_ecobee_cooling_state:
-  friendly_name: 'House: Cooling'
-  icon: 'mdi:snowflake'
-
-# house fan
-binary_sensor.hvac_ecobee_fan_state:
-  friendly_name: 'House: Fan'
-  icon: 'mdi:fan'
-
 # house heating
 binary_sensor.hvac_ecobee_heating_state:
   friendly_name: 'House: Heating'
