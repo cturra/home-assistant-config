@@ -21,6 +21,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Bulb (E26)        | Philips    | 9290024687      | 1     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 929002478401    | 1     | Zigbee2MQTT           |
 | Bulb (E26)        | Philips    | 9290024717      | 2     | Zigbee2MQTT           |
+| Floor Lamp        | Govee      | H6076           | 1     | HA :: Govee           |
 | **Locks**                                                                        |
 | Door Lock         | August     | ASL-03          | 2     | HA :: Yale Access BLE |
 | **Entertainment**                                                                |
@@ -49,6 +50,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Presence          | Tuya       | ZY-M100         | 2     | ESPHome               |
 | Plant             | Xiaomi     | Mi Flora (HHCC) | 3     | HA:: Xiami BLE        |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
+| Soil              | Tuya       | TS0601          | 1     | Zigbee2MQTT           |
 | Temperature       | Acurite    | 592TXR          | 3     | MQTT :: rtl_433       |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433       |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT           |
@@ -72,6 +74,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Switch (Motion)   | CloudFree  | SWM1            | 1     | Tasmota               |
 | Switch (Motion)   | Milfra     | MFA06           | 1     | Tasmota               |
 | Switch            | Shelly     | 1               | 1     | Tasmota               |
+| Switch (Energy)   | Shelly     | EM              | 1     | Tasmota               |
 | Switch            | Sonoff     | Basic           | 1     | Tasmota               |
 | Switch            | Sonoff     | Mini R1         | 2     | Tasmota               |
 | Switch            | Sonoff     | SV              | 1     | Tasmota               |

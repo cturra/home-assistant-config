@@ -1583,7 +1583,7 @@
       - service: switch.toggle
         data: {}
         target:
-          entity_id: switch.sw_main_bedroom_airpurifier
+          entity_id: light.blb_main_bedroom_floor_lamp
     - conditions:
       - condition: template
         value_template: "{% if is_state('light.sw_mainbedroom_ceilinglight','on')

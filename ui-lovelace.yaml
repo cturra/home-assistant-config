@@ -804,6 +804,14 @@ views:
                 icon: 'mdi:dome-light'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
+            - entity_id: light.blb_main_bedroom_floor_lamp
+              state: 'on'
+              options:
+                type: 'custom:slider-entity-row'
+                hide_state: true
+                name: 'Main Bedroom: Lamp'
+                seconary_info: last-changed
+                <<: *neutral-icon-entity-style
             # kids bedroom
             - entity_id: light.sw_kidsbedroom_ceilinglight
               state: 'on'
@@ -1228,11 +1236,16 @@ views:
                   name: 'Air Purifier'
                   icon: 'mdi:air-purifier'
                   state_color: true
-                # heater
-                - entity: switch.sw_main_bedroom_heater
-                  name: 'Heater'
-                  icon: 'mdi:radiator'
+                # floor lamp
+                - entity: light.blb_main_bedroom_floor_lamp
+                  name: 'Lamp'
                   state_color: true
+                # entertainment
+                - entity: switch.sw_main_bedroom_entertainment
+                  name: 'TV'
+                  icon: 'mdi:television'
+                  state_color: true
+
             - type: entities
               show_header_toggle: false
               <<: *entities-style
@@ -1242,10 +1255,10 @@ views:
                   name: 'Ceiling'
                   icon: 'mdi:dome-light'
                   state_color: true
-                # entertainment
-                - entity: switch.sw_main_bedroom_entertainment
-                  name: 'TV'
-                  icon: 'mdi:television'
+                # heater
+                - entity: switch.sw_main_bedroom_heater
+                  name: 'Heater'
+                  icon: 'mdi:radiator'
                   state_color: true
 
       # Kids Bedroom
