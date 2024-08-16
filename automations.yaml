@@ -685,14 +685,14 @@
     minutes: /10
   condition: []
   action:
-  - service: mqtt.publish
-    data:
+  - data:
       topic: zigbee2mqtt-pi/HVAC_Garage_Thermostat/set/thermostat_outdoor_temperature
-      payload_template: '{{ states(''sensor.snr_outside_temperature'') }}'
-  - service: mqtt.publish
-    data:
+      payload: '{{ states("sensor.snr_outside_temperature") }}'
+    action: mqtt.publish
+  - data:
       topic: zigbee2mqtt-pi/HVAC_Garage_Thermostat/set/thermostat_time
       payload: ''
+    action: mqtt.publish
   mode: restart
 - id: '1631040582872'
   alias: 'Garage Inside: HVAC off when vehicle door opened'
@@ -1580,7 +1580,7 @@
       - condition: template
         value_template: '{{ trigger.payload == ''dots_2_initial_press'' }}'
       sequence:
-      - service: switch.toggle
+      - service: light.toggle
         data: {}
         target:
           entity_id: light.blb_main_bedroom_floor_lamp
@@ -1854,10 +1854,11 @@
   mode: single
 - id: '1694408321293'
   alias: 'House: Indoor Lights off at sunrise'
-  description: turn off indoor lights at sunrise.
+  description: turn off indoor lights just after sunrise.
   trigger:
   - platform: sun
     event: sunrise
+    offset: 00:15:00
   condition: []
   action:
   - service: switch.turn_off
@@ -1866,6 +1867,11 @@
       entity_id:
       - switch.fan_family_room_airpurifier_night_mode
       - switch.fan_main_bedroom_airpurifier_night_mode
+  - service: light.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: light.blb_main_bedroom_floor_lamp
   mode: single
 - id: '1700159738395'
   alias: 'Porch: Nofity front door motion'
