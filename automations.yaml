@@ -8,7 +8,7 @@
   action:
   - data:
       addon: core_letsencrypt
-    service: hassio.addon_restart
+    action: hassio.addon_restart
   mode: single
 - id: '1612291452533'
   alias: 'Shed: Plant Light Controls'
@@ -33,11 +33,11 @@
         id:
         - shed_plant_light_on
       sequence:
-      - service: timer.start
+      - action: timer.start
         data: {}
         target:
           entity_id: timer.shed_indoor_plant_light_on
-      - service: switch.turn_on
+      - action: switch.turn_on
         target:
           entity_id: switch.plg_shed_utility
         data: {}
@@ -46,7 +46,7 @@
         id:
         - shed_plant_light_off
       sequence:
-      - service: switch.turn_off
+      - action: switch.turn_off
         target:
           entity_id: switch.plg_shed_utility
         data: {}
@@ -64,7 +64,7 @@
     state: 'off'
     entity_id: switch.plg_kitchen_speaker
   action:
-  - service: switch.turn_on
+  - action: switch.turn_on
     data: {}
     target:
       entity_id: switch.plg_kitchen_speaker
@@ -86,7 +86,7 @@
     state: 'on'
     entity_id: switch.plg_kitchen_speaker
   action:
-  - service: switch.turn_off
+  - action: switch.turn_off
     data: {}
     target:
       entity_id: switch.plg_kitchen_speaker
@@ -99,11 +99,11 @@
     event: sunset
   condition: []
   action:
-  - service: scene.turn_on
+  - action: scene.turn_on
     data: {}
     target:
       entity_id: scene.indoor_evening_lights_on
-  - service: switch.turn_on
+  - action: switch.turn_on
     data: {}
     target:
       entity_id:
@@ -114,7 +114,7 @@
       entity_id: input_boolean.christmas_lights_indoors
       state: 'on'
     then:
-    - service: switch.turn_on
+    - action: switch.turn_on
       data: {}
       target:
         entity_id:
@@ -129,11 +129,11 @@
     at: 01:01:00
   condition: []
   action:
-  - service: scene.turn_on
+  - action: scene.turn_on
     data: {}
     target:
       entity_id: scene.indoor_evening_lights_off
-  - service: switch.turn_on
+  - action: switch.turn_on
     data: {}
     target:
       entity_id:
@@ -149,12 +149,12 @@
     offset: -00:15:00
   condition: []
   action:
-  - service: light.turn_off
+  - action: light.turn_off
     target:
       entity_id: light.group_driveway_lights
     data:
       transition: 2
-  - service: light.turn_off
+  - action: light.turn_off
     data: {}
     target:
       entity_id: light.front_door_ring_light
@@ -187,7 +187,7 @@
           entity_id: switch.sw_main_bedroom_heater
           state: 'off'
       sequence:
-      - service: switch.turn_on
+      - action: switch.turn_on
         data: {}
         target:
           entity_id: switch.sw_main_bedroom_heater
@@ -201,7 +201,7 @@
           entity_id: switch.sw_main_bedroom_heater
           state: 'on'
       sequence:
-      - service: switch.turn_off
+      - action: switch.turn_off
         data: {}
         target:
           entity_id: switch.sw_main_bedroom_heater
@@ -229,7 +229,7 @@
       state: 'off'
       for: 00:00:10
   action:
-  - service: switch.turn_on
+  - action: switch.turn_on
     data: {}
     target:
       entity_id: switch.sw_garage_ceilingmainlights
@@ -260,11 +260,11 @@
         entity_id: sun.sun
         state: below_horizon
       sequence:
-      - service: timer.start
+      - action: timer.start
         target:
           entity_id: timer.outside_garage_side_door_light_on
         data: {}
-      - service: switch.turn_on
+      - action: switch.turn_on
         target:
           entity_id: switch.sw_outside_garagesidedoorlight
         data: {}
@@ -273,7 +273,7 @@
         id:
         - outside_garage_motion_off
       sequence:
-      - service: switch.turn_off
+      - action: switch.turn_off
         target:
           entity_id: switch.sw_outside_garagesidedoorlight
         data: {}
@@ -292,7 +292,7 @@
     entity_id: switch.plg_garage_dehumidifier
     state: 'on'
   action:
-  - service: switch.turn_off
+  - action: switch.turn_off
     data: {}
     target:
       entity_id: switch.plg_garage_dehumidifier
@@ -316,7 +316,7 @@
       entity_id: switch.plg_garage_dehumidifier
       state: 'off'
   action:
-  - service: switch.turn_on
+  - action: switch.turn_on
     data: {}
     target:
       entity_id: switch.plg_garage_dehumidifier
@@ -341,7 +341,7 @@
       entity_id: switch.sw_garage_vehicledoorcontact
       state: 'off'
   action:
-  - service: switch.turn_on
+  - action: switch.turn_on
     data: {}
     target:
       entity_id: switch.plg_garage_dehumidifier
@@ -367,7 +367,7 @@
         minutes: 0
         seconds: 0
   action:
-  - service: switch.turn_off
+  - action: switch.turn_off
     data: {}
     target:
       entity_id: switch.plg_garage_dehumidifier
@@ -390,7 +390,7 @@
       entity_id: switch.plg_office_airpurifier
       state: 'off'
   action:
-  - service: switch.turn_on
+  - action: switch.turn_on
     data: {}
     target:
       entity_id: switch.plg_office_airpurifier
@@ -420,7 +420,7 @@
       entity_id: sensor.indoor_mean_air_quality_calculation
       below: 10
   action:
-  - service: switch.turn_off
+  - action: switch.turn_off
     data: {}
     target:
       entity_id: switch.plg_office_airpurifier
@@ -434,7 +434,7 @@
     to: 'on'
   condition: []
   action:
-  - service: notify.grp_anne_chris_phones
+  - action: notify.grp_anne_chris_phones
     data:
       title: "❗\U0001F4A7 Water Detected"
       message: Water detected at {{ triggered_leak_sensor }} sensor.
@@ -444,7 +444,7 @@
             name: default
             critical: 1
             volume: 1
-  - service: notify.grp_all_tvs
+  - action: notify.grp_all_tvs
     data:
       message: ALERT! Water detected at {{ triggered_leak_sensor }} sensor.
   variables:
@@ -486,7 +486,7 @@
       state: 'off'
       entity_id: switch.plg_kitchen_espressomachine
   action:
-  - service: switch.turn_on
+  - action: switch.turn_on
     target:
       entity_id: switch.plg_kitchen_espressomachine
     data: {}
@@ -501,7 +501,7 @@
     entity_id: binary_sensor.snr_crawlspace_lockerdoorcontact_contact
   condition: []
   action:
-  - service: notify.mobile_app_turraphone
+  - action: notify.mobile_app_turraphone
     data:
       title: "❗\U0001F6AA Locker Door Open"
       message: Locker Door has been opened
@@ -538,11 +538,11 @@
         id:
         - outside_shed_floodlight_on
       sequence:
-      - service: timer.start
+      - action: timer.start
         target:
           entity_id: timer.outside_shed_flood_light_on
         data: {}
-      - service: switch.turn_on
+      - action: switch.turn_on
         target:
           entity_id: switch.sw_shed_floodlight
         data: {}
@@ -551,7 +551,7 @@
         id:
         - outside_shed_floodlight_off
       sequence:
-      - service: switch.turn_off
+      - action: switch.turn_off
         target:
           entity_id: switch.sw_shed_floodlight
         data: {}
@@ -576,7 +576,7 @@
     - condition: time
       after: '22:30:00'
   action:
-  - service: notify.mobile_app_turraphone
+  - action: notify.mobile_app_turraphone
     data:
       message: '{{ triggered_door_sensor }} has been left open'
       title: "❗\U0001F6AA Shed Door Open"
@@ -609,7 +609,7 @@
       entity_id: sensor.snr_outside_temperature
       above: 0
   action:
-  - service: switch.turn_on
+  - action: switch.turn_on
     data: {}
     target:
       entity_id: switch.sw_shed_fan
@@ -618,7 +618,7 @@
       minutes: 10
       seconds: 0
       milliseconds: 0
-  - service: switch.turn_off
+  - action: switch.turn_off
     data: {}
     target:
       entity_id: switch.sw_shed_fan
@@ -637,7 +637,7 @@
     entity_id: switch.sw_garage_vehicledoorcontact
     state: 'off'
   action:
-  - service: notify.mobile_app_turraphone
+  - action: notify.mobile_app_turraphone
     data:
       title: Welcome Home!
       message: Would you like to open the Garage Door?
@@ -654,7 +654,7 @@
         action: OPEN_DOOR
     timeout: 00:02:00
     continue_on_timeout: false
-  - service: cover.open_cover
+  - action: cover.open_cover
     target:
       entity_id: cover.garage_vehicledoor
   mode: single
@@ -670,7 +670,7 @@
     for: 00:00:10
   condition: []
   action:
-  - service: notify.mobile_app_turraphone
+  - action: notify.mobile_app_turraphone
     data:
       title: "\U0001F6AA Garage Door"
       message: The Garage Door has been opened.
@@ -713,7 +713,7 @@
     entity_id: sensor.snr_outside_temperature
     below: '11'
   action:
-  - service: switch.turn_off
+  - action: switch.turn_off
     target:
       entity_id: switch.sw_hvac_garage_thermostat
     data: {}
@@ -748,7 +748,7 @@
         a longer delay to be safe #}\n  6\n{% endif %}\n"
       seconds: 0
       milliseconds: 0
-  - service: switch.turn_on
+  - action: switch.turn_on
     target:
       entity_id: switch.sw_hvac_garage_thermostat
     data: {}
@@ -770,7 +770,7 @@
     - condition: time
       after: '22:30:00'
   action:
-  - service: notify.mobile_app_turraphone
+  - action: notify.mobile_app_turraphone
     data:
       message: Garage Vehicle Door has been left open
       title: "❗\U0001F6AA Garage Vehicle Door Open"
@@ -800,7 +800,7 @@
           entity_id: sensor.snr_crawlspace_locker_climatedisplay_humidity
           below: '49.0'
       sequence:
-      - service: switch.turn_off
+      - action: switch.turn_off
         data: {}
         target:
           entity_id: switch.plg_crawlspace_zbrtr
@@ -814,7 +814,7 @@
           entity_id: sensor.snr_crawlspace_locker_climatedisplay_humidity
           above: '52.0'
       sequence:
-      - service: switch.turn_on
+      - action: switch.turn_on
         data: {}
         target:
           entity_id: switch.plg_crawlspace_zbrtr
@@ -832,7 +832,7 @@
   - repeat:
       count: '3'
       sequence:
-      - service: script.text_to_speech_on_sonos
+      - action: script.text_to_speech_on_sonos
         data:
           entity_id: media_player.main_bedroom_speaker, media_player.family_room_speaker
           volume_level: 0.8
@@ -856,7 +856,7 @@
     at: '23:59:00'
   condition: []
   action:
-  - service: light.turn_off
+  - action: light.turn_off
     data:
       transition: 2
     target:
@@ -879,7 +879,7 @@
       minutes: 0
       seconds: 10
   action:
-  - service: switch.turn_on
+  - action: switch.turn_on
     target:
       entity_id: switch.sw_crawlspace_entrancelight
   mode: single
@@ -908,7 +908,7 @@
       entity_id: switch.sw_garage_ceilingmainlights
       state: 'off'
   action:
-  - service: switch.turn_on
+  - action: switch.turn_on
     data: {}
     target:
       entity_id: switch.sw_garage_ceilingmainlights
@@ -927,7 +927,7 @@
       seconds: 0
   condition: []
   action:
-  - service: notify.mobile_app_turraphone
+  - action: notify.mobile_app_turraphone
     data:
       title: "❗\U0001F50C Plug Power OFF"
       message: Power OFF detected at {{ triggered_plug }}.
@@ -937,7 +937,7 @@
             name: default
             critical: 1
             volume: 1
-  - service: notify.grp_all_tvs
+  - action: notify.grp_all_tvs
     data:
       message: ALERT! Power OFF at {{ triggered_plug }}.
   mode: single
@@ -956,7 +956,7 @@
     to: 'on'
   condition:
   action:
-  - service: switch.turn_off
+  - action: switch.turn_off
     target:
       entity_id: switch.plg_laundry_washingmachine
   mode: single
@@ -969,7 +969,7 @@
     to: single
   condition: []
   action:
-  - service: light.toggle
+  - action: light.toggle
     target:
       entity_id: light.blb_crawlspace_lab
     data:
@@ -1009,7 +1009,7 @@
           - condition: template
             value_template: "{{\n  'rainy' in states('weather.pitt_meadows')\n}}"
       sequence:
-      - service: switch.turn_on
+      - action: switch.turn_on
         data: {}
         target:
           entity_id: switch.sw_shed_fan
@@ -1027,7 +1027,7 @@
           - condition: template
             value_template: "{{\n  'rainy' in states('weather.pitt_meadows')\n}}"
       sequence:
-      - service: switch.turn_off
+      - action: switch.turn_off
         data: {}
         target:
           entity_id: switch.sw_shed_fan
@@ -1042,7 +1042,7 @@
             > (states('sensor.snr_outside_temperature')|int(default=10)+10)) and\n
             \ (states('sensor.snr_shed_temperature')|int(default=10) > 20)\n}}"
       sequence:
-      - service: switch.turn_on
+      - action: switch.turn_on
         data: {}
         target:
           entity_id: switch.sw_shed_fan
@@ -1056,7 +1056,7 @@
           entity_id: binary_sensor.snr_shed_doorcontact_contact
           state: 'on'
       sequence:
-      - service: switch.turn_on
+      - action: switch.turn_on
         data: {}
         target:
           entity_id: switch.sw_shed_fan
@@ -1065,7 +1065,7 @@
           minutes: 10
           seconds: 0
           milliseconds: 0
-      - service: switch.turn_off
+      - action: switch.turn_off
         data: {}
         target:
           entity_id: switch.sw_shed_fan
@@ -1081,7 +1081,7 @@
         - condition: template
           value_template: '{{ now().strftime("%M")|int(default=0) < 15 }}'
       sequence:
-      - service: switch.turn_on
+      - action: switch.turn_on
         data: {}
         target:
           entity_id: switch.sw_shed_fan
@@ -1090,7 +1090,7 @@
           minutes: 10
           seconds: 0
           milliseconds: 0
-      - service: switch.turn_off
+      - action: switch.turn_off
         data: {}
         target:
           entity_id: switch.sw_shed_fan
@@ -1121,7 +1121,7 @@
         entity_id: input_boolean.adhoc_outside_light_colours
         state: 'on'
       sequence:
-      - service: scene.turn_on
+      - action: scene.turn_on
         data:
           transition: 2
         target:
@@ -1138,11 +1138,11 @@
           entity_id: input_boolean.halloween_string_lights_outlet
           state: 'on'
       sequence:
-      - service: switch.turn_off
+      - action: switch.turn_off
         data: {}
         target:
           entity_id: switch.rcl_outside_porchsoffit
-      - service: scene.turn_on
+      - action: scene.turn_on
         data:
           transition: 2
         target:
@@ -1166,7 +1166,7 @@
         entity_id: input_boolean.adhoc_outside_light_colours
         state: 'on'
       sequence:
-      - service: scene.turn_on
+      - action: scene.turn_on
         data:
           transition: 2
         target:
@@ -1178,14 +1178,14 @@
         entity_id: input_boolean.christmas_lights_outdoors
         state: 'on'
       sequence:
-      - service: scene.turn_on
+      - action: scene.turn_on
         data:
           transition: 2
         target:
           entity_id:
           - scene.driveway_bulbs_christmas_colours
           - scene.porch_bulbs_christmas_colours
-      - service: switch.turn_on
+      - action: switch.turn_on
         data: {}
         target:
           entity_id: switch.rcl_outside_porchsoffit
@@ -1194,26 +1194,26 @@
         entity_id: input_boolean.halloween_string_lights_outlet
         state: 'on'
       sequence:
-      - service: scene.turn_on
+      - action: scene.turn_on
         data:
           transition: 2
         target:
           entity_id:
           - scene.driveway_bulbs_halloween_colours
           - scene.porch_bulbs_halloween_colours
-      - service: switch.turn_on
+      - action: switch.turn_on
         data: {}
         target:
           entity_id: switch.rcl_outside_porchsoffit
     default:
-    - service: scene.turn_on
+    - action: scene.turn_on
       data:
         transition: 2
       target:
         entity_id:
         - scene.driveway_bulbs_normal_colour
         - scene.porch_bulbs_normal_colour_dimmed
-  - service: light.turn_on
+  - action: light.turn_on
     data: {}
     target:
       entity_id: light.front_door_ring_light
@@ -1238,7 +1238,7 @@
       - condition: trigger
         id: blindtime-adjusted
       sequence:
-      - service: script.adjust_motion_light_timer_setting
+      - action: script.adjust_motion_light_timer_setting
         data:
           timer: blindtime
           topic: SW_DownstairsBathroom_CeilingLight
@@ -1248,7 +1248,7 @@
       - condition: trigger
         id: lighttime-adjusted
       sequence:
-      - service: script.adjust_motion_light_timer_setting
+      - action: script.adjust_motion_light_timer_setting
         data:
           timer: lighttime
           topic: SW_DownstairsBathroom_CeilingLight
@@ -1273,7 +1273,7 @@
       minutes: 0
       seconds: 5
   action:
-  - service: switch.turn_on
+  - action: switch.turn_on
     data: {}
     target:
       entity_id: switch.sw_downstairsbathroom_ceilinglight
@@ -1287,7 +1287,7 @@
     above: 99
   condition: []
   action:
-  - service: notify.mobile_app_turraphone
+  - action: notify.mobile_app_turraphone
     data:
       title: ❗☣️ High Radon Levels
       message: High radon levels detected
@@ -1307,7 +1307,7 @@
     below: 15
   condition: []
   action:
-  - service: notify.mobile_app_turraphone
+  - action: notify.mobile_app_turraphone
     data:
       title: "\U0001FAA5\U0001FAAB Toothbrush Battery Low"
       message: Time to charge your toothbrush.
@@ -1332,12 +1332,12 @@
         entity_id: input_boolean.crawlspace_locker_dehumidifier_reset
         state: 'on'
       sequence:
-      - service: input_datetime.set_datetime
+      - action: input_datetime.set_datetime
         target:
           entity_id: input_datetime.crawlspace_locker_dehumidifier_last_dried
         data:
           timestamp: '{{ now().timestamp() }}'
-      - service: input_boolean.turn_off
+      - action: input_boolean.turn_off
         data: {}
         target:
           entity_id: input_boolean.crawlspace_locker_dehumidifier_reset
@@ -1346,12 +1346,12 @@
         entity_id: input_boolean.kitchen_dishwasher_cleaning_reset
         state: 'on'
       sequence:
-      - service: input_datetime.set_datetime
+      - action: input_datetime.set_datetime
         target:
           entity_id: input_datetime.kitchen_dishwasher_last_cleaned
         data:
           timestamp: '{{ now().timestamp() }}'
-      - service: input_boolean.turn_off
+      - action: input_boolean.turn_off
         data: {}
         target:
           entity_id: input_boolean.kitchen_dishwasher_cleaning_reset
@@ -1360,12 +1360,12 @@
         entity_id: input_boolean.kitchen_espresso_machine_cleaning_reset
         state: 'on'
       sequence:
-      - service: input_datetime.set_datetime
+      - action: input_datetime.set_datetime
         target:
           entity_id: input_datetime.kitchen_espresso_machine_last_cleaned
         data:
           timestamp: '{{ now().timestamp() }}'
-      - service: input_boolean.turn_off
+      - action: input_boolean.turn_off
         data: {}
         target:
           entity_id: input_boolean.kitchen_espresso_machine_cleaning_reset
@@ -1374,12 +1374,12 @@
         entity_id: input_boolean.laundry_washing_machine_cleaning_reset
         state: 'on'
       sequence:
-      - service: input_datetime.set_datetime
+      - action: input_datetime.set_datetime
         target:
           entity_id: input_datetime.laundry_washing_machine_last_cleaned
         data:
           timestamp: '{{ now().timestamp() }}'
-      - service: input_boolean.turn_off
+      - action: input_boolean.turn_off
         data: {}
         target:
           entity_id: input_boolean.laundry_washing_machine_cleaning_reset
@@ -1388,12 +1388,12 @@
         entity_id: input_boolean.hvac_filter_change_reset
         state: 'on'
       sequence:
-      - service: input_datetime.set_datetime
+      - action: input_datetime.set_datetime
         target:
           entity_id: input_datetime.hvac_filter_last_changed
         data:
           timestamp: '{{ now().timestamp() }}'
-      - service: input_boolean.turn_off
+      - action: input_boolean.turn_off
         data: {}
         target:
           entity_id: input_boolean.hvac_filter_change_reset
@@ -1408,7 +1408,7 @@
     to: 'on'
   condition: []
   action:
-  - service: notify.mobile_app_turraphone
+  - action: notify.mobile_app_turraphone
     data:
       message: Someone is at the door
       title: "\U0001F514 Front Doorbell"
@@ -1442,14 +1442,14 @@
             value_template: "{# receiver is not set to nintendo input #}\n{{\nstate_attr('media_player.living_room_receiver_main_zone',\n'source')
               == 'AV2' \n}}"
         then:
-        - service: media_player.select_source
+        - action: media_player.select_source
           metadata: {}
           data:
             source: AV2
           target:
             entity_id: media_player.living_room_receiver_main_zone
         else:
-        - service: switch.toggle
+        - action: switch.toggle
           metadata: {}
           data: {}
           target:
@@ -1459,7 +1459,7 @@
         value_template: "{{\n  trigger.payload == 'volume_up' or\n  trigger.payload
           == 'volume_up_hold' \n}}"
       sequence:
-      - service: media_player.volume_set
+      - action: media_player.volume_set
         data:
           volume_level: '{% set volume = state_attr(''media_player.living_room_receiver_main_zone'',
             "volume_level") + 0.005 %} {{ 1.0 if volume > 1.0 else volume }}'
@@ -1469,7 +1469,7 @@
         value_template: "{{\n  trigger.payload == 'volume_down' or\n  trigger.payload
           == 'volume_down_hold'\n}}"
       sequence:
-      - service: media_player.volume_set
+      - action: media_player.volume_set
         data:
           volume_level: '{% set volume = state_attr(''media_player.living_room_receiver_main_zone'',
             "volume_level") - 0.005 %} {{ 0.0 if volume < 0.0 else volume }}'
@@ -1478,7 +1478,7 @@
       - condition: template
         value_template: "{{\n  trigger.payload == 'dots_1_initial_press' \n}}"
       sequence:
-      - service: light.toggle
+      - action: light.toggle
         target:
           entity_id: light.sw_livingroom_ceilinglight
         data: {}
@@ -1499,14 +1499,14 @@
             value_template: "{# receiver is not set to htcp input #}\n{{\nstate_attr('media_player.living_room_receiver_main_zone',\n'source')
               == 'AV3' \n}}"
         then:
-        - service: media_player.select_source
+        - action: media_player.select_source
           metadata: {}
           data:
             source: AV3
           target:
             entity_id: media_player.living_room_receiver_main_zone
         else:
-        - service: switch.toggle
+        - action: switch.toggle
           metadata: {}
           data: {}
           target:
@@ -1516,7 +1516,7 @@
         value_template: "{% if is_state('light.sw_livingroom_ceilinglight','on') %}\n
           \ {{ trigger.payload == 'track_next' }}\n{% endif %}"
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           brightness_step_pct: 10
         target:
@@ -1526,7 +1526,7 @@
         value_template: "{% if is_state('light.sw_livingroom_ceilinglight','on') %}\n
           \ {{ trigger.payload == 'track_previous' }}\n{% endif %}"
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           brightness_step_pct: -10
         target:
@@ -1546,7 +1546,7 @@
         value_template: "{{\n  trigger.payload == 'play_pause' or\n  trigger.payload
           == 'toggle'\n}}"
       sequence:
-      - service: switch.toggle
+      - action: switch.toggle
         data: {}
         target:
           entity_id: switch.sw_main_bedroom_entertainment
@@ -1555,7 +1555,7 @@
         value_template: "{{\n  trigger.payload == 'volume_up' or\n  trigger.payload
           == 'volume_up_hold' \n}}"
       sequence:
-      - service: media_player.volume_up
+      - action: media_player.volume_up
         data: {}
         target:
           entity_id: media_player.main_bedroom_speaker
@@ -1564,7 +1564,7 @@
         value_template: "{{\n  trigger.payload == 'volume_down' or\n  trigger.payload
           == 'volume_down_hold'\n}}"
       sequence:
-      - service: media_player.volume_down
+      - action: media_player.volume_down
         data: {}
         target:
           entity_id: media_player.main_bedroom_speaker
@@ -1572,7 +1572,7 @@
       - condition: template
         value_template: '{{ trigger.payload == ''dots_1_initial_press'' }}'
       sequence:
-      - service: light.toggle
+      - action: light.toggle
         data: {}
         target:
           entity_id: light.sw_mainbedroom_ceilinglight
@@ -1580,7 +1580,7 @@
       - condition: template
         value_template: '{{ trigger.payload == ''dots_2_initial_press'' }}'
       sequence:
-      - service: light.toggle
+      - action: light.toggle
         data: {}
         target:
           entity_id: light.blb_main_bedroom_floor_lamp
@@ -1589,7 +1589,7 @@
         value_template: "{% if is_state('light.sw_mainbedroom_ceilinglight','on')
           %}\n  {{ trigger.payload == 'track_next' }}\n{% endif %}"
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           brightness_step_pct: 10
         target:
@@ -1599,7 +1599,7 @@
         value_template: "{% if is_state('light.sw_mainbedroom_ceilinglight','on')
           %}\n  {{ trigger.payload == 'track_previous' }}\n{% endif %}"
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           brightness_step_pct: -10
         target:
@@ -1616,7 +1616,7 @@
     entity_id: light.blb_kidsbedroom_lamp
     state: 'on'
   action:
-  - service: light.turn_on
+  - action: light.turn_on
     data:
       transition: 10
       rgb_color:
@@ -1645,7 +1645,7 @@
         entity_id: lock.lck_garage_house_door
         state: unlocked
       sequence:
-      - service: lock.lock
+      - action: lock.lock
         data: {}
         target:
           entity_id: lock.lck_garage_house_door
@@ -1654,7 +1654,7 @@
         entity_id: lock.lck_garage_house_door
         state: locked
       sequence:
-      - service: lock.unlock
+      - action: lock.unlock
         data: {}
         target:
           entity_id: lock.lck_garage_house_door
@@ -1663,7 +1663,7 @@
       entity_id: input_boolean.garage_house_door_lock_toggled
       state: 'on'
     then:
-    - service: input_boolean.turn_off
+    - action: input_boolean.turn_off
       data: {}
       target:
         entity_id: input_boolean.garage_house_door_lock_toggled
@@ -1682,7 +1682,7 @@
         value_template: "{{\n  trigger.payload == 'play_pause' or\n  trigger.payload
           == 'toggle'\n}}"
       sequence:
-      - service: mqtt.publish
+      - action: mqtt.publish
         data:
           topic: cmnd/IRB_Shed/IRSend
           payload: '{"Protocol":"PANASONIC","Bits":48,"Data":"0x40040538BC81","DataLSB":"0x220A01C3D81","Repeat":0}
@@ -1692,7 +1692,7 @@
       - condition: template
         value_template: '{{ trigger.payload == ''volume_up'' }}'
       sequence:
-      - service: mqtt.publish
+      - action: mqtt.publish
         data:
           topic: cmnd/IRB_Shed/IRSend
           payload: '{"Protocol":"PANASONIC","Bits":48,"Data":"0x400405000401","DataLSB":"0x220A0002080","Repeat":0}
@@ -1702,7 +1702,7 @@
       - condition: template
         value_template: '{{ trigger.payload == ''volume_down'' }}'
       sequence:
-      - service: mqtt.publish
+      - action: mqtt.publish
         data:
           topic: cmnd/IRB_Shed/IRSend
           payload: '{"Protocol":"PANASONIC","Bits":48,"Data":"0x400405008481","DataLSB":"0x220A0002181","Repeat":0}
@@ -1712,7 +1712,7 @@
       - condition: template
         value_template: '{{ trigger.payload == ''dots_1_initial_press'' }}'
       sequence:
-      - service: light.toggle
+      - action: light.toggle
         data: {}
         target:
           entity_id: light.sw_deck_ceilinglight
@@ -1721,7 +1721,7 @@
         value_template: "{% if is_state('light.sw_deck_ceilinglight','on') %}\n  {{
           trigger.payload == 'track_next' }}\n{% endif %}"
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           brightness_step_pct: 10
         target:
@@ -1731,7 +1731,7 @@
         value_template: "{% if is_state('light.sw_deck_ceilinglight','on') %}\n  {{
           trigger.payload == 'track_previous' }}\n{% endif %}"
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           brightness_step_pct: -10
         target:
@@ -1749,7 +1749,7 @@
       - condition: template
         value_template: '{{ trigger.payload == ''toggle'' }}'
       sequence:
-      - service: light.toggle
+      - action: light.toggle
         target:
           entity_id: light.blb_kidsbedroom_lamp
         data: {}
@@ -1757,7 +1757,7 @@
       - condition: template
         value_template: '{{  trigger.payload == ''brightness_up_click'' }}'
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           transition: 1
           brightness_step_pct: 10
@@ -1767,7 +1767,7 @@
       - condition: template
         value_template: '{{  trigger.payload == ''brightness_down_click'' }}'
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           transition: 1
           brightness_step_pct: -10
@@ -1777,7 +1777,7 @@
       - condition: template
         value_template: '{{  trigger.payload == ''arrow_right_click'' }}'
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           hs_color:
           - '{{ range(360) | random }}'
@@ -1789,7 +1789,7 @@
       - condition: template
         value_template: '{{  trigger.payload == ''arrow_left_click'' }}'
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           transition: 1
           effect: colorloop
@@ -1799,7 +1799,7 @@
       - condition: template
         value_template: '{{  trigger.payload == ''arrow_right_hold'' }}'
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           transition: 1
           kelvin: 3300
@@ -1819,7 +1819,7 @@
       - condition: template
         value_template: '{{ trigger.payload == ''toggle'' }}'
       sequence:
-      - service: light.toggle
+      - action: light.toggle
         target:
           entity_id: light.sw_sparebedroom_ceilinglight
         data: {}
@@ -1827,7 +1827,7 @@
       - condition: template
         value_template: '{{  trigger.payload == ''brightness_up_click'' }}'
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           transition: 1
           brightness_step_pct: 10
@@ -1837,7 +1837,7 @@
       - condition: template
         value_template: '{{  trigger.payload == ''brightness_down_click'' }}'
       sequence:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           transition: 1
           brightness_step_pct: -10
@@ -1847,7 +1847,7 @@
       - condition: template
         value_template: '{{  trigger.payload == ''arrow_right_click'' }}'
       sequence:
-      - service: switch.toggle
+      - action: switch.toggle
         data: {}
         target:
           entity_id: switch.plg_sparebedroom_lamp
@@ -1861,13 +1861,13 @@
     offset: 00:15:00
   condition: []
   action:
-  - service: switch.turn_off
+  - action: switch.turn_off
     data: {}
     target:
       entity_id:
       - switch.fan_family_room_airpurifier_night_mode
       - switch.fan_main_bedroom_airpurifier_night_mode
-  - service: light.turn_off
+  - action: light.turn_off
     metadata: {}
     data: {}
     target:
@@ -1879,7 +1879,7 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.front_door_cross_region_detection
+    - binary_sensor.front_door_motion_alarm
     to: 'on'
   condition: []
   action:
@@ -1894,7 +1894,7 @@
           entity_id: timer.outside_porch_motion_snooze
           state: active
       sequence:
-      - service: notify.mobile_app_turraphone
+      - action: notify.mobile_app_turraphone
         data:
           message: Someone was detected at the front door.
           title: "\U0001F3C3\U0001F3FBPerson Detected"
@@ -1912,11 +1912,11 @@
             action: SNOOZE
         timeout: 00:00:30
         continue_on_timeout: false
-      - service: timer.start
+      - action: timer.start
         target:
           entity_id: timer.outside_porch_motion_snooze
         data: {}
-  - service: notify.grp_all_tvs
+  - action: notify.grp_all_tvs
     data:
       message: Person Detected at front door
   mode: single
@@ -1933,13 +1933,13 @@
       entity_id: input_boolean.christmas_lights_indoors
       state: 'on'
     then:
-    - service: switch.turn_off
+    - action: switch.turn_off
       data: {}
       target:
         entity_id:
         - switch.sw_familyroom_christmastree
         - switch.sw_familyroom_cornerlight
-    - service: light.turn_off
+    - action: light.turn_off
       data: {}
       target:
         entity_id: light.blb_familyroom_garland
@@ -1962,7 +1962,7 @@
         entity_id: lock.lck_house_front_door
         state: unlocked
       sequence:
-      - service: lock.lock
+      - action: lock.lock
         data: {}
         target:
           entity_id: lock.lck_house_front_door
@@ -1971,7 +1971,7 @@
         entity_id: lock.lck_house_front_door
         state: locked
       sequence:
-      - service: lock.unlock
+      - action: lock.unlock
         data: {}
         target:
           entity_id: lock.lck_house_front_door
@@ -1980,7 +1980,7 @@
       entity_id: input_boolean.house_front_door_lock_toggled
       state: 'on'
     then:
-    - service: input_boolean.turn_off
+    - action: input_boolean.turn_off
       data: {}
       target:
         entity_id: input_boolean.house_front_door_lock_toggled
@@ -2017,11 +2017,11 @@
             after: '16:30:00'
             before: '23:59:00'
           sequence:
-          - service: timer.start
+          - action: timer.start
             target:
               entity_id: timer.outside_porch_lights_on
             data: {}
-          - service: scene.turn_on
+          - action: scene.turn_on
             target:
               entity_id: scene.porch_bulbs_normal_colour_bright
             data:
@@ -2034,12 +2034,12 @@
             after: 00:00:00
             before: 06:00:00
           sequence:
-          - service: timer.start
+          - action: timer.start
             metadata: {}
             data: {}
             target:
               entity_id: timer.outside_porch_lights_on
-          - service: scene.turn_on
+          - action: scene.turn_on
             target:
               entity_id: scene.porch_bulbs_normal_colour_bright
             data:
@@ -2058,7 +2058,7 @@
             after: '16:30:00'
             before: '22:29:00'
           sequence:
-          - service: scene.turn_on
+          - action: scene.turn_on
             target:
               entity_id: scene.porch_bulbs_adhoc_colours
             data:
@@ -2071,7 +2071,7 @@
             after: '16:30:00'
             before: '22:29:00'
           sequence:
-          - service: scene.turn_on
+          - action: scene.turn_on
             target:
               entity_id: scene.porch_bulbs_christmas_colours
             data:
@@ -2084,7 +2084,7 @@
             after: '16:30:00'
             before: '22:29:00'
           sequence:
-          - service: scene.turn_on
+          - action: scene.turn_on
             target:
               entity_id: scene.porch_bulbs_halloween_colours
             data:
@@ -2100,7 +2100,7 @@
             after: '16:30:00'
             before: '22:29:00'
           sequence:
-          - service: scene.turn_on
+          - action: scene.turn_on
             target:
               entity_id: scene.porch_bulbs_normal_colour_dimmed
             data:
@@ -2110,13 +2110,13 @@
             after: 00:00:00
             before: 06:00:00
           sequence:
-          - service: light.turn_off
+          - action: light.turn_off
             target:
               entity_id: light.group_porch_lights
             data:
               transition: 2
         default:
-        - service: scene.turn_on
+        - action: scene.turn_on
           target:
             entity_id: scene.porch_bulbs_normal_colour_dimmed
           data:
