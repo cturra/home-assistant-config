@@ -42,5 +42,6 @@
     - binary_sensor.snr_kitchen_espressoleak_water_leak
     - binary_sensor.snr_kitchen_fridgeleak_water_leak
     - binary_sensor.snr_kitchen_sinkleak_water_leak
-    - binary_sensor.snr_laundry_sinkleak_water_leak
-    - binary_sensor.snr_laundry_washingmachineleak_water_leak
+    - binary_sensor.snr_laundry_sinkleak_water_leaki
+    - binary_sensor.snr_laundry_washingmachine1leak_water_leak
+    - binary_sensor.snr_laundry_washingmachine2leak_water_leak

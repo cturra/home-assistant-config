@@ -525,6 +525,7 @@ views:
                     entity_id: input_boolean.kitchen_espresso_machine_cleaning_reset
                   confirmation:
                     text: 'Espresso Machine cleaned?'
+                <<: *alert-info-style
             # crawlspace locker dehumidifier drying cycle (every month)
             - entity_id: 'sensor.crawlspace_locker_dehumidifier_last_dried_interval'
               state: '> 30'
@@ -810,8 +811,7 @@ views:
                 type: 'custom:slider-entity-row'
                 hide_state: true
                 name: 'Main Bedroom: Lamp'
-                seconary_info: last-changed
-                <<: *neutral-icon-entity-style
+                secondary_info: last-changed
             # kids bedroom
             - entity_id: light.sw_kidsbedroom_ceilinglight
               state: 'on'

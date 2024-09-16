@@ -1879,7 +1879,7 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.front_door_motion_alarm
+    - binary_sensor.front_door_cross_region_detection
     to: 'on'
   condition: []
   action:
