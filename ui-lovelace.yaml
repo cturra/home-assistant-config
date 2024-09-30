@@ -566,7 +566,7 @@ views:
                 name: 'Bathroom, Up: Fan'
                 secondary_info: last-changed
             # house (ecobee) & garage (sinope)
-            - entity_id: '/binary_sensor.hvac_(ecobee|garage|house)_(cooling|heating)_state/'
+            - entity_id: '/binary_sensor.hvac_(garage|house)_(cooling|heating)_state/'
               state: 'on'
               options:
                 secondary_info: last-changed
@@ -1654,7 +1654,7 @@ views:
               show_line: false
               show_points: false
             # heating on/off
-            - entity: binary_sensor.hvac_ecobee_heating_state
+            - entity: binary_sensor.hvac_house_heating_state
               name: Heating
               color: '#ffad33'
               show_legend: false

@@ -10,13 +10,19 @@
       is_state_attr('climate.amazon', 'hvac_action', 'cooling')
     }}
 
-
+# -- shelly em 
 # HVAC heating on/off
-- name: 'HVAC Ecobee Heating State'
+- name: 'HVAC House Heating State'
+  unique_id: 'hvac_house_heating_state'
+  # power reported in watts (w)
   state: >
-    {{ is_state_attr('climate.amazon', 'hvac_action', 'heating') }}
+    {% if is_number(states('sensor.em_crawlspace_hvac_power_1')) %}
+      {{ 
+        (states('sensor.em_crawlspace_hvac_power_1') | int(default=0)) > 170 and
+        (states('sensor.em_crawlspace_hvac_power_1') | int(default=0)) < 460
+      }}
+    {% endif %}
 
-# -- shelly em --
 # HVAC cooling on/off
 - name: 'HVAC House Cooling State'
   unique_id: 'hvac_house_cooling_state'
