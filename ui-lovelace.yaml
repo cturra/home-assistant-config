@@ -795,6 +795,12 @@ views:
                 name: "Office: Ceiling"
                 icon: 'mdi:track-light'
                 secondary_info: last-changed
+            - entity_id: switch.sw_office_monitorlightbar
+              state: 'on'
+              options:
+                name: 'Office: Monitor Light'
+                icon: 'mdi:television-ambient-light'
+                secondary_info: last-changed
             # main bedroom
             - entity_id: light.sw_mainbedroom_ceilinglight
               state: 'on'
@@ -1210,6 +1216,9 @@ views:
               - entity: switch.plg_office_airpurifier
                 name: 'Air Purifier'
                 icon: 'mdi:air-purifier'
+                state_color: true
+              - entity: switch.sw_office_monitorlightbar
+                name: 'Monitor Light'
                 state_color: true
             - type: entities
               <<: *entities-style

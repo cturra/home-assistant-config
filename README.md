@@ -42,8 +42,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 7     | HA :: BTHome          |
 | Contact           | Ikea       | E2013           | 3     | Zigbee2MQTT           |
 | Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT           |
-| Leak              | Ikea       | E2202           | 1     | Zigbee2MQTT           |
-| Leak              | Xiaomi     | SJCGQ11LM       | 16    | Zigbee2MQTT           |
+| Leak              | Ikea       | E2202           | 2     | Zigbee2MQTT           |
+| Leak              | Xiaomi     | SJCGQ11LM       | 15    | Zigbee2MQTT           |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
 | Motion            | Ikea       | E2134           | 1     | Zigbee2MQTT           |
 | Motion            | Philips    | 9290030674      | 2     | Zigbee2MQTT           |
@@ -76,6 +76,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Switch (Motion)   | Milfra     | MFA06           | 1     | Tasmota               |
 | Switch            | Shelly     | 1               | 1     | Tasmota               |
 | Switch (Energy)   | Shelly     | EM              | 1     | Tasmota               |
+| Switch (USB)      | Sinilink   | XY-WFUSB        | 1     | Tasmota               |
 | Switch            | Sonoff     | Basic           | 1     | Tasmota               |
 | Switch            | Sonoff     | Mini R1         | 2     | Tasmota               |
 | Switch            | Sonoff     | SV              | 1     | Tasmota               |
