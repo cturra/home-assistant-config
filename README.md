@@ -39,7 +39,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
 | Climate           | Inkbird    | IBS-TH2         | 3     | HA :: Inkbird BLE     |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 1     | Zigbee2MQTT           |
-| Climate           | Xiaomi Mi  | LYWSD03MMC      | 7     | HA :: BTHome          |
+| Climate           | Xiaomi Mi  | LYWSD03MMC      | 8     | HA :: BTHome          |
 | Contact           | Ikea       | E2013           | 3     | Zigbee2MQTT           |
 | Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT           |
 | Leak              | Ikea       | E2202           | 2     | Zigbee2MQTT           |

@@ -19,8 +19,8 @@
   unique_id: 'snr_garage_freezer_temperature'
   device_class: temperature
   unit_of_measurement: '°C'
-  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-47
-  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-47
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-75
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-75
   value_template: >
     {{ value_json.temperature_C | round(1, default=-15.0) }}
 
@@ -29,7 +29,7 @@
   unique_id: 'snr_garage_fridge_temperature'
   device_class: temperature
   unit_of_measurement: '°C'
-  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-176
-  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-176
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-155
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-155
   value_template: >
     {{ value_json.temperature_C | round(1, default=1.0) }}

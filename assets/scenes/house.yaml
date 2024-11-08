@@ -1,21 +1,5 @@
 ## SCENES / HOUSE
 
-# evening lights to turn on
-- name: 'Indoor Evening Lights On'
-  entities:
-    switch.sw_kitchen_sinklight:
-      state: 'on'
-    switch.plg_familyroom_cabinetlight:
-      state: 'on'
-
-# evening lights to turn off
-- name: 'Indoor Evening Lights Off'
-  entities:
-    switch.sw_kitchen_sinklight:
-      state: 'off'
-    switch.plg_familyroom_cabinetlight:
-      state: 'off'
-
 # front door lock toggle
 - name: 'Lock: Front Door'
   icon: 'mdi:lock-open-outline'

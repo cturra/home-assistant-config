@@ -6,8 +6,8 @@
   unique_id: 'snr_kitchen_freezer_temperature'
   device_class: temperature
   unit_of_measurement: '°C'
-  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-40
-  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-40
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-46
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-46
   value_template: >
     {{ value_json.temperature_C | round(1, default=-15.0) }}
 
@@ -16,7 +16,7 @@
   unique_id: 'snr_kitchen_fridge_temperature'
   device_class: temperature
   unit_of_measurement: '°C'
-  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-75
-  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-75
+  state_topic: rtl_433/sensor/LaCrosse-TX141Bv3-106
+  json_attributes_topic: rtl_433/sensor/LaCrosse-TX141Bv3-106
   value_template: >
     {{ value_json.temperature_C | round(1, default=1.0) }}

@@ -94,21 +94,31 @@
 - id: '1612292819059'
   alias: 'House: Indoor Lights on at sunset'
   description: ''
-  trigger:
-  - platform: sun
-    event: sunset
-  condition: []
-  action:
-  - action: scene.turn_on
-    data: {}
-    target:
-      entity_id: scene.indoor_evening_lights_on
+  triggers:
+  - event: sunset
+    trigger: sun
+  conditions: []
+  actions:
+  - action: light.turn_on
+    data:
+      transition: 5
+      rgb_color:
+      - 129
+      - 173
+      - 255
+      brightness_pct: 50
+      target:
+        entity_id:
+        - light.blb_kidsbedroom_lamp
+        - light.blb_main_bedroom_floor_lamp
   - action: switch.turn_on
     data: {}
     target:
       entity_id:
       - switch.fan_family_room_airpurifier_night_mode
       - switch.fan_main_bedroom_airpurifier_night_mode
+      - switch.plg_familyroom_cabinetlight
+      - switch.sw_kitchen_sinklight
   - if:
     - condition: state
       entity_id: input_boolean.christmas_lights_indoors
@@ -124,15 +134,17 @@
 - id: '1612292887886'
   alias: 'House: Indoor Devices off for the night check'
   description: turn off any devices that might have been left on over night.
-  trigger:
-  - platform: time
-    at: 01:01:00
-  condition: []
-  action:
-  - action: scene.turn_on
+  triggers:
+  - at: 01:01:00
+    trigger: time
+  conditions: []
+  actions:
+  - action: switch.turn_off
     data: {}
     target:
-      entity_id: scene.indoor_evening_lights_off
+      entity_id:
+      - switch.plg_familyroom_cabinetlight
+      - switch.sw_kitchen_sinklight
   - action: switch.turn_on
     data: {}
     target:
