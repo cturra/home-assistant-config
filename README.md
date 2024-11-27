@@ -36,6 +36,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Quality       | Awair      | Element         | 3     | HA :: Awair Local API |
 | Air Quality       | Airthings  | Wave+           | 1     | HA :: Airthings BLE   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
+| BLE Proxy         | M5Stack    | ATOM Lite       | 5     | ESPHome               |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
 | Climate           | Inkbird    | IBS-TH2         | 3     | HA :: Inkbird BLE     |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 1     | Zigbee2MQTT           |
@@ -51,7 +52,6 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Presence          | Tuya       | ZY-M100         | 2     | ESPHome               |
 | Plant             | Xiaomi     | Mi Flora (HHCC) | 3     | HA:: Xiami BLE        |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
-| Soil              | Tuya       | TS0601          | 1     | Zigbee2MQTT           |
 | Temperature       | Acurite    | 592TXR          | 3     | MQTT :: rtl_433       |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433       |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT           |
@@ -95,7 +95,6 @@ And, if you have any feedback, please feel free to reach out :smile:
 
  | Model           | Count | Role                                                              |
  | :---            | :--:  | :---                                                              |
- | GL-S10          | 2     | [ESPHome BL Proxy](esphome/bt-proxy-front.yaml)                   |
  | RTL-SDR         | 2     | SDR USB Adapters w/ Antenna                                       |
  | Odroid-N2+      | 1     | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
  | Raspberry Pi 4  | 1     | Secondary Zigbee2MQTT server *                                    |

@@ -1,0 +1,60 @@
+substitutions:
+  device_name: pxy-kitchen-ble
+  device_description: "M5Stack Atom Lite"
+  main_device_id: "pxy_kitchen_ble"
+  project_name: "esphome.bluetooth-proxy"
+  project_version: "1.0"
+
+esphome:
+  name: ${device_name}
+  comment: ${device_description}
+  name_add_mac_suffix: true
+  project:
+    name: ${project_name}
+    version: ${project_version}
+
+esp32:
+  board: m5stack-atom
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+  level: INFO # DEBUG for sensor readings
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret pxy_kitchen_ble_key
+
+ota:
+  - platform: esphome
+    password: !secret pxy_kitchen_ble_ota
+
+wifi:
+  ssid: !secret wifi_purple_ssid
+  password: !secret wifi_purple_password
+
+  manual_ip:
+    static_ip: !secret pxy_kitchen_ble_ip
+    gateway: !secret network_gateway
+    subnet: !secret network_subnet
+
+esp32_ble_tracker:
+  scan_parameters:
+    # We currently use the defaults to ensure Bluetooth
+    # can co-exist with WiFi In the future we may be able to
+    # enable the built-in coexistence logic in ESP-IDF
+    active: true
+
+bluetooth_proxy:
+  active: true
+
+button:
+  - platform: safe_mode
+    id: button_safe_mode
+    name: Safe Mode Boot
+
+  - platform: factory_reset
+    id: factory_reset_btn
+    name: Factory reset
