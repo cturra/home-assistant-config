@@ -285,6 +285,9 @@ views:
           <<: *entities-overview-header-style
         filter:
           include:
+            - entity_id: 'sensor.turraphone_ble_area'
+              options:
+                name: "Chris' location"
             # battery low: zigbee & ble sensors < 15%
             - entity_id: 'sensor.(rmt|snr)_*_battery'
               state: '< 10'
@@ -709,6 +712,13 @@ views:
                 name: 'Family Room: Cabinet'
                 icon: 'mdi:light-recessed'
                 secondary_info: last-changed
+            - entity_id: light.blb_familyroom_garland
+              state: 'on'
+              options:
+                name: 'Family Room: Garland'
+                icon: 'mdi:string-lights'
+                secondary_info: last-changed
+                <<: *neutral-icon-entity-style
             - entity_id: switch.sw_familyroom_christmastree
               state: 'on'
               options:
@@ -1104,6 +1114,11 @@ views:
                   name: 'Air Purifier'
                   icon: 'mdi:air-purifier'
                   state_color: true
+                # christmas garland
+                - entity: light.blb_familyroom_garland
+                  name: Garland
+                  icon: 'mdi:string-lights'
+                  state_color: true
                 # ceiling light
                 - entity: switch.sw_familyroom_ceilinglight
                   name: Ceiling
@@ -1395,6 +1410,10 @@ views:
                   name: Driveway
                   icon: 'mdi:coach-lamp'
                   state_color: true
+                # soffit
+                - entity: switch.rcl_outside_porchsoffit
+                  name: Soffit
+                  state_colour: true
                 # deck
                 - entity: light.sw_deck_ceilinglight
                   name: 'Deck: Ceiling'
@@ -1793,7 +1812,7 @@ views:
 
       ## SHED CLIMATE CARDS
       - type: 'custom:stack-in-card'
-        title: 'Shed'
+        title: 'Sheds'
         <<: *entities-header-style
         cards:
         - type: horizontal-stack
@@ -1833,6 +1852,7 @@ views:
             <<: *graph-button-card-style
 
         # SHED TEMPERATURE GRAPH CARD
+        # tool shed
         - type: 'custom:mini-graph-card'
           show:
             extrema: false
@@ -1866,6 +1886,75 @@ views:
               state_adaptive_color: true
               color: '#5f9bea'
               y_axis: secondary
+        # toy shed
+        - type: horizontal-stack
+          cards:
+          # toy shed temperature
+          - type: 'custom:button-card'
+            entity: sensor.snr_toy_shed_temperature
+            name: Temperature
+            show_state: true
+            show_icon: false
+            <<: *graph-button-card-style
+          # toy shed humidity
+          - type: 'custom:button-card'
+            entity: sensor.snr_toy_shed_humidity
+            name: Humidity
+            show_state: true
+            show_icon: false
+            <<: *graph-button-card-style
+          # blank
+          - type: 'custom:button-card'
+            <<: *entities-style
+            color_type: blank
+          # toy shed door
+          - type: 'custom:button-card'
+            entity: binary_sensor.snr_toyshed_doorcontact_contact
+            name: Door
+            show_state: true
+            state_display: |
+              [[[
+                if (entity.state == 'on') return 'Open';
+                else return 'Closed'
+              ]]]
+            show_icon: false
+            <<: *graph-button-card-style
+
+        # TOY SHED TEMPERATURE GRAPH CARD
+        - type: 'custom:mini-graph-card'
+          show:
+            extrema: false
+            icon: false
+            labels: hover
+            labels_secondary: hover
+            name: false
+            state: false
+          height: 60
+          line_width: 1
+          hours_to_show: 24
+          points_per_hour: 4
+          lower_bound_secondary: 25
+          upper_bound_secondary: 90
+          group: true
+          <<: *mini-graph-style
+          <<: *temp-graph-color_thresholds
+          entities:
+            # temerature
+            - entity: sensor.snr_toy_shed_temperature
+              name: Temperature
+              show_fill: false
+              show_legend: false
+              state_adaptive_color: true
+            # humidity
+            - entity: sensor.snr_toy_shed_humidity
+              name: Humidity
+              line_width: 1
+              show_legend: false
+              show_fill: false
+              state_adaptive_color: true
+              color: '#5f9bea'
+              y_axis: secondary
+
 
       ## OUTDSIDE CLIMATE CARDS
       - type: 'custom:stack-in-card'

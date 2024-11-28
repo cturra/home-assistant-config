@@ -36,13 +36,13 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Quality       | Awair      | Element         | 3     | HA :: Awair Local API |
 | Air Quality       | Airthings  | Wave+           | 1     | HA :: Airthings BLE   |
 | Air Quality       | PurpleAir  | PA-II           | 1     | RESP API              |
-| BLE Proxy         | M5Stack    | ATOM Lite       | 5     | ESPHome               |
+| BLE Proxy         | M5Stack    | ATOM Lite       | 6     | ESPHome               |
 | Climate           | Ecobee     | v1              | 3     | HA :: Ecobee          |
 | Climate           | Inkbird    | IBS-TH2         | 3     | HA :: Inkbird BLE     |
 | Climate           | Xiaomi     | WSDCGQ11LM      | 1     | Zigbee2MQTT           |
 | Climate           | Xiaomi Mi  | LYWSD03MMC      | 8     | HA :: BTHome          |
-| Contact           | Ikea       | E2013           | 3     | Zigbee2MQTT           |
-| Contact           | Xiaomi     | MCCGQ11LM       | 15    | Zigbee2MQTT           |
+| Contact           | Ikea       | E2013           | 4     | Zigbee2MQTT           |
+| Contact           | Xiaomi     | MCCGQ11LM       | 14    | Zigbee2MQTT           |
 | Leak              | Ikea       | E2202           | 2     | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 15    | Zigbee2MQTT           |
 | Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
