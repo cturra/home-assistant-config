@@ -13,36 +13,36 @@
         }}
       turn_on:
         # send IR signal to toggle tv power
-        - service: mqtt.publish
+        - action: mqtt.publish
           data:
             topic: cmnd/IRB_LivingRoom/IRSend
             payload: >
               {"Protocol":"NEC","Bits":32,"Data":"0x20DF10EF","Repeat":0}
         # send IR signal to toggle receiver power
-        - service: mqtt.publish
+        - action: mqtt.publish
           data:
             topic: cmnd/IRB_LivingRoom/IRSend
             payload: >
               {"Protocol":"NEC","Bits":32,"Data":"0x7E8154AB","Repeat":0}
         # ensure the correct sources are selected for htpc
         - delay: '00:00:02' # give devices a chance to start
-        - service: media_player.select_source
+        - action: media_player.select_source
           data:
             entity_id: media_player.living_room_tv
             source: "HDMI 4"
-        - service: media_player.select_source
+        - action: media_player.select_source
           data:
             entity_id: media_player.living_room_receiver_main_zone
             source: "AV2"
       turn_off:
         # send IR signal to toggle tv power
-        - service: mqtt.publish
+        - action: mqtt.publish
           data:
             topic: cmnd/IRB_LivingRoom/IRSend
             payload: >
               {"Protocol":"NEC","Bits":32,"Data":"0x20DF10EF","Repeat":0}
         # send IR signal to toggle receiver power
-        - service: mqtt.publish
+        - action: mqtt.publish
           data:
             topic: cmnd/IRB_LivingRoom/IRSend
             payload: >

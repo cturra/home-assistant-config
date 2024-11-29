@@ -712,7 +712,7 @@ views:
                 name: 'Family Room: Cabinet'
                 icon: 'mdi:light-recessed'
                 secondary_info: last-changed
-            - entity_id: light.blb_familyroom_garland
+            - entity_id: switch.family_room_garland_light
               state: 'on'
               options:
                 name: 'Family Room: Garland'
@@ -1115,7 +1115,7 @@ views:
                   icon: 'mdi:air-purifier'
                   state_color: true
                 # christmas garland
-                - entity: light.blb_familyroom_garland
+                - entity: switch.family_room_garland_light
                   name: Garland
                   icon: 'mdi:string-lights'
                   state_color: true

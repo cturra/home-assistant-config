@@ -1,0 +1,29 @@
+## SWITCHES / LEGACY / FAMILY ROOM
+
+# xmas garland  on/off
+- platform: template
+  switches:
+    family_room_garland_light:
+      unique_id: family_room_garland_light
+      # confirm lights on and preset set to xmas
+      value_template: >
+        {{
+          is_state('light.blb_familyroom_garland', 'on') and
+          is_state('select.blb_familyroom_garland_preset', 'xmas')
+        }}
+      turn_on:
+        # turn on light
+        - action: light.turn_on
+          target:
+            entity_id: light.blb_familyroom_garland
+        # ensure xmas light is set
+        - action: select.select_option
+          target:
+            entity_id: select.blb_familyroom_garland_preset
+          data:
+            option: xmas
+      turn_off:
+        # turn off light
+        - action: light.turn_off
+          target:
+            entity_id: light.blb_familyroom_garland
