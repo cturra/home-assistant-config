@@ -1952,10 +1952,7 @@
         entity_id:
         - switch.sw_familyroom_christmastree
         - switch.sw_familyroom_cornerlight
-    - action: light.turn_off
-      data: {}
-      target:
-        entity_id: light.blb_familyroom_garland
+        - swtich.family_room_garland_light
   mode: single
 - id: '1701748470522'
   alias: 'House: Front Door lock controls'

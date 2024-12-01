@@ -1124,10 +1124,10 @@ views:
                   name: Ceiling
                   icon: 'mdi:ceiling-light-outline'
                   state_color: true
-                # wall sconce
-                - entity: light.sw_familyroom_walllights
-                  name: 'Wall Sconce'
-                  icon: 'mdi:wall-sconce-flat-variant-outline'
+                # xmas tree
+                - entity: switch.sw_familyroom_christmastree
+                  name: Tree
+                  state_color: true
             - type: entities
               show_header_toggle: false
               <<: *entities-style
@@ -1147,6 +1147,10 @@ views:
                   name: Stairwell
                   icon: 'mdi:chandelier'
                   state_color: true
+                # wall sconce
+                - entity: light.sw_familyroom_walllights
+                  name: 'Wall Sconce'
+                  icon: 'mdi:wall-sconce-flat-variant-outline'
 
       # Kitchen
       - type: 'custom:stack-in-card'
