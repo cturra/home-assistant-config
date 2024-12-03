@@ -369,18 +369,7 @@ views:
                 secondary_info: last-changed
                 <<: *alert-style
             # weather advisories
-            - entity_id: sensor.pitt_meadows_warnings
-              # regex matches any string that doesn't contain a 0 (used for no warning) or is unavaiable
-              state: '/^(?!.*(unavailable|0))/'
-              options:
-                type: attribute
-                attribute: alert_1
-                name: 'Weather'
-                icon: 'mdi:weather-cloudy-alert'
-                secondary_info: last-changed
-                <<: *alert-style
-            # weather statements
-            - entity_id: sensor.pitt_meadows_statements
+            - entity_id: '/sensor.pitt_meadows_(advisories|statements|warnings)/'
               # regex matches any string that doesn't contain a 0 (used for no warning) or is unavaiable
               state: '/^(?!.*(unavailable|0))/'
               options:
