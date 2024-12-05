@@ -895,6 +895,12 @@ views:
                 name: 'Living Room: TV'
                 icon: 'mdi:television'
                 secondary_info: last-changed
+            - entity_id: switch.living_room_entertainment_nintendo
+              state: 'on'
+              options:
+                name: 'Living Room: Nintendo'
+                icon: 'mdi:television'
+                secondary_info: last-changed
             # plex media players :: living room
             - entity_id: 'media_player.plex_htpc_living_room'
               state: '/(playing|paused)/'
@@ -1205,7 +1211,7 @@ views:
             <<: *entities-style
             entities:
               # entertainment
-              - entity: switch.living_room_entertainment_htpc
+              - entity: switch.living_room_entertainment
                 name: 'TV'
                 icon: 'mdi:television'
                 state_color: true
