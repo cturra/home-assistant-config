@@ -66,7 +66,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | IR Blaster        | Uniplay    | Q1              | 3     | Tasmota               |
 | Plug              | Gosund     | WP2             | 2     | Tasmota               |
 | Plug              | Gosund     | WP5             | 3     | Tasmota               |
-| Plug              | Sonoff     | S31             | 8     | Tasmota               |
+| Plug              | Sonoff     | S31             | 9     | Tasmota               |
 | Plug              | Sonoff     | S31ZB           | 3     | Zigbee2MQTT           |
 | Plug              | Wyze       | WLPPO1          | 1     | Tasmota               |
 | Receptacle        | TopGreener | TGWF15RM        | 1     | Tasmota               |
@@ -90,6 +90,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Purifier      | Dyson      | BP01            | 2     | infrared              |
 | Air Purifier      | Dyson      | HP07            | 1     | HACS :: Dyson         |
 | Propane Tank      | Mopeka     | Pro Check M1017 | 1     | HA :: Mopeka          |
+| Scale             | Acaia      | Lunar           | 1     | HA :: Acaia           |
 | Toothbrush        | Oral-B     | Smart 4000      | 2     | HA :: Oral-B          |
 
  ### Infrastructure

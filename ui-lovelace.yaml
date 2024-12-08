@@ -295,8 +295,8 @@ views:
                 secondary_info: last-changed
                 icon: 'mdi:battery-alert-variant-outline'
                 <<: *alert-style
-            # battery low: toothbrushes < 15%
-            - entity_id: 'sensor.toothbrush_*_battery_persistent'
+            # battery low: scale & toothbrushes < 15%
+            - entity_id: 'sensor.(scale|toothbrush)_*_battery_persistent'
               state: '< 15'
               options:
                 secondary_info: last-changed
@@ -602,6 +602,13 @@ views:
                   service: switch.turn_off
                   service_data:
                     entity_id: switch.sw_main_bedroom_heater
+            # spare bedroom heater
+            - entity_id: switch.plg_sparebedroom_heater
+              state: 'on'
+              options:
+                name: 'Spare Bedroom: Heater'
+                icon: 'mdi:radiator'
+                secondary_info: last-changed
             # office air purifier
             - entity_id: switch.plg_office_airpurifier
               state: 'on'
@@ -735,6 +742,12 @@ views:
               options:
                 name: 'Garage: Ceiling, Main'
                 icon: 'mdi:ceiling-light-multiple-outline'
+                secondary_info: last-changed
+            - entity_id: switch.sw_garage_plant_relay_1
+              state: 'on'
+              options:
+                name: 'Garage: Plant Light'
+                icon: 'mdi:ceiling-light-outline'
                 secondary_info: last-changed
             - entity_id: switch.sw_outside_garagesidedoorlight
               state: 'on'
@@ -2308,6 +2321,20 @@ views:
           include:
             - name: entity_id
               value: 'sensor.rmt_*remote_battery'
+
+      # Scale Sensors
+      - type: 'custom:battery-state-card'
+        title: 'Scale'
+        <<: *battery-state-color_gradient
+        <<: *battery-state-style
+        tap_action: more-info
+        sort:
+          - "state"
+          - "name"
+        filter:
+          include:
+            - name: entity_id
+              value: 'sensor.scale_*_battery_persistent'
 
       # Toothbrushes
       - type: 'custom:battery-state-card'

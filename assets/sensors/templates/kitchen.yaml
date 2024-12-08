@@ -15,3 +15,14 @@
   #  -- convert seconds to days
   state: >
     {{ ((as_timestamp(now()) - state_attr('input_datetime.kitchen_espresso_machine_last_cleaned','timestamp')) | int / 60/1440) | round(0) }}
+
+- name: 'Scale Kitchen Espresso Battery Persistent'
+  unique_id: 'scale_kitchen_espresso_battery_persistent'
+  device_class: battery
+  unit_of_measurement: '%'
+  # acaia scale  attributes states are only available when the
+  # device is in use. grab those values and keep battery around
+  # for use in dashboard.
+  state: >
+    {% from 'battery.jinja' import persist_value %}
+    {{ persist_value('sensor.scale_kitchen_espresso_battery', 'sensor.scale_kitchen_espresso_battery_persistent') }}

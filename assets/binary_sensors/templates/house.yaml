@@ -26,7 +26,6 @@
 # HVAC cooling on/off
 - name: 'HVAC House Cooling State'
   unique_id: 'hvac_house_cooling_state'
-  state: >
   # power reported in watts (w)
   state: >
     {% if is_number(states('sensor.em_crawlspace_hvac_power_1')) %}
