@@ -44,18 +44,6 @@ sensor.snr_familyroom_frontdoorcontact_battery:
 binary_sensor.garage_vehicle_door_contact_state:
   friendly_name: 'Garage: Vehicle Door'
 
-# garage house door
-binary_sensor.snr_garage_housedoorcontact_contact:
-  friendly_name: 'Garage: House Door'
-sensor.snr_garage_housedoorcontact_battery:
-  friendly_name: 'Garage: House Door'
-
-# garage side door
-binary_sensor.snr_garage_sidedoorcontact_contact:
-  friendly_name: 'Garage: Side Door'
-sensor.snr_garage_sidedoorcontact_battery:
-  friendly_name: 'Garage: Side Door'
-
 # patio door 
 binary_sensor.snr_diningroom_patiodoorcontact_contact:
   friendly_name: 'Patio Door'
