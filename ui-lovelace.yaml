@@ -603,7 +603,7 @@ views:
                   service_data:
                     entity_id: switch.sw_main_bedroom_heater
             # spare bedroom heater
-            - entity_id: switch.plg_sparebedroom_heater
+            - entity_id: binary_sensor.spare_bedroom_heating_state
               state: 'on'
               options:
                 name: 'Spare Bedroom: Heater'

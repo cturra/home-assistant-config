@@ -1,0 +1,11 @@
+## BINARY SENSORS / TEMPLATES / SPARE BEDROOM
+
+# -- sonoff --
+# heater running (via plug)
+- name: 'Spare Bedroom Heating State'
+  icon: 'mdi:radiator'
+  # power reported in watts
+  state: >
+    {% if is_number(states('sensor.spare_bedroom_heater_plug_energy_power')) %}
+      {{ (states('sensor.spare_bedroom_heater_plug_energy_power') | int(default=0)) > 10 }}
+    {% endif %}
