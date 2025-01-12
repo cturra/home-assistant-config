@@ -672,17 +672,17 @@
       entity_id: cover.garage_vehicledoor
   mode: single
 - id: '1624131994582'
-  alias: 'Garage Indoor: notify Chris when vehicle door opened'
+  alias: 'Garage Inside: notify Chris when vehicle door opened'
   description: send a notification to chris' phone, including a dynamic image, when
     the garage door has been opened.
-  trigger:
-  - platform: state
-    entity_id: switch.sw_garage_vehicledoorcontact
+  triggers:
+  - entity_id: switch.sw_garage_vehicledoorcontact
     from: 'off'
     to: 'on'
     for: 00:00:10
-  condition: []
-  action:
+    trigger: state
+  conditions: []
+  actions:
   - action: notify.mobile_app_turraphone
     data:
       title: "\U0001F6AA Garage Door"
@@ -712,43 +712,44 @@
   description: turn heating mode off on thermostat every time door is opened if outside
     temp is lower than 11c to ensure heater doesn't turn on while vehicle door is
     open.
-  trigger:
-  - platform: state
-    entity_id: switch.sw_garage_vehicledoorcontact
+  triggers:
+  - entity_id: switch.sw_garage_vehicledoorcontact
     from: 'off'
     to: 'on'
     for:
       hours: 0
       minutes: 0
       seconds: 2
-  condition:
+    trigger: state
+  conditions:
   - condition: numeric_state
     entity_id: sensor.snr_outside_temperature
     below: '11'
-  action:
-  - action: switch.turn_off
+  actions:
+  - action: climate.set_hvac_mode
+    data:
+      hvac_mode: 'off'
     target:
-      entity_id: switch.sw_hvac_garage_thermostat
-    data: {}
+      entity_id: climate.hvac_garage_thermostat
   mode: single
 - id: '1631040781299'
   alias: 'Garage Inside: HVAC on when vehicle door closed'
   description: wait a couple mins after vehicle door closes to ensure temp normalizes,
     if current is below target temp, before returning the thermostat to heating mode.
-  trigger:
-  - platform: state
-    entity_id: switch.sw_garage_vehicledoorcontact
+  triggers:
+  - entity_id: switch.sw_garage_vehicledoorcontact
     from: 'on'
     to: 'off'
     for:
       hours: 0
       minutes: 0
       seconds: 2
-  condition:
+    trigger: state
+  conditions:
   - condition: state
-    entity_id: switch.sw_hvac_garage_thermostat
+    entity_id: climate.hvac_garage_thermostat
     state: 'off'
-  action:
+  actions:
   - delay:
       hours: 0
       minutes: "{% set current_temp = state_attr('climate.hvac_garage_thermostat','current_temperature')
@@ -761,19 +762,20 @@
         a longer delay to be safe #}\n  6\n{% endif %}\n"
       seconds: 0
       milliseconds: 0
-  - action: switch.turn_on
+  - action: climate.set_hvac_mode
+    data:
+      hvac_mode: heat
     target:
-      entity_id: switch.sw_hvac_garage_thermostat
-    data: {}
+      entity_id: climate.hvac_garage_thermostat
   mode: restart
 - id: '1631739108301'
-  alias: 'Garage Indoor: Notify when vehicle door left open at night'
+  alias: 'Garage Inside: Notify when vehicle door left open at night'
   description: notify chris' phone if the vehicle door is left open for 5 minutes
     when the time is after 22:30.
-  trigger:
-  - platform: time_pattern
-    minutes: /10
-  condition:
+  triggers:
+  - minutes: /10
+    trigger: time_pattern
+  conditions:
   - condition: and
     conditions:
     - condition: state
@@ -782,7 +784,7 @@
       for: 00:05:00
     - condition: time
       after: '22:30:00'
-  action:
+  actions:
   - action: notify.mobile_app_turraphone
     data:
       message: Garage Vehicle Door has been left open
@@ -1431,16 +1433,73 @@
 - id: '1682884121773'
   alias: 'Living Room: Remote controls'
   description: control devices in living room from ikea/symfonisk remote
-  trigger:
-  - platform: mqtt
-    topic: zigbee2mqtt-pi/RMT_LivingRoom_Remote/action
-  condition: []
-  action:
+  triggers:
+  - trigger: device
+    domain: mqtt
+    device_id: 31357218e6ee5e796b62f45d08027950
+    type: action
+    subtype: play_pause
+    id: play_pause
+  - trigger: device
+    domain: mqtt
+    device_id: 31357218e6ee5e796b62f45d08027950
+    type: action
+    subtype: toggle
+    id: toggle
+  - trigger: device
+    domain: mqtt
+    device_id: 31357218e6ee5e796b62f45d08027950
+    type: action
+    subtype: volume_up
+    id: volume_up
+  - trigger: device
+    domain: mqtt
+    device_id: 31357218e6ee5e796b62f45d08027950
+    type: action
+    subtype: volume_up_hold
+    id: volume_up_hold
+  - trigger: device
+    domain: mqtt
+    device_id: 31357218e6ee5e796b62f45d08027950
+    type: action
+    subtype: volume_down
+    id: volume_down
+  - trigger: device
+    domain: mqtt
+    device_id: 31357218e6ee5e796b62f45d08027950
+    type: action
+    subtype: volume_down_hold
+    id: volume_down_hold
+  - trigger: device
+    domain: mqtt
+    device_id: 31357218e6ee5e796b62f45d08027950
+    type: action
+    subtype: dots_1_initial_press
+    id: dots_1_initial_press
+  - trigger: device
+    domain: mqtt
+    device_id: 31357218e6ee5e796b62f45d08027950
+    type: action
+    subtype: dots_2_initial_press
+    id: dots_2_initial_press
+  - trigger: device
+    domain: mqtt
+    device_id: 31357218e6ee5e796b62f45d08027950
+    type: action
+    subtype: track_next
+    id: track_next
+  - trigger: device
+    domain: mqtt
+    device_id: 31357218e6ee5e796b62f45d08027950
+    type: action
+    subtype: track_previous
+    id: track_previous
+  conditions: []
+  actions:
   - choose:
     - conditions:
       - condition: template
-        value_template: "{{\n  trigger.payload == 'play_pause' or\n  trigger.payload
-          == 'toggle'\n}}"
+        value_template: "{{\n  trigger.id == 'play_pause' or\n  trigger.id == 'toggle'\n}}"
       sequence:
       - if:
         - condition: state
@@ -1469,8 +1528,8 @@
             entity_id: switch.living_room_entertainment_htpc
     - conditions:
       - condition: template
-        value_template: "{{\n  trigger.payload == 'volume_up' or\n  trigger.payload
-          == 'volume_up_hold' \n}}"
+        value_template: "{{\n  trigger.id == 'volume_up' or\n  trigger.id == 'volume_up_hold'
+          \n}}"
       sequence:
       - action: media_player.volume_set
         data:
@@ -1479,8 +1538,7 @@
         entity_id: media_player.living_room_receiver_main_zone
     - conditions:
       - condition: template
-        value_template: "{{\n  trigger.payload == 'volume_down' or\n  trigger.payload
-          == 'volume_down_hold'\n}}"
+        value_template: "{{\n  trigger.id == 'volume_down' or\n  trigger.id == 'volume_down_hold'\n}}"
       sequence:
       - action: media_player.volume_set
         data:
@@ -1489,7 +1547,7 @@
         entity_id: media_player.living_room_receiver_main_zone
     - conditions:
       - condition: template
-        value_template: "{{\n  trigger.payload == 'dots_1_initial_press' \n}}"
+        value_template: "{{\n  trigger.id == 'dots_1_initial_press' \n}}"
       sequence:
       - action: light.toggle
         target:
@@ -1497,7 +1555,7 @@
         data: {}
     - conditions:
       - condition: template
-        value_template: "{{\n  trigger.payload == 'dots_2_initial_press'\n}}"
+        value_template: "{{\n  trigger.id == 'dots_2_initial_press'\n}}"
       sequence:
       - if:
         - condition: state
@@ -1527,7 +1585,7 @@
     - conditions:
       - condition: template
         value_template: "{% if is_state('light.sw_livingroom_ceilinglight','on') %}\n
-          \ {{ trigger.payload == 'track_next' }}\n{% endif %}"
+          \ {{ trigger.id == 'track_next' }}\n{% endif %}"
       sequence:
       - action: light.turn_on
         data:
@@ -1537,7 +1595,7 @@
     - conditions:
       - condition: template
         value_template: "{% if is_state('light.sw_livingroom_ceilinglight','on') %}\n
-          \ {{ trigger.payload == 'track_previous' }}\n{% endif %}"
+          \ {{ trigger.id == 'track_previous' }}\n{% endif %}"
       sequence:
       - action: light.turn_on
         data:
@@ -1548,16 +1606,73 @@
 - id: '1683261355629'
   alias: 'Main Bedroom: Remote controls'
   description: control devices in main bedroom from ikea/symfonisk remote
-  trigger:
-  - platform: mqtt
-    topic: zigbee2mqtt-pi/RMT_MainBedroom_Remote/action
-  condition: []
-  action:
+  triggers:
+  - trigger: device
+    domain: mqtt
+    device_id: 04f696559090555013a87476d2cee5b9
+    type: action
+    subtype: play_pause
+    id: play_pause
+  - trigger: device
+    domain: mqtt
+    device_id: 04f696559090555013a87476d2cee5b9
+    type: action
+    subtype: toggle
+    id: toggle
+  - trigger: device
+    domain: mqtt
+    device_id: 04f696559090555013a87476d2cee5b9
+    type: action
+    subtype: volume_up
+    id: volume_up
+  - trigger: device
+    domain: mqtt
+    device_id: 04f696559090555013a87476d2cee5b9
+    type: action
+    subtype: volume_up_hold
+    id: volume_up_hold
+  - trigger: device
+    domain: mqtt
+    device_id: 04f696559090555013a87476d2cee5b9
+    type: action
+    subtype: volume_down
+    id: volume_down
+  - trigger: device
+    domain: mqtt
+    device_id: 04f696559090555013a87476d2cee5b9
+    type: action
+    subtype: volume_down_hold
+    id: volume_down_hold
+  - trigger: device
+    domain: mqtt
+    device_id: 04f696559090555013a87476d2cee5b9
+    type: action
+    subtype: dots_1_initial_press
+    id: dots_1_initial_press
+  - trigger: device
+    domain: mqtt
+    device_id: 04f696559090555013a87476d2cee5b9
+    type: action
+    subtype: dots_2_initial_press
+    id: dots_2_initial_press
+  - trigger: device
+    domain: mqtt
+    device_id: 04f696559090555013a87476d2cee5b9
+    type: action
+    subtype: track_next
+    id: track_next
+  - trigger: device
+    domain: mqtt
+    device_id: 04f696559090555013a87476d2cee5b9
+    type: action
+    subtype: track_previous
+    id: track_previous
+  conditions: []
+  actions:
   - choose:
     - conditions:
       - condition: template
-        value_template: "{{\n  trigger.payload == 'play_pause' or\n  trigger.payload
-          == 'toggle'\n}}"
+        value_template: "{{\n  trigger.id == 'play_pause' or\n  trigger.id == 'toggle'\n}}"
       sequence:
       - action: switch.toggle
         data: {}
@@ -1565,8 +1680,8 @@
           entity_id: switch.sw_main_bedroom_entertainment
     - conditions:
       - condition: template
-        value_template: "{{\n  trigger.payload == 'volume_up' or\n  trigger.payload
-          == 'volume_up_hold' \n}}"
+        value_template: "{{\n  trigger.id == 'volume_up' or\n  trigger.id == 'volume_up_hold'
+          \n}}"
       sequence:
       - action: media_player.volume_up
         data: {}
@@ -1574,8 +1689,7 @@
           entity_id: media_player.main_bedroom_speaker
     - conditions:
       - condition: template
-        value_template: "{{\n  trigger.payload == 'volume_down' or\n  trigger.payload
-          == 'volume_down_hold'\n}}"
+        value_template: "{{\n  trigger.id == 'volume_down' or\n  trigger.id == 'volume_down_hold'\n}}"
       sequence:
       - action: media_player.volume_down
         data: {}
@@ -1583,7 +1697,7 @@
           entity_id: media_player.main_bedroom_speaker
     - conditions:
       - condition: template
-        value_template: '{{ trigger.payload == ''dots_1_initial_press'' }}'
+        value_template: '{{ trigger.id == ''dots_1_initial_press'' }}'
       sequence:
       - action: light.toggle
         data: {}
@@ -1591,7 +1705,7 @@
           entity_id: light.sw_mainbedroom_ceilinglight
     - conditions:
       - condition: template
-        value_template: '{{ trigger.payload == ''dots_2_initial_press'' }}'
+        value_template: '{{ trigger.id == ''dots_2_initial_press'' }}'
       sequence:
       - action: light.toggle
         data: {}
@@ -1600,7 +1714,7 @@
     - conditions:
       - condition: template
         value_template: "{% if is_state('light.sw_mainbedroom_ceilinglight','on')
-          %}\n  {{ trigger.payload == 'track_next' }}\n{% endif %}"
+          %}\n  {{ trigger.id == 'track_next' }}\n{% endif %}"
       sequence:
       - action: light.turn_on
         data:
@@ -1610,7 +1724,7 @@
     - conditions:
       - condition: template
         value_template: "{% if is_state('light.sw_mainbedroom_ceilinglight','on')
-          %}\n  {{ trigger.payload == 'track_previous' }}\n{% endif %}"
+          %}\n  {{ trigger.id == 'track_previous' }}\n{% endif %}"
       sequence:
       - action: light.turn_on
         data:
@@ -1684,16 +1798,55 @@
 - id: '1684011953306'
   alias: 'Deck: Remote Controls'
   description: control multi-media from ikea/symfonisk remote
-  trigger:
-  - platform: mqtt
-    topic: zigbee2mqtt-pi/RMT_Deck_Remote/action
-  condition: []
-  action:
+  triggers:
+  - trigger: device
+    domain: mqtt
+    device_id: 8932c926faee51a637b3ff7707958a3c
+    type: action
+    subtype: play_pause
+    id: play_pause
+  - trigger: device
+    domain: mqtt
+    device_id: 8932c926faee51a637b3ff7707958a3c
+    type: action
+    subtype: toggle
+    id: toggle
+  - trigger: device
+    domain: mqtt
+    device_id: 8932c926faee51a637b3ff7707958a3c
+    type: action
+    subtype: volume_up
+    id: volume_up
+  - trigger: device
+    domain: mqtt
+    device_id: 8932c926faee51a637b3ff7707958a3c
+    type: action
+    subtype: volume_down
+    id: volume_down
+  - trigger: device
+    domain: mqtt
+    device_id: 8932c926faee51a637b3ff7707958a3c
+    type: action
+    subtype: dots_1_initial_press
+    id: dots_1_initial_press
+  - trigger: device
+    domain: mqtt
+    device_id: 8932c926faee51a637b3ff7707958a3c
+    type: action
+    subtype: track_next
+    id: track_next
+  - trigger: device
+    domain: mqtt
+    device_id: 8932c926faee51a637b3ff7707958a3c
+    type: action
+    subtype: track_previous
+    id: track_previous
+  conditions: []
+  actions:
   - choose:
     - conditions:
       - condition: template
-        value_template: "{{\n  trigger.payload == 'play_pause' or\n  trigger.payload
-          == 'toggle'\n}}"
+        value_template: "{{\n  trigger.id == 'play_pause' or\n  trigger.id == 'toggle'\n}}"
       sequence:
       - action: mqtt.publish
         data:
@@ -1703,7 +1856,7 @@
             '
     - conditions:
       - condition: template
-        value_template: '{{ trigger.payload == ''volume_up'' }}'
+        value_template: '{{ trigger.id == ''volume_up'' }}'
       sequence:
       - action: mqtt.publish
         data:
@@ -1713,7 +1866,7 @@
             '
     - conditions:
       - condition: template
-        value_template: '{{ trigger.payload == ''volume_down'' }}'
+        value_template: '{{ trigger.id == ''volume_down'' }}'
       sequence:
       - action: mqtt.publish
         data:
@@ -1723,7 +1876,7 @@
             '
     - conditions:
       - condition: template
-        value_template: '{{ trigger.payload == ''dots_1_initial_press'' }}'
+        value_template: '{{ trigger.id == ''dots_1_initial_press'' }}'
       sequence:
       - action: light.toggle
         data: {}
@@ -1732,7 +1885,7 @@
     - conditions:
       - condition: template
         value_template: "{% if is_state('light.sw_deck_ceilinglight','on') %}\n  {{
-          trigger.payload == 'track_next' }}\n{% endif %}"
+          trigger.id == 'track_next' }}\n{% endif %}"
       sequence:
       - action: light.turn_on
         data:
@@ -1742,7 +1895,7 @@
     - conditions:
       - condition: template
         value_template: "{% if is_state('light.sw_deck_ceilinglight','on') %}\n  {{
-          trigger.payload == 'track_previous' }}\n{% endif %}"
+          trigger.id == 'track_previous' }}\n{% endif %}"
       sequence:
       - action: light.turn_on
         data:
@@ -1752,15 +1905,49 @@
 - id: '1684823367096'
   alias: 'Kids Bedroom: Remote controls'
   description: control Ikea bulb in kids room from 5 button remote
-  trigger:
-  - platform: mqtt
-    topic: zigbee2mqtt-pi/RMT_KidsBedroom_Remote/action
-  condition: []
-  action:
+  triggers:
+  - trigger: device
+    domain: mqtt
+    device_id: 92244798f2ec5e133489ba9a39978d1b
+    type: action
+    subtype: toggle
+    id: toggle
+  - trigger: device
+    domain: mqtt
+    device_id: 92244798f2ec5e133489ba9a39978d1b
+    type: action
+    subtype: brightness_up_click
+    id: brightness_up_click
+  - trigger: device
+    domain: mqtt
+    device_id: 92244798f2ec5e133489ba9a39978d1b
+    type: action
+    subtype: brightness_down_click
+    id: brightness_down_click
+  - trigger: device
+    domain: mqtt
+    device_id: 92244798f2ec5e133489ba9a39978d1b
+    type: action
+    subtype: arrow_right_click
+    id: arrow_right_click
+  - trigger: device
+    domain: mqtt
+    device_id: 92244798f2ec5e133489ba9a39978d1b
+    type: action
+    subtype: arrow_left_click
+    id: arrow_left_click
+  - trigger: device
+    domain: mqtt
+    device_id: 92244798f2ec5e133489ba9a39978d1b
+    type: action
+    subtype: arrow_right_hold
+    id: arrow_right_hold
+  conditions: []
+  actions:
   - choose:
     - conditions:
       - condition: template
-        value_template: '{{ trigger.payload == ''toggle'' }}'
+        value_template: '{{ trigger.id == ''toggle'' }}'
       sequence:
       - action: light.toggle
         target:
@@ -1768,7 +1955,7 @@
         data: {}
     - conditions:
       - condition: template
-        value_template: '{{  trigger.payload == ''brightness_up_click'' }}'
+        value_template: '{{ trigger.id == ''brightness_up_click'' }}'
       sequence:
       - action: light.turn_on
         data:
@@ -1778,7 +1965,7 @@
           entity_id: light.blb_kidsbedroom_lamp
     - conditions:
       - condition: template
-        value_template: '{{  trigger.payload == ''brightness_down_click'' }}'
+        value_template: '{{ trigger.id == ''brightness_down_click'' }}'
       sequence:
       - action: light.turn_on
         data:
@@ -1788,7 +1975,7 @@
           entity_id: light.blb_kidsbedroom_lamp
     - conditions:
       - condition: template
-        value_template: '{{  trigger.payload == ''arrow_right_click'' }}'
+        value_template: '{{  trigger.id == ''arrow_right_click'' }}'
       sequence:
       - action: light.turn_on
         data:
@@ -1800,7 +1987,7 @@
           entity_id: light.blb_kidsbedroom_lamp
     - conditions:
       - condition: template
-        value_template: '{{  trigger.payload == ''arrow_left_click'' }}'
+        value_template: '{{ trigger.id == ''arrow_left_click'' }}'
       sequence:
       - action: light.turn_on
         data:
@@ -1810,7 +1997,7 @@
           entity_id: light.blb_kidsbedroom_lamp
     - conditions:
       - condition: template
-        value_template: '{{  trigger.payload == ''arrow_right_hold'' }}'
+        value_template: '{{ trigger.id == ''arrow_right_hold'' }}'
       sequence:
       - action: light.turn_on
         data:
@@ -1822,15 +2009,37 @@
 - id: '1684988902593'
   alias: 'Sparebedroom: Remote controls'
   description: control spare bedroom lights from ikea/5-button remote
-  trigger:
-  - platform: mqtt
-    topic: zigbee2mqtt-pi/RMT_SpareBedroom_Remote/action
-  condition: []
-  action:
+  triggers:
+  - trigger: device
+    domain: mqtt
+    device_id: 7eb966d6f904921b2ab6a5131ccefa4d
+    type: action
+    subtype: toggle
+    id: toggle
+  - trigger: device
+    domain: mqtt
+    device_id: 7eb966d6f904921b2ab6a5131ccefa4d
+    type: action
+    subtype: brightness_up_click
+    id: brightness_up_click
+  - trigger: device
+    domain: mqtt
+    device_id: 7eb966d6f904921b2ab6a5131ccefa4d
+    type: action
+    subtype: brightness_down_click
+    id: brightness_down_click
+  - trigger: device
+    domain: mqtt
+    device_id: 7eb966d6f904921b2ab6a5131ccefa4d
+    type: action
+    subtype: arrow_right_click
+    id: arrow_right_click
+  conditions: []
+  actions:
   - choose:
     - conditions:
       - condition: template
-        value_template: '{{ trigger.payload == ''toggle'' }}'
+        value_template: '{{ trigger.id == ''toggle'' }}'
       sequence:
       - action: light.toggle
         target:
@@ -1838,7 +2047,7 @@
         data: {}
     - conditions:
       - condition: template
-        value_template: '{{  trigger.payload == ''brightness_up_click'' }}'
+        value_template: '{{  trigger.id == ''brightness_up_click'' }}'
       sequence:
       - action: light.turn_on
         data:
@@ -1848,7 +2057,7 @@
           entity_id: light.sw_sparebedroom_ceilinglight
     - conditions:
       - condition: template
-        value_template: '{{  trigger.payload == ''brightness_down_click'' }}'
+        value_template: '{{  trigger.id == ''brightness_down_click'' }}'
       sequence:
       - action: light.turn_on
         data:
@@ -1858,7 +2067,7 @@
           entity_id: light.sw_sparebedroom_ceilinglight
     - conditions:
       - condition: template
-        value_template: '{{  trigger.payload == ''arrow_right_click'' }}'
+        value_template: '{{  trigger.id == ''arrow_right_click'' }}'
       sequence:
       - action: switch.toggle
         data: {}
@@ -2133,3 +2342,44 @@
             transition: 2
     default: []
   mode: restart
+- id: '1736622179881'
+  alias: 'Garage Inside: Plant Light Controls'
+  description: used when Windmill Palm is brought indoors during the winter.
+  triggers:
+  - event: sunrise
+    id: garage_plant_light_on
+    trigger: sun
+  - event_type: timer.finished
+    event_data:
+      entity_id: timer.garage_indoor_plant_light_on
+    id: garage_plant_light_off
+    trigger: event
+  conditions:
+  - condition: state
+    entity_id: input_boolean.garage_indoor_plant_light
+    state: 'on'
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - garage_plant_light_on
+      sequence:
+      - action: timer.start
+        data: {}
+        target:
+          entity_id: timer.garage_indoor_plant_light_on
+      - action: switch.turn_on
+        target:
+          entity_id: switch.sw_garage_plant_relay_1
+        data: {}
+    - conditions:
+      - condition: trigger
+        id:
+        - garage_plant_light_off
+      sequence:
+      - action: switch.turn_off
+        target:
+          entity_id: switch.sw_garage_plant_relay_1
+        data: {}
+  mode: single
