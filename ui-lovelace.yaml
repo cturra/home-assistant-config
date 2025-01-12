@@ -419,8 +419,8 @@ views:
                 icon: 'mdi:alert-circle-outline'
                 secondary_info: last-changed
                 <<: *alert-style
-            # updates available for philips hue bulbs through zigbee2mqtt
-            - entity_id: '/update.(blb|rmt|snr)_*/'
+            # updates available for philips hue bulbs through zigbee2mqtt & esphome
+            - entity_id: '/update.(blb|rmt|snr|sw)_*/'
               state: 'on'
               options:
                 icon: 'mdi:arrow-up-circle-outline'
@@ -708,19 +708,13 @@ views:
                 name: 'Family Room: Cabinet'
                 icon: 'mdi:light-recessed'
                 secondary_info: last-changed
-            - entity_id: switch.family_room_garland_light
+            - entity_id: light.blb_familyroom_garland
               state: 'on'
               options:
                 name: 'Family Room: Garland'
                 icon: 'mdi:string-lights'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
-            - entity_id: switch.sw_familyroom_christmastree
-              state: 'on'
-              options:
-                name: 'Family Room: Tree'
-                icon: 'mdi:pine-tree-variant-outline'
-                secondary_info: last-changed
             - entity_id: switch.sw_familyroom_cornerlight
               state: 'on'
               options:
@@ -1132,10 +1126,10 @@ views:
                   name: Ceiling
                   icon: 'mdi:ceiling-light-outline'
                   state_color: true
-                # xmas tree
-                - entity: switch.sw_familyroom_christmastree
-                  name: Tree
-                  state_color: true
+                # wall sconce
+                - entity: light.sw_familyroom_walllights
+                  name: 'Wall Sconce'
+                  icon: 'mdi:wall-sconce-flat-variant-outline'
             - type: entities
               show_header_toggle: false
               <<: *entities-style
@@ -1155,10 +1149,6 @@ views:
                   name: Stairwell
                   icon: 'mdi:chandelier'
                   state_color: true
-                # wall sconce
-                - entity: light.sw_familyroom_walllights
-                  name: 'Wall Sconce'
-                  icon: 'mdi:wall-sconce-flat-variant-outline'
 
       # Kitchen
       - type: 'custom:stack-in-card'
@@ -1946,7 +1936,7 @@ views:
           hours_to_show: 24
           points_per_hour: 4
           lower_bound_secondary: 25
-          upper_bound_secondary: 90
+          upper_bound_secondary: 95
           group: true
           <<: *mini-graph-style
           <<: *temp-graph-color_thresholds
