@@ -119,6 +119,7 @@
       - switch.fan_main_bedroom_airpurifier_night_mode
       - switch.plg_familyroom_cabinetlight
       - switch.sw_kitchen_sinklight
+      - switch.family_room_garland_light
   - if:
     - condition: state
       entity_id: input_boolean.christmas_lights_indoors
@@ -130,7 +131,6 @@
         entity_id:
         - switch.sw_familyroom_christmastree
         - switch.sw_familyroom_cornerlight
-        - switch.family_room_garland_light
   mode: single
 - id: '1612292887886'
   alias: 'House: Indoor Devices off for the night check'
@@ -146,6 +146,7 @@
       entity_id:
       - switch.plg_familyroom_cabinetlight
       - switch.sw_kitchen_sinklight
+      - switch.family_room_garland_light
   - action: switch.turn_on
     data: {}
     target:
@@ -388,12 +389,14 @@
 - id: '1613012241426'
   alias: 'Office: Air Purifier on with occupancy'
   description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - sensor.snr_office_chairvibration_action
-    to: tilt
-  condition:
+  triggers:
+  - trigger: device
+    domain: mqtt
+    device_id: ac1685c3f906b6d35a73dd2e5a7ce265
+    type: action
+    subtype: tilt
+    id: tilt
+  conditions:
   - condition: and
     conditions:
     - condition: state
@@ -402,7 +405,7 @@
     - condition: state
       entity_id: switch.plg_office_airpurifier
       state: 'off'
-  action:
+  actions:
   - action: switch.turn_on
     data: {}
     target:
@@ -978,12 +981,15 @@
 - id: '1643213265225'
   alias: 'Crawlspace: Lab light toggle when Button is pressed'
   description: ''
-  trigger:
-  - platform: state
-    entity_id: sensor.rmt_crawlspace_labremote_click
-    to: single
-  condition: []
-  action:
+  triggers:
+  - trigger: device
+    domain: mqtt
+    device_id: 99cf4a4d4355f3dd5b3ad658939ae608
+    type: action
+    subtype: single
+    id: single
+  conditions: []
+  actions:
   - action: light.toggle
     target:
       entity_id: light.blb_crawlspace_lab
