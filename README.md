@@ -30,8 +30,10 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Speaker           | Sonos      | Beam            | 1     | HA :: Sonos           |
 | Speaker           | Sonos      | Play:5          | 1     | HA :: Sonos           |
 | Speaker           | Sonos      | Roam SL         | 1     | HA :: Sonos           |
+| Streaming         | Chromecast | HD              | 1     | HA :: Chromecast      |
 | TV                | LG         | OLED55B8        | 1     | HA :: WebOSTV         |
 | TV                | LG         | OLED65C1        | 1     | HA :: WebOSTV         |
+| TV                | Samsung    | UN32M4500       | 1     | HA :: Samsung         |
 | **Sensors**                                                                      |
 | Air Quality       | Awair      | Element         | 3     | HA :: Awair Local API |
 | Air Quality       | Airthings  | Wave+           | 1     | HA :: Airthings BLE   |

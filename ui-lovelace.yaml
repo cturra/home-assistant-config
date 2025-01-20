@@ -895,7 +895,14 @@ views:
           <<: *entities-overview-header-style
         filter:
           include:
-            # tvs :: living room
+            # tv :: garage
+            - entity_id: switch.sw_garage_entertainment
+              state: 'on'
+              options:
+                name: 'Garage: TV'
+                icon: 'mdi:television'
+                secondary_info: last-changed
+            # tv :: living room
             - entity_id: switch.living_room_entertainment_htpc
               state: 'on'
               options:
@@ -1358,10 +1365,10 @@ views:
                   name: 'Dehumidifier'
                   icon: 'mdi:water-outline'
                   state_color: true
-                # side door light
-                - entity: switch.sw_outside_garagesidedoorlight
-                  name: 'Side Door'
-                  icon: 'mdi:coach-lamp'
+                # tv
+                - entity: switch.sw_garage_entertainment
+                  name: 'TV'
+                  icon: 'mdi:television'
                   state_color: true
 
       # Crawlspace
