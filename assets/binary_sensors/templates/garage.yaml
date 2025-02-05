@@ -41,9 +41,7 @@
 # heating on/off
 - name: 'HVAC Garage Heating State'
   state: >
-    {% if is_number(states('sensor.hvac_garage_heating_demand')) %}
-      {{ states('sensor.hvac_garage_heating_demand') | int(default=0) > 0 }}
-    {% endif %}
+    {{ is_state_attr('climate.hvac_garage_thermostat', 'hvac_action', 'heating') }}
 
 # -- sonoff --
 # dehumidifier running (via plug)
