@@ -675,9 +675,8 @@
       entity_id: cover.garage_vehicledoor
   mode: single
 - id: '1624131994582'
-  alias: 'Garage Inside: notify Chris when vehicle door opened'
-  description: send a notification to chris' phone, including a dynamic image, when
-    the garage door has been opened.
+  alias: 'Garage Inside: notify when vehicle door opened'
+  description: send a notifications when the garage door has been opened.
   triggers:
   - entity_id: switch.sw_garage_vehicledoorcontact
     from: 'off'
@@ -692,15 +691,20 @@
       message: The Garage Door has been opened.
       data:
         entity_id: camera.cam_garage
+  - action: mqtt.publish
+    data:
+      topic: awtrix/CLC_Kitchen/notify
+      payload: "{\n  \"text\": \"Garage Door opened\",\n  \"icon\": \"555\",\n  \"pushIcon\":
+        \"2\",\n  \"repeat\": 2,\n  \"scrollSpeed\": 50\n}"
   mode: single
 - id: '1630907999593'
   alias: 'Garage Inside: HVAC update outside temperature'
   description: publish outdoor temperature and time to thermostat mqtt topic
-  trigger:
-  - platform: time_pattern
-    minutes: /10
-  condition: []
-  action:
+  triggers:
+  - minutes: /10
+    trigger: time_pattern
+  conditions: []
+  actions:
   - data:
       topic: zigbee2mqtt-pi/HVAC_Garage_Thermostat/set/thermostat_outdoor_temperature
       payload: '{{ states("sensor.snr_outside_temperature") }}'
@@ -2104,13 +2108,13 @@
 - id: '1700159738395'
   alias: 'Porch: Nofity front door motion'
   description: notify when person detected at front door.
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.front_door_cross_region_detection
+  triggers:
+  - entity_id:
+    - binary_sensor.front_door_motion_alarm
     to: 'on'
-  condition: []
-  action:
+    trigger: state
+  conditions: []
+  actions:
   - choose:
     - conditions:
       - condition: state
@@ -2134,10 +2138,10 @@
             - action: DISMISS
               title: Dismiss
       - wait_for_trigger:
-        - platform: event
-          event_type: mobile_app_notification_action
+        - event_type: mobile_app_notification_action
           event_data:
             action: SNOOZE
+          trigger: event
         timeout: 00:00:30
         continue_on_timeout: false
       - action: timer.start
@@ -2147,6 +2151,11 @@
   - action: notify.grp_all_tvs
     data:
       message: Person Detected at front door
+  - action: mqtt.publish
+    data:
+      topic: awtrix/CLC_Kitchen/notify
+      payload: "{\n  \"text\": \"Person at front door\",\n  \"icon\": \"555\",\n  \"pushIcon\":
+        \"2\",\n  \"scrollSpeed\": 50,\n  \"repeat\": 2\n  \n}"
   mode: single
 - id: '1700170811227'
   alias: 'House: Indoor bedtime check'
@@ -2389,3 +2398,23 @@
           entity_id: switch.sw_garage_plant_relay_1
         data: {}
   mode: single
+- id: '1739058052369'
+  alias: 'Kitchen: Updates to pixel clock'
+  description: publish custom apps to awtrix pixel clock
+  triggers:
+  - minutes: /5
+    trigger: time_pattern
+  conditions: []
+  actions:
+  - data:
+      topic: awtrix/CLC_Kitchen/custom/weather
+      payload: "{% set weather = states('weather.pitt_meadows') %}\n{% if 'sun' in
+        weather.lower() %}\n  {% set icon = 52156 %}\n{% elif 'rain' in weather.lower()
+        %}\n  {% set icon = 72 %}\n{% elif 'snow' in weather.lower() %}\n  {% set
+        icon = 7123 %}\n{% elif 'cloud' in weather.lower() %}\n  {% set icon = 91
+        %}\n{% elif weather.lower() == 'clearnight' %}\n  {% set icon = 65943 %}\n{%
+        else %}\n  {# any other weather state use the cloudy icon #}\n  {% set icon
+        = 91 %}\n{% endif %}\n{\n  \"text\": \"{{ states('sensor.snr_outside_temperature')
+        }}°\",\n  \"icon\": \"{{ icon }}\"\n}"
+    action: mqtt.publish
+  mode: restart

@@ -91,6 +91,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Purifier      | Dyson      | TP02            | 1     | HACS :: Dyson         |
 | Air Purifier      | Dyson      | BP01            | 2     | infrared              |
 | Air Purifier      | Dyson      | HP07            | 1     | HACS :: Dyson         |
+| Pixel Clock       | Ulanzi     | TC001           | 1     | MQTT :: Awtrix        |
 | Propane Tank      | Mopeka     | Pro Check M1017 | 1     | HA :: Mopeka          |
 | Scale             | Acaia      | Lunar           | 1     | HA :: Acaia           |
 | Toothbrush        | Oral-B     | Smart 4000      | 2     | HA :: Oral-B          |
