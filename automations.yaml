@@ -444,12 +444,12 @@
 - id: '1613958937211'
   alias: 'House: Nofity if water leak detected'
   description: send notification to everyone, including the TV, if water leak is detected.
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.group_leak_sensors
+  triggers:
+  - entity_id: binary_sensor.group_leak_sensors
     to: 'on'
-  condition: []
-  action:
+    trigger: state
+  conditions: []
+  actions:
   - action: notify.grp_anne_chris_phones
     data:
       title: "❗\U0001F4A7 Water Detected"
@@ -460,6 +460,12 @@
             name: default
             critical: 1
             volume: 1
+  - action: mqtt.publish
+    data:
+      topic: awtrix/CLC_Kitchen/notify
+      payload: "{\n  \"text\": \"Water at {{ triggered_leak_sensor }}\",\n  \"icon\":
+        \"555\",\n  \"pushIcon\": \"2\",\n  \"repeat\": 2,\n  \"scrollSpeed\": 50,\n
+        \ \"rtttl\": \"siren:d=4,o=5,b=100:d,e\",\n  \"loopSound\": true\n}"
   - action: notify.grp_all_tvs
     data:
       message: ALERT! Water detected at {{ triggered_leak_sensor }} sensor.
@@ -2412,7 +2418,7 @@
         weather.lower() %}\n  {% set icon = 52156 %}\n{% elif 'rain' in weather.lower()
         %}\n  {% set icon = 72 %}\n{% elif 'snow' in weather.lower() %}\n  {% set
         icon = 7123 %}\n{% elif 'cloud' in weather.lower() %}\n  {% set icon = 91
-        %}\n{% elif weather.lower() == 'clearnight' %}\n  {% set icon = 65943 %}\n{%
+        %}\n{% elif weather.lower() == 'clear-night' %}\n  {% set icon = 52163 %}\n{%
         else %}\n  {# any other weather state use the cloudy icon #}\n  {% set icon
         = 91 %}\n{% endif %}\n{\n  \"text\": \"{{ states('sensor.snr_outside_temperature')
         }}°\",\n  \"icon\": \"{{ icon }}\"\n}"
