@@ -20,3 +20,24 @@
   json_attributes_topic: rtl_433/sensor/Acurite-Tower-9142
   value_template: >
     {{ value_json.humidity | int(default=50) }}
+
+# -- ecowitt wh51 --
+# windmill palm (trachycarpus fortunei)
+- name: 'SNR Outside Plant Windmill Palm Moisture'
+  unique_id: 'snr_outside_plant_windmill_palm_moisture'
+  device_class: moisture
+  unit_of_measurement: '%'
+  state_topic: rtl_433/sensor/Fineoffset-WH51-0eb79e
+  json_attributes_topic: rtl_433/sensor/Fineoffset-WH51-0eb79e
+  value_template: >
+    {{ value_json.moisture | int(50) }}
+
+- name: 'SNR Outside Plant Windmill Palm Battery'
+  unique_id: 'snr_outside_plant_windmill_palm_battery'
+  device_class: battery
+  unit_of_measurement: '%'
+  state_topic: rtl_433/sensor/Fineoffset-WH51-0eb79e
+  json_attributes_topic: rtl_433/sensor/Fineoffset-WH51-0eb79e
+  value_template: >
+    {{ value_json.battery_ok | multiply(100) | round(0) }}
+

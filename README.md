@@ -52,7 +52,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Presence          | Tuya       | ZY-M100         | 2     | ESPHome               |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
 | Soil              | Xiaomi     | Mi Flora (HHCC) | 3     | HA:: Xiami BLE        |
-| Soil              | Tuya       | TS601           | 1     | Zigbee2MQTT           |
+| Soil              | Ecowitt    | WH51            | 1     | MQTT :: rtl_433       |
 | Temperature       | Acurite    | 592TXR          | 3     | MQTT :: rtl_433       |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433       |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT           |
