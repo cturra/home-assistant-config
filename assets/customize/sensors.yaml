@@ -2,14 +2,6 @@
 
 ## ------ climate sensors ------
 
-# crawlspace: locker (xiaomi mi)
-sensor.snr_crawlspace_locker_climatedisplay_battery:
-  friendly_name: 'Locker: Display'
-
-# main bedroom (xiaomi mi)
-sensor.snr_mainbedroom_climatedisplay_battery:
-  friendly_name: 'Main Bedroom: Display'
-
 # outside: tacoma box
 sensor.snr_outside_tacomaboxclimate_battery:
   friendly_name: 'Outside: Tacoma Box'

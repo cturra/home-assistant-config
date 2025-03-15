@@ -42,4 +42,4 @@
     - sensor.snr_kitchen_airquality_humidity
     - sensor.snr_mainbedroom_airquality_humidity
     - sensor.snr_kidsbedroom_airquality_humidity
-    - sensor.snr_sparebedroom_climate_humidity
+    - sensor.snr_sparebedroom_climatedisplay_humidity

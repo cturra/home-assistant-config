@@ -52,7 +52,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Presence          | Tuya       | ZY-M100         | 2     | ESPHome               |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
 | Soil              | Xiaomi     | Mi Flora (HHCC) | 3     | HA:: Xiami BLE        |
-| Soil              | Ecowitt    | WH51            | 1     | MQTT :: rtl_433       |
+| Soil              | Ecowitt    | WH51            | 2     | MQTT :: rtl_433       |
 | Temperature       | Acurite    | 592TXR          | 3     | MQTT :: rtl_433       |
 | Temperature       | La Crosse  | TX141Bv3        | 4     | MQTT :: rtl_433       |
 | Vibration         | Xiaomi     | DJT11LM         | 1     | Zigbee2MQTT           |
@@ -89,7 +89,7 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Air Purifier      | Dyson      | TP02            | 1     | HACS :: Dyson         |
 | Air Purifier      | Dyson      | BP01            | 2     | infrared              |
 | Air Purifier      | Dyson      | HP07            | 1     | HACS :: Dyson         |
-| Pixel Clock       | Ulanzi     | TC001           | 1     | MQTT :: Awtrix        |
+| Pixel Clock       | Ulanzi     | TC001           | 2     | MQTT :: Awtrix        |
 | Propane Tank      | Mopeka     | Pro Check M1017 | 1     | HA :: Mopeka          |
 | Scale             | Acaia      | Lunar           | 1     | HA :: Acaia           |
 | Toothbrush        | Oral-B     | Smart 4000      | 2     | HA :: Oral-B          |

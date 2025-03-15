@@ -448,13 +448,6 @@ views:
                 icon: 'mdi:arrow-up-circle-outline'
                 secondary_info: last-changed
                 <<: *alert-info-style
-            # backups stale
-            - entity_id: 'binary_sensor.backups_stale'
-              state: 'on'
-              options:
-                icon: 'mdi:alert-box-outline'
-                secondary_info: last-changed
-                <<: *alert-info-style
             # family room/main bedroom: air purifier filter change
             - entity_id: 'sensor.fan_(family_room|main_bedroom)_airpurifier_filter_life'
               state: '< 2'
@@ -1559,7 +1552,7 @@ views:
 
           # spare bedroom
           - type: 'custom:button-card'
-            entity: sensor.spare_bedroom_temperature_1_decimal
+            entity: sensor.snr_sparebedroom_climatedisplay_temperature
             name: 'Spare Bedroom'
             show_state: true
             show_icon: false
@@ -1583,7 +1576,7 @@ views:
 
           # family room
           - type: 'custom:button-card'
-            entity: sensor.familyroom_temperature_1_decimal
+            entity: sensor.snr_familyroom_climatedisplay_temperature
             name: >
               [[[
                 var occupied = states['binary_sensor.snr_familyroom_motion_occupancy'].state
@@ -1607,7 +1600,7 @@ views:
 
           # crawlspace
           - type: 'custom:button-card'
-            entity: sensor.crawlspace_temperature_1_decimal
+            entity: sensor.snr_crawlspace_climatedisplay_temperature
             name: Crawlspace
             show_state: true
             show_icon: false
@@ -1628,7 +1621,7 @@ views:
           hours_to_show: 24
           points_per_hour: 3
           group: true
-          lower_bound_secondary: 35
+          lower_bound_secondary: 30
           upper_bound_secondary: 70
           font_size: 85
           <<: *mini-graph-style
@@ -1652,7 +1645,7 @@ views:
               show_points: false
               color: '#e6b800'
             # temerature at crawlspace aqara sensor
-            - entity: sensor.crawlspace_temperature_1_decimal
+            - entity: sensor.snr_crawlspace_climatedisplay_temperature
               name: Crawlspace
               show_fill: false
               show_points: false

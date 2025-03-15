@@ -8,17 +8,3 @@
   #  -- convert seconds to days
   state: >
     {{ ((as_timestamp(now()) - state_attr('input_datetime.crawlspace_locker_dehumidifier_last_dried','timestamp')) | int / 60/1440) | round(0) }}
-
-# -- inkbird ibs-th2 --
-# temperature
-- name: 'Crawlspace Temperature 1 Decimal'
-  device_class: temperature
-  unit_of_measurement: '°C'
-  # return last value if we get 'unknown' state attribute from device.
-  state: >
-    {% if is_number(states('sensor.snr_crawlspace_climate_temperature')) %}
-      {{ states('sensor.snr_crawlspace_climate_temperature') | round(1, default=20.0) }}
-    {% else %}
-      {# use previous value if sensor returns unknown #}
-      {{ states('sensor.crawlspace_temperature_1_decimal') }}
-    {% endif %}

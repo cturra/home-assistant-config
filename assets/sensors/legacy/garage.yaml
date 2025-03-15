@@ -10,23 +10,23 @@
   end: "{{ now() }}"
 
 # mean humidity from climate sensors:
-#  - inkbird IBS-TH
+#  - Xiaomi Mi LYWSD03MMC
 #  - am2302 (wired dht22)
 - platform: min_max
   name: 'Garage Mean Humidity Calculation'
   type: mean
   round_digits: 0
   entity_ids:
-    - sensor.snr_garage_climate_humidity
+    - sensor.snr_garage_climatedisplay_humidity
     - sensor.garage_vehicle_door_opener_am2301_humidity
 
 # mean temperature from climate sensors:
-#  - inkbird IBS-TH
+#  - Xiaomi Mi LYWSD03MMC
 #  - sinopé TH1400ZB
 - platform: min_max
   name: 'Garage Mean Temperature Calculation'
   type: mean
   round_digits: 1
   entity_ids:
-    - sensor.snr_garage_climate_temperature
+    - sensor.snr_garage_climatedisplay_temperature
     - sensor.hvac_garage_thermostat_temperature
