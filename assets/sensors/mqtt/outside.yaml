@@ -41,3 +41,22 @@
   value_template: >
     {{ value_json.battery_ok | multiply(100) | round(0) }}
 
+# rosemary
+- name: 'SNR Outside Plant Rosemary Moisture'
+  unique_id: 'snr_outside_plant_rosemary_moisture'
+  device_class: moisture
+  unit_of_measurement: '%'
+  state_topic: rtl_433/sensor/Fineoffset-WH51-0eb6d8
+  json_attributes_topic: rtl_433/sensor/Fineoffset-WH51-0eb6d8
+  value_template: >
+    {{ value_json.moisture | int(50) }}
+
+- name: 'SNR Outside Plant Rosemary Battery'
+  unique_id: 'snr_outside_plant_rosemary_battery'
+  device_class: battery
+  unit_of_measurement: '%'
+  state_topic: rtl_433/sensor/Fineoffset-WH51-0eb6d8
+  json_attributes_topic: rtl_433/sensor/Fineoffset-WH51-0eb6d8
+  value_template: >
+    {{ value_json.battery_ok | multiply(100) | round(0) }}
+
