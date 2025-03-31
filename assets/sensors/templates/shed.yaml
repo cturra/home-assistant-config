@@ -5,9 +5,12 @@
 - name: 'SNR Shed BBQ Propane Tank Level Percent'
   unit_of_measurement: '%'
   state: >
-    {% if is_number(states('sensor.snr_shed_bbq_propane_tank_level_mm')) %}
+    # check reading is a number and a reading that's greater than 100%
+    {% if is_number(states('sensor.snr_shed_bbq_propane_tank_level_mm')) and
+          (states('sensor.snr_shed_bbq_propane_tank_level_mm')| float / 254  * 100) < 100
+    %}
       {# manually calculated full tank capacity for 20lb propane #}
-      {{ (states('sensor.snr_shed_bbq_propane_tank_level_mm') | float / 254 * 100) | round(0) }}
+      {{ (states('sensor.snr_shed_bbq_propane_tank_level_mm')| float / 254 * 100) | round(0) }}
     {% else %}
       {# non-numeric value, return previous reading for now #}
       {{ states('sensor.snr_shed_bbq_propane_tank_level_percent') }}
