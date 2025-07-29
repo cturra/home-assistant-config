@@ -19,7 +19,8 @@
     {% if is_number(states('sensor.em_crawlspace_hvac_power_1')) %}
       {{ 
         (states('sensor.em_crawlspace_hvac_power_1') | int(default=0)) > 170 and
-        (states('sensor.em_crawlspace_hvac_power_1') | int(default=0)) < 460
+        (states('sensor.em_crawlspace_hvac_power_1') | int(default=0)) < 460 and
+        (states('sensor.hvac_ecobee_indoor_average_temperature') | int(default=20)) < 23
       }}
     {% endif %}
 
@@ -29,7 +30,10 @@
   # power reported in watts (w)
   state: >
     {% if is_number(states('sensor.em_crawlspace_hvac_power_1')) %}
-      {{ (states('sensor.em_crawlspace_hvac_power_1') | int(default=0)) > 475 }}
+      {{ 
+        (states('sensor.em_crawlspace_hvac_power_1') | int(default=0)) > 350 and
+        (states('sensor.hvac_ecobee_indoor_average_temperature') | int(default=20)) > 23
+      }}
     {% endif %}
 
 # HVAC fan on/off (when heating/cooling NOT running)
