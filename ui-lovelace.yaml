@@ -284,6 +284,8 @@ views:
           show_header_toggle: false
           <<: *entities-overview-header-style
         filter:
+          exclude:
+            - state: 'unavailable'
           include:
             - entity_id: 'sensor.turraphone_ble_area'
               options:
@@ -537,6 +539,8 @@ views:
           show_header_toggle: false
           <<: *entities-overview-header-style
         filter:
+          exclude:
+            - state: 'unavailable'
           include:
             # bathroom (down) fan
             - entity_id: 'switch.sw_downstairsbathroom_fan'
@@ -633,6 +637,8 @@ views:
           show_header_toggle: false
           <<: *entities-overview-header-style
         filter:
+          exclude:
+            - state: 'unavailable'
           include:
             # bathroom (down)
             - entity_id: switch.sw_downstairsbathroom_ceilinglight
@@ -887,6 +893,8 @@ views:
           show_header_toggle: false
           <<: *entities-overview-header-style
         filter:
+          exclude:
+            - state: 'unavailable'
           include:
             # tv :: garage
             - entity_id: switch.sw_garage_entertainment
@@ -908,24 +916,6 @@ views:
                 name: 'Living Room: Nintendo'
                 icon: 'mdi:television'
                 secondary_info: last-changed
-            # plex media players :: living room
-            - entity_id: 'media_player.plex_htpc_living_room'
-              state: '/(playing|paused)/'
-              options:
-                type: 'custom:mini-media-player'
-                name: 'Living Room: HTPC'
-                hide:
-                  progress: true
-                  prev: true
-                  next: true
-                  power: true
-                  volume: true
-                tap_action:
-                  action: call-service
-                  service: media_player.media_play_pause
-                  service_data:
-                    entity_id: this.entity_id
-                <<: *media-player-card-style
             # speakers :: paused
             - entity_id: 'media_player.*_speaker'
               last_changed: < 2 # minutes
@@ -962,24 +952,6 @@ views:
                 name: 'Main Bedroom: TV'
                 icon: 'mdi:television'
                 secondary_info: last-changed
-            # plex media players :: main bedroom
-            - entity_id: 'media_player.plex_htpc_main_bedroom'
-              state: '/(playing|paused)/'
-              options:
-                type: 'custom:mini-media-player'
-                name: 'Main Bedroom: HTPC'
-                hide:
-                  progress: true
-                  prev: true
-                  next: true
-                  power: true
-                  volume: true
-                tap_action:
-                  action: call-service
-                  service: media_player.media_play_pause
-                  service_data:
-                    entity_id: this.entity_id
-                <<: *media-player-card-style
         sort:
           method: name
 
@@ -991,6 +963,8 @@ views:
           title: 'Doors & Windows'
           <<: *entities-overview-header-style
         filter:
+          exclude:
+            - state: 'unavailable'
           include:
             # door: locks (ble)
             - entity_id: 'lock.lck_garage_house_door'
