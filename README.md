@@ -24,6 +24,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Floor Lamp        | Govee      | H6076           | 1     | HA :: Govee           |
 | **Locks**                                                                        |
 | Door Lock         | August     | ASL-03          | 2     | HA :: Yale Access BLE |
+| **Energy**                                                                       |
+| Energy Meter      | Shelly     | Plus PM Mini    | 1     | Tasmota               | 
 | **Entertainment**                                                                |
 | Audio             | Chromecast | Audio           | 1     | HA :: Chromecast      |
 | Receiver          | Yamaha     | HTR-8063        | 1     | HA :: MediaPlayers    |
@@ -45,9 +47,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Contact           | Xiaomi     | MCCGQ11LM       | 13    | Zigbee2MQTT           |
 | Leak              | Ikea       | E2202           | 3     | Zigbee2MQTT           |
 | Leak              | Xiaomi     | SJCGQ11LM       | 14    | Zigbee2MQTT           |
-| Motion            | Ikea       | E1745           | 1     | Zigbee2MQTT           |
 | Motion            | Ikea       | E2134           | 1     | Zigbee2MQTT           |
-| Motion            | Philips    | 9290030674      | 2     | Zigbee2MQTT           |
+| Motion            | Philips    | 9290030674      | 3     | Zigbee2MQTT           |
 | Motion            | Xiaomi     | RTCGQ14LM       | 1     | Zigbee2MQTT           |
 | Presence          | Tuya       | ZY-M100         | 2     | ESPHome               |
 | Smoke             | Nest       | Protect         | 4     | HACS :: Nest Proect   | 
