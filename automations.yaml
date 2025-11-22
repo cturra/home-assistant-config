@@ -131,6 +131,15 @@
         entity_id:
         - switch.sw_familyroom_christmastree
         - switch.sw_familyroom_cornerlight
+    - action: select.select_option
+      data:
+        option: xmas
+      target:
+        entity_id: select.blb_familyroom_garland_preset
+    else:
+    - action: select.select_option
+      data:
+        option: simple-sparkle
   mode: single
 - id: '1612292887886'
   alias: 'House: Indoor Devices off for the night check'
@@ -224,15 +233,15 @@
 - id: '1612306243899'
   alias: 'Garage Inside: Lights on when person doors opened'
   description: turn on garage lights when house or side door is opened after sunset.
-  trigger:
-  - platform: state
-    to: 'on'
+  triggers:
+  - to: 'on'
     entity_id: binary_sensor.snr_garage_housedoorcontact_contact
-  - platform: state
-    entity_id: binary_sensor.snr_garage_sidedoorcontact_contact
+    trigger: state
+  - entity_id: binary_sensor.snr_garage_sidedoorcontact_contact
     from: 'off'
     to: 'on'
-  condition:
+    trigger: state
+  conditions:
   - condition: and
     conditions:
     - condition: state
@@ -242,7 +251,17 @@
       entity_id: switch.sw_garage_ceilingmainlights
       state: 'off'
       for: 00:00:10
-  action:
+    - condition: not
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.garage_treadmill_state
+        state:
+        - 'on'
+        for:
+          hours: 0
+          minutes: 1
+          seconds: 0
+  actions:
   - action: switch.turn_on
     data: {}
     target:
@@ -396,6 +415,11 @@
     type: action
     subtype: tilt
     id: tilt
+  - domain: mqtt
+    device_id: ac1685c3f906b6d35a73dd2e5a7ce265
+    type: action
+    subtype: vibration
+    trigger: device
   conditions:
   - condition: and
     conditions:
@@ -649,16 +673,16 @@
   alias: 'Garage Inside: Offer to open vehicle door on return home'
   description: notify chris' phone when it returns home from away and offer to open
     the garage door.
-  trigger:
-  - platform: state
-    entity_id: device_tracker.turraphone
+  triggers:
+  - entity_id: device_tracker.turraphone
     from: not_home
     to: home
-  condition:
+    trigger: state
+  conditions:
   - condition: state
     entity_id: switch.sw_garage_vehicledoorcontact
     state: 'off'
-  action:
+  actions:
   - action: notify.mobile_app_turraphone
     data:
       title: Welcome Home!
@@ -667,18 +691,17 @@
         actions:
         - action: OPEN_DOOR
           title: Yes Please
-        - action: NO_ACTION
-          title: No Thanks
   - wait_for_trigger:
-    - platform: event
-      event_type: mobile_app_notification_action
+    - event_type: mobile_app_notification_action
       event_data:
         action: OPEN_DOOR
+      trigger: event
     timeout: 00:02:00
     continue_on_timeout: false
   - action: cover.open_cover
     target:
       entity_id: cover.garage_vehicledoor
+    data: {}
   mode: single
 - id: '1624131994582'
   alias: 'Garage Inside: notify when vehicle door opened'
@@ -696,7 +719,7 @@
       title: "\U0001F6AA Garage Door"
       message: The Garage Door has been opened.
       data:
-        entity_id: camera.cam_garage
+        entity_id: camera.garage
   - action: mqtt.publish
     data:
       topic: awtrix/CLC_Kitchen/notify
@@ -2030,12 +2053,6 @@
     domain: mqtt
     device_id: 7eb966d6f904921b2ab6a5131ccefa4d
     type: action
-    subtype: toggle
-    id: toggle
-  - trigger: device
-    domain: mqtt
-    device_id: 7eb966d6f904921b2ab6a5131ccefa4d
-    type: action
     subtype: brightness_up_click
     id: brightness_up_click
   - trigger: device
@@ -2116,7 +2133,7 @@
   description: notify when person detected at front door.
   triggers:
   - entity_id:
-    - binary_sensor.front_door_motion_alarm
+    - binary_sensor.front_door_cross_region_detection
     to: 'on'
     trigger: state
   conditions: []
@@ -2161,7 +2178,12 @@
     data:
       topic: awtrix/CLC_Kitchen/notify
       payload: "{\n  \"text\": \"Person at front door\",\n  \"icon\": \"555\",\n  \"pushIcon\":
-        \"2\",\n  \"scrollSpeed\": 50,\n  \"repeat\": 2\n  \n}"
+        \"2\",\n  \"scrollSpeed\": 50,\n  \"repeat\": 2\n}"
+  - action: mqtt.publish
+    data:
+      topic: awtrix/CLC_Office/notify
+      payload: "{\n  \"text\": \"Person at front door\",\n  \"icon\": \"555\",\n  \"pushIcon\":
+        \"2\",\n  \"scrollSpeed\": 50,\n  \"repeat\": 2\n}"
   mode: single
 - id: '1700170811227'
   alias: 'House: Indoor bedtime check'
@@ -2416,11 +2438,47 @@
       topic: awtrix/CLC_Kitchen/custom/weather
       payload: "{% set weather = states('weather.pitt_meadows') %}\n{% if 'sun' in
         weather.lower() %}\n  {% set icon = 52156 %}\n{% elif 'rain' in weather.lower()
-        %}\n  {% set icon = 72 %}\n{% elif 'snow' in weather.lower() %}\n  {% set
-        icon = 7123 %}\n{% elif 'cloud' in weather.lower() %}\n  {% set icon = 91
+        %}\n  {% set icon = 72 %}\n{% elif 'pour' in weather.lower() %}\n  {% set
+        icon = 72 %}\n{% elif 'snow' in weather.lower() %}\n  {% set icon = 7123 %}\n{%
+        elif 'partlycloudy'in weather.lower() %}\n  {# check if the sun has set #}\n
+        \ {% if states('sun.sun') == 'below_horizon' %}\n    {# use evening partly
+        cloudy icon #}\n    {% set icon = 52165 %}\n  {% else %}\n    {# use daytime
+        partly cloudy icon #}\n    {% set icon = 52173 %}\n  {% endif %}\n{% elif
+        weather.lower() == 'cloud' %}\n  {% set icon = 91 %}\n{% elif weather.lower()
+        == 'clear-night' %}\n  {% set icon = 52163 %}\n{% else %}\n  {# any other
+        weather state use the cloudy icon #}\n  {% set icon = 91 %}\n{% endif %}\n{\n
+        \ \"text\": \"{{ states('sensor.snr_outside_temperature') }}°\",\n  \"icon\":
+        \"{{ icon }}\"\n}"
+    action: mqtt.publish
+  mode: restart
+- id: '1740272156546'
+  alias: 'Office: Updates to pixel clock'
+  description: publish custom apps to awtrix pixel clock
+  triggers:
+  - minutes: /5
+    trigger: time_pattern
+  conditions: []
+  actions:
+  - data:
+      topic: awtrix/CLC_Office/custom/weather
+      payload: "{# icons found at: https://developer.lametric.com/icons #}\n{% set
+        weather = states('weather.pitt_meadows') %}\n{% if 'sun' in weather.lower()
+        %}\n  {% set icon = 52156 %}\n{% elif 'rain' in weather.lower() %}\n  {% set
+        icon = 52160 %}\n{% elif 'pour' in weather.lower() %}\n  {% set icon = 52161
+        %}\n{% elif 'snow' in weather.lower() %}\n  {% set icon = 52168 %}\n{% elif
+        'partlycloudy'in weather.lower() %}\n  {% if states('sun.sun') == 'below_horizon'
+        %}\n    {% set icon = 52165 %}\n  {% else %}\n    {% set icon = 52173 %}\n
+        \ {% endif %}\n{% elif weather.lower() == 'cloud' %}\n  {% set icon = 52159
         %}\n{% elif weather.lower() == 'clear-night' %}\n  {% set icon = 52163 %}\n{%
         else %}\n  {# any other weather state use the cloudy icon #}\n  {% set icon
         = 91 %}\n{% endif %}\n{\n  \"text\": \"{{ states('sensor.snr_outside_temperature')
         }}°\",\n  \"icon\": \"{{ icon }}\"\n}"
+    action: mqtt.publish
+  - data:
+      topic: awtrix/CLC_Office/custom/co2
+      payload: "{% if states('sensor.snr_office_airquality_co2')| int > 1500 %}\n
+        \ {% set icon = 44042 %}\n{% else %}\n  {% set icon = 37235 %}\n{% endif %}\n{\n
+        \ \"text\": \"{{ states('sensor.snr_office_airquality_co2') }}\",\n  \"icon\":
+        \"{{ icon }}\"\n}"
     action: mqtt.publish
   mode: restart
