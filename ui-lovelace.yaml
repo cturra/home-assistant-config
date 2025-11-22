@@ -287,9 +287,6 @@ views:
           exclude:
             - state: 'unavailable'
           include:
-            - entity_id: 'sensor.turraphone_ble_area'
-              options:
-                name: "Chris' location"
             # battery low: zigbee & ble sensors < 15%
             - entity_id: 'sensor.(rmt|snr)_*_battery'
               state: '< 10'
@@ -457,7 +454,7 @@ views:
                 icon: 'mdi:air-filter'
                 secondary_info: last-changed
                 <<: *alert-info-style
-            # hvac filter change cycle (every ~ 3 months)
+            # hvac filter change cycle (every ~3 months)
             - entity_id: 'sensor.hvac_filter_change_interval'
               state: '> 90'
               options:
@@ -513,7 +510,21 @@ views:
                   confirmation:
                     text: 'Espresso Machine cleaned?'
                 <<: *alert-info-style
-            # crawlspace locker dehumidifier drying cycle (every month)
+            # stove range hood cleaning cycle (every ~3 months)
+            - entity_id: 'sensor.kitchen_rangehood_cleaned_interval'
+              state: '> 90'
+              options:
+                name: 'Kitchen: Range Hood cleaning'
+                secondary_info: last-changed
+                tap_action:
+                  action: call-service
+                  service: input_boolean.turn_on
+                  service_data:
+                    entity_id: input_boolean.kitchen_rangehood_cleaning_reset
+                  confirmation:
+                    text: 'Range Hood cleaned?'
+                <<: *alert-info-style
+            # crawlspace locker dehumidified drying cycle (every month)
             - entity_id: 'sensor.crawlspace_locker_dehumidifier_last_dried_interval'
               state: '> 30'
               options:
@@ -741,6 +752,11 @@ views:
               options:
                 name: 'Garage: Plant Light'
                 icon: 'mdi:ceiling-light-outline'
+                secondary_info: last-changed
+            - entity_id: binary_sensor.garage_treadmill_state
+              state: 'on'
+              options:
+                name: 'Garage: Treadmill'
                 secondary_info: last-changed
             - entity_id: switch.sw_outside_garagesidedoorlight
               state: 'on'

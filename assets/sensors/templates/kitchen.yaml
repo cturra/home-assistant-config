@@ -16,6 +16,16 @@
   state: >
     {{ ((as_timestamp(now()) - state_attr('input_datetime.kitchen_espresso_machine_last_cleaned','timestamp')) | int / 60/1440) | round(0) }}
 
+- name: 'Kitchen Range Hood Cleaned Interval'
+  unique_id: 'kitchen_rangehood_cleaning_interval'
+  unit_of_measurement: 'days'
+  icon: 'mdi:stove'
+  # calculate days since the espresso machine was last cleaned
+  #  -- convert seconds to days
+  state: >
+    {{ ((as_timestamp(now()) - state_attr('input_datetime.kitchen_rangehood_last_cleaned','timestamp')) | int / 60/1440) | round(0) }}
+
+
 - name: 'Scale Kitchen Espresso Battery Persistent'
   unique_id: 'scale_kitchen_espresso_battery_persistent'
   device_class: battery
