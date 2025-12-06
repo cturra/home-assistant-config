@@ -3,8 +3,14 @@
 # -- binary sensors --
 - binary_sensor: !include_dir_merge_list binary_sensors/templates
 
+# -- covers --
+- cover: !include_dir_merge_list assets/covers/templates
+
 # -- sensors --
 - sensor: !include_dir_merge_list sensors/templates
+
+# -- switchs --
+- switch: !include_dir_merge_list switches/templates
 
 # -- triggers --
 # main bedroom: timeout value for presence sensor

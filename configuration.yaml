@@ -14,7 +14,7 @@ lovelace: !include assets/core/lovelace.yaml
 automation: !include automations.yaml
 binary_sensor: !include_dir_merge_list assets/binary_sensors/groups
 camera: !include_dir_merge_list assets/cameras/generic
-cover: !include_dir_merge_list assets/covers
+cover: !include_dir_merge_list assets/covers/legacy
 group: !include groups.yaml
 input_boolean: !include_dir_merge_named assets/input_booleans
 input_datetime: !include_dir_merge_named assets/input_datetime

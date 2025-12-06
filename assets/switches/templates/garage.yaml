@@ -1,0 +1,47 @@
+## SWITCHES / LEGACY / GARAGE
+
+# house door lock
+- name: "Garage House Door Lock"
+  unique_id: sw_garage_house_door_lock
+  # confirm door is locked
+  state: >
+    {{ is_state('lock.lck_garage_house_door', 'locked') }}
+  turn_on:
+    - service: lock.lock
+      target:
+        entity_id: lock.lck_garage_house_door
+  turn_off:
+    - service: lock.unlock
+      target:
+        entity_id: lock.lck_garage_house_door
+  icon: >-
+    {% if is_state('lock.lck_garage_house_door', 'locked') %}
+      mdi:lock-outline
+    {% else %}
+      mdi:lock-open-variant-outline
+    {% endif %}
+
+# garage tv
+- name: "Garage Entertainment"
+  unique_id: sw_garage_entertainment
+  # confirm tv is on
+  state: >
+    {{ is_state('media_player.garage_tv', 'on') }}
+  turn_on:
+    # turn on tv through android tv remote
+    - service: remote.turn_on
+      target:
+        entity_id: remote.garage_tv
+    # give devices a chance to boot
+    - delay: "00:00:05"
+    # launch plex app through android tv remote
+    - service: remote.turn_on
+      target:
+        entity_id: remote.garage_tv
+      data:
+        activity: plex://
+  turn_off:
+    # turn off tv through android tv remote
+    - service: remote.turn_off
+      target:
+        entity_id: remote.garage_tv

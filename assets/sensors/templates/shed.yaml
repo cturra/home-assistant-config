@@ -3,12 +3,10 @@
 # -- mopeka --
 # convert mm to %
 - name: 'SNR Shed BBQ Propane Tank Level Percent'
+  unique_id: 'snr_shed_bbq_propane_tank_level_percent'
   unit_of_measurement: '%'
   state: >
-    # check reading is a number and a reading that's greater than 100%
-    {% if is_number(states('sensor.snr_shed_bbq_propane_tank_level_mm')) and
-          (states('sensor.snr_shed_bbq_propane_tank_level_mm')| float / 254  * 100) < 100
-    %}
+    {% if is_number(states('sensor.snr_shed_bbq_propane_tank_level_mm')) %}
       {# manually calculated full tank capacity for 20lb propane #}
       {{ (states('sensor.snr_shed_bbq_propane_tank_level_mm')| float / 254 * 100) | round(0) }}
     {% else %}

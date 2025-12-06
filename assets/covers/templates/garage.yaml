@@ -1,0 +1,23 @@
+## COVERS / GARAGE
+
+# garage vehicle door opener
+- name: "Garage Vehicle Door"
+  device_class: garage
+  # to preserve the old entity_id `cover.garage_vehicledoor`,
+  default_entity_id: cover.garage_vehicledoor
+  state: >-
+    {{ is_state('switch.sw_garage_vehicledoorcontact', 'on') }}
+  open_cover:
+    - service: switch.turn_on
+      target:
+        entity_id: switch.sw_garage_vehicledooropener
+  close_cover:
+    - service: switch.turn_on
+      target:
+        entity_id: switch.sw_garage_vehicledooropener
+  icon: >-
+    {% if is_state('switch.sw_garage_vehicledoorcontact','on') %}
+      mdi:garage-open-variant
+    {% else %}
+      mdi:garage-variant
+    {% endif %}

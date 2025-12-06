@@ -1,0 +1,22 @@
+## SENSORS / LEGACY / HOUSE
+
+# front door lock
+- name: "House Front Door Lock"
+  unique_id: house_front_door_lock
+  # confirm door is locked
+  state: >
+    {{ is_state('lock.lck_house_front_door', 'locked') }}
+  turn_on:
+    - service: lock.lock
+      target:
+        entity_id: lock.lck_house_front_door
+  turn_off:
+    - service: lock.unlock
+      target:
+        entity_id: lock.lck_house_front_door
+  icon: >
+    {% if is_state('lock.lck_house_front_door', 'locked') %}
+      mdi:lock-outline
+    {% else %}
+      mdi:lock-open-variant-outline
+    {% endif %}
