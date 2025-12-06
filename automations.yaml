@@ -2450,6 +2450,21 @@
         \ \"text\": \"{{ states('sensor.snr_outside_temperature') }}°\",\n  \"icon\":
         \"{{ icon }}\"\n}"
     action: mqtt.publish
+  - if:
+    - condition: state
+      entity_id: input_boolean.christmas_lights_outdoors
+      state: 'on'
+    then:
+    - action: mqtt.publish
+      data:
+        topic: awtrix/CLC_Kitchen/custom/christmas
+        payload: "{\n  \"text\": \"{{ states('sensor.days_until_christmas') }}\",\n
+          \ \"icon\": {{ [1782, 55720, 55720, 55720] | random }}\n}"
+    else:
+    - action: mqtt.publish
+      data:
+        topic: awtrix/CLC_Kitchen/custom/christmas
+        payload: '{}'
   mode: restart
 - id: '1740272156546'
   alias: 'Office: Updates to pixel clock'

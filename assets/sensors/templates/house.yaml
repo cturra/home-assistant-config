@@ -53,3 +53,19 @@
       {# use previous value if sensor returns unknown #}
       {{ states('sensor.indoor_mean_humidity') }}
     {% endif %}
+
+# countdown timer (days) to christmas
+- name: "Days Until Christmas"
+  unique_id: 'days_until_christmas'
+  unit_of_measurement: "days"
+  state: >
+    {% set today = now().date() %}
+    {% set year  = now().year   %}
+    {% set christmas = strptime(year ~ '-12-25', '%Y-%m-%d').date() %}
+
+    {# christmas has passed this year, use next year #}
+    {% if christmas < today %}
+      {% set christmas = strptime((year + 1) ~ '-12-25', '%Y-%m-%d').date() %}
+    {% endif %}
+
+    {{ (christmas - today).days }}
