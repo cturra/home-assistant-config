@@ -251,7 +251,7 @@ class NestClient:
         ) as response:
             result = await response.json()
 
-            if result.get("2fa_enabled"):
+            if "2fa_enabled" in result:
                 result["_2fa_enabled"] = result.pop("2fa_enabled")
 
             if result.get("error"):
@@ -275,7 +275,7 @@ class NestClient:
         updated_buckets: dict,
     ) -> Any:
         """Subscribe for data."""
-        timeout = 3600 * 24
+        timeout = 600
 
         objects = []
         for bucket in updated_buckets:
