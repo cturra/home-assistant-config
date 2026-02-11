@@ -33,7 +33,7 @@ anchors:
   entities-header-style: &entities-header-style
     card_mod:
       style:
-        $: | 
+        ha-card $: | 
           :host {
             border: none;
           }
@@ -133,6 +133,7 @@ anchors:
   # battery state
   battery-state-style: &battery-state-style
     card_mod:
+      prepend: true
       style: |
         :host .card-header {
           padding: 5px 20px 0px 20px;
@@ -1015,7 +1016,7 @@ views:
                   confirmation:
                     text: 'Are you sure you want to lock the Front Door?'
             # doors: zigbee (aqara)
-            - entity_id: 'binary_sensor.snr_*door*_contact'
+            - entity_id: 'binary_sensor.snr_*(door|gate)*_contact'
               state: 'on'
               options:
                 secondary_info: last-changed
