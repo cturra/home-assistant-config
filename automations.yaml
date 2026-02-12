@@ -2053,6 +2053,12 @@
     domain: mqtt
     device_id: 7eb966d6f904921b2ab6a5131ccefa4d
     type: action
+    subtype: toggle
+    id: toggle
+  - trigger: device
+    domain: mqtt
+    device_id: 7eb966d6f904921b2ab6a5131ccefa4d
+    type: action
     subtype: brightness_up_click
     id: brightness_up_click
   - trigger: device
@@ -2451,9 +2457,14 @@
         \"{{ icon }}\"\n}"
     action: mqtt.publish
   - if:
-    - condition: state
-      entity_id: input_boolean.christmas_lights_outdoors
-      state: 'on'
+    - condition: and
+      conditions:
+      - condition: numeric_state
+        entity_id: sensor.days_until_christmas
+        below: 45
+      - condition: state
+        entity_id: input_boolean.christmas_lights_outdoors
+        state: 'on'
     then:
     - action: mqtt.publish
       data:

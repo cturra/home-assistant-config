@@ -18,6 +18,7 @@
     - sensor.snr_kidsbedroom_airquality_pm2_5
     - sensor.snr_mainbedroom_airquality_pm2_5
     - sensor.snr_office_airquality_pm2_5
+    - sensor.snr_sparebedroom_airquality_pm2_5
 
 # mean indoor Co2 levels from air quality sensors
 - platform: min_max
@@ -29,6 +30,7 @@
     - sensor.snr_kidsbedroom_airquality_co2
     - sensor.snr_mainbedroom_airquality_co2
     - sensor.snr_office_airquality_cao2
+    - sensor.snr_sparebedroom_airquality_co2
 
 # mean indoor humidity from climate sensors
 - platform: min_max
