@@ -1932,18 +1932,10 @@ views:
           - type: 'custom:button-card'
             <<: *entities-style
             color_type: blank
-          # toy shed door
+          # toy shed door (placeholder)
           - type: 'custom:button-card'
-            entity: binary_sensor.snr_toyshed_doorcontact_contact
-            name: Door
-            show_state: true
-            state_display: |
-              [[[
-                if (entity.state == 'on') return 'Open';
-                else return 'Closed'
-              ]]]
-            show_icon: false
             <<: *graph-button-card-style
+            color_type: blank
 
         # TOY SHED TEMPERATURE GRAPH CARD
         - type: 'custom:mini-graph-card'
