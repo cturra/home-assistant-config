@@ -48,7 +48,6 @@ And, if you have any feedback, please feel free to reach out :smile:
 | Contact           | Xiaomi       | MCCGQ11LM       | 15    | Zigbee2MQTT           |
 | Leak              | Ikea         | E2202           | 3     | Zigbee2MQTT           |
 | Leak              | Xiaomi       | SJCGQ11LM       | 14    | Zigbee2MQTT           |
-| Motion            | Ikea         | E2134           | 1     | Zigbee2MQTT           |
 | Motion            | Philips      | 9290030674      | 3     | Zigbee2MQTT           |
 | Motion            | Xiaomi       | RTCGQ14LM       | 1     | Zigbee2MQTT           |
 | Presence          | Tuya         | ZY-M100         | 2     | ESPHome               |

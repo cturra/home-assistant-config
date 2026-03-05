@@ -940,6 +940,35 @@ views:
                 name: 'Living Room: Nintendo'
                 icon: 'mdi:television'
                 secondary_info: last-changed
+            # htpc :: livingroom (plex)
+            - entity_id: 'media_player.plex_livingroom'
+              state: '/(playing|paused)/'
+              options:
+                type: 'custom:mini-media-player'
+                name: 'Living Room: HTPC'
+                info: short
+                hide:
+                  progress: true
+                  prev: true
+                  next: true
+                  power: true
+                  volume: true
+                <<: *media-player-card-style
+            # htpc :: main bedroom (plex)
+            - entity_id: 'media_player.plex_main_bedroom'
+              state: '/(playing|paused)/'
+              options:
+                type: 'custom:mini-media-player'
+                name: 'Main Bedroom: HTPC'
+                info: short
+                hide:
+                  progress: true
+                  prev: true
+                  next: true
+                  power: true
+                  volume: true
+                <<: *media-player-card-style
+
             # speakers :: paused
             - entity_id: 'media_player.*_speaker'
               last_changed: < 2 # minutes
@@ -1575,11 +1604,7 @@ views:
           # family room
           - type: 'custom:button-card'
             entity: sensor.snr_familyroom_climatedisplay_temperature
-            name: >
-              [[[
-                var occupied = states['binary_sensor.snr_familyroom_motion_occupancy'].state
-                return 'Family Room' + (occupied == 'on' ? ' ⦿': '');
-              ]]]
+            name: 'Family Room'
             show_state: true
             show_icon: false
             <<: *climate-button-style
