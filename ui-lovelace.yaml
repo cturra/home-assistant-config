@@ -907,6 +907,21 @@ views:
                 icon: 'mdi:chandelier'
                 secondary_info: last-changed
                 <<: *neutral-icon-entity-style
+            # outside
+            - entity_id: 'binary_sensor.opensprinkler_z*_station_running'
+              state: 'on'
+              options:
+                icon: 'mdi:sprinkler-variant'
+                secondary_info: last-changed
+                tap_action:
+                  action: perform-action
+                  confirmation:
+                    text: 'Stop active sprinkler station?'
+                  perform_action: opensprinkler.stop
+                  data:
+                    shift_sequential_stations: false
+                  target:
+                    entity_id: switch.opensprinkler_enabled
 
       # entertainment devices active
       - type: 'custom:auto-entities'
@@ -1069,7 +1084,6 @@ views:
                 secondary_info: last-changed
         sort:
           method: name
-
 
   ## ------ SWITCH DASHBAORD ------
   - title: Home
@@ -1750,8 +1764,8 @@ views:
                     show_icon: false
                     styles:
                       card:
-                        - margin: 4px 1px 0 4px
-                        - padding: 6px 2px
+                        - margin: 0px 1px 0 4px
+                        - padding: 0px 0px
                         - background: transparent
                         - border: none
                         - box-shadow: none
@@ -1780,8 +1794,8 @@ views:
                     show_icon: false
                     styles:
                       card:
-                        - margin: 4px 1px 0 1px
-                        - padding: 6px 2px
+                        - margin: 0px 1px 0 4px
+                        - padding: 0px 0px
                         - background: transparent
                         - border: none
                         - box-shadow: none
@@ -1806,8 +1820,8 @@ views:
                     show_icon: false
                     styles:
                       card:
-                        - margin: 4px 1px 0 1px
-                        - padding: 6px 2px
+                        - margin: 0px 1px 0 4px
+                        - padding: 0px 0px
                         - background: transparent
                         - border: none
                         - box-shadow: none
@@ -1832,8 +1846,8 @@ views:
                     show_icon: false
                     styles:
                       card:
-                        - margin: 4px 4px 0 1px
-                        - padding: 6px 2px
+                        - margin: 0px 1px 0 4px
+                        - padding: 0px 0px
                         - background: transparent
                         - border: none
                         - box-shadow: none
@@ -1867,8 +1881,8 @@ views:
                     show_icon: false
                     styles:
                       card:
-                        - margin: 0 1px 10px 4px
-                        - padding: 6px 2px
+                        - margin: 0 4px 10px 1px
+                        - padding: 0px 0px
                         - background: transparent
                         - border: none
                         - box-shadow: none
@@ -1893,8 +1907,8 @@ views:
                     show_icon: false
                     styles:
                       card:
-                        - margin: 0 1px 10px 1px
-                        - padding: 6px 2px
+                        - margin: 0 4px 10px 1px
+                        - padding: 0px 0px
                         - background: transparent
                         - border: none
                         - box-shadow: none
@@ -1923,8 +1937,8 @@ views:
                     show_icon: false
                     styles:
                       card:
-                        - margin: 0 1px 10px 1px
-                        - padding: 6px 2px
+                        - margin: 0 4px 10px 1px
+                        - padding: 0px 0px
                         - background: |
                             [[[
                               const occupied = states['binary_sensor.office_presence_sensor_timeout']?.state;
@@ -1954,7 +1968,7 @@ views:
                     styles:
                       card:
                         - margin: 0 4px 10px 1px
-                        - padding: 6px 2px
+                        - padding: 0px 0px
                         - background: transparent
                         - border: none
                         - box-shadow: none
@@ -2014,8 +2028,8 @@ views:
                 upper_bound_secondary: 70
                 font_size: 85
                 entities:
-                  # temperature in downstairs family room
-                  - entity: sensor.family_room_temperature
+                  # temperature in downstairs dining room
+                  - entity: sensor.dining_room_temperature
                     name: Downstairs
                     show_fill: false
                     show_points: false
@@ -2131,13 +2145,13 @@ views:
             cards:
               # GARAGE SUMMARY CARDS
               - type: grid
-                columns: 3
+                columns: 4
                 square: false
                 cards:
                   # garage temperature
                   - type: custom:button-card
                     entity: sensor.garage_mean_temperature_calculation
-                    name: Temperature
+                    name: Temp
                     icon: mdi:thermometer
                     show_state: true
                     show_icon: true
@@ -2206,6 +2220,52 @@ views:
                       state:
                         - justify-self: start
                         - font-size: 16px
+                        - font-weight: 500
+                        - opacity: 0.9
+                        - line-height: 1.15
+
+                  # garage person door
+                  - type: custom:button-card
+                    entity: binary_sensor.snr_garage_sidedoorcontact_contact
+                    name: Door
+                    icon: mdi:door
+                    show_state: true
+                    show_icon: true
+                    state_display: |
+                      [[[
+                        if (entity.state == 'on') return 'Open';
+                        else return 'Closed';
+                      ]]]
+                    styles:
+                      card:
+                        - margin: 10px 8px 6px 1px
+                        - padding: 6px 2px
+                        - background: transparent
+                        - border: none
+                        - box-shadow: none
+                      grid:
+                        - grid-template-areas: '"i n" "i s"'
+                        - grid-template-columns: 28px 1fr
+                        - align-items: center
+                      img_cell:
+                        - width: 26px
+                        - height: 26px
+                        - background: transparent
+                      icon:
+                        - width: 22px
+                        - color: |
+                            [[[
+                              return entity.state == 'on' ? '#ff8a65' : '#66bb6a';
+                            ]]]
+                      name:
+                        - justify-self: start
+                        - font-size: 12px
+                        - font-weight: 700
+                        - line-height: 1.1
+                        - opacity: 0.84
+                      state:
+                        - justify-self: start
+                        - font-size: 15px
                         - font-weight: 500
                         - opacity: 0.9
                         - line-height: 1.15
@@ -2627,7 +2687,7 @@ views:
                   # toy shed temperature
                   - type: custom:button-card
                     entity: sensor.snr_toy_shed_temperature
-                    name: Temperature
+                    name: Temp
                     icon: mdi:thermometer
                     show_state: true
                     show_icon: true
@@ -2759,11 +2819,13 @@ views:
     sections:
       - type: grid
         cards:
+          # outside hero header
           - type: heading
             heading: Outside
             heading_style: title
             icon: mdi:weather-partly-cloudy
 
+          # outside hero card
           - type: custom:stack-in-card
             mode: vertical
             keep:
@@ -3099,11 +3161,13 @@ views:
                         - opacity: 0.86
                         - line-height: 1.2
 
+          # Sun & Moon header
           - type: heading
             heading: Sun & Moon
             heading_style: subtitle
             icon: mdi:weather-sunset
 
+          # Sun & Moon observability
           - type: custom:stack-in-card
             mode: vertical
             keep:
@@ -3243,6 +3307,179 @@ views:
                         - font-size: 14px
                         - opacity: 0.86
 
+          # Irrigation header
+          - type: heading
+            heading: Irrigation
+            heading_style: subtitle
+            icon: mdi:water-outline
+
+          # Irrigation observability
+          - type: custom:stack-in-card
+            mode: vertical
+            keep:
+              background: true
+              border_radius: true
+              box_shadow: true
+              margin: false
+            card_mod:
+              style: |
+                ha-card {
+                  border-radius: 24px;
+                  background: rgba(255,255,255,0.025);
+                  border: 1px solid rgba(255,255,255,0.075);
+                  box-shadow: 0 8px 24px rgba(0,0,0,0.14);
+                  overflow: hidden;
+                }
+            cards:
+              - type: grid
+                columns: 3
+                square: false
+                cards:
+                  - type: custom:button-card
+                    entity: sensor.opensprinkler_front_yard_status
+                    name: Status
+                    icon: mdi:sprinkler-variant
+                    show_icon: true
+                    show_state: true
+                    tap_action:
+                      action: more-info
+                    styles:
+                      card:
+                        - margin: 8px 4px 8px 8px
+                        - border-radius: 0
+                        - padding: 10px 8px
+                        - background: transparent
+                        - border: none
+                        - box-shadow: none
+                      grid:
+                        - grid-template-areas: '"i n" "i s"'
+                        - grid-template-columns: 38px 1fr
+                      img_cell:
+                        - width: 34px
+                        - height: 34px
+                        - background: transparent
+                      icon:
+                        - width: 26px
+                        - color: >
+                            [[[
+                              if (entity.state === 'Watering') {
+                                return '#4fc3f7';
+                              } else if (entity.state === 'Rain Delay') {
+                                return '#81c784';
+                              } else if (entity.state === 'Paused') {
+                                return '#ffb74d';
+                              } else {
+                                return '#64b5f6';
+                              }
+                            ]]]
+                      name:
+                        - justify-self: start
+                        - font-weight: 700
+                        - font-size: 14px
+                      state:
+                        - justify-self: start
+                        - font-size: 14px
+                        - opacity: 0.86
+                        - color: >
+                            [[[
+                              if (entity.state === 'Watering') {
+                                return '#81d4fa';
+                              } else if (entity.state === 'Rain Delay') {
+                                return '#a5d6a7';
+                              } else if (entity.state === 'Paused') {
+                                return '#ffcc80';
+                              } else {
+                                return 'var(--secondary-text-color)';
+                              }
+                            ]]]
+
+                  - type: custom:button-card
+                    entity: sensor.opensprinkler_front_yard_active_zone
+                    name: Zone
+                    icon: mdi:map-marker-radius-outline
+                    show_icon: true
+                    show_state: true
+                    tap_action:
+                      action: more-info
+                    styles:
+                      card:
+                        - margin: 8px 4px 8px 4px
+                        - border-radius: 0
+                        - padding: 10px 8px
+                        - background: transparent
+                        - border: none
+                        - box-shadow: none
+                      grid:
+                        - grid-template-areas: '"i n" "i s"'
+                        - grid-template-columns: 38px 1fr
+                      img_cell:
+                        - width: 34px
+                        - height: 34px
+                        - background: transparent
+                      icon:
+                        - width: 26px
+                        - color: >
+                            [[[
+                              return entity.state !== 'Idle'
+                                ? '#4fc3f7'
+                                : '#ba68c8';
+                            ]]]
+                      name:
+                        - justify-self: start
+                        - font-weight: 700
+                        - font-size: 14px
+                      state:
+                        - justify-self: start
+                        - font-size: 14px
+                        - opacity: 0.86
+                        - color: >
+                            [[[
+                              return entity.state !== 'Idle'
+                                ? '#81d4fa'
+                                : 'var(--secondary-text-color)';
+                            ]]]
+
+                  - type: custom:button-card
+                    entity: sensor.opensprinkler_rain_delay_display
+                    name: Rain Delay
+                    icon: mdi:weather-rainy
+                    show_icon: true
+                    show_state: true
+                    tap_action:
+                      action: more-info
+                    styles:
+                      card:
+                        - margin: 8px 8px 8px 4px
+                        - border-radius: 0
+                        - padding: 10px 8px
+                        - background: transparent
+                        - border: none
+                        - box-shadow: none
+                      grid:
+                        - grid-template-areas: '"i n" "i s"'
+                        - grid-template-columns: 38px 1fr
+                      img_cell:
+                        - width: 34px
+                        - height: 34px
+                        - background: transparent
+                      icon:
+                        - width: 26px
+                        - color: '#81c784'
+                      name:
+                        - justify-self: start
+                        - font-weight: 700
+                        - font-size: 14px
+                      state:
+                        - justify-self: start
+                        - font-size: 14px
+                        - opacity: 0.86
+                        - color: >
+                            [[[
+                              return entity.state !== 'Off'
+                                ? '#a5d6a7'
+                                : 'var(--secondary-text-color)';
+                            ]]]
+ 
       - type: grid
         cards:
           - type: heading

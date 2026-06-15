@@ -1,0 +1,12 @@
+## BINARY SENSORS / TEMPLATES / OUTSIDE
+
+# irrigation
+- name: 'OpenSprinkler Front Yard Watering Active'
+  unique_id: opensprinkler_front_yard_watering_active
+  icon: mdi:sprinkler-variant
+  state: >
+    {{
+      is_state('binary_sensor.opensprinkler_z1_front_patio_station_running', 'on')
+      or is_state('binary_sensor.opensprinkler_z2_front_boulevard_station_running', 'on')
+      or is_state('binary_sensor.opensprinkler_z3_front_sidewalk_station_running', 'on')
+    }}

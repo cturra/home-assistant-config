@@ -1,0 +1,183 @@
+{
+  "title": "OpenSprinkler",
+  "config": {
+    "abort": {
+      "already_configured": "Device is already configured",
+      "reauth_successful": "Re-authentication was successful"
+    },
+    "error": {
+      "invalid_url": "URL is malformed (example: http://192.168.0.1)",
+      "cannot_connect": "Failed to connect",
+      "invalid_auth": "Invalid authentication",
+      "mac_address_required": "MAC Address required for firmware below 2.1.9 (4)",
+      "unknown": "Unexpected error"
+    },
+    "step": {
+      "user": {
+        "data": {
+          "url": "URL",
+          "password": "Password",
+          "verify_ssl": "Verify SSL Certificate (Safer when checked)",
+          "mac": "MAC Address",
+          "name": "Controller Name"
+        },
+        "title": "Connect to the OpenSprinkler controller"
+      },
+      "reauth": {
+        "data": {
+          "url": "URL",
+          "password": "Password"
+        },
+        "title": "Enter new password"
+      }
+    }
+  },
+  "services": {
+    "run": {
+      "name": "Run",
+      "description": "Runs a controller program or station.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity",
+          "description": "Sensor or switch entity id for programs or stations."
+        },
+        "run_seconds": {
+          "name": "Run seconds",
+          "description": "Number of seconds to run (optional for stations, defaults to 60 seconds; required for controllers, list of seconds for each station or index and seconds pairs)."
+        },
+        "continue_running_stations": {
+          "name": "Continue running stations",
+          "description": "Keeps running stations that are not specified running (only used for controllers with index/second pairs, optional, defaults to False)."
+        }
+      }
+    },
+    "run_once": {
+      "name": "Run Once",
+      "description": "Runs a controller.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity",
+          "description": "Switch entity id for controller."
+        },
+        "run_seconds": {
+          "name": "Run seconds",
+          "description": "List of seconds for each station (e.g. '- 60'), or key/value pairs (e.g. '0: 60'). One per line. See documentation for details."
+        },
+        "continue_running_stations": {
+          "name": "Continue running stations",
+          "description": "Keeps running stations that are not specified (only used for controllers with index/seconds pairs, optional, defaults to False)."
+        },
+        "use_weather_adjustment": {
+          "name": "Use weather adjustment",
+          "description": "Apply the controller's current weather-based water level adjustment to run durations. Optional, defaults to false."
+        },
+        "queue_option": {
+          "name": "Scheduling option",
+          "description": "How to schedule this run: append (run after others), preempt (run now and pause others), or replace (run now and cancel others). Optional, defaults to replace. Requires firmware 2.2.1(4) or later."
+        }
+      }
+    },
+    "run_program": {
+      "name": "Run Program",
+      "description": "Runs a Program.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity",
+          "description": "Switch entity id of a program."
+        },
+        "use_weather_adjustment": {
+          "name": "Use weather adjustment",
+          "description": "Apply the controller's current weather-based water level adjustment to run durations. Optional, defaults to the program's configured setting."
+        },
+        "queue_option": {
+          "name": "Scheduling option",
+          "description": "How to schedule this run: append (run after others), preempt (run now and pause others), or replace (run now and cancel others). Optional, defaults to replace. Requires firmware 2.2.1(4) or later."
+        }
+      }
+    },
+    "run_station": {
+      "name": "Run Station",
+      "description": "Runs a Station for the specified number of seconds.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity",
+          "description": "Switch entity id of a station."
+        },
+        "run_seconds": {
+          "name": "Run seconds",
+          "description": "Number of seconds to run the station. Optional, defaults to 60 seconds."
+        },
+        "queue_option": {
+          "name": "Scheduling option",
+          "description": "How to schedule this run: append (run after others) or preempt (run now and pause others). Optional, defaults to append. Requires firmware 2.2.1(4) or later."
+        }
+      }
+    },
+    "stop": {
+      "name": "Stop",
+      "description": "Stops a station or all station (for controller).",
+      "fields": {
+        "entity_id": {
+          "name": "Entity",
+          "description": "Sensor or switch entity id for stations or controller."
+        },
+        "shift_sequential_stations": {
+          "name": "Shift sequential stations",
+          "description": "When stopping a station, shift remaining stations in the same sequential group forward. Only applies when targeting station entities; ignored for controllers. Optional, defaults to false."
+        }
+      }
+    },
+    "set_water_level": {
+      "name": "Set water level",
+      "description": "Set water level percentage.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity",
+          "description": "The water level entity to change."
+        },
+        "water_level": {
+          "name": "Water level",
+          "description": "Percentage of water level."
+        }
+      }
+    },
+    "set_rain_delay": {
+      "name": "Set rain delay",
+      "description": "Set rain delay of the sprinkler.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity",
+          "description": "The rain delay entity to change."
+        },
+        "rain_delay": {
+          "name": "Rain delay",
+          "description": "Rain delay in hours."
+        }
+      }
+    },
+    "pause_stations": {
+      "name": "Pause Stations",
+      "description": "Pause all stations for the given duration.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity",
+          "description": "The pause time entity to change."
+        },
+        "pause_duration": {
+          "name": "Pause duration",
+          "description": "Duration to pause in seconds."
+        }
+      }
+    },
+    "reboot": {
+      "name": "Reboot",
+      "description": "Reboot the controller.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity",
+          "description": "Switch entity id for controller."
+        }
+      }
+    }
+  }
+}

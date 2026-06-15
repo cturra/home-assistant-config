@@ -1,0 +1,157 @@
+run:
+  fields:
+    entity_id:
+      selector:
+        entity:
+          device_class:
+            - controller
+            - program
+            - station
+    run_seconds:
+      example: 60
+      selector:
+        number:
+          min: 0
+          max: 64800
+          mode: slider
+          unit_of_measurement: "s"
+    continue_running_stations:
+      example: False
+      selector:
+        boolean:
+
+run_once:
+  fields:
+    entity_id:
+      selector:
+        entity:
+          device_class: controller
+    run_seconds:
+      example: "0: 60"
+      selector:
+        object:
+    continue_running_stations:
+      example: False
+      selector:
+        boolean:
+    use_weather_adjustment:
+      example: False
+      selector:
+        boolean:
+    queue_option:
+      example: append
+      selector:
+        select:
+          options:
+            - append
+            - preempt
+            - replace
+
+run_program:
+  fields:
+    entity_id:
+      selector:
+        entity:
+          device_class: program
+    use_weather_adjustment:
+      example: False
+      selector:
+        boolean:
+    queue_option:
+      example: append
+      selector:
+        select:
+          options:
+            - append
+            - preempt
+            - replace
+
+run_station:
+  fields:
+    entity_id:
+      selector:
+        entity:
+          device_class: station
+    run_seconds:
+      example: 60
+      selector:
+        number:
+          min: 0
+          max: 64800
+          mode: slider
+          unit_of_measurement: "s"
+    queue_option:
+      example: append
+      selector:
+        select:
+          options:
+            - append
+            - preempt
+
+stop:
+  fields:
+    entity_id:
+      selector:
+        entity:
+          device_class:
+            - controller
+            - station
+    shift_sequential_stations:
+      example: False
+      selector:
+        boolean:
+
+set_water_level:
+  fields:
+    entity_id:
+      selector:
+        entity:
+          device_class: controller
+    water_level:
+      example: 100
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 250
+          mode: slider
+          unit_of_measurement: "%"
+
+set_rain_delay:
+  fields:
+    entity_id:
+      selector:
+        entity:
+          device_class: controller
+    rain_delay:
+      example: 24
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 32767
+          mode: slider
+          unit_of_measurement: "h"
+
+pause_stations:
+  fields:
+    entity_id:
+      selector:
+        entity:
+          device_class: controller
+    pause_duration:
+      example: 600
+      required: true
+      selector:
+        number:
+          min: 0
+          max: 86400
+          mode: slider
+          unit_of_measurement: "s"
+
+reboot:
+  fields:
+    entity_id:
+      selector:
+        entity:
+          device_class: controller

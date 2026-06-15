@@ -73,3 +73,46 @@
       {# non-numeric value, return previous reading for now #}
       {{ states('sensor.snr_outside_airquality_aqi') }}
     {% endif %}
+
+# irrigation
+- name: 'OpenSprinkler Front Yard Status'
+  unique_id: opensprinkler_front_yard_status
+  icon: mdi:sprinkler
+  state: >
+    {% if is_state('binary_sensor.opensprinkler_paused', 'on') %}
+      Paused
+    {% elif is_state('binary_sensor.opensprinkler_rain_delay_active', 'on') %}
+      Rain Delay
+    {% elif is_state('binary_sensor.opensprinkler_front_yard_watering_active', 'on') %}
+      Watering
+    {% elif is_state('switch.opensprinkler_enabled', 'off') %}
+      Disabled
+    {% else %}
+      Idle
+    {% endif %}
+
+- name: 'OpenSprinkler Rain Delay Display'
+  unique_id: opensprinkler_rain_delay_display
+  icon: mdi:weather-rainy
+  state: >
+    {% if is_state('binary_sensor.opensprinkler_rain_delay_active', 'on') %}
+      {% set stop = states('sensor.opensprinkler_rain_delay_stop_time') %}
+      {% set ts = as_timestamp(stop, 0) %}
+      {{ 'Until ' ~ (ts | timestamp_custom('%a %-I:%M %p', true)) if ts > 0 else 'Active' }}
+    {% else %}
+      Off
+    {% endif %}
+
+- name: 'OpenSprinkler Front Yard Active Zone'
+  unique_id: opensprinkler_front_yard_active_zone
+  icon: mdi:map-marker-radius-outline
+  state: >
+    {% if is_state('binary_sensor.opensprinkler_z1_front_patio_station_running', 'on') %}
+      Patio
+    {% elif is_state('binary_sensor.opensprinkler_z2_front_boulevard_station_running', 'on') %}
+      Boulevard
+    {% elif is_state('binary_sensor.opensprinkler_z3_front_sidewalk_station_running', 'on') %}
+      Sidewalk
+    {% else %}
+      Idle
+    {% endif %}
