@@ -1,0 +1,77 @@
+substitutions:
+  device_name: snr-crawlspace-ro
+  device_description: "ESP8266 NodeMCU"
+  friendly_name: "Crawlspace Reverse Osmosis Sensors"
+  main_device_id: "snr_crawlspace_ro" # Put the name that you want to see in Home Assistant.
+  project_name: "esp8266.nodemcu"
+  project_version: "1.0"
+
+esphome:
+  name: ${device_name}
+  comment: ${device_description}
+  project:
+    name: "${project_name}"
+    version: "${project_version}"
+
+esp8266:
+  board: nodemcuv2
+
+# Enable logging
+logger:
+  level: INFO # DEBUG for sensor readings
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret snr_crawlspace_ro_key
+
+ota:
+  - platform: esphome
+    password: !secret snr_crawlspace_ro_ota
+
+wifi:
+  ssid: !secret wifi_purple_ssid
+  password: !secret wifi_purple_password
+
+sensor:
+  # 1) Raw ADC voltage from A0
+  - platform: adc
+    pin: A0
+    id: tds_adc_voltage
+    name: "TDS Sensor Voltage"
+    update_interval: 30s
+    accuracy_decimals: 3
+    unit_of_measurement: "V"
+    filters:
+      # NodeMCU has 0–1V at the chip, scaled from 0–3.3V at the A0 pin.
+      # This converts the reading to the actual external voltage at A0.
+      - multiply: 3.3
+
+  # 2) TDS value in ppm, calculated from the voltage
+  - platform: template
+    id: tds_ppm
+    name: "Water TDS"
+    unit_of_measurement: "ppm"
+    accuracy_decimals: 0
+    icon: "mdi:water"
+    update_interval: 5s
+    lambda: |-
+      const float temperature = 10.0;
+      float voltage = id(tds_adc_voltage).state;
+
+      float compensation_coefficient = 1.0 + 0.02 * (temperature - 25.0);
+      float compensation_voltage = voltage / compensation_coefficient;
+
+      float tds =
+        (133.42 * compensation_voltage * compensation_voltage * compensation_voltage
+       - 255.86 * compensation_voltage * compensation_voltage
+       + 857.39 * compensation_voltage) * 0.5;
+
+      if (tds < 0) tds = 0;
+
+      // If you still want integer output:
+      return (int) round(tds);
+    filters:
+      - calibrate_linear:
+          - 0.0 -> 0.0
+          - 11.0 -> 5.0
