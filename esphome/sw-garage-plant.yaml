@@ -1,0 +1,60 @@
+substitutions:
+  device_name: sw-garage-plant
+  device_description: "ESP32 DevKit v1"
+  friendly_name: "Garage Plant Switch"
+  main_device_id: "sw_garage_plant" # Put the name that you want to see in Home Assistant.
+  project_name: "esp32.devkit-v1"
+  project_version: "1.0"
+
+esphome:
+  name: ${device_name}
+  comment: ${device_description}
+  project:
+    name: "${project_name}"
+    version: "${project_version}"
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+  level: INFO # DEBUG for sensor readings
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: !secret sw_garage_plant_key
+
+ota:
+  - platform: esphome
+    password: !secret sw_garage_plant_ota
+
+wifi:
+  ssid: !secret wifi_purple_ssid
+  password: !secret wifi_purple_password
+    
+switch:
+  - platform: gpio
+    name: "relay 1"
+    id: relay1
+    pin: GPIO32 #D32
+  - platform: gpio
+    name: "relay 2"
+    id: relay2
+    pin: GPIO33 #D33
+
+i2c:
+  sda: GPIO21 #D21
+  scl: GPIO22 #D22
+  scan: true
+
+sensor:
+  - platform: bme280_i2c
+    address: 0x76
+    update_interval: 15s
+    temperature:
+      name: "Temperature"
+    humidity:
+      name: "Humidity"
