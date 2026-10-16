@@ -122,10 +122,6 @@ class OpenSprinklerCalendar(CalendarEntity):
         """Locate predicted runs for all programs in a date range."""
         runs = []
 
-        if not self._controller.enabled:
-            _LOGGER.info("Controller is disabled, no runs will be returned.")
-            return runs
-
         # Adjust search dates to beginning of each local day.
         today = dt_util.start_of_local_day(dt_util.now())
         calendar_day = dt_util.start_of_local_day(start_date)
@@ -139,6 +135,10 @@ class OpenSprinklerCalendar(CalendarEntity):
                     calendar_day, end_date
                 )
                 calendar_day = end_date
+
+        if not self._controller.enabled:
+            _LOGGER.info("Controller is disabled, no predicted runs will be returned.")
+            return runs
 
         # Loop through days in the range (after historical runs, if using) and find any programs that can run.
         while calendar_day < last_day:
@@ -401,6 +401,7 @@ class OpenSprinklerCalendar(CalendarEntity):
         for program in programs:
             original_program_start_time = program["start_time"]
             has_rain_delay_ignored_stations = program["has_rain_delay_ignored_stations"]
+            use_weather = program["use_weather"]
 
             # Append stations to end of last program if schedules overlap.
             # Otherwise start with the program's originally scheduled start time.
@@ -412,6 +413,7 @@ class OpenSprinklerCalendar(CalendarEntity):
                     calendar_day,
                     original_program_start_time,
                     has_rain_delay_ignored_stations,
+                    use_weather,
                 )
             )
 
@@ -443,6 +445,7 @@ class OpenSprinklerCalendar(CalendarEntity):
         calendar_day,
         original_program_start_time,
         has_rain_delay_ignored_stations,
+        use_weather,
     ):
         """Check for Weather Restriction, Rain Delay."""
         # Rain delay program selection:
@@ -456,30 +459,35 @@ class OpenSprinklerCalendar(CalendarEntity):
         # If there is no rain delay, or if there is a rain delay but the program has stations
         # that ignore it, program qualifies.
 
-        # A Weather Restriction blocks all programs for the current day only.
+        # Weather Restrictions apply only to today's schedule.
 
         restrict_to_ignored = False
 
-        if today == calendar_day and self._controller.weather_restriction_active:
+        if (
+            today == calendar_day
+            and self._controller.weather_restriction_active
+            and use_weather
+        ):
             program_qualifies = False
-        elif self._controller.rain_delay_active:
-            rain_delay_end_time = self._epoch_to_local(
-                self._controller.rain_delay_stop_time
-            )
-            program_time = original_program_start_time
+        else:
+            if self._controller.rain_delay_active:
+                rain_delay_end_time = self._epoch_to_local(
+                    self._controller.rain_delay_stop_time
+                )
+                program_time = original_program_start_time
 
-            # Check that start time not inside rain delay time.
-            if not (today < program_time < rain_delay_end_time):
+                # Check that start time not inside rain delay time.
+                if not (today < program_time < rain_delay_end_time):
+                    # Program fully qualifies to run.
+                    program_qualifies = True
+                else:
+                    # Program may partially qualify to run.
+                    restrict_to_ignored = program_qualifies = (
+                        has_rain_delay_ignored_stations
+                    )
+            else:
                 # Program fully qualifies to run.
                 program_qualifies = True
-            else:
-                # Program may partially qualify to run.
-                restrict_to_ignored = program_qualifies = (
-                    has_rain_delay_ignored_stations
-                )
-        else:
-            # Program fully qualifies to run.
-            program_qualifies = True
 
         return program_qualifies, restrict_to_ignored
 
