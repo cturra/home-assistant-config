@@ -44,7 +44,8 @@ And, if you have any feedback, please feel free to reach out :smile:
 | BLE Proxy         | M5Stack      | ATOM Lite       | 6     | ESPHome               |
 | Climate           | Ecobee       | v1              | 3     | HA :: Ecobee          |
 | Climate           | Xiaomi Mi    | LYWSD03MMC      | 11    | HA :: BTHome          |
-| Contact           | Ikea         | E2013           | 3     | Zigbee2MQTT           |
+| Contact           | Ikea         | E2013           | 1     | Zigbee2MQTT           |
+| Contact           | Ikea         | MYGGBETT        | 2     | Matter                |
 | Contact           | Xiaomi       | MCCGQ11LM       | 15    | Zigbee2MQTT           |
 | Leak              | Ikea         | E2202           | 3     | Zigbee2MQTT           |
 | Leak              | Xiaomi       | SJCGQ11LM       | 14    | Zigbee2MQTT           |
@@ -98,14 +99,14 @@ And, if you have any feedback, please feel free to reach out :smile:
 
  ### Infrastructure
 
- | Model            | Count | Role                                                              |
- | :---             | :--:  | :---                                                              |
- | ASUS BT500       | 1     | Bluetooth USB Adapter                                             |
- | HA Connect ZBT-2 | 1     | Thread (or Zigbee) Antenna                                        
- | Odroid-N2+       | 1     | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
- | Raspberry Pi 4   | 1     | Secondary Zigbee2MQTT server *                                    |
- | RTL-SDR          | 2     | SDR USB Adapters w/ Antenna                                       |
- | Slaesh CC2652RB  | 2     | [Zigbee Adapter ](https://slae.sh/projects/cc2652/)               |
+ | Model              | Count | Role                                                              |
+ | :---               | :--:  | :---                                                              |
+ | Feasycom FSC-BP119 | 1     | Bluetooth USB Adapter                                             |
+ | HA Connect ZBT-2   | 1     | Thread (or Zigbee) Antenna                                        
+ | Odroid-N2+         | 1     | [Home Assistant Blue](https://www.home-assistant.io/blue/) Server | 
+ | Raspberry Pi 4     | 1     | Secondary Zigbee2MQTT server *                                    |
+ | RTL-SDR            | 2     | SDR USB Adapters w/ Antenna                                       |
+ | Slaesh CC2652RB    | 2     | [Zigbee Adapter ](https://slae.sh/projects/cc2652/)               |
 
  \* *I was having some issues with Zigbee mesh stability when running the Sinopé thermostat
  alongside the Xiaomi devices. From my understanding this is because Xiaomi doesn't completely
