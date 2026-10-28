@@ -17,6 +17,8 @@ esp32:
   board: m5stack-atom
   framework:
     type: esp-idf
+    advanced:
+      flash_chip: gd
 
 # Enable logging
 logger:
@@ -29,10 +31,7 @@ api:
 
 ota:
   - platform: esphome
-    password: !secret pxy_mainbedroom_ble_ota
-
-mdns:
-  disabled: false
+    encryption: 
   
 wifi:
   ssid: !secret wifi_ssid
