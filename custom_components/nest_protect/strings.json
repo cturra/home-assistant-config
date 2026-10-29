@@ -7,9 +7,26 @@
           "account_type": "Account Type"
         }
       },
+      "auth_method": {
+        "title": "Authentication Method",
+        "description": "Choose how to connect your Nest account. The Chrome Extension method is recommended for most users.",
+        "data": {
+          "method": "Method"
+        }
+      },
+      "extension": {
+        "title": "Connect with Chrome Extension",
+        "description": "1. [Download the Nest Auth Helper extension]({extension_download_url})\n2. Unzip and load it in Chrome (chrome://extensions → Developer Mode → Load Unpacked)\n3. Sign in to [home.nest.com]({nest_url})\n4. Click the extension icon → click **Extract Credentials**\n5. Copy the code and paste it below\n\n⚠️ Do not share this code — it contains your session credentials.",
+        "data": {
+          "auth_code": "Authentication Code"
+        },
+        "data_description": {
+          "auth_code": "The code displayed by the Nest Auth Helper extension"
+        }
+      },
       "account_link": {
-        "title": "Connect Your Nest Account",
-        "description": "Follow these steps to get your credentials:\n\n1. Open an **Incognito/Private** browser window\n2. Enable **third-party cookies** in browser settings\n3. Go to [home.nest.com]({nest_url}) and sign in with Google\n4. Open **Developer Tools** (F12) → **Network** tab → Check **Preserve Log**\n5. In the filter box, type `issueToken` and copy the full **Request URL**\n6. In the filter box, type `oauth2/iframe`, click the last request, and copy the entire **Cookie** header value\n\n⚠️ Do not log out of home.nest.com after copying credentials",
+        "title": "Connect Your Nest Account (Manual)",
+        "description": "Follow these steps to get your credentials:\n\n1. Open a **regular** Chrome/Edge browser window (not Incognito — third-party cookies must be enabled)\n2. Open **Developer Tools** (F12) → **Network** tab → Check **Preserve Log**\n3. In the filter box, type `issueToken`\n4. Go to [home.nest.com]({nest_url}) and sign in with Google\n5. Click the `iframerpc` request and copy the full **Request URL**\n6. In the filter box, type `oauth2/iframe`, click the last request, and copy the entire **Cookie** header value\n\n⚠️ Do not log out of home.nest.com after copying credentials.",
         "data": {
           "issue_token": "Issue Token URL",
           "cookies": "Cookies"
@@ -25,22 +42,143 @@
       "invalid_auth": "[%key:common::config_flow::error::invalid_auth%]",
       "invalid_issue_token": "Invalid issue token URL. Must start with {accounts_url} and contain the issueToken action.",
       "invalid_cookies": "Invalid cookies format. Ensure you copied the complete cookie header from the oauth2/iframe request.",
+      "invalid_code": "Invalid authentication code. Make sure you copied the complete code from the extension.",
       "unknown": "[%key:common::config_flow::error::unknown%]"
     },
     "abort": {
       "already_configured": "[%key:common::config_flow::abort::already_configured_account%]",
-      "reauth_successful": "[%key:common::config_flow::abort::reauth_successful%]"
+      "wrong_account": "The credentials belong to a different Nest account than the one configured. Sign in with the original account, or add the other account as a new entry."
     }
   },
   "entity": {
+    "binary_sensor": {
+      "co_status": {
+        "name": "CO status"
+      },
+      "smoke_status": {
+        "name": "Smoke status"
+      },
+      "heat_status": {
+        "name": "Heat status"
+      },
+      "hushed_state": {
+        "name": "Alarm hushed"
+      },
+      "component_speaker_test_passed": {
+        "name": "Speaker test"
+      },
+      "battery_health_state": {
+        "name": "Battery health"
+      },
+      "is_online": {
+        "name": "Online"
+      },
+      "component_smoke_test_passed": {
+        "name": "Smoke test"
+      },
+      "component_co_test_passed": {
+        "name": "CO test"
+      },
+      "component_wifi_test_passed": {
+        "name": "Wi-Fi test"
+      },
+      "component_led_test_passed": {
+        "name": "LED test"
+      },
+      "component_pir_test_passed": {
+        "name": "PIR test"
+      },
+      "component_buzzer_test_passed": {
+        "name": "Buzzer test"
+      },
+      "component_hum_test_passed": {
+        "name": "Humidity test"
+      },
+      "component_als_test_passed": {
+        "name": "Ambient light sensor test"
+      },
+      "component_temp_test_passed": {
+        "name": "Temperature sensor test"
+      },
+      "removed_from_base": {
+        "name": "Removed from base"
+      },
+      "auto_away": {
+        "name": "Occupancy"
+      },
+      "line_power_present": {
+        "name": "Line power"
+      }
+    },
+    "sensor": {
+      "battery_level": {
+        "name": "Battery level"
+      },
+      "battery_voltage": {
+        "name": "Battery voltage"
+      },
+      "replace_by_date_utc_secs": {
+        "name": "Replace by"
+      },
+      "last_audio_self_test_end_utc_secs": {
+        "name": "Last audio self-test"
+      },
+      "latest_manual_test_end_utc_secs": {
+        "name": "Last manual test"
+      },
+      "current_temperature": {
+        "name": "Temperature"
+      },
+      "smoke_status_sensor": {
+        "name": "Smoke alarm state",
+        "state": {
+          "ok": "OK",
+          "testing": "Testing",
+          "warning": "Warning",
+          "emergency": "Emergency"
+        }
+      },
+      "co_status_sensor": {
+        "name": "CO alarm state",
+        "state": {
+          "ok": "OK",
+          "testing": "Testing",
+          "warning": "Warning",
+          "emergency": "Emergency"
+        }
+      },
+      "co_previous_peak": {
+        "name": "CO previous peak"
+      },
+      "total_critical_failures": {
+        "name": "Safety critical failures"
+      },
+      "total_warnings": {
+        "name": "Safety warnings"
+      }
+    },
     "select": {
       "night_light_brightness": {
-        "name": "Night Light Brightness",
+        "name": "Night light brightness",
         "state": {
           "low": "Low",
           "medium": "Medium",
           "high": "High"
         }
+      }
+    },
+    "switch": {
+      "night_light_enable": {
+        "name": "Pathlight"
+      },
+      "ntp_green_led_enable": {
+        "name": "Nightly promise"
+      },
+      "heads_up_enable": {
+        "name": "Heads-Up"
+      },
+      "steam_detection_enable": {
+        "name": "Steam check"
       }
     }
   }

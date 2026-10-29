@@ -1,0 +1,163 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Account is al geconfigureerd"
+    },
+    "error": {
+      "cannot_connect": "Kan niet verbinden",
+      "invalid_auth": "Ongeldige authenticatie",
+      "invalid_issue_token": "Ongeldige issue token URL. Moet beginnen met {accounts_url} en de issueToken-actie bevatten.",
+      "invalid_cookies": "Ongeldig cookie-formaat. Zorg ervoor dat je de volledige cookie-header van het oauth2/iframe-verzoek hebt gekopieerd.",
+      "invalid_code": "Ongeldige authenticatiecode. Controleer of je de volledige code van de extensie hebt gekopieerd.",
+      "unknown": "Onverwachte fout"
+    },
+    "step": {
+      "user": {
+        "description": "Selecteer je accounttype. De meeste gebruikers moeten Google Account selecteren. Field Test is alleen beschikbaar voor geselecteerde testers in het Google Field Test-programma.",
+        "data": {
+          "account_type": "Accounttype"
+        }
+      },
+      "auth_method": {
+        "title": "Authenticatiemethode",
+        "description": "Kies hoe je je Nest-account wilt verbinden. De Chrome-extensiemethode wordt aanbevolen voor de meeste gebruikers.",
+        "data": {
+          "method": "Methode"
+        }
+      },
+      "extension": {
+        "title": "Verbinden met Chrome-extensie",
+        "description": "1. [Download de Nest Auth Helper-extensie]({extension_download_url})\n2. Pak uit en laad in Chrome (chrome://extensions → Ontwikkelaarsmodus → Uitgepakt laden)\n3. Log in op [home.nest.com]({nest_url})\n4. Klik op het extensie-icoon → klik op **Extract Credentials**\n5. Kopieer de code en plak deze hieronder\n\n⚠️ Deel deze code niet — deze bevat je sessiegegevens.",
+        "data": {
+          "auth_code": "Authenticatiecode"
+        },
+        "data_description": {
+          "auth_code": "De code die wordt weergegeven door de Nest Auth Helper-extensie"
+        }
+      },
+      "account_link": {
+        "title": "Verbind je Nest-account (handmatig)",
+        "description": "Volg deze stappen om je inloggegevens te verkrijgen:\n\n1. Open een **normaal** Chrome/Edge-browservenster (niet Incognito — cookies van derden moeten ingeschakeld zijn)\n2. Open **DevTools** (F12) → tabblad **Network** → Vink **Preserve log** aan\n3. Typ `issueToken` in het filtervak\n4. Ga naar [home.nest.com]({nest_url}) en log in met Google\n5. Klik op het `iframerpc`-verzoek en kopieer de volledige **Request URL**\n6. Typ `oauth2/iframe` in het filtervak, klik op het laatste verzoek en kopieer de volledige **Cookie**-headerwaarde\n\n⚠️ Log niet uit bij home.nest.com na het kopiëren van de inloggegevens.",
+        "data": {
+          "issue_token": "Issue Token URL",
+          "cookies": "Cookies"
+        },
+        "data_description": {
+          "issue_token": "Volledige URL beginnend met {issue_token_prefix}...",
+          "cookies": "Volledige cookie-string van de oauth2/iframe-verzoekheaders"
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "co_status": {
+        "name": "CO-status"
+      },
+      "smoke_status": {
+        "name": "Rookstatus"
+      },
+      "heat_status": {
+        "name": "Warmtestatus"
+      },
+      "component_speaker_test_passed": {
+        "name": "Speakertest"
+      },
+      "battery_health_state": {
+        "name": "Batterijstatus"
+      },
+      "is_online": {
+        "name": "Online"
+      },
+      "component_smoke_test_passed": {
+        "name": "Rooktest"
+      },
+      "component_co_test_passed": {
+        "name": "CO-test"
+      },
+      "component_wifi_test_passed": {
+        "name": "Wifi-test"
+      },
+      "component_led_test_passed": {
+        "name": "LED-test"
+      },
+      "component_pir_test_passed": {
+        "name": "PIR-test"
+      },
+      "component_buzzer_test_passed": {
+        "name": "Sirenetest"
+      },
+      "component_hum_test_passed": {
+        "name": "Vochtigheidstest"
+      },
+      "removed_from_base": {
+        "name": "Verwijderd van basis"
+      },
+      "auto_away": {
+        "name": "Aanwezigheid"
+      },
+      "line_power_present": {
+        "name": "Netstroom"
+      }
+    },
+    "sensor": {
+      "battery_level": {
+        "name": "Batterijniveau"
+      },
+      "replace_by_date_utc_secs": {
+        "name": "Vervangdatum"
+      },
+      "last_audio_self_test_end_utc_secs": {
+        "name": "Laatste geluidscheck"
+      },
+      "latest_manual_test_end_utc_secs": {
+        "name": "Laatste veiligheidscontrole"
+      },
+      "current_temperature": {
+        "name": "Temperatuur"
+      },
+      "smoke_status_sensor": {
+        "name": "Rookalarmstatus",
+        "state": {
+          "ok": "OK",
+          "testing": "Testen",
+          "warning": "Waarschuwing",
+          "emergency": "Noodgeval"
+        }
+      },
+      "co_status_sensor": {
+        "name": "CO-alarmstatus",
+        "state": {
+          "ok": "OK",
+          "testing": "Testen",
+          "warning": "Waarschuwing",
+          "emergency": "Noodgeval"
+        }
+      }
+    },
+    "select": {
+      "night_light_brightness": {
+        "name": "Lichtpad helderheid",
+        "state": {
+          "low": "Laag",
+          "medium": "Gemiddeld",
+          "high": "Hoog"
+        }
+      }
+    },
+    "switch": {
+      "night_light_enable": {
+        "name": "Lichtpad"
+      },
+      "ntp_green_led_enable": {
+        "name": "Nachtwacht"
+      },
+      "heads_up_enable": {
+        "name": "Let op-meldingen"
+      },
+      "steam_detection_enable": {
+        "name": "Stoomcontrole"
+      }
+    }
+  }
+}

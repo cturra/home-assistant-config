@@ -5,11 +5,15 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from homeassistant.components.select import SelectEntity, SelectEntityDescription
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity import EntityCategory
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
 
-from . import HomeAssistantNestProtectData
-from .const import DOMAIN, LOGGER
-from .entity import NestDescriptiveEntity
+from . import NestProtectConfigEntry
+from .const import LOGGER
+from .entity import NestUpdatableEntity
+
+PARALLEL_UPDATES = 1
 
 
 @dataclass
@@ -26,7 +30,6 @@ SENSOR_DESCRIPTIONS: list[SelectEntityDescription] = [
     NestProtectSelectDescription(
         key="night_light_brightness",
         translation_key="night_light_brightness",
-        name="Brightness",
         icon="mdi:lightbulb-on",
         options=[*PRESET_TO_BRIGHTNESS],
         entity_category=EntityCategory.CONFIG,
@@ -34,10 +37,14 @@ SENSOR_DESCRIPTIONS: list[SelectEntityDescription] = [
 ]
 
 
-async def async_setup_entry(hass, entry, async_add_devices):
+async def async_setup_entry(
+    hass: HomeAssistant,
+    entry: NestProtectConfigEntry,
+    async_add_devices: AddEntitiesCallback,
+) -> None:
     """Set up the Nest Protect sensors from a config entry."""
 
-    data: HomeAssistantNestProtectData = hass.data[DOMAIN][entry.entry_id]
+    data = entry.runtime_data
     entities: list[NestProtectSelect] = []
 
     supported_keys: dict[str, NestProtectSelectDescription] = {
@@ -48,13 +55,19 @@ async def async_setup_entry(hass, entry, async_add_devices):
         for key in device.value:
             if description := supported_keys.get(key):
                 entities.append(
-                    NestProtectSelect(device, description, data.areas, data.client)
+                    NestProtectSelect(
+                        device,
+                        description,
+                        data.areas,
+                        data.client,
+                        data.session_manager,
+                    )
                 )
 
     async_add_devices(entities)
 
 
-class NestProtectSelect(NestDescriptiveEntity, SelectEntity):
+class NestProtectSelect(NestUpdatableEntity, SelectEntity):
     """Representation of a Nest Protect Select."""
 
     entity_description: NestProtectSelectDescription
@@ -84,17 +97,5 @@ class NestProtectSelect(NestDescriptiveEntity, SelectEntity):
             }
         ]
 
-        if not self.client.nest_session or self.client.nest_session.is_expired():
-            if not self.client.auth or self.client.auth.is_expired():
-                await self.client.get_access_token()
-
-            await self.client.authenticate(self.client.auth.access_token)
-
-        result = await self.client.update_objects(
-            self.client.nest_session.access_token,
-            self.client.nest_session.userid,
-            self.client.transport_url,
-            objects,
-        )
-
+        result = await self._async_update_objects(objects)
         LOGGER.debug(result)

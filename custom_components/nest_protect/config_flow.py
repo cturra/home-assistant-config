@@ -2,17 +2,21 @@
 
 from __future__ import annotations
 
-from typing import Any, cast
+import base64
+import json
+import re
+from typing import Any
 
 import voluptuous as vol
 from aiohttp import ClientError
 from homeassistant import config_entries
-from homeassistant.config_entries import ConfigEntry
+from homeassistant.config_entries import SOURCE_REAUTH, SOURCE_RECONFIGURE
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
 from .const import (
     CONF_ACCOUNT_TYPE,
+    CONF_AUTH_CODE,
     CONF_COOKIES,
     CONF_ISSUE_TOKEN,
     CONF_REFRESH_TOKEN,
@@ -22,12 +26,15 @@ from .const import (
 from .pynest.client import NestClient
 from .pynest.const import NEST_ENVIRONMENTS
 from .pynest.enums import Environment
-from .pynest.exceptions import BadCredentialsException
+from .pynest.exceptions import BadCredentialsException, NestServiceException
 
 DESCRIPTION_PLACEHOLDERS = {
     "nest_url": "https://home.nest.com",
     "issue_token_prefix": "https://accounts.google.com/o/oauth2/iframerpc?action=issueToken",
     "accounts_url": "https://accounts.google.com/",
+    # Pinned to a specific release rather than "latest", which may resolve to a
+    # pre-release that is incompatible with this version of the integration.
+    "extension_download_url": "https://github.com/iMicknl/ha-nest-protect/releases/download/v0.5.0/nest-auth-helper.zip",
 }
 
 
@@ -36,7 +43,6 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     VERSION = 3
 
-    _config_entry: ConfigEntry | None = None
     _default_account_type: Environment = Environment.PRODUCTION
 
     @staticmethod
@@ -69,6 +75,17 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         google_auth_markers = ("APISID=", "SAPISID=", "HSID=", "SSID=", "SID=")
         return any(marker in cookies for marker in google_auth_markers)
 
+    @staticmethod
+    def _normalize_cookies(cookies: str) -> str:
+        """Normalize a pasted cookie header.
+
+        Long header values copied from browser developer tools can contain line
+        wraps, and some browsers include the header name in the copied text.
+        """
+        cookies = "".join(line.strip() for line in cookies.splitlines())
+        cookies = re.sub(r"^cookie:\s*", "", cookies, flags=re.IGNORECASE)
+        return "; ".join(part.strip() for part in cookies.split(";") if part.strip())
+
     async def async_validate_input(self, user_input: dict[str, Any]) -> list:
         """Validate user credentials."""
 
@@ -76,11 +93,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         session = async_create_clientsession(self.hass)
         client = NestClient(session=session, environment=NEST_ENVIRONMENTS[environment])
 
-        if CONF_ISSUE_TOKEN in user_input and CONF_COOKIES in user_input:
-            issue_token = user_input[CONF_ISSUE_TOKEN]
-            cookies = user_input[CONF_COOKIES]
-        if CONF_REFRESH_TOKEN in user_input:
-            refresh_token = user_input[CONF_REFRESH_TOKEN]
+        issue_token = user_input.get(CONF_ISSUE_TOKEN)
+        cookies = user_input.get(CONF_COOKIES)
+        refresh_token = user_input.get(CONF_REFRESH_TOKEN)
 
         if issue_token and cookies:
             auth = await client.get_access_token_from_cookies(issue_token, cookies)
@@ -89,6 +104,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         nest = await client.authenticate(auth.access_token)
         data = await client.get_first_data(nest.access_token, nest.userid)
+
+        if client.refreshed_cookies:
+            cookies = client.refreshed_cookies
 
         email = ""
         for bucket in data.updated_buckets:
@@ -101,6 +119,35 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         return [issue_token, cookies, email]
 
+    def _async_create_or_update_entry(
+        self, data: dict[str, Any], email: str
+    ) -> FlowResult:
+        """Create a new entry, or update the entry being reauthenticated/reconfigured."""
+        if self.source not in (SOURCE_REAUTH, SOURCE_RECONFIGURE):
+            self._abort_if_unique_id_configured()
+            return self.async_create_entry(title=f"Nest Protect ({email})", data=data)
+
+        entry = (
+            self._get_reauth_entry()
+            if self.source == SOURCE_REAUTH
+            else self._get_reconfigure_entry()
+        )
+
+        # Entries created before v0.4.0 are keyed by their refresh token instead
+        # of the Nest user ID, so the account can't be compared. Adopt the account
+        # that was just authenticated, unless another entry already owns it.
+        if not entry.unique_id or not entry.unique_id.startswith("user."):
+            if self.hass.config_entries.async_entry_for_domain_unique_id(
+                DOMAIN, self.unique_id
+            ):
+                return self.async_abort(reason="already_configured")
+            return self.async_update_reload_and_abort(
+                entry, unique_id=self.unique_id, data_updates=data
+            )
+
+        self._abort_if_unique_id_mismatch(reason="wrong_account")
+        return self.async_update_reload_and_abort(entry, data_updates=data)
+
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
@@ -109,7 +156,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         if user_input:
             self._default_account_type = user_input[CONF_ACCOUNT_TYPE]
-            return await self.async_step_account_link()
+            return await self.async_step_auth_method()
 
         return self.async_show_form(
             step_id="user",
@@ -125,6 +172,92 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             errors=errors,
         )
 
+    async def async_step_auth_method(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        """Handle auth method selection."""
+        if user_input:
+            if user_input["method"] == "extension":
+                return await self.async_step_extension()
+            return await self.async_step_account_link()
+
+        return self.async_show_form(
+            step_id="auth_method",
+            data_schema=vol.Schema(
+                {
+                    vol.Required("method", default="extension"): vol.In(
+                        {
+                            "extension": "Use the Chrome Extension (recommended)",
+                            "manual": "Enter credentials manually",
+                        }
+                    ),
+                }
+            ),
+            description_placeholders=DESCRIPTION_PLACEHOLDERS,
+        )
+
+    async def async_step_extension(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        """Handle authentication via Chrome extension code."""
+        errors = {}
+
+        if user_input:
+            issue_token = ""
+            cookies = ""
+
+            try:
+                decoded = json.loads(
+                    base64.b64decode(user_input[CONF_AUTH_CODE]).decode()
+                )
+                issue_token = decoded["issue_token"]
+                cookies = decoded["cookies"]
+            except ValueError, KeyError, json.JSONDecodeError:
+                errors[CONF_AUTH_CODE] = "invalid_code"
+
+            if not errors and (
+                not self._validate_issue_token(issue_token)
+                or not self._validate_cookies(cookies)
+            ):
+                errors[CONF_AUTH_CODE] = "invalid_code"
+
+            if not errors:
+                validation_input = {
+                    CONF_ISSUE_TOKEN: issue_token,
+                    CONF_COOKIES: cookies,
+                    CONF_ACCOUNT_TYPE: self._default_account_type,
+                }
+                try:
+                    [issue_token, cookies, email] = await self.async_validate_input(
+                        validation_input
+                    )
+                except TimeoutError, ClientError, NestServiceException:
+                    errors["base"] = "cannot_connect"
+                except BadCredentialsException:
+                    errors["base"] = "invalid_auth"
+                except Exception as exception:  # pylint: disable=broad-except
+                    errors["base"] = "unknown"
+                    LOGGER.exception(exception)
+
+            if not errors:
+                data = {
+                    CONF_ISSUE_TOKEN: issue_token,
+                    CONF_COOKIES: cookies,
+                    CONF_ACCOUNT_TYPE: self._default_account_type,
+                }
+                return self._async_create_or_update_entry(data, email)
+
+        return self.async_show_form(
+            step_id="extension",
+            data_schema=vol.Schema(
+                {
+                    vol.Required(CONF_AUTH_CODE): str,
+                }
+            ),
+            description_placeholders=DESCRIPTION_PLACEHOLDERS,
+            errors=errors,
+        )
+
     async def async_step_account_link(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
@@ -134,7 +267,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input:
             user_input[CONF_ACCOUNT_TYPE] = self._default_account_type
             issue_token = user_input.get(CONF_ISSUE_TOKEN, "").strip()
-            cookies = user_input.get(CONF_COOKIES, "").strip()
+            cookies = self._normalize_cookies(user_input.get(CONF_COOKIES, ""))
             # Store stripped values back so downstream validation and API calls
             # use the normalized credentials
             user_input[CONF_ISSUE_TOKEN] = issue_token
@@ -151,7 +284,9 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     [issue_token, cookies, email] = await self.async_validate_input(
                         user_input
                     )
-                except TimeoutError, ClientError:
+                    user_input[CONF_ISSUE_TOKEN] = issue_token
+                    user_input[CONF_COOKIES] = cookies
+                except TimeoutError, ClientError, NestServiceException:
                     errors["base"] = "cannot_connect"
                 except BadCredentialsException:
                     errors["base"] = "invalid_auth"
@@ -160,29 +295,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                     LOGGER.exception(exception)
 
             if not errors:
-                if self._config_entry:
-                    # Update existing entry during reauth
-                    self.hass.config_entries.async_update_entry(
-                        self._config_entry,
-                        data={
-                            **self._config_entry.data,
-                            **user_input,
-                        },
-                    )
-
-                    self.hass.async_create_task(
-                        self.hass.config_entries.async_reload(
-                            self._config_entry.entry_id
-                        )
-                    )
-
-                    return self.async_abort(reason="reauth_successful")
-
-                self._abort_if_unique_id_configured()
-
-                return self.async_create_entry(
-                    title=f"Nest Protect ({email})", data=user_input
-                )
+                return self._async_create_or_update_entry(user_input, email)
 
         return self.async_show_form(
             step_id="account_link",
@@ -201,11 +314,16 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         """Handle reauth."""
-        self._config_entry = cast(
-            ConfigEntry,
-            self.hass.config_entries.async_get_entry(self.context["entry_id"]),
-        )
+        self._default_account_type = self._get_reauth_entry().data[CONF_ACCOUNT_TYPE]
 
-        self._default_account_type = self._config_entry.data[CONF_ACCOUNT_TYPE]
+        return await self.async_step_auth_method()
 
-        return await self.async_step_account_link(user_input)
+    async def async_step_reconfigure(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        """Handle updating the credentials of an existing entry."""
+        self._default_account_type = self._get_reconfigure_entry().data[
+            CONF_ACCOUNT_TYPE
+        ]
+
+        return await self.async_step_auth_method()
